@@ -29,6 +29,7 @@ class App extends Component {
   }
 
   
+  
   updateAppStateContacts(newContact){
     console.log("here is statecontacts before", this.state.contacts)
   const currentStateContacts = this.state.contacts

@@ -41,9 +41,8 @@ class AddContact extends Component {
 
 
   handleSubmit = (e) => {
-    console.log("here is submit")
+    e.preventDefault()
     this.createNewContact(e)
-
   }
   
   
