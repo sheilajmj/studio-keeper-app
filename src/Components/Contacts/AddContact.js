@@ -50,7 +50,7 @@ class AddContact extends Component {
   render() {
     return(
       <div className="item-wrap contact-add">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-space">
             <label htmlFor="contact_type">Contact Type:</label>
             <select name="contact_type" onChange={this.handleChange} value={this.state.newContact.contact_type}>
@@ -116,7 +116,7 @@ class AddContact extends Component {
             <label htmlFor="notes" className="contact-edit">Notes:</label>
             <input type="text" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newContact.notes} />
           </div>
-          <button type="submit" value="submit" onClick={() => {this.handleSubmit()}} >Submit</button>
+          <button type="submit" value="submit">Submit</button>
         </form>
       </div>
     );
