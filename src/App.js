@@ -12,26 +12,40 @@ import EventParent from './Components/Events/EventParent'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
 import Home from './Components/Home/Home'
+import catalog_items from './data-store-catalog'
+import contacts from './data-store-contacts'
+import events from './data-store-events'
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
-
-
+      catalog_items: catalog_items,
+      contacts: contacts,
+      events: events,
     }
+    this.updateAppStateContacts = this.updateAppStateContacts.bind(this);
   }
 
-  setSelectedContactId = (id) => {
-    this.setState({ selectedContactId: id })
+  
+  updateAppStateContacts(newContact){
+    console.log("here is statecontacts before", this.state.contacts)
+  const currentStateContacts = this.state.contacts
+  this.setState({contacts:currentStateContacts.push(newContact)})
+  console.log("stateUpdated", this.state.contacts)
   }
+
 
   render() {
     const contextValue = {
       history: this.props.history,
+      catalog_items: this.state.catalog_items,
+      contacts: this.state.contacts,
+      events: this.state.events,
+      updateAppStateContacts: this.updateAppStateContacts,
     }
+    
 
     return (
       <main className='App'>

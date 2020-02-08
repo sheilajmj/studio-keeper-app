@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { contactItems } from '../../data-store-contacts'
 import Context from '../../Context'
 
 
@@ -7,10 +6,11 @@ class ContactItem extends Component {
   static contextType = Context;
 
   handleEditClick(id) {
+    console.log(console.log(this.context.contacts))
     this.context.history.push(`/contacts/edit/${id}`)
   }
 
-  contactItemsList = contactItems.map((item, index) => {
+  contactItemsList = this.context.contacts.map((item, index) => {
     return (
       <div key={item.contact_id} className="item-wrap">
         <ul className="item">

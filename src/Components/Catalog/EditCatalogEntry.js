@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { catalogItems } from '../../data-store-catalog'
 import Context from '../../Context'
 
 
@@ -8,7 +7,7 @@ class EditCatalogEntry extends Component {
 
   selectedCatalogId = this.props.match.params.catalog_id
 
-  selectedCatalogItem = catalogItems.filter(item => item.catalog_id === this.selectedCatalogId)
+  selectedCatalogItem = this.context.catalog_items.filter(item => item.catalog_id === this.selectedCatalogId)
 
   selectedCatalogItemForm = this.selectedCatalogItem.map((item) => {
     return (

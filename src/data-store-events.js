@@ -1,4 +1,4 @@
-export const eventItems = [
+export default [
 	{
      "event_id": "001",
 	 "event_type": "art show",

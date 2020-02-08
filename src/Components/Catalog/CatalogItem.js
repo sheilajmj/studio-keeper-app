@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { catalogItems } from '../../data-store-catalog'
 import Context from '../../Context'
 
 class CatalogItem extends Component {
@@ -9,7 +8,7 @@ class CatalogItem extends Component {
     this.context.history.push(`/catalog/edit/${id}`)
   }
 
-  catalogItemsList = catalogItems.map((item, index) => {
+  catalogItemsList = this.context.catalog_items.map((item, index) => {
     return (
       <div key={item.catalog_id} className="item-wrap">
         <ul className="item">

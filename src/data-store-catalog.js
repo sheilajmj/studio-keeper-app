@@ -1,5 +1,5 @@
 
-export const catalogItems = [
+export default [
 	{
 	 "catalog_id": "001",
 	 "type": "drawing",

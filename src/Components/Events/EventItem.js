@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { eventItems } from '../../data-store-events'
 import Context from '../../Context'
 
 class EventItem extends Component {
@@ -9,7 +8,7 @@ class EventItem extends Component {
     this.context.history.push(`/events/edit/${id}`)
   }
 
-  eventItemsList = eventItems.map((item, index) => {
+  eventItemsList = this.context.events.map((item, index) => {
     return (
       <div key={item.event_id} className="item-wrap">
         <ul className="item">

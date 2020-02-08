@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { contactItems } from '../../data-store-contacts'
 import Context from '../../Context'
 
 
@@ -8,7 +7,8 @@ class EditContact extends Component {
 
   selectedContactId = this.props.match.params.contact_id
 
-  selectedContactItem = contactItems.filter(item => item.contact_id === this.selectedContactId)
+  contacts = [this.context.contacts]
+  selectedContactItem = this.context.contacts.filter(item => item.contact_id === this.selectedContactId)
 
   selectedContactItemForm = this.selectedContactItem.map((item) => {
     return (

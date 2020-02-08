@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { eventItems } from '../../data-store-events'
 import Context from '../../Context'
 
 
@@ -8,7 +7,7 @@ class EditEvent extends Component {
   
   selectedEventId = this.props.match.params.event_id
 
-  selectedEventItem = eventItems.filter(item => item.event_id === this.selectedEventId)
+  selectedEventItem = this.context.events.filter(item => item.event_id === this.selectedEventId)
 
   selectedEventItemForm = this.selectedEventItem.map((item) => {
     return (

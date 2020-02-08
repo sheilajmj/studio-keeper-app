@@ -1,4 +1,4 @@
-export const contactItems = [
+export default [
 
 	{
 	 "contact_id": "001",
