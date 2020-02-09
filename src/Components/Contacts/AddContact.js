@@ -50,6 +50,7 @@ class AddContact extends Component {
   render() {
     return(
       <div className="item-wrap contact-add">
+        <h2>Add New Contact</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-space">
             <label htmlFor="contact_type">Contact Type:</label>

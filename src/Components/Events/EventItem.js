@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
+import Context from '../../Context';
+import ForwardButton from '../Button/ForwardButton';
+import BackButton from '../Button/BackButton';
 
 class EventItem extends Component {
   static contextType = Context;
@@ -48,6 +50,7 @@ class EventItem extends Component {
   render(){
   return(
     <div>
+      <ForwardButton /><BackButton />
       {this.eventItemsList}
     </div>
   );

@@ -7,6 +7,7 @@ import BackButton from '../Button/BackButton';
 class EditEvent extends Component {
   static contextType = Context;
   
+  
   selectedEventId = this.props.match.params.event_id
 
   selectedEventItem = this.context.events.filter(item => item.event_id === this.selectedEventId)
@@ -53,7 +54,6 @@ class EditEvent extends Component {
           </div>
           <button type="submit" value="submit">Submit</button>
         </form>
-        <ForwardButton /><BackButton />
       </div>
     );
   })
@@ -61,7 +61,9 @@ class EditEvent extends Component {
   render() {
     return (
       <div>
+        <h2>Edit Event</h2>
         {this.selectedEventItemForm}
+        <ForwardButton /><BackButton />
       </div>
     )
   }

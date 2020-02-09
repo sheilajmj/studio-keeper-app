@@ -8,7 +8,7 @@ class ContactsParent extends Component {
   render(){
   return (
     <main className='App'>
-      <h2>Here is the Contacts page!</h2>
+      <h2>Here are your Contacts</h2>
       <ContactItemContainer />
     </main>
   );

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
+import ForwardButton from '../Button/ForwardButton';
+import BackButton from '../Button/BackButton';
 
 
 class EditCatalogEntry extends Component {
@@ -78,7 +80,9 @@ class EditCatalogEntry extends Component {
   render() {
     return (
       <div>
+        <h2>Edit Catalog</h2>
         {this.selectedCatalogItemForm}
+        <ForwardButton /> <BackButton />
       </div>
     )
   }
