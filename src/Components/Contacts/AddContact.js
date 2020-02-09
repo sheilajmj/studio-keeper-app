@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import Nav from '../Nav/Nav'
+const { uuid } = require('uuidv4');
+
 class AddContact extends Component {
   static contextType = Context;
 
@@ -31,6 +33,7 @@ class AddContact extends Component {
   const key = (e.target.name)
   const value = (e.target.value)
   this.setState(previousState => ({newContact: {...previousState.newContact, [key]: value}}))
+  this.setState(previousState => ({newContact: {...previousState.newContact, contact_id: uuid()}}))
   }
 
   createNewContact = () => {

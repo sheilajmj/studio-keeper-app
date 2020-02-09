@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import Nav from '../Nav/Nav'
-
+const { uuid } = require('uuidv4');
 
 class AddCatalogEntry extends Component {
   static contextType = Context;
@@ -32,6 +32,7 @@ class AddCatalogEntry extends Component {
   const key = (e.target.name)
   const value = (e.target.value)
   this.setState(previousState => ({newCatalogEntry: {...previousState.newCatalogEntry, [key]: value}}))
+  this.setState(previousState => ({newCatalogEntry: {...previousState.newCatalogEntry, catalog_id: uuid()}}))
   }
 
   createNewCatalogEntry = () => {

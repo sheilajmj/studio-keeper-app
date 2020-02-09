@@ -45,6 +45,13 @@ class App extends Component {
     console.log("stateUpdated", this.state.catalog_items)
   }
 
+  updateAppStateEvent = (newEvent) => {
+    const currentStateEvents = this.state.events
+    currentStateEvents.push(newEvent)
+    this.setState({events:currentStateEvents})
+    console.log("eventState UPdated", this.state.events)
+  }
+
   render() {
     const contextValue = {
       history: this.props.history,
@@ -53,6 +60,7 @@ class App extends Component {
       events: this.state.events,
       updateAppStateContacts: this.updateAppStateContacts,
       updateAppStateCatalog: this.updateAppStateCatalog,
+      updateAppStateEvent: this.updateAppStateEvent
     }
     
 
