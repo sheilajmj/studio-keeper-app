@@ -6,7 +6,6 @@ class BackButton extends Component {
   static contextType = Context;
 
 handleBackClick = () => {
-console.log("handleBackClick")
 this.context.history.goBack()
 
 }

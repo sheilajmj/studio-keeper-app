@@ -6,7 +6,6 @@ class ForwardButton extends Component {
   static contextType = Context;
 
 handleForwardClick = () => {
-console.log("forward")
 this.context.history.goForward()
 
 }

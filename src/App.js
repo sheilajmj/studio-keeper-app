@@ -12,9 +12,6 @@ import EventParent from './Components/Events/EventParent'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
 import Home from './Components/Home/Home'
-// import catalog_items from './data-store-catalog'
-// import contacts from './data-store-contacts'
-// import events from './data-store-events'
 let json_data = require('./db.json');
 
 const catalog_items = json_data.catalog_items
@@ -54,6 +51,7 @@ class App extends Component {
 
     return (
       <main className='App'>
+        <h1>Studio Keeper</h1>
         <Context.Provider value={contextValue}>
           <Route
             exact path={'/'}

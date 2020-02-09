@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import { withRouter } from 'react-router-dom'
-import ForwardButton from '../Button/ForwardButton';
-import BackButton from '../Button/BackButton';
+import Nav from '../Nav/Nav'
 
 class Home extends Component {
     static contextType = Context;
@@ -15,8 +14,7 @@ class Home extends Component {
     render() {
         return (
             <section className='home'>
-                <h1>MakerDash!</h1>
-                <h2>This is the Home area of the App</h2>
+              <Nav />
                 <div className="hm-btn-container">
                     <div className="contact-wrap hm-wrap">
                         <button className="contactBtn hm-btn" onClick={(() => { this.context.history.push('/contacts') })}>Contact</button>
@@ -35,7 +33,6 @@ class Home extends Component {
                         <button className="galleryBtn hm-btn">Gallery</button>
                     </div>
                 </div>
-                <ForwardButton /> <BackButton />
             </section>
         );
     }

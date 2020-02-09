@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import ForwardButton from '../Button/ForwardButton';
-import BackButton from '../Button/BackButton';
 
 class CatalogItem extends Component {
   static contextType = Context;
@@ -67,7 +65,6 @@ render(){
 
   return (
     <main className='App'>
-      <ForwardButton /><BackButton />
       {this.catalogItemsList}
     </main>
   );

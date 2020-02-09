@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Context from '../../Context';
-import ForwardButton from '../Button/ForwardButton';
-import BackButton from '../Button/BackButton';
 
 class ContactItem extends Component {
   static contextType = Context;
@@ -34,7 +32,6 @@ class ContactItem extends Component {
   render() {
     return (
       <div>
-        <ForwardButton /> <BackButton />
         {this.contactItemsList}
       </div>
     );

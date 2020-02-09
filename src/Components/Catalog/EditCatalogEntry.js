@@ -81,8 +81,8 @@ class EditCatalogEntry extends Component {
     return (
       <div>
         <h2>Edit Catalog</h2>
-        {this.selectedCatalogItemForm}
         <ForwardButton /> <BackButton />
+        {this.selectedCatalogItemForm}
       </div>
     )
   }

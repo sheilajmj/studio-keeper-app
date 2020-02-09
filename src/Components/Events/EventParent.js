@@ -1,14 +1,13 @@
 import React from 'react';
 import EventItemContainer from './EventItemContainer'
-import ForwardButton from '../Button/ForwardButton';
-import BackButton from '../Button/BackButton';
+import Nav from '../Nav/Nav'
 
 function EventParent() {
   return (
     <main className='App'>
+      <Nav />
       <h2>Here are your Events</h2>
-      <EventItemContainer />
-      <ForwardButton /> <BackButton />
+      <EventItemContainer />>
     </main>
   );
 }

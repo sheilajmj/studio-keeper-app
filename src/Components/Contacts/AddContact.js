@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import BackButton from '../Button/BackButton'
-import ForwardButton from '../Button/ForwardButton'
-
+import Nav from '../Nav/Nav'
 class AddContact extends Component {
   static contextType = Context;
 
@@ -35,7 +33,7 @@ class AddContact extends Component {
   this.setState(previousState => ({newContact: {...previousState.newContact, [key]: value}}))
   }
 
-  createNewContact(){
+  createNewContact = () => {
     const newContact = this.state.newContact
     this.context.updateAppStateContacts(newContact)
   }
@@ -49,6 +47,8 @@ class AddContact extends Component {
   
   render() {
     return(
+      <>
+      <Nav />
       <div className="item-wrap contact-add">
         <h2>Add New Contact</h2>
         <form onSubmit={this.handleSubmit}>
@@ -119,10 +119,8 @@ class AddContact extends Component {
           </div>
           <button type="submit" value="submit">Submit</button>
         </form>
-        <ForwardButton />
-        <BackButton />
-
       </div>
+      </>
     );
   }
 }

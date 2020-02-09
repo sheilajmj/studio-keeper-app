@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import BackButton from '../Button/BackButton';
-import ForwardButton from '../Button/ForwardButton';
+import Nav from '../Nav/Nav'
 
 
 class AddEvent extends Component {
@@ -10,7 +9,11 @@ class AddEvent extends Component {
 
   render() {
     return (
+      <>
+      <Nav />
       <div className="item-wrap contact-edit">
+        <h2>Add Event</h2>
+
         <form>
           <div className="form-space">
             <label htmlFor="event_type" className="event-edit">Event Type:</label>
@@ -50,8 +53,8 @@ class AddEvent extends Component {
           </div>
           <button type="submit" value="submit">Submit</button>
         </form>
-        <ForwardButton /><BackButton />
       </div>
+      </>
     );
   }
   }
