@@ -25,10 +25,10 @@ class AddCatalogEntry extends Component {
       sold_to: "Jane Doe",
       history: "01/1/1900 Shown at Winter Festival",
       }
-    } 
+    }
   }
 
-  handleChange= (e) => {
+  handleChange = (e) => {
   const key = (e.target.name)
   const value = (e.target.value)
   this.setState(previousState => ({newCatalogEntry: {...previousState.newCatalogEntry, [key]: value}}))
@@ -36,7 +36,7 @@ class AddCatalogEntry extends Component {
 
   createNewCatalogEntry = () => {
     const newCatalogEntry = this.state.newCatalogEntry
-    this.context.updateAppStateContacts(newCatalogEntry)
+    this.context.updateAppStateCatalog(newCatalogEntry)
   }
 
 

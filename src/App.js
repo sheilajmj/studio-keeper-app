@@ -26,18 +26,24 @@ class App extends Component {
       contacts: contacts,
       events: events,
     }
-    this.updateAppStateContacts = this.updateAppStateContacts.bind(this);
+    // this.updateAppStateContacts = this.updateAppStateContacts.bind(this);
   }
 
    
-  updateAppStateContacts(newContact){
-    console.log("here is statecontacts before", this.state.contacts)
+  updateAppStateContacts = (newContact) => {
     const currentStateContacts = this.state.contacts
     currentStateContacts.push(newContact)
-    this.setState({contacts:currentStateContacts}, () => {localStorage.setItem(catalog_items, JSON.stringify(this.state.catalog_items))} )
+    this.setState({contacts:currentStateContacts} )
     console.log("stateUpdated", this.state.contacts)
   }
 
+  
+  updateAppStateCatalog = (newCatalogEntry) => {
+    const currentStateCatalog = this.state.catalog_items
+    currentStateCatalog.push(newCatalogEntry)
+    this.setState({catalog:currentStateCatalog} )
+    console.log("stateUpdated", this.state.catalog_items)
+  }
 
   render() {
     const contextValue = {
@@ -46,6 +52,7 @@ class App extends Component {
       contacts: this.state.contacts,
       events: this.state.events,
       updateAppStateContacts: this.updateAppStateContacts,
+      updateAppStateCatalog: this.updateAppStateCatalog,
     }
     
 
