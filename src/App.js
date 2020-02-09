@@ -12,10 +12,14 @@ import EventParent from './Components/Events/EventParent'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
 import Home from './Components/Home/Home'
-import catalog_items from './data-store-catalog'
-import contacts from './data-store-contacts'
-import events from './data-store-events'
+// import catalog_items from './data-store-catalog'
+// import contacts from './data-store-contacts'
+// import events from './data-store-events'
+let json_data = require('./db.json');
 
+const catalog_items = json_data.catalog_items
+const events = json_data.events
+const contacts = json_data.contacts
 
 class App extends Component {
   constructor(props) {
@@ -28,14 +32,13 @@ class App extends Component {
     this.updateAppStateContacts = this.updateAppStateContacts.bind(this);
   }
 
-  
-  
+   
   updateAppStateContacts(newContact){
     console.log("here is statecontacts before", this.state.contacts)
-  const currentStateContacts = this.state.contacts
-  currentStateContacts.push(newContact)
-  this.setState({contacts:currentStateContacts})
-  console.log("stateUpdated", this.state.contacts)
+    const currentStateContacts = this.state.contacts
+    currentStateContacts.push(newContact)
+    this.setState({contacts:currentStateContacts}, () => {localStorage.setItem(catalog_items, JSON.stringify(this.state.catalog_items))} )
+    console.log("stateUpdated", this.state.contacts)
   }
 
 

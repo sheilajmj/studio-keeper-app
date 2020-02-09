@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
+import BackButton from '../Button/BackButton';
+import ForwardButton from '../Button/ForwardButton';
 
 
 class AddEvent extends Component {
@@ -48,6 +50,7 @@ class AddEvent extends Component {
           </div>
           <button type="submit" value="submit">Submit</button>
         </form>
+        <ForwardButton /><BackButton />
       </div>
     );
   }

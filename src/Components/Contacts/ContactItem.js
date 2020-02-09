@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
-
+import Context from '../../Context';
+import ForwardButton from '../Button/ForwardButton';
+import BackButton from '../Button/BackButton';
 
 class ContactItem extends Component {
   static contextType = Context;
 
   handleEditClick(id) {
-    console.log(console.log(this.context.contacts))
     this.context.history.push(`/contacts/edit/${id}`)
   }
 
@@ -34,6 +34,7 @@ class ContactItem extends Component {
   render() {
     return (
       <div>
+        <ForwardButton /> <BackButton />
         {this.contactItemsList}
       </div>
     );

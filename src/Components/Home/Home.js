@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import { withRouter } from 'react-router-dom'
+import ForwardButton from '../Button/ForwardButton';
+import BackButton from '../Button/BackButton';
 
 class Home extends Component {
     static contextType = Context;
@@ -33,6 +35,7 @@ class Home extends Component {
                         <button className="galleryBtn hm-btn">Gallery</button>
                     </div>
                 </div>
+                <ForwardButton /> <BackButton />
             </section>
         );
     }

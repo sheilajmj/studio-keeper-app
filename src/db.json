@@ -1,0 +1,153 @@
+{"catalog_items":[
+		{
+		"catalog_id": "001",
+		"type": "drawing",
+		"collection": "pen and ink",
+		"size": "9in x 9in",
+		"medium": "napkin, ballpoint pen, and india ink",
+		"Price": "$4000",
+		"date_created": "01/25/2020",
+		"concept_statement": "This is a concept statement for this piece",
+		"notes": "I created this in a bus heading to the moon",
+		"images": "img_3241.jpg",
+		"subject": "lemons",
+		"quantity": "4",
+		"favorited_by": "DearT, Craftwork, Allstar Show",
+		"sold_to": "",
+		"history": "1/26/2020 Allstar Show"
+		},
+		{
+		"catalog_id": "002",
+		"type": "sculpture",
+		"collection": "Yesterday",
+		"size": "4in x 2in",
+		"medium": "toothpaste, tissue, ink",
+		"Price": "$25",
+		"date_created": "01/20/2020",
+		"concept_statement": "Toothpaste reimagined is the concept statement",
+		"notes": "This was inspired by the sunset",
+		"images": "img_3240.jpg",
+		"subject": "sunset",
+		"quantity": "1",
+		"favorited_by": "DearT",
+		"sold_to": "",
+		"history": ""
+		},
+		{
+		"catalog_id": "003",
+		"type": "sewing",
+		"collection": "lunch bags",
+		"size": "4in x 8in x 3in",
+		"medium": "canvas, beeswax",
+		"Price": "$180",
+		"date_created": "01/1/2020",
+		"concept_statement": "Concept here",
+		"notes": "",
+		"images": "img_3242.jpg",
+		"subject": "",
+		"quantity": "1",
+		"favorited_by": "Craftwork, Allstar Show",
+		"sold_to": "",
+		"history": "1/26/2020 Allstar Show"
+		}
+], 
+
+"contacts": [
+
+	{
+	 "contact_id": "001",
+	 "contact_type": "individual",
+	 "business_name": "Craftwork",
+	 "name": "Dear T",
+	 "event_name": "",
+	 "email": "dearT@email.com", 
+	 "phone": "303.555.5555",
+	 "address_street": "2323 Arm St.",
+	 "address_line2": "",
+	 "address_city": "Seven Hills",
+	 "address_state": "CO",
+	 "address_zip": "80881",
+	 "address_country": "USA",
+	 "website": "www.website.com",
+	 "favorites":"[001, 002, 003]",
+	 "notes": "here is a note for my contact"
+	},
+
+	{
+	 "contact_id": "002",
+	 "contact_type": "business",
+	 "business_name": "Craftwork",
+	 "name": "",
+	 "event_name": "",
+	 "email": "craftwork@craftwork.com", 
+	 "phone": "222-893-8873",
+	 "address_street": "1011 Leg St.",
+	 "address_line2": "#40",
+	 "address_city": "LakeAli",
+	 "address_state": "CA",
+	 "address_zip": "70221",
+	 "address_country": "USA",
+	 "website": "www.website2.com",
+	 "favorites":"[001, 003]",
+	 "notes": "Note 2 here is a note for my contact"
+	},
+	{
+	 "contact_id": "003",
+	 "contact_type": "event",
+	 "business_name": "",
+	 "name": "",
+	 "event_name": "AllStar Show",
+	 "email": "info@allstarshow.com", 
+	 "phone": "101-993-3399",
+	 "address_street": "107 Shoulder St.",
+	 "address_line2": "",
+	 "address_city": "City1",
+	 "address_state": "WA",
+	 "address_zip": "90912",
+	 "address_country": "USA",
+	 "website": "www.allstarshow.com",
+	 "favorites":"[002]",
+	 "notes": "This is note 3"
+	}
+	],
+	"events": [
+		{
+		 "event_id": "001",
+		 "event_type": "art show",
+		 "name": "ArtyArt",
+		 "location": "Lone Tree",
+		 "event_dates": "02-19-2020",
+		 "application_due_date": "01-01-2020", 
+		 "contact": "ArtyArt",
+		 "notes": "This is the show Jane Doe told me about",
+		 "submission_requirements": "Letter of interest, images, application",
+		 "catalog-items": "001, 002, 003"
+		},
+		{
+		 "event_id": "002",
+		 "event_type": "Competition",
+		 "name": "fancy Name",
+		 "location": "Northern Colorado",
+		 "event_dates": "08-10-2020",
+		 "application_due_date": "03-01-2020", 
+		 "contact": "DearT",
+		 "notes": "This is a note about this competition",
+		 "submission_requirements": "digital entry, application",
+		 "catalog_items": "001"
+		},
+		{
+		 "event_id": "003",
+		 "event_type": "Fair",
+		 "name": "Holiday Fair",
+		 "location": "North Pole",
+		 "event_dates": "12-23-2020",
+		 "application_due_date": "10-01-2020", 
+		 "contact": "Elf5",
+		 "notes": "This is a note and sounds interesting",
+		 "submission_requirements": "application, table fee",
+		 "catalog_items": "001, 002, 003"
+		}
+	]
+}
+
+

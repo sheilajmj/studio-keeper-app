@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-
+import BackButton from '../Button/BackButton'
+import ForwardButton from '../Button/ForwardButton'
 
 class AddContact extends Component {
   static contextType = Context;
+
   constructor(props){
     super(props)
     this.state = {
@@ -35,7 +37,6 @@ class AddContact extends Component {
 
   createNewContact(){
     const newContact = this.state.newContact
-    console.log("newContact", newContact) 
     this.context.updateAppStateContacts(newContact)
   }
 
@@ -117,6 +118,9 @@ class AddContact extends Component {
           </div>
           <button type="submit" value="submit">Submit</button>
         </form>
+        <ForwardButton />
+        <BackButton />
+
       </div>
     );
   }
