@@ -7,30 +7,30 @@ import ForwardButton from '../Button/ForwardButton';
 class EditContact extends Component {
   static contextType = Context;
 
-  constructor(props){
-    super(props)
-    this.state = {
-      updateBoolean: false,
-      updateContact: {}
-    } 
-  }
+  // constructor(props){
+  //   super(props)
+  //   this.state = {
+  //     updateBoolean: false,
+  //     updateContact: {}
+  //   } 
+  // }
 
-  handleChange= (e) =>{
-    const key = (e.target.name)
-    const value = (e.target.value)
-    this.setState(previousState =>({ updateContact: {...previousState.newContact, [key]: value},  updateBoolean: true }))
-    }
+  // handleChange= (e) =>{
+  //   const key = (e.target.name)
+  //   const value = (e.target.value)
+  //   this.setState(previousState =>({ updateContact: {...previousState.newContact, [key]: value},  updateBoolean: true }))
+  //   }
    
-    createUpdateContact = () => {
-       const updateContact = this.state.updateContact
-       console.log("UpdateContact", updateContact) 
-       this.context.updateAppStateContacts(updateContact)
-     }
+  //   createUpdateContact = () => {
+  //      const updateContact = this.state.updateContact
+  //      console.log("UpdateContact", updateContact) 
+  //      this.context.updateAppStateContacts(updateContact)
+  //    }
   
-     handleSubmit = (e) => {
-       e.preventDefault()
-       this.createUpdateContact(e)
-    }
+  //    handleSubmit = (e) => {
+  //      e.preventDefault()
+  //      this.createUpdateContact(e)
+  //   }
 
   selectedContactId = this.props.match.params.contact_id
 
@@ -62,11 +62,11 @@ class EditContact extends Component {
   })
 
   
-   setInitialDefaultState = () => {
-     if (this.state.updateBoolean === false){
-       this.setState({updateContact: this.selectedContactObjectValues})
-     }
-   }
+  //  setInitialDefaultState = () => {
+  //    if (this.state.updateBoolean === false){
+  //      this.setState({updateContact: this.selectedContactObjectValues})
+  //    }
+  //  }
 
   selectedContactForm = this.selectedContactObject.map((contact) => {
     return (
@@ -143,7 +143,7 @@ class EditContact extends Component {
   })
 
   render() {   
-   this.setInitialDefaultState() 
+ // this.setInitialDefaultState() 
     return (
       <div>
         {this.selectedContactForm}
