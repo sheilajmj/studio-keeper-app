@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import Nav from '../Nav/Nav'
+// import ContactButton from '../Button/ContactButton';
 const { uuid } = require('uuidv4');
 
 class AddContact extends Component {
@@ -49,7 +50,7 @@ class AddContact extends Component {
   
   
   render() {
-    return(
+   return(
       <>
       <Nav />
       <div className="item-wrap contact-add">

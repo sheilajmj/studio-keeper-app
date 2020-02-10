@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import ForwardButton from '../Button/ForwardButton';
-import BackButton from '../Button/BackButton';
+import Nav from '../Nav/Nav'
 
 
 class EditCatalogEntry extends Component {
@@ -80,8 +79,8 @@ class EditCatalogEntry extends Component {
   render() {
     return (
       <div>
+        <Nav />
         <h2>Edit Catalog</h2>
-        <ForwardButton /> <BackButton />
         {this.selectedCatalogItemForm}
       </div>
     )

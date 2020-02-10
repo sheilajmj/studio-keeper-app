@@ -5,6 +5,7 @@ import CatalogButton from '../Button/CatalogButton';
 import EventButton from '../Button/EventButton';
 import ForwardButton from '../Button/ForwardButton';
 import BackButton from '../Button/BackButton';
+import HomeButton from '../Button/HomeButton';
 
 
 class Nav extends Component {
@@ -12,10 +13,17 @@ class Nav extends Component {
 
   render() {
     return (
-      <div>
-        <ContactButton /><CatalogButton /><EventButton />
+      <div className="nav">
+        <div>
+        <ForwardButton /> <HomeButton /> <BackButton />
+        </div>
         <br />
-        <ForwardButton /><BackButton />
+        <br />
+        <div>
+        <ContactButton /><CatalogButton /><EventButton />
+        </div>
+        <br />
+        
       </div>
     );
   }

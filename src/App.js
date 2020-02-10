@@ -25,6 +25,7 @@ class App extends Component {
       catalog_items: catalog_items,
       contacts: contacts,
       events: events,
+      selectedContact:[]
     }
     // this.updateAppStateContacts = this.updateAppStateContacts.bind(this);
   }
@@ -34,7 +35,7 @@ class App extends Component {
     const currentStateContacts = this.state.contacts
     currentStateContacts.push(newContact)
     this.setState({contacts:currentStateContacts} )
-    console.log("stateUpdated", this.state.contacts)
+    console.log("appStateUpdated - Contacts", this.state.contacts)
   }
 
   
@@ -42,14 +43,14 @@ class App extends Component {
     const currentStateCatalog = this.state.catalog_items
     currentStateCatalog.push(newCatalogEntry)
     this.setState({catalog:currentStateCatalog} )
-    console.log("stateUpdated", this.state.catalog_items)
+    console.log("appStateUpdated - Catalog", this.state.catalog_items)
   }
 
   updateAppStateEvent = (newEvent) => {
     const currentStateEvents = this.state.events
     currentStateEvents.push(newEvent)
     this.setState({events:currentStateEvents})
-    console.log("eventState UPdated", this.state.events)
+    console.log("appStateUpdated - Events", this.state.events)
   }
 
   render() {
@@ -94,8 +95,9 @@ class App extends Component {
           />
           <Route
             exact path={'/contacts/edit/:contact_id'}
-            component={EditContact}
-          />
+            render={(props) => <EditContact {...props} contextValue={this.contextValue} />}
+          />          
+          
           <Route
             exact path={'/events'}
             component={EventParent}

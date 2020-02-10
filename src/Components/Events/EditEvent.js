@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import ForwardButton from '../Button/ForwardButton';
-import BackButton from '../Button/BackButton';
+import Nav from '../Nav/Nav'
 
 
 class EditEvent extends Component {
@@ -59,11 +58,12 @@ class EditEvent extends Component {
   })
 
   render() {
+    console.log(this.context)
     return (
       <div>
+        <Nav />
         <h2>Edit Event</h2>
         {this.selectedEventItemForm}
-        <ForwardButton /><BackButton />
       </div>
     )
   }
