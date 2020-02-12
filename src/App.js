@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
-import Context from './Context'
+import { Route, Switch, withRouter } from 'react-router-dom';
+import StudioKeeperContext from './Context'
 import CatalogParent from './Components/Catalog/CatalogParent'
 import AddCatalogEntry from './Components/Catalog/AddCatalogEntry'
 import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
 import ContactsParent from './Components/Contacts/ContactsParent'
 import AddContact from './Components/Contacts/AddContact'
-import EditContact from './Components/Contacts/EditContact'
+import EditContact from './Components/Contacts/EditContact-Original'
 import EventParent from './Components/Events/EventParent'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
@@ -68,49 +67,50 @@ class App extends Component {
     return (
       <main className='App'>
         <h1>Studio Keeper</h1>
-        <Context.Provider value={contextValue}>
+        <StudioKeeperContext.Provider value={contextValue}>
+          <Switch>
           <Route
-            exact path={'/'}
-            component={Home}
+            path={'/catalog/edit/:catalog_id'}
+            component={EditCatalogEntry}
           />
           <Route
-            exact path={'/catalog'}
-            component={CatalogParent}
-          />
-          <Route
-            exact path={'/catalog/add'}
+            path={'/catalog/add'}
             component={AddCatalogEntry}
           />
           <Route
-            exact path={'/catalog/edit/:catalog_id'}
-            component={EditCatalogEntry}
+            path={'/catalog'}
+            component={CatalogParent}
+          />
+          <Route
+            exact path={'/contacts/edit/:contact_id'}
+            render={(props) => <EditContact {...props} contextValue={this.contextValue} />}
+          />          
+          <Route
+            exact path={'/contacts/add'}
+            component={AddContact}
           />
           <Route
             exact path={'/contacts'}
             component={ContactsParent}
           />
           <Route
-            exact path={'/contacts/add'}
-            component={AddContact}
+            path={'/events/edit/:event_id'}
+            component={EditEvent}
           />
           <Route
-            exact path={'/contacts/edit/:contact_id'}
-            render={(props) => <EditContact {...props} contextValue={this.contextValue} />}
-          />          
-          
-          <Route
-            exact path={'/events'}
-            component={EventParent}
-          />
-          <Route
-            exact path={'/events/add'}
+            path={'/events/add'}
             component={AddEvent}
           />
           <Route
-            exact path={'/events/edit/:event_id'}
-            component={EditEvent}
+            path={'/events'}
+            component={EventParent}
           />
-        </Context.Provider>
+          <Route
+            exact path={'/'}
+            component={Home}
+          />
+          </Switch>
+        </StudioKeeperContext.Provider>
       </main>
     );
   };

@@ -5,6 +5,7 @@ import Nav from '../Nav/Nav'
 class EditContact extends Component {
   static contextType = Context;
 
+  
   // constructor(props) {
   //   super(props)
   //   this.state = {
@@ -26,12 +27,39 @@ class EditContact extends Component {
 
   selectedContactId = this.props.match.params.contact_id
   selectedContactObject = this.context.contacts.find(contact => contact.contact_id === this.selectedContactId)
+  selectedContactArray = [this.selectedContactObject]
+
+  contactValues = {  
+    contact_type: "" ,
+    name: "",
+    business: "",
+    event: "",
+    email: "",
+    phone: "",
+    address_street: "",
+    address_line2:  "",
+    address_city: "",
+    address_state: "",
+    address_zip: "",
+    address_country: "",
+    website: "",
+    favorites: "",
+    notes: "",
+  }
+
+
 
   handleChange(e) {
-    const key = (e.target.name)
-    const value = (e.target.value)
-    this.setState(previousState => ({ updateContact: { ...previousState.updateContact, [key]: value }, updateBoolean: true }))
-    this.setInitialDefaultState()
+    console.log("ID" , this.selectedContactId)
+    console.log("Contact Values - ", this.contactValues, "ID", this.selectedContactId )
+    for (var i = 0; i < this.contactValues.length; i++) {
+      if (this.contactValues[i].key === e.target.name){
+        this.contactValues[i].key = e.target.value
+        console.log(this.contactValues[i].key.value)
+        this.updateBoolean = true
+        break;
+      }
+    }
     }
 
   createUpdateContact() {
@@ -47,38 +75,40 @@ class EditContact extends Component {
   }
 
 
-  selectedContactObject() {
-    // this.selectedContactArray.map((contact) => {
-    //   return ({
-    //     selectedContact: {
-    //       contact_type: contact.contact_type,
-    //       name: contact.name,
-    //       business: contact.business,
-    //       event: contact.event,
-    //       email: contact.email,
-    //       phone: contact.phone,
-    //       address_street: contact.address_street,
-    //       address_line2: contact.address_line2,
-    //       address_city: contact.address_city,
-    //       address_state: contact.address_state,
-    //       address_zip: contact.address_zip,
-    //       address_country: contact.address_country,
-    //       website: contact.website,
-    //       favorites: contact.favorites,
-    //       notes: contact.notes,
-    //     }
-    //   })
-    // })
-  }
+  // updateContactObject() {
+  //   console.log (this.selectedContactObject.name, "is this an object name?")
+  //   this.selectedContactArray.map((contact) => {
+  //     return ({
+  //       selectedContact: {
+  //         contact_type: contact.contact_type,
+  //         name: contact.name,
+  //         business: contact.business,
+  //         event: contact.event,
+  //         email: contact.email,
+  //         phone: contact.phone,
+  //         address_street: contact.address_street,
+  //         address_line2: contact.address_line2,
+  //         address_city: contact.address_city,
+  //         address_state: contact.address_state,
+  //         address_zip: contact.address_zip,
+  //         address_country: contact.address_country,
+  //         website: contact.website,
+  //         favorites: contact.favorites,
+  //         notes: contact.notes,
+  //       }
+  //     })
+  //   })
+  // }
 
    setInitialDefaultState(){
      if (this.state.updateBoolean === false){
-       this.setState({updateContact: this.selectedContactValues})
+       this.contactValues = this.selectedContactObject
+       this.updateBoolean = true 
+      }
      }
-   }
+   
 
-  selectedContactForm(){
-    this.selectedContactArray.map((item) => {
+  selectedContactForm = this.selectedContactArray.map((item) => {
     return (
       <div key={item.contact_id} className="item-wrap contact-edit">
         <form onSubmit={() => { this.handleSubmit() }}>
@@ -151,10 +181,9 @@ class EditContact extends Component {
       </div>
     );
   })
-}
+
 
   render() {
-    console.log("This is my object array", this.selectedContactArray)
     return (
       <div>
         <Nav />
@@ -186,3 +215,6 @@ export default EditContact;
 // website: "",
 // favorites: "",
 // notes: "",
+
+
+    // this.setState(previousState => ({ updateContact: { ...previousState.updateContact, [key]: value }, updateBoolean: true }))

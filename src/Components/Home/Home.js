@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import { withRouter } from 'react-router-dom'
 import Nav from '../Nav/Nav'
 
 class Home extends Component {
@@ -39,4 +38,4 @@ class Home extends Component {
 }
 
 
-export default withRouter(Home);
+export default Home;

@@ -1,8 +1,13 @@
 import React from 'react'
 
-const Context = React.createContext({
-  
-    
+const StudioKeeperContext = React.createContext({
+      history: {},
+      catalog_items: [], 
+      contacts: [],
+      events: [],
+      updateAppStateContacts: () => {},
+      updateAppStateCatalog: () => {},
+      updateAppStateEvent: () => {}    
   })
   
-  export default Context;
+  export default StudioKeeperContext;
