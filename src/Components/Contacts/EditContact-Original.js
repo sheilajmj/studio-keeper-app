@@ -20,65 +20,62 @@ class EditContact extends Component {
   //   this.selectedContactForm = this.selectedContactForm.bind(this)
   // }
 
-  updateBoolean = false
-
-  updateContact = []
-
+ 
   selectedContactId = this.props.match.params.contact_id
   selectedContactObject = this.context.contacts.find(contact => contact.contact_id === this.selectedContactId)
+  selectedContactArray = [this.selectedContactObject]
 
-  handleChange(e) {
-    const key = (e.target.name)
-    const value = (e.target.value)
-    this.setState(previousState => ({ updateContact: { ...previousState.updateContact, [key]: value }, updateBoolean: true }))
-    this.setInitialDefaultState()
-    }
+  // handleChange(e) {
+  //   const key = (e.target.name)
+  //   const value = (e.target.value)
+  //   this.setState(previousState => ({ updateContact: { ...previousState.updateContact, [key]: value }, updateBoolean: true }))
+  //   this.setInitialDefaultState()
+  //   }
 
-  createUpdateContact() {
-    console.log("updatecontact hit")
-    const updateContact = this.state.updateContact
-    console.log("UpdateContact", updateContact)
-    this.context.updateAppStateContacts(updateContact)
-  }
+  // createUpdateContact() {
+  //   console.log("updatecontact hit")
+  //   const updateContact = this.state.updateContact
+  //   console.log("UpdateContact", updateContact)
+  //   this.context.updateAppStateContacts(updateContact)
+  // }
 
-  handleSubmit(e){
-    e.preventDefault()
-    this.createUpdateContact(e)
-  }
+  // handleSubmit(e){
+  //   e.preventDefault()
+  //   this.createUpdateContact(e)
+  // }
 
 
-  selectedContactObject() {
-    // this.selectedContactArray.map((contact) => {
-    //   return ({
-    //     selectedContact: {
-    //       contact_type: contact.contact_type,
-    //       name: contact.name,
-    //       business: contact.business,
-    //       event: contact.event,
-    //       email: contact.email,
-    //       phone: contact.phone,
-    //       address_street: contact.address_street,
-    //       address_line2: contact.address_line2,
-    //       address_city: contact.address_city,
-    //       address_state: contact.address_state,
-    //       address_zip: contact.address_zip,
-    //       address_country: contact.address_country,
-    //       website: contact.website,
-    //       favorites: contact.favorites,
-    //       notes: contact.notes,
-    //     }
-    //   })
-    // })
-  }
+  // selectedContactObject() {
+  //   this.selectedContactArray.map((contact) => {
+  //     return ({
+  //       selectedContact: {
+  //         contact_type: contact.contact_type,
+  //         name: contact.name,
+  //         business: contact.business,
+  //         event: contact.event,
+  //         email: contact.email,
+  //         phone: contact.phone,
+  //         address_street: contact.address_street,
+  //         address_line2: contact.address_line2,
+  //         address_city: contact.address_city,
+  //         address_state: contact.address_state,
+  //         address_zip: contact.address_zip,
+  //         address_country: contact.address_country,
+  //         website: contact.website,
+  //         favorites: contact.favorites,
+  //         notes: contact.notes,
+  //       }
+  //     })
+  //   })
+  // }
 
-   setInitialDefaultState(){
-     if (this.state.updateBoolean === false){
-       this.setState({updateContact: this.selectedContactValues})
-     }
-   }
+  //  setInitialDefaultState(){
+  //    if (this.state.updateBoolean === false){
+  //      this.setState({updateContact: this.selectedContactValues})
+  //    }
+  //  }
 
-  selectedContactForm(){
-    this.selectedContactArray.map((item) => {
+  selectedContactForm =  this.selectedContactArray.map((item) => {
     return (
       <div key={item.contact_id} className="item-wrap contact-edit">
         <form onSubmit={() => { this.handleSubmit() }}>
@@ -151,10 +148,10 @@ class EditContact extends Component {
       </div>
     );
   })
-}
+
 
   render() {
-    console.log("This is my object array", this.selectedContactArray)
+    console.log("This is my array", this.selectedContactArray)
     return (
       <div>
         <Nav />
