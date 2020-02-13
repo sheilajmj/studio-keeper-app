@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
+import StudioKeeperContext from '../../Context'
 import Nav from '../Nav/Nav'
 
 class EditContact extends Component {
-  static contextType = Context;
+  static contextType = StudioKeeperContext;
 
   // constructor(props) {
   //   super(props)
