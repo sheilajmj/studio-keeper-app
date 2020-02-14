@@ -32,13 +32,14 @@ class AddEvent extends Component {
   
     createNewEvent = () => {
       const newEvent = this.state.newEvent
-      this.context.updateAppStateEvent(newEvent)
+      this.context.updateAppStateEventsCreate(newEvent)
     }
   
   
     handleSubmit = (e) => {
       e.preventDefault()
       this.createNewEvent(e)
+      this.context.history.push(`/events`)
     }
 
 

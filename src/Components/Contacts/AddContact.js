@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import Nav from '../Nav/Nav'
-// import ContactButton from '../Button/ContactButton';
 const { uuid } = require('uuidv4');
 
 class AddContact extends Component {
@@ -39,13 +38,15 @@ class AddContact extends Component {
 
   createNewContact = () => {
     const newContact = this.state.newContact
-    this.context.updateAppStateContacts(newContact)
+    this.context.updateAppStateContactsCreate(newContact, null)
   }
 
 
   handleSubmit = (e) => {
     e.preventDefault()
     this.createNewContact(e)
+    this.context.history.path(`/contacts`) 
+
   }
   
   

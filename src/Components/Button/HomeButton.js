@@ -12,7 +12,7 @@ this.context.history.push('/')
 
 render() {
   return (
-    <button onClick={() => {this.handleBackClick()}}>Home</button>
+    <button className="nav-btn" onClick={() => {this.handleBackClick()}}>Home</button>
   );
 }
 }

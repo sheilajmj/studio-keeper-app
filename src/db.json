@@ -6,7 +6,7 @@
 		"collection": "pen and ink",
 		"size": "9in x 9in",
 		"medium": "napkin, ballpoint pen, and india ink",
-		"Price": "$4000",
+		"price": "$4000",
 		"date_created": "01/25/2020",
 		"concept_statement": "This is a concept statement for this piece",
 		"notes": "I created this in a bus heading to the moon",
@@ -70,7 +70,7 @@
 	 "address_zip": "80881",
 	 "address_country": "USA",
 	 "website": "www.website.com",
-	 "favorites":"[001, 002, 003]",
+	 "favorites":"",
 	 "notes": "here is a note for my contact"
 	},
 
@@ -89,7 +89,7 @@
 	 "address_zip": "70221",
 	 "address_country": "USA",
 	 "website": "www.website2.com",
-	 "favorites":"[001, 003]",
+	 "favorites": "001",
 	 "notes": "Note 2 here is a note for my contact"
 	},
 	{
@@ -107,7 +107,7 @@
 	 "address_zip": "90912",
 	 "address_country": "USA",
 	 "website": "www.allstarshow.com",
-	 "favorites":"[002]",
+	 "favorites": "002",
 	 "notes": "This is note 3"
 	}
 	],

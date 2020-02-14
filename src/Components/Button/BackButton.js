@@ -12,7 +12,7 @@ this.context.history.goBack()
 
 render() {
   return (
-    <button onClick={() => {this.handleBackClick()}}>Back</button>
+    <button className="nav-btn" onClick={() => {this.handleBackClick()}}>Back</button>
   );
 }
 }

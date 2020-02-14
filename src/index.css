@@ -42,22 +42,21 @@ main{
   display:flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin-top: 20%;
+  margin-top: 5%;
 }
 
 .hm-btn{
   width: 100px;
   height: 100px;
-  background-color:gainsboro;
+  background-color: gainsboro;
   font-size: 1em;
   margin-right: 5%;
   margin-left: 5%;
+  text-align: center;
   border-radius: 5%;
-  display: inline-flex;
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
-  padding-right: 12%;
-  padding-left: 12%;
 }
 
 
@@ -94,7 +93,10 @@ main{
   margin-left: auto;  
 }
 
-
+.nav-bottom .add-btn{
+  margin-left: 0px;
+  margin-right: 10px;
+}
 
 
 ul{
@@ -107,10 +109,24 @@ ul{
   font-size: 1em;
 }
 
-.nav{
+.nav-top, .nav-bottom{
   display:flex;
+  text-align: center;
 }
 
-.nav button{
-margin: 4px;
+.nav-top button{
+  display: inline-block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.nav-wrap{
+display: inline-block;
+}
+.nav-box{
+  align-content: center;
+}
+
+.nav-bottom button, .nav-top button{
+margin-left: auto;
+margin-right: auto;
 }

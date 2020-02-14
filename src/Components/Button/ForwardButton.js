@@ -12,7 +12,7 @@ this.context.history.goForward()
 
 render() {
   return (
-    <button onClick={() => {this.handleForwardClick()}}>Forward</button>
+    <button className="nav-btn" onClick={() => {this.handleForwardClick()}}>Forward</button>
   );
 }
 }

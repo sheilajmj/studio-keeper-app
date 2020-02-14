@@ -13,13 +13,12 @@ class Nav extends Component {
 
   render() {
     return (
-      <div className="nav">
-        <div>
+      <div className="nav-wrap">
+        <div className="nav-top">
         <ForwardButton /> <HomeButton /> <BackButton />
         </div>
         <br />
-        <br />
-        <div>
+        <div className="nav-bottom">
         <ContactButton /><CatalogButton /><EventButton />
         </div>
         <br />

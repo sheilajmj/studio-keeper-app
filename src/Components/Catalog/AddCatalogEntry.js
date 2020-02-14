@@ -35,20 +35,21 @@ class AddCatalogEntry extends Component {
   this.setState(previousState => ({newCatalogEntry: {...previousState.newCatalogEntry, catalog_id: uuid()}}))
   }
 
-  createNewCatalogEntry = () => {
-    const newCatalogEntry = this.state.newCatalogEntry
-    this.context.updateAppStateCatalog(newCatalogEntry)
-  }
 
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.createNewCatalogEntry(e)
-  }
-  
 
 
   render() {
+    this.createNewCatalogEntry = () => {
+      const newCatalogEntry = this.state.newCatalogEntry
+      this.context.updateAppStateCatalogCreate(newCatalogEntry)
+    }
+  
+    this.handleSubmit = (e) => {
+      e.preventDefault()
+      this.createNewCatalogEntry(e)
+      this.context.history.push(`/catalog`)
+    }
+    
     return (
         <>
         <Nav />
