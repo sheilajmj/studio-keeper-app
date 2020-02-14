@@ -37,7 +37,21 @@ class EditContact extends Component {
       this.setInitialDefaultState()
       this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, [key]: value }, updateBoolean: true }))
       }
+
+      this.handleCancel = (e) => {
+        this.context.history.push('/contacts')
+      }
   
+      this.handleDeleteContact = (id) => {
+          let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === id)
+          let contactsList = JSON.parse(JSON.stringify(this.context.contacts))
+          contactsList.splice(indexToDelete, 1)
+          let newContactsList = contactsList
+          this.context.updateAppStateContactsDelete(newContactsList)
+          this.context.history.push(`/contacts`)
+        }
+
+
     this.selectedContactForm =  this.selectedContactArray.map((item) => {
       return (
         <div key={item.contact_id} className="item-wrap contact-edit">
@@ -106,7 +120,9 @@ class EditContact extends Component {
               <label htmlFor="notes" className="contact-edit">Notes:</label>
               <input type="text" name="notes" id="notes" defaultValue={item.notes} />
             </div>
-            <button type="submit" value="submit">Submit</button>
+            <button type="submit" value="submit">Submit Changes</button>
+            <button type="button" value="delete" onClick={(() => {this.handleDeleteContact(item.contact_id)})}>Delete Contact</button>
+            <button type="button" value="cancel" onClick={(() => {this.handleCancel(item.contact_id)})}>Cancel</button>
           </form>
         </div>
       );

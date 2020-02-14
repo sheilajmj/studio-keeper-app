@@ -7,6 +7,7 @@ import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
 import ContactsParent from './Components/Contacts/ContactsParent'
 import AddContact from './Components/Contacts/AddContact'
 import EditContact from './Components/Contacts/EditContact'
+import ViewContact from './Components/Contacts/ViewContact'
 import EventParent from './Components/Events/EventParent'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
@@ -24,7 +25,8 @@ class App extends Component {
       catalog_items: catalog_items,
       contacts: contacts,
       events: events,
-      selectedContact:[]
+      selectedContact:[],
+      updateValue: true,
     }
   }
 
@@ -32,7 +34,7 @@ class App extends Component {
   updateAppStateContactsCreate = (newContact) => {
     const currentStateContacts = JSON.parse(JSON.stringify(this.state.contacts))
     currentStateContacts.push(newContact)
-    this.setState({contacts:currentStateContacts} )
+    this.setState({contacts:currentStateContacts, } )
 
   }
 
@@ -45,9 +47,9 @@ class App extends Component {
  
   }
 
-  updateAppStateContactsDelete = (newContactsList) => {
-    console.log("this is new Contacts list", newContactsList)
-    this.setState({contacts: newContactsList}, () => {console.log("setstate was called after delete")})
+  updateAppStateContactsDelete = (newContactsList, contactDeleted) => {
+    this.setState({contacts: newContactsList, deletedContact: contactDeleted, updateValue: "deleted" })
+
   }
 
 
@@ -117,12 +119,16 @@ class App extends Component {
           />
           <Route
             exact path={'/contacts/edit/:contact_id'}
-            render={(props) => <EditContact {...props} contextValue={this.contextValue} />}
+            component={EditContact} 
           />          
           <Route
             exact path={'/contacts/add'}
             component={AddContact}
           />
+          <Route
+            exact path={'/contacts/:contact_id'}
+            component ={ViewContact}
+            />
           <Route
             exact path={'/contacts'}
             component={ContactsParent}

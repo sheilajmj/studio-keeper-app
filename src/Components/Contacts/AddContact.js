@@ -45,7 +45,7 @@ class AddContact extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.createNewContact(e)
-    this.context.history.path(`/contacts`) 
+    this.context.history.push(`/contacts`) 
 
   }
   
