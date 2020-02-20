@@ -4,6 +4,7 @@ import StudioKeeperContext from './Context'
 import CatalogParent from './Components/Catalog/CatalogParent'
 import AddCatalogEntry from './Components/Catalog/AddCatalogEntry'
 import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
+import ViewCatalog from './Components/Catalog/ViewCatalog'
 import ContactsParent from './Components/Contacts/ContactsParent'
 import AddContact from './Components/Contacts/AddContact'
 import EditContact from './Components/Contacts/EditContact'
@@ -11,6 +12,7 @@ import ViewContact from './Components/Contacts/ViewContact'
 import EventParent from './Components/Events/EventParent'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
+import ViewEvent from './Components/Events/ViewEvent'
 import Home from './Components/Home/Home'
 let json_data = require('./db.json');
 
@@ -47,13 +49,11 @@ class App extends Component {
  
   }
 
-  updateAppStateContactsDelete = (newContactsList, contactDeleted) => {
-    this.setState({contacts: newContactsList, deletedContact: contactDeleted, updateValue: "deleted" })
+  updateAppStateContactsDelete = (newContactsList) => {
+    this.setState({contacts: newContactsList})
 
   }
 
-
-  
   updateAppStateCatalogCreate = (newCatalogEntry) => {
     const currentStateCatalog = JSON.parse(JSON.stringify(this.state.catalog_items))
     currentStateCatalog.push(newCatalogEntry)
@@ -66,8 +66,11 @@ class App extends Component {
     let index = catalog_items.findIndex((catalog_item) => catalog_item.catalog_id === catalogId)
     let catalogItemReplaced = catalog_items.splice(index, 1, updatedCatalogEntry)
     this.setState({replacedCatalogEntry:catalogItemReplaced, catalog_items:catalog_items})
-
 }
+
+  updateAppStateCatalogDelete = (newCatalogList) => {
+    this.setState({catalog_items: newCatalogList})
+  }
 
   updateAppStateEventsCreate = (newEvent) => {
     const currentStateEvents = JSON.parse(JSON.stringify(this.state.events))
@@ -81,6 +84,9 @@ class App extends Component {
     let index = events.findIndex((events) => events.event_id === eventId)
     let eventItemReplaced = events.splice(index, 1, updatedEvent)
     this.setState({replacedEventEntry:eventItemReplaced, events:events})
+}
+updateAppStateEventsDelete = (newEventsList) => {
+  this.setState({events: newEventsList})
 
 }
 
@@ -96,7 +102,9 @@ class App extends Component {
       updateAppStateContactsUpdate: this.updateAppStateContactsUpdate,
       updateAppStateCatalogUpdate: this.updateAppStateCatalogUpdate,
       updateAppStateEventsUpdate: this.updateAppStateEventsUpdate,
-      updateAppStateContactsDelete: this.updateAppStateContactsDelete
+      updateAppStateContactsDelete: this.updateAppStateContactsDelete,
+      updateAppStateCatalogDelete: this.updateAppStateCatalogDelete,
+      updateAppStateEventsDelete: this.updateAppStateEventsDelete,
     }
     
 
@@ -113,6 +121,10 @@ class App extends Component {
             path={'/catalog/add'}
             component={AddCatalogEntry}
           />
+          <Route
+            exact path={'/catalog/:catalog_id'}
+            component ={ViewCatalog}
+            />
           <Route
             path={'/catalog'}
             component={CatalogParent}
@@ -141,6 +153,10 @@ class App extends Component {
             path={'/events/add'}
             component={AddEvent}
           />
+          <Route
+            exact path={'/events/:event_id'}
+            component ={ViewEvent}
+            />
           <Route
             path={'/events'}
             component={EventParent}

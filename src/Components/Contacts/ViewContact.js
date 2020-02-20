@@ -35,28 +35,53 @@ class ViewContact extends Component {
             <div>
                 <div key={item.contact_id} className="item-wrap">
             <ul className="item">
-              <li>
-                Name: {item.name}
-              </li>
-              <li>
-                Business: {item.business_name}
-              </li>
-              <li>
-                Phone: {item.phone}
-              </li>
-              <li>
-                email: {item.email}
-              </li>
+                <li>
+                    Contact Type: {item.contact_type}
+                </li>
+                <li>
+                    Business Name: {item.business_name}
+                </li>
+                <li>
+                    Name: {item.name}
+                </li>
+                <li >
+                    Event Name: {item.event_name}
+                </li>
+                <li>
+                Email: <a href={"mailto:" + item.email}> {item.email} </a>
+                </li>
+                <li>
+                Phone:
+                <a href={"tel:" + item.phone}>{item.phone}</a> 
+                </li>
+                <li>
+                    Address: {item.address_street}
+                </li>
+                <li>
+                  {item.address_line2}
+                </li>
+                <li>
+                  {item.address_city}{item.address_state}{item.address_zip}
+                </li>
+                <li>
+                  {item.address_country}
+                </li>
+                <li>
+                  website: <a href={item.website} target="_blank"  rel="noopener noreferrer">{item.website}</a>
+                </li>
+                <li>
+                  Favorites: {item.favorites}
+                </li>
+                <li>
+                  Notes: {item.notes}
+                </li>
             </ul>
             <button onClick={(() => { this.handleEditClick(item.contact_id) })}>Edit</button>
             <button onClick={() => { this.handleDeleteClick(item.contact_id) }}>Delete</button>
             <button type="button" value="backToContacts" onClick={(() => {this.handleBackToContacts(item.contact_id)})}>Back to Contacts</button>
-
           </div>
-        );
-      
-            </div>
-          )
+        </div>
+      )
     })
     return(
         <div>

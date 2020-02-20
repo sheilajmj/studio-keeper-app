@@ -8,10 +8,18 @@ class EventItem extends Component {
     this.context.history.push(`/events/edit/${id}`)
   }
 
+  handleItemClick = (id) => {
+    this.context.history.push(`/events/${id}`)
+  }
+
+  handleViewEvent = (id) => {
+    this.context.history.push(`/events/${id}`)
+  }
+
   eventItemsList = this.context.events.map((item, index) => {
     return (
       <div key={item.event_id} className="item-wrap">
-        <ul className="item">
+        <ul className="item" onClick={(() => {this.handleItemClick(item.event_id)})}>
           <li>
           Event Type: {item.event_type}
           </li>
@@ -41,6 +49,7 @@ class EventItem extends Component {
           </li>
         </ul>
         <button onClick={(() => { this.handleEditClick(item.event_id) })}>Edit</button>
+        <button type="button" value="viewEvent" onClick={(() => {this.handleViewEvent(item.event_id)})}>View Event</button>
     </div>
     );
   });

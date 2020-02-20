@@ -34,28 +34,15 @@ class ContactItem extends Component {
             Event Name: {item.event_name}
           </li>
           <li>
-            Email: {item.email}
+            Email: <a href={"mailto:" + item.email}> {item.email} </a>
           </li>
           <li>
-            Phone: {item.phone}
+            Phone:
+            <a href={"tel:" + item.phone}>{item.phone}</a> 
           </li>
           <li>
-            Address: {item.address_street}
+          website: <a href={item.website} target="_blank"  rel="noopener noreferrer">{item.website}</a>
           </li>
-          <li>
-          {item.address_line2}
-          </li>
-          {item.address_city}{item.address_state}{item.address_zip}
-          <li>
-          </li>
-          {item.address_country}
-          <li>
-          </li>
-           website: {item.website}
-          <li>
-            Favorites: {item.favorites}
-          </li>
-          Notes: {item.notes}
         </ul>
         <button onClick={(() => { this.handleEditClick(item.contact_id) })}>Edit</button>
         <button type="button" value="viewContact" onClick={(() => {this.handleViewContact(item.contact_id)})}>View Contact</button>

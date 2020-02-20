@@ -7,7 +7,7 @@ function EventParent() {
     <main className='App'>
       <Nav />
       <h2>Here are your Events</h2>
-      <EventItemContainer />>
+      <EventItemContainer />
     </main>
   );
 }

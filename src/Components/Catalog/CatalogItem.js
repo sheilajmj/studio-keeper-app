@@ -8,10 +8,42 @@ class CatalogItem extends Component {
     this.context.history.push(`/catalog/edit/${id}`)
   }
 
-  catalogItemsList = this.context.catalog_items.map((item, index) => {
+  handleItemClick = (id) => {
+    this.context.history.push(`/catalog/${id}`)
+  }
+
+  handleViewCatalog = (id) => {
+    this.context.history.push(`/catalog/${id}`)
+  }
+
+  catalogItemsList = this.context.catalog_items.map((item) => {  
+    console.log("item in catalog item images", item.images )
+     this.imageArray = item.images.split(', ')
+     console.log("image array", this.imageArray)
+      this.itemImagesArrayReturn = this.imageArray.map((item) => {
+      return(
+        <img src={require("../../assets/" + item)} alt="catalog item" height="42px" width="42px"/>
+      )
+      })
+
+      this.favoritedByArray = this.context.contacts.filter(contact => contact.favorites.includes(item.catalog_id))
+
+      this.favoritedByReturn = this.favoritedByArray.map(fav =>{ 
+        return {
+          contact_id: fav.contact_id,
+          name: fav.name
+        }
+      }
+      )
+      this.favoritedByReturnMapped = this.favoritedByReturn.map(fav => {
+        return (
+          <li><a href={`http://localhost:3000/contacts/` + fav.contact_id} target="_blank"  rel="noopener noreferrer">{fav.name}</a></li>
+        )
+      })
+
     return (
       <div key={item.catalog_id} className="item-wrap">
-        <ul className="item">
+        <ul className="item" onClick={(() => {this.handleItemClick(item.catalog_id)})}>
           <li>
             Type: {item.type}
           </li>
@@ -37,7 +69,8 @@ class CatalogItem extends Component {
             Notes: {item.notes}
           </li>
           <li>
-            Images: {item.images}
+            Images:
+            {this.itemImagesArrayReturn}
           </li>
           <li>
             Subject: {item.subject}
@@ -46,7 +79,10 @@ class CatalogItem extends Component {
             Quantity: {item.quantity}
           </li>
           <li>
-            Favorited By: {item.favorited_by}
+            Favorited By: 
+            <ul>
+            {this.favoritedByReturnMapped}
+            </ul>
           </li>
           <li>
             Sold To: {item.sold_to}
@@ -56,6 +92,7 @@ class CatalogItem extends Component {
           </li>
         </ul>
         <button onClick={(() => { this.handleEditClick(item.catalog_id) })}>Edit</button>
+        <button type="button" value="viewCatalog" onClick={(() => {this.handleViewCatalog(item.catalog_id)})}>View Catalog Item</button>
       </div>
     )
   })

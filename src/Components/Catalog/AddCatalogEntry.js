@@ -6,52 +6,67 @@ const { uuid } = require('uuidv4');
 class AddCatalogEntry extends Component {
   static contextType = Context;
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       newCatalogEntry: {
-      type: "ie. Drawing",
-      collection: "Collection",
-      size: "Size",
-      medium: "Medium",
-      price: "$5.00",
-      date_created: "01/01/2020",
-      concept_statement: "Concept Statement",
-      notes:  "Notes",
-      images: "Images",
-      subject: "Subject",
-      quantity: "Quantity",
-      favorited_by: "Jane Doe, John Doe",
-      sold_to: "Jane Doe",
-      history: "01/1/1900 Shown at Winter Festival",
+        type: "ie. Drawing",
+        collection: "Collection",
+        size: "Size",
+        medium: "Medium",
+        price: "$5.00",
+        date_created: "01/01/2020",
+        concept_statement: "Concept Statement",
+        notes: "Notes",
+        images: null,
+        subject: "Subject",
+        quantity: "Quantity",
+        favorited_by: "Jane Doe, John Doe",
+        sold_to: "Jane Doe",
+        history: "01/1/1900 Shown at Winter Festival",
       }
     }
   }
 
   handleChange = (e) => {
-  const key = (e.target.name)
-  const value = (e.target.value)
-  this.setState(previousState => ({newCatalogEntry: {...previousState.newCatalogEntry, [key]: value}}))
-  this.setState(previousState => ({newCatalogEntry: {...previousState.newCatalogEntry, catalog_id: uuid()}}))
+    const key = (e.target.name)
+    const value = (e.target.value)
+    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
+    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, catalog_id: uuid() } }))
   }
 
-
-
+  handleFileSelection  = (e) => {
+    const key = (e.target.name)
+    const value = (e.target.files[0].name)
+    // console.log("file name", e.target.files[0].name)
+    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
+    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, catalog_id: uuid() } }))
+    }
+ 
 
   render() {
     this.createNewCatalogEntry = () => {
       const newCatalogEntry = this.state.newCatalogEntry
       this.context.updateAppStateCatalogCreate(newCatalogEntry)
     }
-  
+
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.createNewCatalogEntry(e)
       this.context.history.push(`/catalog`)
     }
-    
+
+    this.favoritedBySelectionBoxes = this.context.contacts.map(contact => {
+        return (
+          <div>
+            <input type="checkbox" id={contact.contact_id} name={contact.name} />
+            <label for={contact.name}> {`${contact.name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id}> {contact.name} </a> : `${contact.business_name}` !== "" ? `${contact.business_name}` : `${contact.event_name}`} </label>
+          </div>
+        )
+      })
+
     return (
-        <>
+      <>
         <Nav />
         <div className="item-wrap catalog-add">
           <h2>Add Catalog Entry</h2>
@@ -90,7 +105,8 @@ class AddCatalogEntry extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="images" className="catalog-add">Images:</label>
-              <input type="text" name="images" id="images" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.images} />
+              <input type="file" name="images" id="images" onChange={this.handleFileSelection}  />
+              <p>(this upload image feature will not be fully functional until a later version)</p>
             </div>
             <div className="form-space">
               <label htmlFor="subject" className="catalog-add">Subject:</label>
@@ -101,8 +117,8 @@ class AddCatalogEntry extends Component {
               <input type="text" name="quantity" id="quantity" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.quantity} />
             </div>
             <div className="form-space">
-              <label htmlFor="favorited_by" className="catalog-add">Favorited By:</label>
-              <input type="text" name="favorited_by" id="favorited_by" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.favorited_by} />
+              <p htmlFor="favorited_by" className="catalog-add">Favorited By:</p>
+              {this.favoritedBySelectionBoxes}
             </div>
             <div className="form-space">
               <label htmlFor="sold_to" className="catalog-add">Sold To:</label>
@@ -115,9 +131,9 @@ class AddCatalogEntry extends Component {
             <button type="submit" value="submit">Submit</button>
           </form>
         </div>
-        </>
-        );
-    }
+      </>
+    );
   }
-  
+}
+
 export default AddCatalogEntry;

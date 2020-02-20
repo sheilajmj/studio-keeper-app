@@ -41,6 +41,19 @@ class EditEvent extends Component {
     }
 
 
+    this.handleCancel = (e) => {
+      this.context.history.push('/events')
+    }
+
+    this.handleDeleteEvent = (id) => {
+        let indexToDelete = this.context.events.findIndex(event => event.event_id === id)
+        let eventsList = JSON.parse(JSON.stringify(this.context.events))
+        eventsList.splice(indexToDelete, 1)
+        let newEventsList = eventsList
+        this.context.updateAppStateEventsDelete(newEventsList)
+        this.context.history.push(`/events`)
+      }
+
 
     this.selectedEventForm = this.selectedEventArray.map((item) => {
       return (
@@ -83,6 +96,8 @@ class EditEvent extends Component {
               <input type="text" name="catalog_items" id="catalog_items" onChange={this.handleChange} defaultValue={item.catalog_items} />
             </div>
             <button type="submit" value="submit">Submit</button>
+            <button type="button" value="delete" onClick={(() => {this.handleDeleteEvent(item.event_id)})}>Delete Event</button>
+            <button type="button" value="cancel" onClick={(() => {this.handleCancel(item.event_id)})}>Cancel</button>
           </form>
         </div>
       );

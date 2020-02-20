@@ -39,6 +39,19 @@ class EditCatalogEntry extends Component {
       this.setState(previousState => ({ updatedCatalogEntry: { ...previousState.updatedCatalogEntry, [key]: value }, updateBoolean: true }))
       }
 
+      this.handleCancel = (e) => {
+        this.context.history.push('/catalog')
+      }
+  
+      this.handleDeleteCatalogItem = (id) => {
+          let indexToDelete = this.context.catalog_items.findIndex(item => item.catalog_id === id)
+          let catalogList = JSON.parse(JSON.stringify(this.context.catalog_items))
+          catalogList.splice(indexToDelete, 1)
+          let newCatalogList = catalogList
+          this.context.updateAppStateCatalogDelete(newCatalogList)
+          this.context.history.push(`/catalog`)
+        }
+
 
     this.selectedCatalogItemForm = this.selectedCatalogArray.map((item) => {
       return (
@@ -101,6 +114,8 @@ class EditCatalogEntry extends Component {
               <input type="text" name="history" id="history"  onChange={this.handleChange} defaultValue={item.history} />
             </div>
             <button type="submit" value="submit">Submit</button>
+            <button type="button" value="delete" onClick={(() => {this.handleDeleteCatalogItem(item.catalog_id)})}>Delete Catalog Item</button>
+            <button type="button" value="cancel" onClick={(() => {this.handleCancel(item.catalog_id)})}>Cancel</button>
           </form>
         </div>
       );
