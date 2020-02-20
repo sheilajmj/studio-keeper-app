@@ -1,16 +1,15 @@
 import React from 'react';
-import CatalogItemContainer from './CatalogItemContainer'
+import CatalogItem from './CatalogItem'
 import Nav from '../Nav/Nav'
 
 
 function CatalogParent() {
   return (
-    <main className='App'>
+    <section className='catalog'>
       <Nav />
-      <h1>Here is your Catalog</h1>
-
-      <CatalogItemContainer />
-    </main>
+      <h2>Catalog</h2>
+      <CatalogItem />
+    </section>
   );
 }
 

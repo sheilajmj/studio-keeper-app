@@ -11,7 +11,7 @@ class ContactsParent extends Component {
   return (
     <main className='App'>
       <Nav />
-      <h2>Here are your Contacts</h2>
+      <h2>Contacts</h2>
         <ContactItemContainer />
     </main>
   );

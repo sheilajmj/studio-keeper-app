@@ -15,7 +15,7 @@ class Nav extends Component {
     return (
       <div className="nav-wrap">
         <div className="nav-top">
-        <ForwardButton /> <HomeButton /> <BackButton />
+        <BackButton /><HomeButton /> <ForwardButton />
         </div>
         <br />
         <div className="nav-bottom">

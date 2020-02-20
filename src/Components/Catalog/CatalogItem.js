@@ -110,3 +110,6 @@ render(){
 
 
 export default CatalogItem;
+
+
+
