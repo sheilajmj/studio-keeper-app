@@ -9,16 +9,9 @@ class EventButton extends Component {
     this.context.history.push('/events')
   }
 
-  handleAddClick = (location) => {
-    this.context.history.push(`/${location}/add`)
-  }
-
   render() {
     return (
-      <div>
         <button onClick={() => { this.handleEventsClick() }}>Events</button>
-        <button className="eventOptions add-btn" onClick={(() => { this.handleAddClick('events') })}> + </button>
-      </div>
     );
   }
 }

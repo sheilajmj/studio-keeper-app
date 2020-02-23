@@ -1,13 +1,12 @@
 import React from 'react';
 import CatalogItem from './CatalogItem'
-import Nav from '../Nav/Nav'
+import PageParentHeader from '../Nav/PageParentHeader';
 
 
 function CatalogParent() {
   return (
     <section className='catalog'>
-      <Nav />
-      <h2>Catalog</h2>
+      <PageParentHeader pageName="Catalog" />
       <CatalogItem />
     </section>
   );

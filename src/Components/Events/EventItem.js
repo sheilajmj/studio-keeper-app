@@ -4,7 +4,7 @@ import Context from '../../Context';
 class EventItem extends Component {
   static contextType = Context;
 
-  handleEditClick(id){
+  handleEditClick(id) {
     this.context.history.push(`/events/edit/${id}`)
   }
 
@@ -16,50 +16,136 @@ class EventItem extends Component {
     this.context.history.push(`/events/${id}`)
   }
 
-  eventItemsList = this.context.events.map((item, index) => {
+  eventItemsObject = this.context.events.map((item) => {
+    //return contacts
+    this.contactsLinkedArray = this.context.contacts.filter((contact) => {
+      return (contact.contact_id === item.contact)
+    })
+    this.contactsLinkedReturn = this.contactsLinkedArray.map((contact) => {
+      return (
+        <div className="event-contacts"><a href={`http://localhost:3000/contacts/` + contact.contact_id} target="_blank" rel="noopener noreferrer">{contact.name}</a></div>
+
+      )
+    })
+    //
+
+    //get the catalog_id of the catalog_items listed in the Event in an array
+    this.eventCatalogItemsArray = item.catalog_items.split(', ')
+    this.catalogObject = this.eventCatalogItemsArray.map((id) => {
+      //get the catalog object of the contact favorite
+      return (
+        this.catalogObject = this.context.catalog_items.filter((item) => {
+          return item.catalog_id === id
+        })
+      )
+    })
+    this.catalogArray = this.catalogObject.flat()
+    console.log("this is catalogArray", this.catalogArray)
+
+    //turn the catalog object into a return value for the image
+    this.catalogReturn = this.catalogArray.map((item) => {
+      return (
+        <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+          {this.imageFav = item.images.split(', ').map((image) => {
+            return (
+              <img className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+            )
+          })}
+        </a>
+      )
+    })
+
+
+    this.eventTypeIncluded = () => {
+      if (item.event_type) {
+        return (<li>
+          <span className="event-labels">Event Type:</span> {item.event_type}
+        </li>)
+      }
+    }
+
+    this.eventNameIncluded = () => {
+      if (item.name) {
+        return (<li>
+          <span className="event-labels">Name:</span> {item.name}
+        </li>)
+      }
+    }
+
+    this.eventWebIncluded = () => {
+      if (item.website) {
+        return (<li>
+          <span className="event-labels">Web:</span> {item.website}
+        </li>)
+      }
+    }
+
+    this.eventLocationIncluded = () => {
+      if (item.location) {
+        return (<li>
+          <span className="event-labels">Location:</span> {item.location}
+        </li>)
+      }
+    }
+
+    this.eventDatesIncluded = () => {
+      if (item.event_dates) {
+        return (<li>
+          <span className="event-labels">Event Dates:</span> {item.event_dates}
+        </li>)
+      }
+    }
+    this.eventAppDatesIncluded = () => {
+      if (item.application_due_date) {
+        return (<li>
+          <span className="event-labels">Application Due Dates:</span> {item.application_due_date}
+        </li>)
+      }
+    }
+    this.eventLocationIncluded = () => {
+      if (item.location) {
+        return (<li>
+          <span className="event-labels">Location:</span> {item.location}
+        </li>)
+      }
+    }
+
     return (
       <div key={item.event_id} className="item-wrap">
-        <ul className="item" onClick={(() => {this.handleItemClick(item.event_id)})}>
+        {/* <button type="button" className="view-item" value="viewEvent" onClick={(() => {this.handleViewEvent(item.event_id)})}><img src={require("../../assets/viewItem.svg")} width="30px" alt="view item" /></button> */}
+        <button type="button" className="edit-btn" onClick={(() => { this.handleEditClick(item.event_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+        <ul className="item" onClick={(() => { this.handleItemClick(item.event_id) })}>
+          {this.eventTypeIncluded()}
+          {this.eventNameIncluded()}
+          {this.eventWebIncluded()}
+          {this.eventLocationIncluded()}
+          {this.eventDatesIncluded()}
+          {this.eventAppDatesIncluded()}
+
+          {/* <li>
+          <span className="event-labels">Affiliated Contacts:</span> {this.contactsLinkedReturn}
+          </li>          
           <li>
-          Event Type: {item.event_type}
+          <span className="event-labels">Notes:</span> {item.notes}
+          </li>          
+          <li>
+          <span className="event-labels">Submission Requirements:</span> {item.submission_requirements}
           </li>
           <li>
-          Name: {item.name}
-          </li>
-          <li>
-          Location: {item.location}
-          </li>          
-          <li>
-          Event Dates: {item.event_dates}
-          </li>          
-          <li>
-          Application Due Dates: {item.application_due_date}
-          </li>          
-          <li>
-          contact (link to contact data): {item.contact}
-          </li>          
-          <li>
-          Notes: {item.notes}
-          </li>          
-          <li>
-          Submission Requirements: {item.submission_requirements}
-          </li>
-          <li>
-          Catalog Items (items to show or sell or enter to the event): {item.catalog_items}
-          </li>
+          <span className="event-labels">Catalog Items (items to show or sell at event):</span> {this.catalogReturn}
+          </li> */}
         </ul>
-        <button onClick={(() => { this.handleEditClick(item.event_id) })}>Edit</button>
-        <button type="button" value="viewEvent" onClick={(() => {this.handleViewEvent(item.event_id)})}>View Event</button>
-    </div>
+      </div>
     );
   });
 
-  render(){
-  return(
-    <div>
-      {this.eventItemsList}
-    </div>
-  );
+  render() {
+
+    return (
+      <div>
+        {this.eventItemsObject}
+      </div>
+    );
   }
 };
 

@@ -5,14 +5,14 @@ import Context from '../../Context'
 class HomeButton extends Component {
   static contextType = Context;
 
-handleBackClick = () => {
+handleHomeClick = () => {
 this.context.history.push('/')
 
 }
 
 render() {
   return (
-    <button className="nav-btn" onClick={() => {this.handleBackClick()}}>Home</button>
+    <button className="nav-btn" onClick={() => {this.handleHomeClick()}}>Home</button>
   );
 }
 }

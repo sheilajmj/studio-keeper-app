@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
-import Nav from '../Nav/Nav'
+import PageParentHeader from '../Nav/PageParentHeader'
 
 class ViewContact extends Component {
   static contextType = StudioKeeperContext
@@ -8,7 +8,7 @@ class ViewContact extends Component {
   handleEditClick = (id) => {
     this.context.history.push(`/contacts/edit/${id}`)
   }
-  
+
   handleDeleteClick = (id) => {
     this.handleDeleteContact(id)
     this.context.history.push(`/contacts`)
@@ -18,79 +18,137 @@ class ViewContact extends Component {
     this.context.history.push('/contacts')
   }
 
-  render(){
+  render() {
     this.selectedContactId = this.props.match.params.contact_id
     this.contactObject = this.context.contacts.find(contact => contact.contact_id === this.selectedContactId)
     this.contactArray = [this.contactObject]
     this.handleDeleteContact = (id) => {
-        let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === id)
-        let contactsList = JSON.parse(JSON.stringify(this.context.contacts))
-        contactsList.splice(indexToDelete, 1)
-        let newContactsList = contactsList
-        this.context.updateAppStateContactsDelete(newContactsList)
-      }
+      let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === id)
+      let contactsList = JSON.parse(JSON.stringify(this.context.contacts))
+      contactsList.splice(indexToDelete, 1)
+      let newContactsList = contactsList
+      this.context.updateAppStateContactsDelete(newContactsList)
+    }
 
     this.contactObjectRender = this.contactArray.map((item) => {
-        return(
-            <div>
-                <div key={item.contact_id} className="item-wrap">
-            <ul className="item">
+    
+    //get event name and link for contact
+      this.eventIds = item.events.split(', ')
+      this.eventIdsToObjects = this.eventIds.map((ids) => {
+        this.eventObjects = this.context.events.filter((events) => {
+          return events.event_id === ids
+        })
+        return this.eventObjects
+      })
+      this.eventObjectReturnArray = this.eventIdsToObjects.map((event) => {
+        this.eventObjectReturn = event.map((event) => {
+          return (
+            <a href={'localhost:3000/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
+          )
+        })
+        return this.eventObjectReturn
+      })
+
+
+    //get the catalog_id of the favorites in an array
+      this.contactFavoritesIdArray = item.favorites.split(', ')
+      this.favoritesObject = this.contactFavoritesIdArray.map((id) => {
+          //get the catalog object of the contact favorite
+        return (
+          this.catalogObject = this.context.catalog_items.filter((item) => {
+          return item.catalog_id === id
+        })
+        )
+        })
+      this.favoritesArray = this.favoritesObject.flat()
+        
+        //turn the catalog object into a return value for the image
+      this.favoritesReturn = this.favoritesArray.map((item) => {
+        return (
+          <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+            {this.imageFav = [item.images.split(', ')[0]].map((image) => {
+              return (
+                <img className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+              )
+            })}
+            </a>
+        )
+      })
+
+
+      this.contactTypeBusiness = () => {
+        if (item.contact_type === "Business"){
+          return ""
+        }
+        else {
+          return (<li>
+                  <span className="contact-labels">Name:</span> {item.name}
+                </li>
+          )
+        }
+
+      }
+      
+        return (
+          <div>
+            <PageParentHeader pageName="Contacts" />
+            <div key={item.contact_id} className="item-wrap">
+            <button className="back-to-btn" type="button" value="backToContacts" onClick={(() => { this.handleBackToContacts(item.contact_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px"/> <span className="all-contact-text">All Contacts</span></button>
+            <button className="edit-btn" onClick={(() => { this.handleEditClick(item.contact_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+              <ul className="item">
                 <li>
-                    Contact Type: {item.contact_type}
+                  <span className="contact-labels">Contact Type:</span> {item.contact_type}
                 </li>
                 <li>
-                    Business Name: {item.business_name}
+                  <span className="contact-labels">Business Name:</span> {item.business_name}
+                </li>
+                {this.contactTypeBusiness()}
+                <li>
+                  <span className="contact-labels">Event Affliation:</span>   {this.eventObjectReturnArray}
                 </li>
                 <li>
-                    Name: {item.name}
-                </li>
-                <li >
-                    Event Name: {item.event_name}
+                  <span className="contact-labels">Email:</span> <a href={"mailto:" + item.email} target="_blank" rel="noopener noreferrer"> {item.email} </a>
                 </li>
                 <li>
-                Email: <a href={"mailto:" + item.email}> {item.email} </a>
+                  <span className="contact-labels">Phone:</span>
+                  <a href={"tel:" + item.phone} target="_blank" rel="noopener noreferrer">{item.phone}</a>
                 </li>
                 <li>
-                Phone:
-                <a href={"tel:" + item.phone}>{item.phone}</a> 
-                </li>
-                <li>
-                    Address: {item.address_street}
-                </li>
-                <li>
-                  {item.address_line2}
-                </li>
-                <li>
-                  {item.address_city}{item.address_state}{item.address_zip}
-                </li>
-                <li>
+                  <p className="contact-labels">Address:</p> 
+                  <p className="address-block">
+                      <span className="address-center">
+                  {item.address_street}<br />
+                  {item.address_line2}<span>  </span>
+                  {item.address_city}<span>, </span>{item.address_state}<span>  </span>{item.address_zip}<br />
                   {item.address_country}
+                  </span>
+                  </p>
                 </li>
                 <li>
-                  website: <a href={item.website} target="_blank"  rel="noopener noreferrer">{item.website}</a>
+                  <span className="contact-labels">website:</span> <a href={item.website} target="_blank" rel="noopener noreferrer">{item.website}</a>
                 </li>
                 <li>
-                  Favorites: {item.favorites}
+                  <p className="contact-labels">Favorites:</p> {this.favoritesReturn}
                 </li>
                 <li>
-                  Notes: {item.notes}
+                  <p className="contact-labels expand-field">Notes:</p>
+                   {item.notes}
                 </li>
-            </ul>
-            <button onClick={(() => { this.handleEditClick(item.contact_id) })}>Edit</button>
-            <button onClick={() => { this.handleDeleteClick(item.contact_id) }}>Delete</button>
-            <button type="button" value="backToContacts" onClick={(() => {this.handleBackToContacts(item.contact_id)})}>Back to Contacts</button>
+              </ul>
+              <div className="button-wrap">
+              <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.contact_id) }}>Delete</button>
+              </div>
+            </div>
           </div>
+        )
+      })
+      return (
+        <div>
+          {this.contactObjectRender}
         </div>
       )
-    })
-    return(
-        <div>
-            <Nav />
-            {this.contactObjectRender}
-        </div>
-    )
 
-     
-  }
+
+    }
 }
   export default ViewContact

@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import ContactButton from '../Button/ContactButton';
-import CatalogButton from '../Button/CatalogButton';
-import EventButton from '../Button/EventButton';
-import ForwardButton from '../Button/ForwardButton';
-import BackButton from '../Button/BackButton';
-import HomeButton from '../Button/HomeButton';
 
 
 class Nav extends Component {
@@ -13,17 +7,19 @@ class Nav extends Component {
 
   render() {
     return (
-      <div className="nav-wrap">
-        <div className="nav-top">
-        <BackButton /><HomeButton /> <ForwardButton />
-        </div>
-        <br />
-        <div className="nav-bottom">
-        <ContactButton /><CatalogButton /><EventButton />
-        </div>
-        <br />
-        
-      </div>
+      <nav className="nav-wrap">
+        <ul>
+          <li>
+          <a href="/contacts">Contacts</a>
+          </li>
+          <li>
+          <a href="/catalog">Catalog</a>
+          </li>
+          <li>
+          <a href="/events">Events</a>
+          </li>
+        </ul>
+      </nav>
     );
   }
 }

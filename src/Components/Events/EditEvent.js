@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import Nav from '../Nav/Nav'
+import PageParentHeader from '../Nav/PageParentHeader';
 
 
 class EditEvent extends Component {
@@ -57,8 +57,9 @@ class EditEvent extends Component {
 
     this.selectedEventForm = this.selectedEventArray.map((item) => {
       return (
-        <div key={item.event_id} className="item-wrap event-edit">
+        <div key={item.event_id} className="item-edit-wrap event-edit">
           <form onSubmit={this.handleSubmit}>
+          <h3 className="add-item-header">Edit Event</h3>
             <div className="form-space">
               <label htmlFor="event_type" className="event-edit">Event Type:</label>
               <input type="text" name="event_type" id="event_type" onChange={this.handleChange} defaultValue={item.event_type} />
@@ -77,7 +78,7 @@ class EditEvent extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="application_due_dates" className="event-edit">Application Due Dates:</label>
-              <input type="text" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} defaultValue={item.application_due_dates} />
+              <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} defaultValue={item.application_due_dates} />
             </div>
             <div className="form-space">
               <label htmlFor="contact" className="event-edit">Contact:</label>
@@ -85,19 +86,21 @@ class EditEvent extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="notes" className="event-edit">Notes:</label>
-              <input type="text" name="notes" id="notes" onChange={this.handleChange} defaultValue={item.notes} />
+              <textarea type="text" className="event-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={item.notes} />
             </div>
             <div className="form-space">
               <label htmlFor="submission_requirements" className="event-edit">Submission Requirements:</label>
-              <input type="text" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} defaultValue={item.submission_requirements} />
+              <br /><textarea type="text"  className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} defaultValue={item.submission_requirements} />
             </div>
             <div className="form-space">
               <label htmlFor="catalog_items" className="event-edit">Catalog Items:</label>
               <input type="text" name="catalog_items" id="catalog_items" onChange={this.handleChange} defaultValue={item.catalog_items} />
             </div>
-            <button type="submit" value="submit">Submit</button>
-            <button type="button" value="delete" onClick={(() => {this.handleDeleteEvent(item.event_id)})}>Delete Event</button>
-            <button type="button" value="cancel" onClick={(() => {this.handleCancel(item.event_id)})}>Cancel</button>
+            <div className="button-wrap">
+            <button className="submit-btn" type="submit" value="submit">Submit</button>
+            <button className="cancel-btn" type="button" value="cancel" onClick={(() => {this.handleCancel(item.event_id)})}>Cancel</button>
+          <br /><button className="delete-btn" type="button" value="delete" onClick={(() => {this.handleDeleteEvent(item.event_id)})}>Delete Event</button>
+            </div>
           </form>
         </div>
       );
@@ -105,8 +108,7 @@ class EditEvent extends Component {
   
       return (
       <div>
-        <Nav />
-        <h2>Edit Event</h2>
+        <PageParentHeader pageName="Events" />
         {this.selectedEventForm}
       </div>
     )

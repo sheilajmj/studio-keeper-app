@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import Nav from '../Nav/Nav'
+import PageParentHeader from '../Nav/PageParentHeader'
 
 
 class EditCatalogEntry extends Component {
@@ -55,8 +55,9 @@ class EditCatalogEntry extends Component {
 
     this.selectedCatalogItemForm = this.selectedCatalogArray.map((item) => {
       return (
-        <div key={item.catalog_id} className="item-wrap catalog-edit">
+        <div key={item.catalog_id} className="item-edit-wrap catalog-edit">
           <form onSubmit={this.handleSubmit}>
+          <h3 className="add-item-header">Edit Catalog Entry</h3>
             <div className="form-space">
               <label htmlFor="type" className="catalog-edit">Type:</label>
               <input type="text" name="type" id="type" onChange={this.handleChange} defaultValue={item.type} />
@@ -78,16 +79,16 @@ class EditCatalogEntry extends Component {
               <input type="text" name="price" id="price"  onChange={this.handleChange} defaultValue={item.price} />
             </div>
             <div className="form-space">
-              <label htmlFor="date_created" className="date_created">Date Created:</label>
+              <label htmlFor="date_created" className="catalog-edit">Date Created:</label>
               <input type="text" name="date_created" id="date_created" onChange={this.handleChange} defaultValue={item.date_created} />
             </div>
             <div className="form-space">
               <label htmlFor="concept_statement" className="catalog-edit">Concept Statement:</label>
-              <input type="text" name="concept_statement" id="concept_statement"  onChange={this.handleChange} defaultValue={item.concept_statement} />
+              <br /><textarea type="text" className="catalog-textarea" name="concept_statement" id="concept_statement" onChange={this.handleChange} defaultValue={item.concept_statement} />
             </div>
             <div className="form-space">
               <label htmlFor="notes" className="catalog-edit">Notes:</label>
-              <input type="text" name="notes" id="notes" onChange={this.handleChange} defaultValue={item.notes} />
+              <br /><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={item.notes} />
             </div>
             <div className="form-space">
               <label htmlFor="images" className="catalog-edit">Images:</label>
@@ -111,11 +112,13 @@ class EditCatalogEntry extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="history" className="catalog-edit">History:</label>
-              <input type="text" name="history" id="history"  onChange={this.handleChange} defaultValue={item.history} />
+              <br /><textarea type="text" className="catalog-textarea" name="history" id="history"  onChange={this.handleChange} defaultValue={item.history} />
             </div>
-            <button type="submit" value="submit">Submit</button>
-            <button type="button" value="delete" onClick={(() => {this.handleDeleteCatalogItem(item.catalog_id)})}>Delete Catalog Item</button>
-            <button type="button" value="cancel" onClick={(() => {this.handleCancel(item.catalog_id)})}>Cancel</button>
+            <div className="button-wrap">
+            <button className="submit-btn" type="submit" value="submit">Submit</button>
+            <button className="cancel-btn"type="button" value="cancel" onClick={(() => {this.handleCancel(item.catalog_id)})}>Cancel</button>
+            <br /><button className="delete-btn" type="button" value="delete" onClick={(() => {this.handleDeleteCatalogItem(item.catalog_id)})}>Delete Catalog Item</button>
+            </div>
           </form>
         </div>
       );
@@ -124,8 +127,7 @@ class EditCatalogEntry extends Component {
 
     return (
       <div>
-        <Nav />
-        <h2>Edit Catalog</h2>
+        <PageParentHeader pageName="Catalog" />
         {this.selectedCatalogItemForm}
       </div>
     )

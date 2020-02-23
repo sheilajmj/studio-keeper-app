@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import Nav from '../Nav/Nav'
+import PageParentHeader from '../Nav/PageParentHeader';
 const { uuid } = require('uuidv4');
 
 class AddCatalogEntry extends Component {
@@ -21,8 +21,11 @@ class AddCatalogEntry extends Component {
         images: null,
         subject: "Subject",
         quantity: "Quantity",
+        location: "upstairs",
         favorited_by: "Jane Doe, John Doe",
         sold_to: "Jane Doe",
+        sold_date: "01/25/2020",
+        events: "002, 003",
         history: "01/1/1900 Shown at Winter Festival",
       }
     }
@@ -59,77 +62,107 @@ class AddCatalogEntry extends Component {
     this.favoritedBySelectionBoxes = this.context.contacts.map(contact => {
         return (
           <div>
-            <input type="checkbox" id={contact.contact_id} name={contact.name} />
-            <label for={contact.name}> {`${contact.name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id}> {contact.name} </a> : `${contact.business_name}` !== "" ? `${contact.business_name}` : `${contact.event_name}`} </label>
+            <input type="checkbox" id={"contact-"+contact.contact_id} name={contact.name} />
+            <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
           </div>
         )
       })
 
+    this.eventsBySelectionBoxes = this.context.events.map(event => {
+      return(
+        <div>
+          <input type="checkbox" id={"event-"+event.event_id} name={event.name} />
+          <label htmlFor={event.name}>{<a href={'localhost:3000/events/'+ event.event_id} >{event.name}</a>} </label>
+        </div>
+      )
+    })  
     return (
       <>
-        <Nav />
-        <div className="item-wrap catalog-add">
-          <h2>Add Catalog Entry</h2>
+      <PageParentHeader pageName="Catalog" />
+        <div className="item-edit-wrap catalog-edit">
           <form onSubmit={this.handleSubmit}>
-            <div className="form-space">
-              <label htmlFor="type" className="catalog-add">Type:</label>
-              <input type="text" name="type" id="type" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.type} />
+          <h3 className="add-item-header">Add Catalog Entry</h3>
+          <div className="form-space">
+              <label htmlFor="name" className="catalog-add">Name:</label>
+              <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.name} />
             </div>
             <div className="form-space">
               <label htmlFor="collection" className="catalog-add">Collection:</label>
               <input type="text" name="collection" id="collection" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.collection} />
             </div>
+            <div className="border"></div>
             <div className="form-space">
-              <label htmlFor="size" className="catalog-add">Size:</label>
-              <input type="text" name="size" id="size" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.size} />
+              <label htmlFor="type" className="catalog-add">Type:</label>
+              <input type="text" name="type" id="type" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.type} />
             </div>
             <div className="form-space">
               <label htmlFor="medium" className="catalog-add">Medium:</label>
               <input type="text" name="medium" id="medium" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.medium} />
             </div>
             <div className="form-space">
-              <label htmlFor="price" className="catalog-add">Price:</label>
-              <input type="text" name="price" id="price" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.price} />
-            </div>
-            <div className="form-space">
-              <label htmlFor="date_created" className="catalog-add">Date Created:</label>
-              <input type="text" name="date_created" id="date_created" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.date_created} />
-            </div>
-            <div className="form-space">
-              <label htmlFor="concept_statement" className="catalog-add">Concept Statement:</label>
-              <input type="text" name="concept_statement" id="concept_statement" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.concept_statement} />
-            </div>
-            <div className="form-space">
-              <label htmlFor="notes" className="catalog-add">Notes:</label>
-              <input type="text" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.notes} />
-            </div>
-            <div className="form-space">
-              <label htmlFor="images" className="catalog-add">Images:</label>
-              <input type="file" name="images" id="images" onChange={this.handleFileSelection}  />
-              <p>(this upload image feature will not be fully functional until a later version)</p>
+              <label htmlFor="size" className="catalog-add">Size:</label>
+              <input type="text" name="size" id="size" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.size} />
             </div>
             <div className="form-space">
               <label htmlFor="subject" className="catalog-add">Subject:</label>
               <input type="text" name="subject" id="subject" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.subject} />
             </div>
             <div className="form-space">
+              <label htmlFor="concept_statement" className="catalog-add">Concept Statement:</label>
+              <br /><textarea type="text" className="catalog-textarea" name="concept_statement" id="concept_statement" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.concept_statement} />
+            </div>
+            <div className="border"></div>
+            <div className="form-space">
+              <label htmlFor="price" className="catalog-add">Price:</label>
+              <input type="text" name="price" id="price" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.price} />
+            </div>
+            <div className="form-space">
               <label htmlFor="quantity" className="catalog-add">Quantity:</label>
               <input type="text" name="quantity" id="quantity" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.quantity} />
             </div>
             <div className="form-space">
+              <label htmlFor="location" className="catalog-add">Location:</label>
+              <input type="text" name="location" id="location" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.location} />
+            </div>
+            <div className="form-space">
               <p htmlFor="favorited_by" className="catalog-add">Favorited By:</p>
               {this.favoritedBySelectionBoxes}
+            </div>
+            <div className="border"></div>
+            <div className="form-space">
+              <label htmlFor="date_created" className="catalog-add">Date Created:</label>
+              <input type="text" name="date_created" id="date_created" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.date_created} />
+            </div>
+            <div className="form-space">
+              <label htmlFor="history" className="catalog-add">History:</label>
+              <br /><textarea type="text" className="catalog-textarea" name="history" id="history" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.history} />
+            </div>
+            <div className="form-space">
+              <label htmlFor="events" className="catalog-add">Events:</label>
+              {this.eventsBySelectionBoxes}            
+              </div>
+              <div className="form-space">
+              <label htmlFor="sold_date" className="catalog-add">Sold Date:</label>
+              <input type="text" name="sold_date" id="sold_date" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.sold_date} />
             </div>
             <div className="form-space">
               <label htmlFor="sold_to" className="catalog-add">Sold To:</label>
               <input type="text" name="sold_to" id="sold_to" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.sold_to} />
             </div>
             <div className="form-space">
-              <label htmlFor="history" className="catalog-add">History:</label>
-              <input type="text" name="history" id="history" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.history} />
+              <label htmlFor="notes" className="catalog-add">Notes:</label>
+              <br/><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.notes} />
             </div>
-            <button type="submit" value="submit">Submit</button>
-          </form>
+            <div className="border"></div>
+            <div className="form-space">
+            <p>(this upload image feature is currently just a placeholder)</p>
+              <label htmlFor="images" className="catalog-add">Images:</label>
+              <input type="file" name="images" id="images" onChange={this.handleFileSelection}  />
+            </div>
+            <div className="button-wrap">
+            <button className="submit-btn" type="submit" value="submit">Submit</button>
+            </div>
+            </form>
         </div>
       </>
     );

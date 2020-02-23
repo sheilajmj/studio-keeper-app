@@ -14,6 +14,9 @@ import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
 import ViewEvent from './Components/Events/ViewEvent'
 import Home from './Components/Home/Home'
+import LandingPage from './Components/LandingPage/LandingPage'
+import Nav from './Components/Nav/Nav'
+
 let json_data = require('./db.json');
 
 const catalog_items = json_data.catalog_items
@@ -27,37 +30,37 @@ class App extends Component {
       catalog_items: catalog_items,
       contacts: contacts,
       events: events,
-      selectedContact:[],
+      selectedContact: [],
       updateValue: true,
     }
   }
 
-   
+
   updateAppStateContactsCreate = (newContact) => {
     const currentStateContacts = JSON.parse(JSON.stringify(this.state.contacts))
     currentStateContacts.push(newContact)
-    this.setState({contacts:currentStateContacts, } )
+    this.setState({ contacts: currentStateContacts, })
 
   }
 
   updateAppStateContactsUpdate = (updatedContact) => {
-      let contactId = updatedContact.contact_id
-      let contacts = JSON.parse(JSON.stringify(this.state.contacts))
-      let index = contacts.findIndex((contacts) => contacts.contact_id === contactId)
-      let contactReplaced = contacts.splice(index, 1, updatedContact)
-      this.setState({replacedContacts:contactReplaced, contacts:contacts})
- 
+    let contactId = updatedContact.contact_id
+    let contacts = JSON.parse(JSON.stringify(this.state.contacts))
+    let index = contacts.findIndex((contacts) => contacts.contact_id === contactId)
+    let contactReplaced = contacts.splice(index, 1, updatedContact)
+    this.setState({ replacedContacts: contactReplaced, contacts: contacts })
+
   }
 
   updateAppStateContactsDelete = (newContactsList) => {
-    this.setState({contacts: newContactsList})
+    this.setState({ contacts: newContactsList })
 
   }
 
   updateAppStateCatalogCreate = (newCatalogEntry) => {
     const currentStateCatalog = JSON.parse(JSON.stringify(this.state.catalog_items))
     currentStateCatalog.push(newCatalogEntry)
-    this.setState({catalog_items:currentStateCatalog} )
+    this.setState({ catalog_items: currentStateCatalog })
   }
 
   updateAppStateCatalogUpdate = (updatedCatalogEntry) => {
@@ -65,17 +68,17 @@ class App extends Component {
     let catalog_items = JSON.parse(JSON.stringify(this.state.catalog_items))
     let index = catalog_items.findIndex((catalog_item) => catalog_item.catalog_id === catalogId)
     let catalogItemReplaced = catalog_items.splice(index, 1, updatedCatalogEntry)
-    this.setState({replacedCatalogEntry:catalogItemReplaced, catalog_items:catalog_items})
-}
+    this.setState({ replacedCatalogEntry: catalogItemReplaced, catalog_items: catalog_items })
+  }
 
   updateAppStateCatalogDelete = (newCatalogList) => {
-    this.setState({catalog_items: newCatalogList})
+    this.setState({ catalog_items: newCatalogList })
   }
 
   updateAppStateEventsCreate = (newEvent) => {
     const currentStateEvents = JSON.parse(JSON.stringify(this.state.events))
     currentStateEvents.push(newEvent)
-    this.setState({events:currentStateEvents})    
+    this.setState({ events: currentStateEvents })
   }
 
   updateAppStateEventsUpdate = (updatedEvent) => {
@@ -83,12 +86,12 @@ class App extends Component {
     let events = JSON.parse(JSON.stringify(this.state.events))
     let index = events.findIndex((events) => events.event_id === eventId)
     let eventItemReplaced = events.splice(index, 1, updatedEvent)
-    this.setState({replacedEventEntry:eventItemReplaced, events:events})
-}
-updateAppStateEventsDelete = (newEventsList) => {
-  this.setState({events: newEventsList})
+    this.setState({ replacedEventEntry: eventItemReplaced, events: events })
+  }
+  updateAppStateEventsDelete = (newEventsList) => {
+    this.setState({ events: newEventsList })
 
-}
+  }
 
   render() {
     const contextValue = {
@@ -106,68 +109,78 @@ updateAppStateEventsDelete = (newEventsList) => {
       updateAppStateCatalogDelete: this.updateAppStateCatalogDelete,
       updateAppStateEventsDelete: this.updateAppStateEventsDelete,
     }
-    
+
 
     return (
-      <main className='App'>
-        <h1>Studio Keeper</h1>
-        <StudioKeeperContext.Provider value={contextValue}>
+      <>     <StudioKeeperContext.Provider value={contextValue}>
+        <header>
+          <h1>
+            <a href="/" className="header">Studio Keeper</a>
+          </h1>
+        <Nav />
+        </header>
+        <main className='app'>
           <Switch>
-          <Route
-            path={'/catalog/edit/:catalog_id'}
-            component={EditCatalogEntry}
-          />
-          <Route
-            path={'/catalog/add'}
-            component={AddCatalogEntry}
-          />
-          <Route
-            exact path={'/catalog/:catalog_id'}
-            component ={ViewCatalog}
+            <Route
+              path={'/catalog/edit/:catalog_id'}
+              component={EditCatalogEntry}
             />
-          <Route
-            path={'/catalog'}
-            component={CatalogParent}
-          />
-          <Route
-            exact path={'/contacts/edit/:contact_id'}
-            component={EditContact} 
-          />          
-          <Route
-            exact path={'/contacts/add'}
-            component={AddContact}
-          />
-          <Route
-            exact path={'/contacts/:contact_id'}
-            component ={ViewContact}
+            <Route
+              path={'/catalog/add'}
+              component={AddCatalogEntry}
             />
-          <Route
-            exact path={'/contacts'}
-            component={ContactsParent}
-          />
-          <Route
-            path={'/events/edit/:event_id'}
-            component={EditEvent}
-          />
-          <Route
-            path={'/events/add'}
-            component={AddEvent}
-          />
-          <Route
-            exact path={'/events/:event_id'}
-            component ={ViewEvent}
+            <Route
+              exact path={'/catalog/:catalog_id'}
+              component={ViewCatalog}
             />
-          <Route
-            path={'/events'}
-            component={EventParent}
-          />
-          <Route
-            exact path={'/'}
-            component={Home}
-          />
+            <Route
+              path={'/catalog'}
+              component={CatalogParent}
+            />
+            <Route
+              exact path={'/contacts/edit/:contact_id'}
+              component={EditContact}
+            />
+            <Route
+              exact path={'/contacts/add'}
+              component={AddContact}
+            />
+            <Route
+              exact path={'/contacts/:contact_id'}
+              component={ViewContact}
+            />
+            <Route
+              exact path={'/contacts'}
+              component={ContactsParent}
+            />
+            <Route
+              path={'/events/edit/:event_id'}
+              component={EditEvent}
+            />
+            <Route
+              path={'/events/add'}
+              component={AddEvent}
+            />
+            <Route
+              exact path={'/events/:event_id'}
+              component={ViewEvent}
+            />
+            <Route
+              path={'/events'}
+              component={EventParent}
+            />
+            <Route
+              exact path={'/'}
+              component={Home}
+            />
+            <Route
+              exact path={'/landing'}
+              component={LandingPage}
+            />
           </Switch>
-        </StudioKeeperContext.Provider>
-      </main>
+        </main>
+      </StudioKeeperContext.Provider>
+      </>
     );
   };
 };

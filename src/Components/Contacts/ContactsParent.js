@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import Nav from '../Nav/Nav'
-import ContactItemContainer from './ContactItemContainer';
-
+import ContactItem from './ContactItem';
+import PageParentHeader from '../Nav/PageParentHeader';
 
 class ContactsParent extends Component {
   static contextType = Context;
 
   render(){
   return (
-    <main className='App'>
-      <Nav />
-      <h2>Contacts</h2>
-        <ContactItemContainer />
-    </main>
+    <section className='contacts'>
+        <PageParentHeader pageName={"Contacts"} />
+        <ContactItem />
+    </section>
   );
 }
 }

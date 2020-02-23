@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import Nav from '../Nav/Nav'
+import PageParentHeader from '../Nav/PageParentHeader';
 const { uuid } = require('uuidv4');
 
 class AddContact extends Component {
@@ -10,9 +10,10 @@ class AddContact extends Component {
     super(props)
     this.state = {
       newContact: {
-      contact_type: "Contact Type",
+      contact_type: "type-individual",
       name: "Name",
-      business: "Business",
+      title: "Title",
+      business: "Business Name",
       event: "Event Name",
       email: "jdoe@email.com",
       phone: "123-456-7890",
@@ -51,33 +52,82 @@ class AddContact extends Component {
   
   
   render() {
+    this.nameFieldPopulator = () => {
+      if (this.state.newContact.contact_type === "Individual"){
+        return (
+          <>
+          <div className="form-space">
+          <label htmlFor="name" className="contact-edit">Name:</label>
+          <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={this.state.newContact.name} />
+        </div>
+        <div className="form-space">
+          <label htmlFor="title" className="contact-edit">Title:</label>
+          <input type="text" name="title" id="title" onChange={this.handleChange} defaultValue={this.state.newContact.title} />
+        </div>
+        <div className="form-space">
+          <label htmlFor="business" className="contact-edit">Business:</label>
+          <input type="text" name="business" id="business" onChange={this.handleChange} defaultValue={this.state.newContact.business} />
+        </div>
+        </>
+        )
+      }
+      else if(this.state.newContact.contact_type === "Business"){
+        return (
+          <div className="form-space">
+          <label htmlFor="business" className="contact-edit">Business Name:</label>
+          <input type="text" name="business" id="business" onChange={this.handleChange} defaultValue={this.state.newContact.business} />
+        </div>
+
+        )
+      }
+    }
+
+   this.eventFieldSelectionOptions = this.context.events.map(event => {
+        return (
+          <div className="check-box">
+            <input type="checkbox" id={event.event_id} name={event.name} />
+            <label htmlFor={event.name}> {<a href={'localhost:3000/events/'+ event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>} </label>
+          </div>
+        )
+      })
+
+
+      this.favoritesBySelectionBoxes = this.context.catalog_items.map(item => {
+        this.favoritesImages = item.images.split(', ')[0]
+        this.favoritesImagesArray= [this.favoritesImages]
+        this.favoritesImagesReturn = this.favoritesImagesArray.map((item) => {
+          return(
+          <img className="catalog-img-item" src={require("../../assets/" + item)} alt="catalog item" />
+          )
+        })
+        
+        return (
+          <div className="check-box">
+            <input type="checkbox" id={"catalog-" + item.catalog_id} name={item.name} />
+            <label htmlFor={item.name}>{<a className="fav-by-check" href={'localhost:3000/catalog/'+ item.catalog_id} target="_blank" rel="noopener noreferrer">{this.favoritesImagesReturn}</a>} </label>
+          </div>
+        )
+      })
+
+
    return(
       <>
-      <Nav />
-      <div className="item-wrap contact-add">
-        <h2>Add New Contact</h2>
+      <PageParentHeader pageName="Contacts" />
+      <div className="item-edit-wrap contact-edit">
         <form onSubmit={this.handleSubmit}>
+          <h3 className="add-item-header">Add Contact</h3>
           <div className="form-space">
-            <label htmlFor="contact_type">Contact Type:</label>
+            <label className="contact-edit" htmlFor="contact_type">Contact Type:</label>
             <select name="contact_type" onChange={this.handleChange} value={this.state.newContact.contact_type}>
-              <option value="type-individual">Individual</option>
-              <option value="type-business">Business</option>
-              <option value="type-event">Event</option>
-              <option value="type-vendor">Vendor</option>
+              <option value="Individual">Individual</option>
+              <option value="Business">Business</option>
             </select>
           </div>
+         {this.nameFieldPopulator()}
           <div className="form-space">
-            <label htmlFor="name" className="contact-edit">Name:</label>
-            <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={this.state.newContact.name} />
-          </div>
-          <div className="form-space">
-            <label htmlFor="business" className="contact-edit">Business:</label>
-            <input type="text" name="business" id="business" onChange={this.handleChange} defaultValue={this.state.newContact.business} />
-          </div>
-          <div className="form-space">
-            <label htmlFor="event" className="contact-edit">Event Name:</label>
-            <input type="text" name="event" id="event" onChange={this.handleChange} defaultValue={this.state.newContact.event} />
-          </div>
+            <label htmlFor="event" className="contact-edit">Event Affiliation:</label>
+            {this.eventFieldSelectionOptions}        
+            </div>
           <div className="form-space">
             <label htmlFor="email" className="contact-edit">Email:</label>
             <input type="text" name="email" id="email" onChange={this.handleChange} defaultValue={this.state.newContact.email} />
@@ -116,13 +166,15 @@ class AddContact extends Component {
           </div>
           <div className="form-space">
             <label htmlFor="favorites" className="contact-edit">Favorites:</label>
-            <input type="text" name="favorites" id="favorites" onChange={this.handleChange} defaultValue={this.state.newContact.favorites} />
+            {this.favoritesBySelectionBoxes}      
           </div>
           <div className="form-space">
             <label htmlFor="notes" className="contact-edit">Notes:</label>
-            <input type="text" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newContact.notes} />
+            <br/><textarea type="text"  className="contact-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newContact.notes} />
           </div>
-          <button type="submit" value="submit">Submit</button>
+          <div className="button-wrap">
+          <button className="submit-btn" type="submit" value="submit">Submit</button>
+          </div>
         </form>
       </div>
       </>

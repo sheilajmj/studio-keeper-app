@@ -1,14 +1,14 @@
 import React from 'react';
-import EventItemContainer from './EventItemContainer'
-import Nav from '../Nav/Nav'
+import EventItem from './EventItem'
+import PageNav from '../Nav/PageNav'
+import PageParentHeader from '../Nav/PageParentHeader';
 
 function EventParent() {
   return (
-    <main className='App'>
-      <Nav />
-      <h2>Events</h2>
-      <EventItemContainer />
-    </main>
+    <section className='event'>
+      <PageParentHeader pageName="Events" />
+      <EventItem />
+    </section>
   );
 }
 

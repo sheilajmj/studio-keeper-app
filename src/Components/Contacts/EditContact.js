@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
-import Nav from '../Nav/Nav'
+import PageParentHeader from '../Nav/PageParentHeader'
 
 class EditContact extends Component {
   static contextType = StudioKeeperContext
@@ -11,9 +11,9 @@ class EditContact extends Component {
       updateBoolean: false,
       updatedContact: []
     }
- }
+  }
 
- render() {
+  render() {
 
     this.selectedContactId = this.props.match.params.contact_id;
     this.selectedContactObject = this.context.contacts.find(contact => contact.contact_id === this.selectedContactId);
@@ -21,49 +21,50 @@ class EditContact extends Component {
 
     this.handleSubmit = (e) => {
       e.preventDefault()
-      this.context.updateAppStateContactsUpdate( this.state.updatedContact)
+      this.context.updateAppStateContactsUpdate(this.state.updatedContact)
       this.context.history.push(`/contacts`)
     }
-  
-     this.setInitialDefaultState = () => {
-       if (this.state.updateBoolean === false){
-         this.setState({updatedContact: this.selectedContactObject})
-       }
-     }
 
-     this.handleChange = (e) => {
+    this.setInitialDefaultState = () => {
+      if (this.state.updateBoolean === false) {
+        this.setState({ updatedContact: this.selectedContactObject })
+      }
+    }
+
+    this.handleChange = (e) => {
       const key = (e.target.name)
       const value = (e.target.value)
       this.setInitialDefaultState()
       this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, [key]: value }, updateBoolean: true }))
-      }
+    }
 
-      this.handleCancel = (e) => {
-        this.context.history.push('/contacts')
-      }
-  
-      this.handleDeleteContact = (id) => {
-          let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === id)
-          let contactsList = JSON.parse(JSON.stringify(this.context.contacts))
-          contactsList.splice(indexToDelete, 1)
-          let newContactsList = contactsList
-          this.context.updateAppStateContactsDelete(newContactsList)
-          this.context.history.push(`/contacts`)
-        }
+    this.handleCancel = (e) => {
+      this.context.history.push('/contacts')
+    }
 
+    this.handleDeleteContact = (id) => {
+      let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === id)
+      let contactsList = JSON.parse(JSON.stringify(this.context.contacts))
+      contactsList.splice(indexToDelete, 1)
+      let newContactsList = contactsList
+      this.context.updateAppStateContactsDelete(newContactsList)
+      this.context.history.push(`/contacts`)
+    }
 
-    this.selectedContactForm =  this.selectedContactArray.map((item) => {
-      return (
-        <div key={item.contact_id} className="item-wrap contact-edit">
-          <form onSubmit={this.handleSubmit}>
+    
+
+    this.selectedContactForm = this.selectedContactArray.map((item) => {
+      this.handleContactType = () => {
+        if (this.state.updatedContact.contact_type === "Business") {
+          return (
             <div className="form-space">
-              <label htmlFor="contact_type">Contact Type:</label>
-              <select name="contact_type" onChange={this.handleChange}>
-                <option value="individual">Individual</option>
-                <option value="business">Business</option>
-                <option value="event">Event</option>
-              </select>
+              <label htmlFor="business" className="contact-edit">Business:</label>
+              <input type="text" name="business_name" id="business" onChange={this.handleChange} defaultValue={item.business_name} />
             </div>
+          )}
+          else {
+          return (
+            <>
             <div className="form-space">
               <label htmlFor="name" className="contact-edit">Name:</label>
               <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={item.name} />
@@ -72,10 +73,27 @@ class EditContact extends Component {
               <label htmlFor="business" className="contact-edit">Business:</label>
               <input type="text" name="business_name" id="business" onChange={this.handleChange} defaultValue={item.business_name} />
             </div>
-            <div className="form-space">
+            </>
+              )
+        }
+      }
+
+      return (
+        <div key={item.contact_id} className="item-edit-wrap contact-edit">
+          <form onSubmit={this.handleSubmit}>
+            <h3 className="add-item-header">Edit Contact</h3>
+            {/* <div className="form-space contact-edit"> */}
+            <label htmlFor="contact_type" className="contact-edit">Contact Type:</label>
+            <select name="contact_type" onChange={this.handleChange}>
+              <option value="Individual">Individual</option>
+              <option value="Business">Business</option>
+            </select>
+            {/* </div> */}
+            {this.handleContactType()}
+            {/* <div className="form-space">
               <label htmlFor="event" className="contact-edit">Event Name:</label>
               <input type="text" name="event" id="event" onChange={this.handleChange} defaultValue={item.event_name} />
-            </div>
+            </div> */}
             <div className="form-space">
               <label htmlFor="email" className="contact-edit">Email:</label>
               <input type="text" name="email" id="email" onChange={this.handleChange} defaultValue={item.email} />
@@ -118,21 +136,21 @@ class EditContact extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="notes" className="contact-edit">Notes:</label>
-              <input type="text" name="notes" id="notes" defaultValue={item.notes} />
+              <br /><textarea type="text" className="contact-textarea" name="notes" id="notes" defaultValue={item.notes} />
             </div>
-            <button type="submit" value="submit">Submit Changes</button>
-            <button type="button" value="delete" onClick={(() => {this.handleDeleteContact(item.contact_id)})}>Delete Contact</button>
-            <button type="button" value="cancel" onClick={(() => {this.handleCancel(item.contact_id)})}>Cancel</button>
+            <div className="button-wrap">
+              <button type="submit" className="submit-btn" value="submit">Submit Changes</button><button type="button" className="cancel-btn" value="cancel" onClick={(() => { this.handleCancel(item.contact_id) })}>Cancel</button>
+              <br /><button type="button" className="delete-contact-btn" value="delete" onClick={(() => { this.handleDeleteContact(item.contact_id) })}>Delete Contact</button>
+            </div>
           </form>
         </div>
       );
     })
-  
+
 
     return (
       <div>
-        <Nav />
-        <h2>Edit Contact</h2>
+        <PageParentHeader pageName="Contacts" />
         {this.selectedContactForm}
       </div>
     )

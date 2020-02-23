@@ -9,16 +9,9 @@ class ContactButton extends Component {
     this.context.history.push('/contacts')
   }
 
-  handleAddClick = (location) => {
-    this.context.history.push(`/${location}/add`)
-  }
-
   render() {
     return (
-      <div>
-        <button onClick={() => { this.handleContactsClick() }}>Contacts</button>
-        <button className="contactOptions add-btn" onClick={(() => { this.handleAddClick('contacts') })}> + </button>
-      </div>
+      <button onClick={() => { this.handleContactsClick() }}>Contacts</button>
     );
   }
 }

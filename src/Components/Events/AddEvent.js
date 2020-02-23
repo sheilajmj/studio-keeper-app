@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import Nav from '../Nav/Nav'
+import PageParentHeader from '../Nav/PageParentHeader';
 const { uuid } = require('uuidv4')
 
 
@@ -13,11 +13,13 @@ class AddEvent extends Component {
       newEvent:{
         event_type: "Event Type", 
         name: "Event Name",
+        website: "website",
         location: "Location",
         event_dates: "Event Dates",
         application_due_dates: "Application Due Dates",
         contact: "Contact",
         notes: "Notes",
+        submission_requirements: "some requirements",
         catalog_items: "Catalog Items",
       }
     }
@@ -44,13 +46,38 @@ class AddEvent extends Component {
 
 
   render() {
+    this.contactsBySelectionBoxes = this.context.contacts.map(contact => {
+      return (
+        <div>
+          <input type="checkbox" id={"contact-"+contact.contact_id} name={contact.name} />
+          <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
+        </div>
+      )
+    })
+
+    this.catalogItemsBySelectionBoxes = this.context.catalog_items.map(item => {
+      this.favoritesImages = [item.images.split(', ')[0]]
+      
+      this.favoritesImagesReturn = this.favoritesImages.map((item) => {
+        return(
+        <img className="catalog-img-item" src={require("../../assets/" + item)} alt="catalog item" />
+        )
+      })
+      
+      return (
+        <div>
+          <input type="checkbox" id={"catalog-" + item.catalog_id} name={item.name} />
+          <label htmlFor={item.name}>{<a className="fav-by-check" href={'localhost:3000/catalog/'+ item.catalog_id} target="_blank" rel="noopener noreferrer">{this.favoritesImagesReturn}</a>} </label>
+        </div>
+      )
+    })
+
     return (
       <>
-      <Nav />
-      <div className="item-wrap contact-edit">
-        <h2>Add Event</h2>
-
+      <PageParentHeader pageName="Events" />
+      <div className="item-edit-wrap event-edit">
         <form onSubmit={this.handleSubmit}>
+        <h3 className="add-item-header">Add Event</h3>
           <div className="form-space">
             <label htmlFor="event_type" className="event-edit">Event Type:</label>
             <input type="text" name="event_type" id="event_type" onChange={this.handleChange} defaultValue={this.state.newEvent.event_type} />
@@ -58,6 +85,10 @@ class AddEvent extends Component {
           <div className="form-space">
             <label htmlFor="name" className="event-edit">Name:</label>
             <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={this.state.newEvent.name} />
+          </div>
+          <div className="form-space">
+            <label htmlFor="website" className="event-edit">Website:</label>
+            <input type="text" name="website" id="website" onChange={this.handleChange} defaultValue={this.state.newEvent.website} />
           </div>
           <div className="form-space">
             <label htmlFor="location" className="event-edit">Location:</label>
@@ -69,25 +100,27 @@ class AddEvent extends Component {
           </div>
           <div className="form-space">
             <label htmlFor="application_due_dates" className="event-edit">Application Due Dates:</label>
-            <input type="text" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} defaultValue={this.state.newEvent.application_due_dates} />
+            <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} defaultValue={this.state.newEvent.application_due_dates} />
           </div>
           <div className="form-space">
             <label htmlFor="contact" className="event-edit">Contact:</label>
-            <input type="text" name="contact" id="contact" onChange={this.handleChange} defaultValue={this.state.newEvent.contact} />
+            {this.contactsBySelectionBoxes}
           </div>
           <div className="form-space">
             <label htmlFor="notes" className="event-edit">Notes:</label>
-            <input type="text" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newEvent.notes} />
+            <textarea type="text" className="event-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newEvent.notes} />
           </div>
           <div className="form-space">
             <label htmlFor="submission_requirements" className="event-edit">Submission Requirements:</label>
-            <input type="text" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} defaultValue={this.state.newEvent.submission_requirements} />
+            <textarea type="text" className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} defaultValue={this.state.newEvent.submission_requirements} />
           </div>
           <div className="form-space">
             <label htmlFor="catalog_items" className="event-edit">Catalog Items:</label>
-            <input type="text" name="catalog_items" id="catalog_items" onChange={this.handleChange} defaultValue={this.state.newEvent.catalog_items} />
+            {this.catalogItemsBySelectionBoxes}
           </div>
-          <button type="submit" value="submit">Submit</button>
+          <div className="button-wrap">
+          <button className="submit-btn" type="submit" value="submit">Submit</button>
+        </div>
         </form>
       </div>
       </>

@@ -40,7 +40,7 @@ render() {
     
     }
   return (
-    <button className="nav-btn" onClick={() => {this.handleDeleteClick()}}>Delete</button>
+    <button className="nav-btn delete-btn" onClick={() => {this.handleDeleteClick()}}>Delete</button>
   );
 }
 }
