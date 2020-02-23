@@ -10,11 +10,11 @@ class AddContact extends Component {
     super(props)
     this.state = {
       newContact: {
-      contact_type: "type-individual",
+      contact_type: "Individual",
       name: "Name",
       title: "Title",
       business: "Business Name",
-      event: "Event Name",
+      events: null,
       email: "jdoe@email.com",
       phone: "123-456-7890",
       address_street: "1122 Default St.",
@@ -53,6 +53,7 @@ class AddContact extends Component {
   
   render() {
     this.nameFieldPopulator = () => {
+      console.log("What is the type", this.state.newContact.contact_type)
       if (this.state.newContact.contact_type === "Individual"){
         return (
           <>

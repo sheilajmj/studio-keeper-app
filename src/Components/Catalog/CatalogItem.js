@@ -18,6 +18,7 @@ class CatalogItem extends Component {
 
   catalogItemsList = this.context.catalog_items.map((item) => {
     console.log("item in catalog item images", item.images)
+    if (item.images !== null){
     this.imageArray = item.images.split(', ')
     console.log("image array", this.imageArray)
     this.itemImagesArrayReturn = this.imageArray.map((item) => {
@@ -25,7 +26,7 @@ class CatalogItem extends Component {
         <img className="catalog-img-item" src={require("../../assets/" + item)} alt="catalog item" />
       )
     })
-
+    }
     this.favoritedByArray = this.context.contacts.filter(contact => contact.favorites.includes(item.catalog_id))
 
     this.favoritedByReturn = this.favoritedByArray.map(fav => {
@@ -44,7 +45,7 @@ class CatalogItem extends Component {
 
     this.catalogImagesIncluded = () => {
       if (item.images) {
-        return (<li clasName="catalog-img">
+        return (<li className="catalog-img">
           {this.itemImagesArrayReturn}
         </li>)
       }

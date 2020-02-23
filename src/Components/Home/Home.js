@@ -26,7 +26,7 @@ class Home extends Component {
                         <button className="eventBtn hm-btn" onClick={(() => { this.context.history.push('/events') })}>Event</button>
                     </div>
                     <div className="gallery-wrap hm-wrap">
-                        <button className="galleryBtn hm-btn">Gallery</button>
+                        <button className="galleryBtn hm-btn">Gallery (Coming Soon ;) )</button>
                     </div>
                 </div>
             </section>

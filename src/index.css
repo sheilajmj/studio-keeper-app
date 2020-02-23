@@ -376,6 +376,7 @@ p.event-labels{
 }
 
 .border{
+  width: 100%;
   margin: 5%;
   border-bottom: solid lightgray;
 }

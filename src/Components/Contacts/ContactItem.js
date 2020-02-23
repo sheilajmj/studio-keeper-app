@@ -24,6 +24,7 @@ class ContactItem extends Component {
   contactItemsList = this.context.contacts.map((item, index) => {
 
     //event name and link for contact
+    if (item.events !== null || item.events !== ""){
     this.eventIds = item.events.split(', ')
     this.eventIdsToObjects = this.eventIds.map((ids) => {
       this.eventObjects = this.context.events.filter((events) => {
@@ -39,6 +40,7 @@ class ContactItem extends Component {
       })
       return this.eventObjectReturn
     })
+  }
 
 
     this.contactNameIncluded = () => {

@@ -51,7 +51,14 @@ class EditContact extends Component {
       this.context.history.push(`/contacts`)
     }
 
-    
+    this.eventFieldSelectionOptions = this.context.events.map(event => {
+      return (
+        <div className="check-box">
+          <input type="checkbox" id={event.event_id} name={event.name} />
+          <label htmlFor={event.name}> {<a href={'localhost:3000/events/'+ event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>} </label>
+        </div>
+      )
+    })
 
     this.selectedContactForm = this.selectedContactArray.map((item) => {
       this.handleContactType = () => {
@@ -94,6 +101,10 @@ class EditContact extends Component {
               <label htmlFor="event" className="contact-edit">Event Name:</label>
               <input type="text" name="event" id="event" onChange={this.handleChange} defaultValue={item.event_name} />
             </div> */}
+            <div className="form-space">
+            <label htmlFor="event" className="contact-edit">Event Affiliation: (THIS IS BUGGY!)</label>
+            {this.eventFieldSelectionOptions}        
+            </div>
             <div className="form-space">
               <label htmlFor="email" className="contact-edit">Email:</label>
               <input type="text" name="email" id="email" onChange={this.handleChange} defaultValue={item.email} />

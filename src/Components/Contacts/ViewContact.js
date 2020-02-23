@@ -33,6 +33,7 @@ class ViewContact extends Component {
     this.contactObjectRender = this.contactArray.map((item) => {
     
     //get event name and link for contact
+    if (item.events !== null){
       this.eventIds = item.events.split(', ')
       this.eventIdsToObjects = this.eventIds.map((ids) => {
         this.eventObjects = this.context.events.filter((events) => {
@@ -48,6 +49,7 @@ class ViewContact extends Component {
         })
         return this.eventObjectReturn
       })
+    }
 
 
     //get the catalog_id of the favorites in an array
