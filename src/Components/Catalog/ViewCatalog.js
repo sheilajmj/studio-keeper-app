@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
+import { uuid } from 'uuidv4';
 
 class ViewCatalog extends Component {
   static contextType = StudioKeeperContext
@@ -41,44 +42,55 @@ class ViewCatalog extends Component {
     }
     )
     this.favoritedByReturnMapped = this.favoritedByReturn.map(contact => {
-      console.log("contact", contact)
       return (
-        <div className="favorited-by">
-        {`${contact.name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}       
+        <div key={`contact` + contact.contact_id} className="favorited-by">
+        {`${contact.name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}       
         </div>
         )
     })
 
 
-
     this.catalogObjectRender = this.catalogArray.map((item) => {
 
-      //get event link and name for catalog item
-      this.eventIds = item.events.split(', ')
-      this.eventIdsToObjects = this.eventIds.map((ids) => {
-        this.eventObjects = this.context.events.filter((events) => {
-          return events.event_id === ids
-        })
-        return this.eventObjects
-      })
-      this.eventObjectReturnArray = this.eventIdsToObjects.map((event) => {
-        this.eventObjectReturn = event.map((event) => {
+      if (!item.events){ item.events = []}
+
+      this.eventArray = item.events.split()
+      
+
+      this.eventObjectReturnArray = this.eventArray.map((event) => {
           return (
-            <a href={'localhost:3000/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
+            <a key={`event` + event.event_id}href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
           )
-        })
-        return this.eventObjectReturn
       })
 
+   
 
-
+      
+      if(!item.images){item.images = ""}
 
       this.imageArray = item.images.split(', ')
+
       this.itemImagesArrayReturn = this.imageArray.map((item) => {
+        if (item === ""){
+          return (<div key={uuid()}></div>)
+        }
+        else{
         return (
           <img className="catalog-img-item-view" src={require("../../assets/" + item)} alt="catalog item" height="42px" width="42px" />
         )
+      }
       })
+
+      this.catalogImagesIncluded = () => {
+        if (item.images) {
+          return (<div className="catalog-view-img">
+            {this.itemImagesArrayReturn}
+          </div>)
+        }
+      }
+    
+  
+  
 
       return (
         <div>
@@ -86,9 +98,9 @@ class ViewCatalog extends Component {
           <button className="back-to-btn" type="button" value="backToCatalog" onClick={(() => { this.handleBackToCatalog(item.catalog_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px"/><span className="all-catalog-text">Catalog</span></button>
           <button className="edit-btn" onClick={(() => { this.handleEditClick(item.catalog_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
             <div className="item catalog-item">
-              <div className="catalog-view-img">
-                {this.itemImagesArrayReturn}
-              </div>
+  
+              {this.catalogImagesIncluded()}
+       
               <div className="catalog-view-block1">
               <div className="catalog-view-name">
                   <span className="catalog-labels">Name:</span>{item.name}

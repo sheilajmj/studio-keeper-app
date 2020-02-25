@@ -87,13 +87,14 @@ class AddContact extends Component {
         return (
           <div className="check-box">
             <input type="checkbox" id={event.event_id} name={event.name} />
-            <label htmlFor={event.name}> {<a href={'localhost:3000/events/'+ event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>} </label>
+            <label htmlFor={event.name}> {<a href={'/events/'+ event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>} </label>
           </div>
         )
       })
 
 
       this.favoritesBySelectionBoxes = this.context.catalog_items.map(item => {
+        if (item.images !== null || item.images !== ""){
         this.favoritesImages = item.images.split(', ')[0]
         this.favoritesImagesArray= [this.favoritesImages]
         this.favoritesImagesReturn = this.favoritesImagesArray.map((item) => {
@@ -101,11 +102,11 @@ class AddContact extends Component {
           <img className="catalog-img-item" src={require("../../assets/" + item)} alt="catalog item" />
           )
         })
-        
+      }
         return (
           <div className="check-box">
             <input type="checkbox" id={"catalog-" + item.catalog_id} name={item.name} />
-            <label htmlFor={item.name}>{<a className="fav-by-check" href={'localhost:3000/catalog/'+ item.catalog_id} target="_blank" rel="noopener noreferrer">{this.favoritesImagesReturn}</a>} </label>
+            <label htmlFor={item.name}>{<a className="fav-by-check" href={'/catalog/'+ item.catalog_id} target="_blank" rel="noopener noreferrer">{this.favoritesImagesReturn}</a>} </label>
           </div>
         )
       })

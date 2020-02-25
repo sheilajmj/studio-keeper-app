@@ -1,6 +1,5 @@
 import React from 'react';
 import EventItem from './EventItem'
-import PageNav from '../Nav/PageNav'
 import PageParentHeader from '../Nav/PageParentHeader';
 
 function EventParent() {

@@ -35,7 +35,7 @@ class ContactItem extends Component {
     this.eventObjectReturnArray = this.eventIdsToObjects.map((event) => {
       this.eventObjectReturn = event.map((event) => {
         return (
-          <a href={'localhost:3000/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
+          <a href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
         )
       })
       return this.eventObjectReturn

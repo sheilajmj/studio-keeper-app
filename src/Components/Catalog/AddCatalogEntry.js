@@ -61,18 +61,18 @@ class AddCatalogEntry extends Component {
 
     this.favoritedBySelectionBoxes = this.context.contacts.map(contact => {
         return (
-          <div>
+          <div key={uuid()}>
             <input type="checkbox" id={"contact-"+contact.contact_id} name={contact.name} />
-            <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
+            <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
           </div>
         )
       })
 
     this.eventsBySelectionBoxes = this.context.events.map(event => {
       return(
-        <div>
+        <div key={uuid()}>
           <input type="checkbox" id={"event-"+event.event_id} name={event.name} />
-          <label htmlFor={event.name}>{<a href={'localhost:3000/events/'+ event.event_id} >{event.name}</a>} </label>
+          <label htmlFor={event.name}>{<a href={'/events/'+ event.event_id} >{event.name}</a>} </label>
         </div>
       )
     })  

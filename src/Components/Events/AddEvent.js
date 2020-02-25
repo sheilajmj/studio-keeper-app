@@ -50,12 +50,13 @@ class AddEvent extends Component {
       return (
         <div>
           <input type="checkbox" id={"contact-"+contact.contact_id} name={contact.name} />
-          <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'localhost:3000/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
+          <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
         </div>
       )
     })
 
     this.catalogItemsBySelectionBoxes = this.context.catalog_items.map(item => {
+      if (item.images !== null || item.images !== ""){
       this.favoritesImages = [item.images.split(', ')[0]]
       
       this.favoritesImagesReturn = this.favoritesImages.map((item) => {
@@ -63,14 +64,14 @@ class AddEvent extends Component {
         <img className="catalog-img-item" src={require("../../assets/" + item)} alt="catalog item" />
         )
       })
-      
+    }
       return (
         <div>
           <input type="checkbox" id={"catalog-" + item.catalog_id} name={item.name} />
-          <label htmlFor={item.name}>{<a className="fav-by-check" href={'localhost:3000/catalog/'+ item.catalog_id} target="_blank" rel="noopener noreferrer">{this.favoritesImagesReturn}</a>} </label>
+          <label htmlFor={item.name}>{<a className="fav-by-check" href={'/catalog/'+ item.catalog_id} target="_blank" rel="noopener noreferrer">{this.favoritesImagesReturn}</a>} </label>
         </div>
       )
-    })
+      })
 
     return (
       <>

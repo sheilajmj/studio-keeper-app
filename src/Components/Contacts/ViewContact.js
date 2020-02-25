@@ -33,7 +33,7 @@ class ViewContact extends Component {
     this.contactObjectRender = this.contactArray.map((item) => {
     
     //get event name and link for contact
-    if (item.events !== null){
+    if (item.events !== null || item.events !== ""){
       this.eventIds = item.events.split(', ')
       this.eventIdsToObjects = this.eventIds.map((ids) => {
         this.eventObjects = this.context.events.filter((events) => {
@@ -44,7 +44,7 @@ class ViewContact extends Component {
       this.eventObjectReturnArray = this.eventIdsToObjects.map((event) => {
         this.eventObjectReturn = event.map((event) => {
           return (
-            <a href={'localhost:3000/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
+            <a href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
           )
         })
         return this.eventObjectReturn
@@ -53,6 +53,7 @@ class ViewContact extends Component {
 
 
     //get the catalog_id of the favorites in an array
+    if (item.favorites !== null || item.favorites !== ""){
       this.contactFavoritesIdArray = item.favorites.split(', ')
       this.favoritesObject = this.contactFavoritesIdArray.map((id) => {
           //get the catalog object of the contact favorite
@@ -62,17 +63,22 @@ class ViewContact extends Component {
         })
         )
         })
+      }
       this.favoritesArray = this.favoritesObject.flat()
         
         //turn the catalog object into a return value for the image
-      this.favoritesReturn = this.favoritesArray.map((item) => {
+      this.favoritesReturn = this.favoritesArray.map((item) => {       
+         if (item.images !== null || item.images !== ""){
+            this.imgReturn = [item.images.split(', ')[0]].map((image) => {
+            return (
+              <img className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+            )
+          })
+        }
+      
         return (
-          <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
-            {this.imageFav = [item.images.split(', ')[0]].map((image) => {
-              return (
-                <img className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-              )
-            })}
+          <a href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+            {this.imgReturn}
             </a>
         )
       })

@@ -55,7 +55,7 @@ class EditContact extends Component {
       return (
         <div className="check-box">
           <input type="checkbox" id={event.event_id} name={event.name} />
-          <label htmlFor={event.name}> {<a href={'localhost:3000/events/'+ event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>} </label>
+          <label htmlFor={event.name}> {<a href={'/events/'+ event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>} </label>
         </div>
       )
     })

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import Nav from '../Nav/Nav'
-import PageNav from '../Nav/PageNav'
 
 class Home extends Component {
     static contextType = Context;

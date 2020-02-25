@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
-import Nav from '../Nav/Nav'
-import PageParentHeader from '../Nav/PageParentHeader';
+import PageParentHeader from '../Nav/PageParentHeader'
+const { uuid } = require('uuidv4');
+
 
 class ViewEvent extends Component {
   static contextType = StudioKeeperContext
@@ -37,12 +38,13 @@ class ViewEvent extends Component {
       })
       this.contactsLinkedReturn = this.contactsLinkedArray.map((contact) => {
         return (
-          <div className="event-contacts"><a href={`http://localhost:3000/contacts/` + contact.contact_id} target="_blank" rel="noopener noreferrer">{contact.name}</a></div>
+          <div key={uuid()} className="event-contacts"><a href={`/contacts/` + contact.contact_id} target="_blank" rel="noopener noreferrer">{contact.name}</a></div>
   
         )
       })
   
        //get the catalog_id of the catalog_items listed in the Event in an array
+       if (item.catalog_items !== null || item.catalog_items !== ""){
     this.eventCatalogItemsArray = item.catalog_items.split(', ')
     this.catalogObject = this.eventCatalogItemsArray.map((id) => {
         //get the catalog object of the contact favorite
@@ -52,24 +54,31 @@ class ViewEvent extends Component {
       })
       )
       })
+    }
     this.catalogArray = this.catalogObject.flat()
 
       //turn the catalog object into a return value for the image
+
+
     this.catalogReturn = this.catalogArray.map((item) => {
+       if (item.images !== null || item.images !== ""){
+          this.imgReturn = [item.images.split(', ')[0]].map((image) => {
+          return (
+            <img key={"img"+ item.image} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+          )
+        })
+      }
+
       return (
-        <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
-          {this.imageFav = item.images.split(', ').map((image) => {
-            return (
-              <img className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-            )
-          })}
-          </a>
+        <a key={uuid()} href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+        {this.imgReturn}
+        </a>
       )
     })
 
       return (
-        <div><PageParentHeader pageName="Events" />
-        <div key={item.event_id} className="item-wrap">
+        <div key={`event` + item.event_id}><PageParentHeader pageName="Events" />
+        <div className="item-wrap">
         <button type="button" className="back-to-btn" value="backToEvents" onClick={(() => { this.handleBackToEvents(item.event_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px"/><span className="all-events-text">All Events</span></button>
         <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.event_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
           <ul className="item event-view">
