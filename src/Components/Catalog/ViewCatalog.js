@@ -52,9 +52,11 @@ class ViewCatalog extends Component {
 
     this.catalogObjectRender = this.catalogArray.map((item) => {
 
-      if (!item.events){ item.events = []}
+      if (!item.events){ 
+        item.events = []
+      }
 
-      this.eventArray = item.events.split()
+      this.eventArray = item.events
       
 
       this.eventObjectReturnArray = this.eventArray.map((event) => {
