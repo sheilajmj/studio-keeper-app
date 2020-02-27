@@ -54,6 +54,7 @@ class EditContact extends Component {
       if (!currentEventsArray.includes(event_id)){
         let eventArrayLength = currentEventsArray.push(event_id)
         updatedEventsArray = currentEventsArray
+        console.log(eventArrayLength)
       }
 
       else{
