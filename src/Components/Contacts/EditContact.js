@@ -89,15 +89,21 @@ class EditContact extends Component {
 
 
     this.eventFieldSelectionOptions = this.context.events.map(event => {
-   //I need to set my checkbox selected if the event_id is already in the array.
-   
+
+      this.checkedValue = () => {
+        if (this.selectedContactArray[0].events.includes(event.event_id)){
+        return true
+        }
+        }    
+      
       return (
         <div key={'event' + event.event_id} className="checkbox">
-          <input type="checkbox" id={event.event_id} name={"events"} value={event.event_id} onChange={this.handleEventClick} defaultChecked={true}  />
+          <input type="checkbox" id={event.event_id} name={"events"} value={event.event_id} onChange={this.handleEventClick} defaultChecked={this.checkedValue()}  />
           <label htmlFor={event.event_id}> {<a href={'/events/'+ event.event_id} target="_blank"  rel="noopener noreferrer"> {event.name}</a>} </label>
         </div>
       )
     })
+    
 
     this.selectedContactForm = this.selectedContactArray.map((item) => {
       this.handleContactType = () => {

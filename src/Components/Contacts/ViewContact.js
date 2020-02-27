@@ -45,7 +45,10 @@ class ViewContact extends Component {
       this.eventObjectReturnArray = this.eventIdsToObjects.map((event) => {
         this.eventObjectReturn = event.map((event) => {
           return (
+          <div className="event-name">
             <a href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
+            </div>
+            
           )
         })
         return this.eventObjectReturn
@@ -72,7 +75,9 @@ class ViewContact extends Component {
          if (item.images !== null || item.images !== ""){
             this.imgReturn = [item.images.split(', ')[0]].map((image) => {
             return (
+              <div className="favorites-imgs">
               <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+              </div>
             )
           })
         }
@@ -113,7 +118,7 @@ class ViewContact extends Component {
                 </li>
                 {this.contactTypeBusiness()}
                 <li>
-                  <span className="contact-labels">Event Affliation:</span>   {this.eventObjectReturnArray}
+                  <p className="contact-labels">Event Affliation:</p>   {this.eventObjectReturnArray}
                 </li>
                 <li>
                   <span className="contact-labels">Email:</span> <a href={"mailto:" + item.email} target="_blank" rel="noopener noreferrer"> {item.email} </a>
