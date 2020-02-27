@@ -8,17 +8,17 @@
 		"size": "180yd",
 		"medium": "sock weight, sheep wool",
 		"price": "$35",
-		"date_created": "01/25/2020",
+		"date_created": "12/2019",
 		"concept_statement": "This is a concept statement for this work",
 		"notes": "I created this in a bus heading to the moon",
 		"images": "3390767231_0984b30393_o.jpg",
 		"subject": "",
 		"quantity": "4",
 		"location": "kept in studio",
-		"favorited_by": "001, 002, 003",
+		"favorited_by": ["001", "002", "003"],
 		"sold_date":"01/26/2020",
 		"sold_to": "event attendee",
-		"events": "001",
+		"events": ["001"],
 		"history": "1/26/2020 Allstar Show"
 		},
 		{
@@ -29,17 +29,17 @@
 		"size": "4in x 2in",
 		"medium": "toothpaste, tissue",
 		"Price": "$25",
-		"date_created": "01/20/2020",
+		"date_created": "03/2009",
 		"concept_statement": "Toothpaste reimagined is the concept statement",
 		"notes": "This was inspired by the stars",
 		"images": "kxgAbEPRrc.jpg",
 		"subject": "sunset",
 		"quantity": "1",
 		"location": "Storage Unit B",
-		"favorited_by": "001, 002, 003",
+		"favorited_by": ["001", "002", "003"],
 		"sold_date":"",
 		"sold_to": "",
-		"events": "003",
+		"events": ["003"],
 		"history": ""
 		},
 		{
@@ -50,17 +50,17 @@
 		"size": "4in x 8in x 3in",
 		"medium": "canvas, beeswax",
 		"Price": "$180",
-		"date_created": "01/1/2020",
+		"date_created": "02/2020",
 		"concept_statement": "Concept here",
 		"notes": "",
 		"images": "phuong-tran-zh1THZy8cQU.jpg, henry-co-5IR2yTaS8kg.jpg",
 		"subject": "",
 		"quantity": "1",
 		"location": "on display at Herch Coffee until 4/12/2020",
-		"favorited_by": "001, 002, 003",
+		"favorited_by": ["001", "002", "003"],
 		"sold_date":"",
 		"sold_to": "",
-		"events": "001",
+		"events": ["001"],
 		"history": "1/26/2020 Allstar Show"
 		}
 ], 
@@ -83,7 +83,7 @@
 	 "address_zip": "80881",
 	 "address_country": "USA",
 	 "website": "https://www.website.com",
-	 "favorites":"001, 002",
+	 "favorites":["001", "002"],
 	 "notes": "here is a note for my contact"
 	},
 
@@ -103,7 +103,7 @@
 	 "address_zip": "70221",
 	 "address_country": "USA",
 	 "website": "https://www.website2.com",
-	 "favorites": "001",
+	 "favorites": ["001"],
 	 "notes": "Note 2 here is a note for my contact"
 	},
 	{
@@ -112,7 +112,7 @@
 	 "business_name": "PaintFlow",
 	 "name": "",
 	 "title": "",
-	 "events": ["003"],
+	 "events": ["003", "001"],
 	 "email": "info@allstarshow.com", 
 	 "phone": "101-993-3399",
 	 "address_street": "107 Shoulder St.",
@@ -122,7 +122,7 @@
 	 "address_zip": "90912",
 	 "address_country": "USA",
 	 "website": "https://www.allstarshow.com",
-	 "favorites": "002, 001, 003",
+	 "favorites": ["002", "001", "003"],
 	 "notes": "This is note 3"
 	}
 	],
@@ -133,12 +133,12 @@
 		 "name": "ArtyArt",
 		 "website": "http://www.event3.com",
 		 "location": "Lone Tree",
-		 "event_dates": "02-19-2020",
-		 "application_due_date": "01-01-2020", 
-		 "contact": "002",
+		 "event_dates": "02/19/2020",
+		 "application_due_date": "01/01/2020", 
+		 "contact": ["003"],
 		 "notes": "This is the show Jane Doe told me about",
 		 "submission_requirements": "Letter of interest, images, application",
-		 "catalog_items": "001, 002, 003"
+		 "catalog_items": ["001", "002", "003"]
 		},
 		{
 		 "event_id": "002",
@@ -146,12 +146,12 @@
 		 "name": "fancy Name",
 		 "website": "http://www.event2.com",
 		 "location": "Northern Colorado",
-		 "event_dates": "08-10-2020",
-		 "application_due_date": "03-01-2020", 
-		 "contact": "001",
+		 "event_dates": "08/10/2020",
+		 "application_due_date": "03/01/2020", 
+		 "contact": ["002"],
 		 "notes": "This is a note about this competition",
 		 "submission_requirements": "digital entry, application",
-		 "catalog_items": "001"
+		 "catalog_items": ["001"]
 		},
 		{
 		 "event_id": "003",
@@ -159,12 +159,12 @@
 		 "name": "Holiday Fair",
 		 "website": "http://www.event.com",
 		 "location": "North Pole",
-		 "event_dates": "12-23-2020",
-		 "application_due_date": "10-01-2020", 
-		 "contact": "003",
+		 "event_dates": "12/23/2020",
+		 "application_due_date": "10/01/2020", 
+		 "contact": ["003"],
 		 "notes": "This is a note and sounds interesting",
 		 "submission_requirements": "application, table fee",
-		 "catalog_items": "001, 002, 003"
+		 "catalog_items": ["001", "002", "003"]
 		}
 	]
 }

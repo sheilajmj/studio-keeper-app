@@ -11,13 +11,12 @@ class EditContact extends Component {
       updateBoolean: false,
       updatedContact: [],
       updatedEventsArray: [],
+      updatedFavoritesArray: [],
       }
   }
 
   componentDidMount = () =>{
-    this.setInitialDefaultState()
-    setTimeout(() => {}, 3000 )
-    
+    this.setInitialDefaultState()   
   }
 
   render() {
@@ -46,6 +45,7 @@ class EditContact extends Component {
       this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, [key]: value }, updateBoolean: true }))
     }
 
+
     this.setUpdatedArray = (e) =>{
       let event_id = e.target.value
       let currentEventsArray = this.state.updatedContact.events
@@ -66,11 +66,34 @@ class EditContact extends Component {
 
     }
 
-
     this.handleEventClick = (e) => {
       this.setUpdatedArray(e);  
       }
+
+      this.setUpdatedFavoritesArray = (e) =>{
+        let catalog_id = e.target.value
+        let currentFavoritesArray = this.state.updatedContact.favorites
+        let updatedFavoritesArray 
+  
+        if (!currentFavoritesArray.includes(catalog_id)){
+          let favoritesArrayLength = currentFavoritesArray.push(catalog_id)
+          updatedFavoritesArray = currentFavoritesArray
+          console.log(favoritesArrayLength)
+        }
+  
+        else{
+          updatedFavoritesArray = currentFavoritesArray.filter((favorite) => catalog_id !== favorite)
+        }
+  
+        this.setState({updatedFavoritesArray: updatedFavoritesArray})
+        this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, favorites: updatedFavoritesArray}, updateBoolean: true }))
+  
+      }
      
+      this.handleFavoritesClick = (e) => {
+        this.setUpdatedFavoritesArray(e)
+      }
+
     this.handleCancel = (e) => {
       this.context.history.push('/contacts')
     }
@@ -84,12 +107,7 @@ class EditContact extends Component {
       this.context.history.push(`/contacts`)
     }
 
-
-
-
-
     this.eventFieldSelectionOptions = this.context.events.map(event => {
-
       this.checkedValue = () => {
         if (this.selectedContactArray[0].events.includes(event.event_id)){
         return true
@@ -103,7 +121,41 @@ class EditContact extends Component {
         </div>
       )
     })
-    
+
+
+  this.favoritesFieldSelectionOptions = this.context.catalog_items.map((item) => {
+    console.log(item, "what is item again?", "contactarray", this.selectedContactArray[0].favorites)
+    this.checkedValue = () => {
+      if (this.selectedContactArray[0].favorites.includes(item.catalog_id)){
+      return true
+      }
+    }
+
+    this.favoritesImgReturn = () => {
+      if (item.images !== null || item.images !== "" ){
+        this.imgReturn = [item.images.split(', ')[0]].map((image) => {
+                return (
+                  <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+                  )
+              })
+      }
+      return this.imgReturn
+    }       
+
+      return(
+        <div key={'favorite' + item.catalog_id}  className="checkbox">
+          <input type="checkbox" id={item.catalog_id} name={"favorites"} value={item.catalog_id} onChange={this.handleFavoritesClick} defaultChecked={this.checkedValue()} />
+        <label htmlFor={item.catalog_id}>
+          {<a href={'/catalog/'+ item.catalog_id} target="_blank"  rel="noopener noreferrer">
+              {this.favoritesImgReturn()} 
+              </a>}   
+        </label> 
+        </div>
+      )
+
+
+
+  })
 
     this.selectedContactForm = this.selectedContactArray.map((item) => {
       this.handleContactType = () => {
@@ -147,7 +199,7 @@ class EditContact extends Component {
               <input type="text" name="event" id="event" onChange={this.handleChange} defaultValue={item.event_name} />
             </div> */}
             <div className="form-space">
-            <legend className="contact-edit">Event Affiliation: (THIS IS BUGGY!)</legend>
+            <legend className="contact-edit">Event Affiliation:</legend>
             <fieldset>
             {this.eventFieldSelectionOptions}
             </fieldset>
@@ -190,8 +242,7 @@ class EditContact extends Component {
               <input type="text" name="website" id="website" defaultValue={item.website} />
             </div>
             <div className="form-space">
-              <label htmlFor="favorites" className="contact-edit">Favorites:</label>
-              <input type="text" name="favorites" id="favorites" defaultValue={item.favorites} />
+              {this.favoritesFieldSelectionOptions}
             </div>
             <div className="form-space">
               <label htmlFor="notes" className="contact-edit">Notes:</label>

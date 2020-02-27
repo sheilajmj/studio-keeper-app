@@ -31,8 +31,9 @@ class EventItem extends Component {
 
     //get the catalog_id of the catalog_items listed in the Event in an array
     if (item.catalog_items !== null || item.catalog_items !== ""){
-    this.eventCatalogItemsArray = item.catalog_items.split(', ')
-    this.catalogObject = this.eventCatalogItemsArray.map((id) => {
+    this.eventCatalogItemsArray = item.catalog_items
+    this.catalogObject = [this.eventCatalogItemsArray].map((id) => {
+      console.log(id, "this is ID")
       //get the catalog object of the contact favorite
       return (
         this.catalogObject = this.context.catalog_items.filter((item) => {
@@ -42,25 +43,6 @@ class EventItem extends Component {
     })
   }
     this.catalogArray = this.catalogObject.flat()
-    console.log("this is catalogArray", this.catalogArray)
-
-    //turn the catalog object into a return value for the image
-    this.catalogReturn = this.catalogArray.map((item) => {
-        if (item.images !== null || item.images !== ""){
-          this.imgReturn = [item.images.split(', ')[0]].map((image) => {
-            return (
-              <img className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-            )
-          })}
-     
-
-      return (
-        <a href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
-          {this.imgReturn}
-        </a>
-      )
-    })
-
 
     this.eventTypeIncluded = () => {
       if (item.event_type) {

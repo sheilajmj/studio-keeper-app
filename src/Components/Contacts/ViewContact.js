@@ -58,7 +58,7 @@ class ViewContact extends Component {
 
     //get the catalog_id of the favorites in an array
     if (item.favorites !== null || item.favorites !== ""){
-      this.contactFavoritesIdArray = item.favorites.split(', ')
+      this.contactFavoritesIdArray = item.favorites
       this.favoritesObject = this.contactFavoritesIdArray.map((id) => {
           //get the catalog object of the contact favorite
         return (

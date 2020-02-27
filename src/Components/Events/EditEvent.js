@@ -13,6 +13,10 @@ class EditEvent extends Component {
       updatedEvent: []
     }
   }
+
+  componentDidMount = () =>{
+    this.setInitialDefaultState()   
+  }
   
   render() {
 
@@ -54,6 +58,78 @@ class EditEvent extends Component {
         this.context.history.push(`/events`)
       }
 
+      this.handleCatalogItemsClick = (e) => {
+        let catalog_id = e.target.value
+        let currentCatalogItemsArray = this.state.updatedEvent.catalog_items
+        let updatedCatalogItemsArray 
+  
+        if (!currentCatalogItemsArray.includes(catalog_id)){
+          let catalogArrayLength = currentCatalogItemsArray.push(catalog_id)
+          updatedCatalogItemsArray = currentCatalogItemsArray
+          console.log(catalogArrayLength)
+        }
+  
+        else{
+          updatedCatalogItemsArray = currentCatalogItemsArray.filter((item) => catalog_id !== item)
+        }
+  
+        this.setState({updatedCatalogItemsArray: updatedCatalogItemsArray})
+        this.setState(previousState => ({ updatedEvent: { ...previousState.updatedEvent, catalog_items: updatedCatalogItemsArray}, updateBoolean: true }))
+  
+      }
+
+      this.catalogFieldSelectionOptions = this.context.catalog_items.map((item) => {
+        this.checkedValue = () => {
+          console.log(this.selectedEventArray[0], "selected event array", "item.catalog_id", item.catalog_id)
+          if (this.selectedEventArray[0].catalog_items.includes(item.catalog_id)){
+          return true
+          }
+        }
+    
+        this.catalogImgReturn = () => {
+          if (item.images !== null || item.images !== "" ){
+            this.imgReturn = [item.images.split(', ')[0]].map((image) => {
+                    return (
+                      <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+                      )
+                  })
+          }
+          return this.imgReturn
+        }       
+    
+          return(
+            <div key={'catalog-items' + item.catalog_id}  className="checkbox">
+              <input type="checkbox" id={'catalog-items'+ item.catalog_id} name={"catalog-items"} value={item.catalog_id} onChange={this.handleCatalogItemsClick} defaultChecked={this.checkedValue()} />
+            <label htmlFor={item.catalog_id}>
+              {<a href={'/catalog/'+ item.catalog_id} target="_blank"  rel="noopener noreferrer">
+                  {this.catalogImgReturn()} 
+                  </a>}   
+            </label> 
+            </div>
+          )
+          })
+
+    this.contactFieldSelectionOptions = this.context.contacts.map((contact) => {
+        this.checkValue = () => {
+          console.log("selected Event Array", this.selectedEventArray[0].contact)
+          if(this.selectedEventArray[0].contact.includes(contact.contact_id)){
+            return true
+          }
+        }
+
+        return (
+          <div key={'contact'+ contact.contact_id} className="checkbox">
+            <input type="checkbox" id={'contact' + contact.contact_id} name={"contacts"} value={contact.contact_id} onChange = {this.handleContactClick} defaultChecked={this.checkValue()} />
+            <label htmlFor={contact.contact_id}> {<a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer">{contact.name !== "" ? contact.name : contact.business_name }</a>}</label>
+           </div>
+        )
+      })
+
+          
+
+
+
+
 
     this.selectedEventForm = this.selectedEventArray.map((item) => {
       return (
@@ -82,7 +158,8 @@ class EditEvent extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="contact" className="event-edit">Contact:</label>
-              <input type="text" name="contact" id="contact" onChange={this.handleChange} defaultValue={item.contact} />
+              {this.contactFieldSelectionOptions}
+              {/* <input type="text" name="contact" id="contact" onChange={this.handleChange} defaultValue={item.contact} /> */}
             </div>
             <div className="form-space">
               <label htmlFor="notes" className="event-edit">Notes:</label>
@@ -94,7 +171,8 @@ class EditEvent extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="catalog_items" className="event-edit">Catalog Items:</label>
-              <input type="text" name="catalog_items" id="catalog_items" onChange={this.handleChange} defaultValue={item.catalog_items} />
+              {this.catalogFieldSelectionOptions}
+              {/* <input type="text" name="catalog_items" id="catalog_items" onChange={this.handleChange} defaultValue={item.catalog_items} /> */}
             </div>
             <div className="button-wrap">
             <button className="submit-btn" type="submit" value="submit">Submit</button>

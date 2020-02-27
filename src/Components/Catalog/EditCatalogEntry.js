@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader'
 
-
 class EditCatalogEntry extends Component {
   static contextType = Context;
 
@@ -13,6 +12,11 @@ class EditCatalogEntry extends Component {
       updatedCatalogEntry: []
     }
   }
+
+  componentDidMount = () =>{
+    this.setInitialDefaultState()   
+  }
+
 
   render() {
 
@@ -35,9 +39,16 @@ class EditCatalogEntry extends Component {
      this.handleChange = (e) => {
       const key = (e.target.name)
       const value = (e.target.value)
-      this.setInitialDefaultState()
       this.setState(previousState => ({ updatedCatalogEntry: { ...previousState.updatedCatalogEntry, [key]: value }, updateBoolean: true }))
       }
+
+      this.handleDateCreatedChange = (date) => {
+        console.log("date", date)
+        const key = "date_created"
+        const value = date
+        this.setState(previousState => ({ updatedCatalogEntry: { ...previousState.updatedCatalogEntry, [key]: value }, updateBoolean: true }))
+      }
+  
 
       this.handleCancel = (e) => {
         this.context.history.push('/catalog')
@@ -51,6 +62,21 @@ class EditCatalogEntry extends Component {
           this.context.updateAppStateCatalogDelete(newCatalogList)
           this.context.history.push(`/catalog`)
         }
+
+      this.contactFieldSelectionOptions = this.context.contacts.map((contact) => {
+        this.checkValue = () => {
+          if(this.selectedCatalogArray[0].favorited_by.includes(contact.contact_id)){
+            return true
+          }
+        }
+
+        return (
+          <div key={'contact'+ contact.contact_id} className="checkbox">
+            <input type="checkbox" id={contact.contact_id} name={"contacts"} value={contact.contact_id} onChange = {this.handleContactClick} defaultChecked={this.checkValue()} />
+            <label htmlFor={contact.contact_id}> {<a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer">{contact.name !== "" ? contact.name : contact.business_name }</a>}</label>
+           </div>
+        )
+      })
 
 
     this.selectedCatalogItemForm = this.selectedCatalogArray.map((item) => {
@@ -79,8 +105,10 @@ class EditCatalogEntry extends Component {
               <input type="text" name="price" id="price"  onChange={this.handleChange} defaultValue={item.price} />
             </div>
             <div className="form-space">
-              <label htmlFor="date_created" className="catalog-edit">Date Created:</label>
+              <div className="date-creatd">
+              <label htmlFor="date_created" className="catalog-edit">Date Created (mm/yyyy):</label>
               <input type="text" name="date_created" id="date_created" onChange={this.handleChange} defaultValue={item.date_created} />
+             </div>
             </div>
             <div className="form-space">
               <label htmlFor="concept_statement" className="catalog-edit">Concept Statement:</label>
@@ -104,7 +132,7 @@ class EditCatalogEntry extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="favorited_by" className="catalog-edit">Favorited By:</label>
-              <input type="text" name="favorited_by" id="favorited_by"  onChange={this.handleChange} defaultValue={item.favorited_by} />
+             {this.contactFieldSelectionOptions} 
             </div>
             <div className="form-space">
               <label htmlFor="sold_to" className="catalog-edit">Sold To:</label>
