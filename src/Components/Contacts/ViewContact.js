@@ -33,8 +33,9 @@ class ViewContact extends Component {
     this.contactObjectRender = this.contactArray.map((item) => {
     
     //get event name and link for contact
-    if (item.events !== null || item.events !== ""){
-      this.eventIds = item.events.split(', ')
+    if (item.events !== []){
+      console.log(item.events, "item.events in ViewContact", typeof item.events, "type of")
+      this.eventIds = item.events
       this.eventIdsToObjects = this.eventIds.map((ids) => {
         this.eventObjects = this.context.events.filter((events) => {
           return events.event_id === ids
@@ -71,7 +72,7 @@ class ViewContact extends Component {
          if (item.images !== null || item.images !== ""){
             this.imgReturn = [item.images.split(', ')[0]].map((image) => {
             return (
-              <img className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+              <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
             )
           })
         }

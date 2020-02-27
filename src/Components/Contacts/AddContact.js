@@ -104,7 +104,7 @@ class AddContact extends Component {
         })
       }
         return (
-          <div className="check-box">
+          <div className="checkbox">
             <input type="checkbox" id={"catalog-" + item.catalog_id} name={item.name} />
             <label htmlFor={item.name}>{<a className="fav-by-check" href={'/catalog/'+ item.catalog_id} target="_blank" rel="noopener noreferrer">{this.favoritesImagesReturn}</a>} </label>
           </div>

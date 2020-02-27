@@ -9,8 +9,15 @@ class EditContact extends Component {
     super(props)
     this.state = {
       updateBoolean: false,
-      updatedContact: []
-    }
+      updatedContact: [],
+      updatedEventsArray: [],
+      }
+  }
+
+  componentDidMount = () =>{
+    this.setInitialDefaultState()
+    setTimeout(() => {}, 3000 )
+    
   }
 
   render() {
@@ -28,16 +35,41 @@ class EditContact extends Component {
     this.setInitialDefaultState = () => {
       if (this.state.updateBoolean === false) {
         this.setState({ updatedContact: this.selectedContactObject })
+        this.setState({ updateBoolean: true})
       }
     }
+
 
     this.handleChange = (e) => {
       const key = (e.target.name)
       const value = (e.target.value)
-      this.setInitialDefaultState()
       this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, [key]: value }, updateBoolean: true }))
     }
 
+    this.setUpdatedArray = (e) =>{
+      let event_id = e.target.value
+      let currentEventsArray = this.state.updatedContact.events
+      let updatedEventsArray 
+
+      if (!currentEventsArray.includes(event_id)){
+        let eventArrayLength = currentEventsArray.push(event_id)
+        updatedEventsArray = currentEventsArray
+      }
+
+      else{
+        updatedEventsArray = currentEventsArray.filter((event) => event_id !== event)
+      }
+
+      this.setState({updatedEventsArray: updatedEventsArray})
+      this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, events: updatedEventsArray}, updateBoolean: true }))
+
+    }
+
+
+    this.handleEventClick = (e) => {
+      this.setUpdatedArray(e);  
+      }
+     
     this.handleCancel = (e) => {
       this.context.history.push('/contacts')
     }
@@ -51,11 +83,17 @@ class EditContact extends Component {
       this.context.history.push(`/contacts`)
     }
 
+
+
+
+
     this.eventFieldSelectionOptions = this.context.events.map(event => {
+   //I need to set my checkbox selected if the event_id is already in the array.
+   
       return (
-        <div className="check-box">
-          <input type="checkbox" id={event.event_id} name={event.name} />
-          <label htmlFor={event.name}> {<a href={'/events/'+ event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>} </label>
+        <div key={'event' + event.event_id} className="checkbox">
+          <input type="checkbox" id={event.event_id} name={"events"} value={event.event_id} onChange={this.handleEventClick} defaultChecked={true}  />
+          <label htmlFor={event.event_id}> {<a href={'/events/'+ event.event_id} target="_blank"  rel="noopener noreferrer"> {event.name}</a>} </label>
         </div>
       )
     })
@@ -102,8 +140,11 @@ class EditContact extends Component {
               <input type="text" name="event" id="event" onChange={this.handleChange} defaultValue={item.event_name} />
             </div> */}
             <div className="form-space">
-            <label htmlFor="event" className="contact-edit">Event Affiliation: (THIS IS BUGGY!)</label>
-            {this.eventFieldSelectionOptions}        
+            <legend className="contact-edit">Event Affiliation: (THIS IS BUGGY!)</legend>
+            <fieldset>
+            {this.eventFieldSelectionOptions}
+            </fieldset>
+                    
             </div>
             <div className="form-space">
               <label htmlFor="email" className="contact-edit">Email:</label>
@@ -157,7 +198,6 @@ class EditContact extends Component {
         </div>
       );
     })
-
 
     return (
       <div>
