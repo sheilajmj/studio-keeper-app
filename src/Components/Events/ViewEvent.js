@@ -51,8 +51,9 @@ class ViewEvent extends Component {
                 )
               })
             }
+        
             return (
-              <a key={uuid()} href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+              <a key={uuid()} href={'/catalog/' + item[0].catalog_id} target="_blank" rel="noopener noreferrer">
                 {this.imgReturn}
               </a>
             )
