@@ -34,42 +34,36 @@ class ViewEvent extends Component {
 
     this.eventObjectRender = this.eventArray.map((item) => {
 
-      //get the catalog_id of the catalog_items listed in the Event in an array
-      if (item.catalog_items !== null || item.catalog_items !== "") {
-        this.eventCatalogItemsArray = item.catalog_items
-        this.catalogObject = [this.eventCatalogItemsArray].map((id) => {
-          //get the catalog object of the contact favorite
-          return (
+      //catalog items
+      this.catalogItemsRender = item.catalog_items.map((id) => {
             this.catalogObject = this.context.catalog_items.filter((item) => {
               return item.catalog_id === id
             })
-          )
-        })
-      }
-      this.catalogArray = this.catalogObject.flat()
+            return this.catalogObject
+          })
 
-      //turn the catalog object into a return value for the image
-
-      this.catalogReturn = this.catalogArray.map((item) => {
-        if (item.images !== null || item.images !== "") {
-          this.imgReturn = [item.images.split(', ')[0]].map((image) => {
+          this.catalogItemsArray = this.catalogItemsRender.flat()
+          this.catalogReturn = this.catalogItemsRender.map((item) => {  
+            if (item[0].images !== null || item[0].images !== "") {
+              this.imgReturn = [item[0].images.split(', ')[0]].map((image) => {
+                return (
+                  <img key={"img" + item.image} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+                )
+              })
+            }
             return (
-              <img key={"img" + item.image} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+              <a key={uuid()} href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+                {this.imgReturn}
+              </a>
             )
           })
-        }
+        
+  
 
-        return (
-          <a key={uuid()} href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
-            {this.imgReturn}
-          </a>
-        )
-      })
 
       //contacts linked 
 
       this.contactsLinkedArray = this.context.contacts.filter(contact => contact.events.includes(this.selectedEventId))
-console.log("contacts linked array", this.contactsLinkedArray)
       this.contactsLinkedReturn = this.contactsLinkedArray.map(contact => {
         return {
           contact_id: contact.contact_id,

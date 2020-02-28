@@ -33,7 +33,6 @@ class EventItem extends Component {
     if (item.catalog_items !== null || item.catalog_items !== ""){
     this.eventCatalogItemsArray = item.catalog_items
     this.catalogObject = [this.eventCatalogItemsArray].map((id) => {
-      console.log(id, "this is ID")
       //get the catalog object of the contact favorite
       return (
         this.catalogObject = this.context.catalog_items.filter((item) => {

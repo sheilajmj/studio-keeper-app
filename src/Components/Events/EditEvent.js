@@ -80,7 +80,6 @@ class EditEvent extends Component {
 
       this.catalogFieldSelectionOptions = this.context.catalog_items.map((item) => {
         this.checkedValue = () => {
-          console.log(this.selectedEventArray[0], "selected event array", "item.catalog_id", item.catalog_id)
           if (this.selectedEventArray[0].catalog_items.includes(item.catalog_id)){
           return true
           }
@@ -111,7 +110,6 @@ class EditEvent extends Component {
 
     this.contactFieldSelectionOptions = this.context.contacts.map((contact) => {
         this.checkValue = () => {
-          console.log("selected Event Array", this.selectedEventArray[0].contact)
           if(this.selectedEventArray[0].contact.includes(contact.contact_id)){
             return true
           }
