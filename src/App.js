@@ -16,6 +16,7 @@ import ViewEvent from './Components/Events/ViewEvent'
 import Home from './Components/Home/Home'
 import LandingPage from './Components/LandingPage/LandingPage'
 import Nav from './Components/Nav/Nav'
+import Gallery from './Components/Gallery/Gallery'
 
 let json_data = require('./db.json');
 
@@ -169,6 +170,10 @@ class App extends Component {
               path={'/events'}
               component={EventParent}
             />
+            <Route
+              path={'/gallery'}
+              component={Gallery}
+              />
             <Route
               exact path={'/'}
               component={Home}
