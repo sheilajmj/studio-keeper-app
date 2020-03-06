@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CatalogItem from './CatalogItem'
 import PageParentHeader from '../Nav/PageParentHeader';
 
-
-function CatalogParent() {
+class CatalogParent extends Component {
+  render(){
   return (
     <section className='catalog'>
       <PageParentHeader pageName="Catalog" />
       <CatalogItem />
     </section>
   );
+  }
 }
 
 export default CatalogParent;

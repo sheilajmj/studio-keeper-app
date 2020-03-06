@@ -13,7 +13,8 @@ const StudioKeeperContext = React.createContext({
       updateAppStateEventsUpdate: () => {},    
       updateAppStateContactsDelete: () => {},
       updateAppStateCatalogDelete: () => {},
-      updateAppStateEventDelete: () => {}
+      updateAppStateEventDelete: () => {},
+      setCatalogItems: () => {}
   })
   
   export default StudioKeeperContext;

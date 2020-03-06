@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
+import StudiokeeperApiService from '../../services/studiokeeper-api-service'
 
 class CatalogItem extends Component {
   static contextType = Context;
+
+  componentDidMount() {
+    StudiokeeperApiService.getCatalogItems()
+      .then(this.context.setCatalogItems)
+      .catch(this.context.setError)
+  }
+  
 
   handleEditClick(id) {
     this.context.history.push(`/catalog/edit/${id}`)
@@ -17,7 +25,6 @@ class CatalogItem extends Component {
   }
 
   catalogItemsList = this.context.catalog_items.map((item) => {
-
     this.handleImages = () => {    
     if (!item.images){
       item.images = ""
@@ -49,7 +56,7 @@ class CatalogItem extends Component {
     )
     this.favoritedByReturnMapped = this.favoritedByReturn.map(fav => {
       return (
-        <li><a href={`http://localhost:3000/contacts/` + fav.contact_id} target="_blank" rel="noopener noreferrer">{fav.name}</a></li>
+        <li><a href={`./contacts/` + fav.contact_id} target="_blank" rel="noopener noreferrer">{fav.name}</a></li>
       )
     })
 
@@ -94,7 +101,7 @@ class CatalogItem extends Component {
     }
 
     return (
-      <div key={item.catalog_id} className="item-wrap">
+      <div key={'catalog'+item.catalog_id} className="item-wrap">
         {/* <button type="button" className="view-item" value="viewCatalog" onClick={(() => {this.handleViewCatalog(item.catalog_id)})}><img src={require("../../assets/viewItem.svg")} width="30px" alt="view item" /></button> */}
         <button className="edit-btn" onClick={(() => { this.handleEditClick(item.catalog_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
         <ul className="item" onClick={(() => { this.handleItemClick(item.catalog_id) })}>
@@ -112,9 +119,11 @@ class CatalogItem extends Component {
 
 
   render() {
+    console.log("This is in the catalogItemsList", this.context.catalog_items)
 
     return (
       <section className='catalog-item'>
+        <h1>Did anything show up here?</h1>
         {this.catalogItemsList}
       </section>
     );

@@ -17,20 +17,21 @@ import Home from './Components/Home/Home'
 import LandingPage from './Components/LandingPage/LandingPage'
 import Nav from './Components/Nav/Nav'
 import Gallery from './Components/Gallery/Gallery'
+import SignInForm from './Components/SignInForm/SignInForm'
 
-let json_data = require('./db.json');
+// let json_data = require('./db.json');
 
-const catalog_items = json_data.catalog_items
-const events = json_data.events
-const contacts = json_data.contacts
+// const catalog_items = json_data.catalog_items
+// const events = json_data.events
+// const contacts = json_data.contacts
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      catalog_items: catalog_items,
-      contacts: contacts,
-      events: events,
+      catalog_items: [],
+      contacts: [],
+      events: [],
       selectedContact: [],
       updateValue: true,
     }
@@ -91,7 +92,10 @@ class App extends Component {
   }
   updateAppStateEventsDelete = (newEventsList) => {
     this.setState({ events: newEventsList })
+  }
 
+  setCatalogItems = (catalogItems) => {
+    this.setState({catalog_items: catalogItems })
   }
 
   render() {
@@ -109,6 +113,7 @@ class App extends Component {
       updateAppStateContactsDelete: this.updateAppStateContactsDelete,
       updateAppStateCatalogDelete: this.updateAppStateCatalogDelete,
       updateAppStateEventsDelete: this.updateAppStateEventsDelete,
+      setCatalogItems: this.setCatalogItems
     }
 
 
@@ -173,6 +178,10 @@ class App extends Component {
             <Route
               path={'/gallery'}
               component={Gallery}
+              />
+              <Route
+              path={'/signin'}
+              component={SignInForm}
               />
             <Route
               exact path={'/'}

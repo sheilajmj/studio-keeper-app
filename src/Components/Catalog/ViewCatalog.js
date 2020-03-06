@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
-import { uuid } from 'uuidv4';
+import StudiokeeperApiService from '../../services/studiokeeper-api-service'
 
 class ViewCatalog extends Component {
   static contextType = StudioKeeperContext
+
+  componentDidMount() {
+    StudiokeeperApiService.getCatalogItems()
+      .then(this.context.setCatalogItems)
+      .catch(this.context.setError)
+  }
 
   handleEditClick = (id) => {
     this.context.history.push(`/catalog/edit/${id}`)
@@ -48,52 +54,52 @@ class ViewCatalog extends Component {
         </div>
         )
     })
-
+    console.log("this is before the ITEM error ", this.context.catalog_items)
 
     this.catalogObjectRender = this.catalogArray.map((item) => {
 
-      if (!item.events){ 
-        item.events = []
-      }
+      // if (!item.events){ 
+      //   item.events = []
+      // }
 
-      this.eventArray = item.events
+      // this.eventArray = item.events
       
 
-      this.eventObjectReturnArray = this.eventArray.map((event) => {
-          return (
-            <a key={`event` + event.event_id}href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
-          )
-      })
+      // this.eventObjectReturnArray = this.eventArray.map((event) => {
+      //     return (
+      //       <a key={`event` + event.event_id}href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
+      //     )
+      // })
 
    
 
       
-      if(!item.images){item.images = ""}
+      // if(!item.images){item.images = ""}
 
-      this.imageArray = item.images.split(', ')
+      // this.imageArray = item.images.split(', ')
 
-      this.itemImagesArrayReturn = this.imageArray.map((item) => {
-        if (item === ""){
-          return (<div key={uuid()}></div>)
-        }
-        else{
-        return (
-          <img className="catalog-img-item-view" src={require("../../assets/" + item)} alt="catalog item" height="42px" width="42px" />
-        )
-      }
-      })
+      // this.itemImagesArrayReturn = this.imageArray.map((item) => {
+      //   if (item === ""){
+      //     return (<div key={uuid()}></div>)
+      //   }
+      //   else{
+      //   return (
+      //     <img className="catalog-img-item-view" src={require("../../assets/" + item)} alt="catalog item" height="42px" width="42px" />
+      //   )
+      // }
+      // })
 
-      this.catalogImagesIncluded = () => {
-        if (item.images) {
-          return (<div className="catalog-view-img">
-            {this.itemImagesArrayReturn}
-          </div>)
-        }
-      }
+      // this.catalogImagesIncluded = () => {
+      //   if (item.images) {
+      //     return (<div className="catalog-view-img">
+      //       {this.itemImagesArrayReturn}
+      //     </div>)
+      //   }
+      // }
     
   
   
-
+      console.log("this is item", item)
       return (
         <div>
           <div key={item.catalog_id} className="item-wrap">
