@@ -1,7 +1,7 @@
 //import TokenService from '../services/token-service'
 import config from '../config'
 
-const StudioKeeperApiService = {
+const CatalogApiService = {
     getCatalogItems() {
         return fetch(`${config.API_ENDPOINT}/catalog`, {
             headers:{
@@ -51,8 +51,10 @@ const StudioKeeperApiService = {
     //       )
     //   },
 
-
-
 }
 
-export default StudioKeeperApiService
+
+
+
+
+export default CatalogApiService 

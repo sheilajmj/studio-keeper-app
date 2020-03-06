@@ -98,6 +98,10 @@ class App extends Component {
     this.setState({catalog_items: catalogItems })
   }
 
+  setContacts = (contacts) => {
+    this.setState({contacts: contacts})
+  }
+
   render() {
     const contextValue = {
       history: this.props.history,
@@ -113,7 +117,8 @@ class App extends Component {
       updateAppStateContactsDelete: this.updateAppStateContactsDelete,
       updateAppStateCatalogDelete: this.updateAppStateCatalogDelete,
       updateAppStateEventsDelete: this.updateAppStateEventsDelete,
-      setCatalogItems: this.setCatalogItems
+      setCatalogItems: this.setCatalogItems,
+      setContacts: this.setContacts,
     }
 
 

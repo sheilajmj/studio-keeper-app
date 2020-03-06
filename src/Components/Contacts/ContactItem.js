@@ -22,25 +22,26 @@ class ContactItem extends Component {
 
 
   contactItemsList = this.context.contacts.map((item, index) => {
+    console.log("this is in contactItem ", this.context.contacts)
 
     //event name and link for contact
-    if (item.events !== null || item.events !== ""){
-    this.eventIds = JSON.stringify(item.events).split(', ')
-    this.eventIdsToObjects = this.eventIds.map((ids) => {
-      this.eventObjects = this.context.events.filter((events) => {
-        return events.event_id === ids
-      })
-      return this.eventObjects
-    })
-    this.eventObjectReturnArray = this.eventIdsToObjects.map((event) => {
-      this.eventObjectReturn = event.map((event) => {
-        return (
-          <a href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
-        )
-      })
-      return this.eventObjectReturn
-    })
-  }
+  //   if (item.events !== null || item.events !== ""){
+  //   this.eventIds = JSON.stringify(item.events).split(', ')
+  //   this.eventIdsToObjects = this.eventIds.map((ids) => {
+  //     this.eventObjects = this.context.events.filter((events) => {
+  //       return events.event_id === ids
+  //     })
+  //     return this.eventObjects
+  //   })
+  //   this.eventObjectReturnArray = this.eventIdsToObjects.map((event) => {
+  //     this.eventObjectReturn = event.map((event) => {
+  //       return (
+  //         <a href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
+  //       )
+  //     })
+  //     return this.eventObjectReturn
+  //   })
+  // }
 
 
     this.contactNameIncluded = () => {
@@ -96,6 +97,7 @@ class ContactItem extends Component {
 
     return (
       <div key={"contact" + item.contact_id} className="item-wrap">
+        <h1>Hello!</h1>
         {/* <button type="button" className="view-item" value="viewContact" onClick={(() => {this.handleViewContact(item.contact_id)})}><img src={require("../../assets/viewItem.svg")} width="30px" alt="view item" /> </button> */}
         <button className="edit-btn" onClick={(() => { this.handleEditClick(item.contact_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
         <ul className="item" onClick={(() => { this.handleItemClick(item.contact_id) })}>
@@ -120,9 +122,11 @@ class ContactItem extends Component {
 
   render() {
 
+    console.log("this is context", this.context.contacts)
 
     return (
       <div>
+        <h1>Hi!</h1>
         {this.contactItemsList}
       </div>
     );

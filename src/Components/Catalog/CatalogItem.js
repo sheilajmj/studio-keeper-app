@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import StudiokeeperApiService from '../../services/studiokeeper-api-service'
+import CatalogApiService from '../../services/catalog-api-service'
 
 class CatalogItem extends Component {
   static contextType = Context;
 
   componentDidMount() {
-    StudiokeeperApiService.getCatalogItems()
+    CatalogApiService.getCatalogItems()
       .then(this.context.setCatalogItems)
       .catch(this.context.setError)
+      console.log("in CatalogItem ComponentDidMount", this.context.catalog_items)
   }
   
-
   handleEditClick(id) {
     this.context.history.push(`/catalog/edit/${id}`)
   }
@@ -24,7 +24,9 @@ class CatalogItem extends Component {
     this.context.history.push(`/catalog/${id}`)
   }
 
+
   catalogItemsList = this.context.catalog_items.map((item) => {
+    
     this.handleImages = () => {    
     if (!item.images){
       item.images = ""
@@ -102,6 +104,7 @@ class CatalogItem extends Component {
 
     return (
       <div key={'catalog'+item.catalog_id} className="item-wrap">
+        <h1>NOTHING SHOWS HERE.</h1>
         {/* <button type="button" className="view-item" value="viewCatalog" onClick={(() => {this.handleViewCatalog(item.catalog_id)})}><img src={require("../../assets/viewItem.svg")} width="30px" alt="view item" /></button> */}
         <button className="edit-btn" onClick={(() => { this.handleEditClick(item.catalog_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
         <ul className="item" onClick={(() => { this.handleItemClick(item.catalog_id) })}>

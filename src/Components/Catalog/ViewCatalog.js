@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
-import StudiokeeperApiService from '../../services/studiokeeper-api-service'
+import CatalogApiService from '../../services/catalog-api-service'
 
 class ViewCatalog extends Component {
   static contextType = StudioKeeperContext
 
   componentDidMount() {
-    StudiokeeperApiService.getCatalogItems()
+    CatalogApiService.getCatalogItems()
       .then(this.context.setCatalogItems)
       .catch(this.context.setError)
   }

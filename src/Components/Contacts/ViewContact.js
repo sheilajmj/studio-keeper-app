@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader'
+import ContactsApiService from '../../services/contacts-api-service'
 
 class ViewContact extends Component {
   static contextType = StudioKeeperContext
+
+  componentDidMount() {
+    ContactsApiService.getContact()
+      .then(this.context.setContacts)
+      .catch(this.context.setError)
+  }
+
 
   handleEditClick = (id) => {
     this.context.history.push(`/contacts/edit/${id}`)
