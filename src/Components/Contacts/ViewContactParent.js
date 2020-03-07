@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-import ContactItem from './ContactItem';
+import ViewContact from './ViewContact';
 import PageParentHeader from '../Nav/PageParentHeader';
 
-class ContactsParent extends Component {
+class ViewContactParent extends Component {
   static contextType = Context;
+
 
   render(){
   return (
     <section className='contacts'>
         <PageParentHeader pageName={"Contacts"} />
-        <ContactItem />
+        <ViewContact id={this.props.match.params.id} />
     </section>
   );
 }
 }
 
-export default ContactsParent;
+export default ViewContactParent;

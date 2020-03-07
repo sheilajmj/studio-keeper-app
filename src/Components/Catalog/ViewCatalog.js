@@ -1,63 +1,41 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
-import PageParentHeader from '../Nav/PageParentHeader';
-import CatalogApiService from '../../services/catalog-api-service'
 
 class ViewCatalog extends Component {
   static contextType = StudioKeeperContext
-
-  componentDidMount() {
-    CatalogApiService.getCatalogItems()
-      .then(this.context.setCatalogItems)
-      .catch(this.context.setError)
-  }
-
-  handleEditClick = (id) => {
-    this.context.history.push(`/catalog/edit/${id}`)
-  }
-
-  handleDeleteClick = (id) => {
-    this.handleDeleteCatalogItem(id)
-    this.context.history.push(`/catalog`)
-  }
-
-  handleBackToCatalog = (e) => {
-    this.context.history.push('/catalog')
-  }
-
+ 
   render() {
-    this.selectedCatalogId = this.props.match.params.catalog_id
-    this.catalogObject = this.context.catalog_items.find(item => item.catalog_id === this.selectedCatalogId)
+    this.selectedCatalogId = this.props.id
+    console.log(this.context, "context")
+    this.catalogObject = this.context.catalog_items.find(item => parseFloat(item.id) === parseFloat(this.selectedCatalogId))
     this.catalogArray = [this.catalogObject]
+    console.log("catalogArray", this.catalogObject)
     this.handleDeleteCatalogItem = (id) => {
-      let indexToDelete = this.context.catalog_items.findIndex(item => item.catalog_id === id)
+      let indexToDelete = this.context.catalog_items.findIndex(item => item.id === id)
       let catalogList = JSON.parse(JSON.stringify(this.context.catalog_items))
       catalogList.splice(indexToDelete, 1)
       let newCatalogList = catalogList
       this.context.updateAppStateCatalogDelete(newCatalogList)
     }
 
-    this.favoritedByArray = this.context.contacts.filter(contact => contact.favorites.includes(this.selectedCatalogId))
+    // this.favoritedByArray = this.context.contacts.filter(contact => contact.favorites.includes(this.selectedCatalogId))
 
-    this.favoritedByReturn = this.favoritedByArray.map(fav => {
-      return {
-        contact_id: fav.contact_id,
-        name: fav.name,
-        business_name: fav.business_name,
-      }
-    }
-    )
-    this.favoritedByReturnMapped = this.favoritedByReturn.map(contact => {
-      return (
-        <div key={`contact` + contact.contact_id} className="favorited-by">
-        {`${contact.name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}       
-        </div>
-        )
-    })
-    console.log("this is before the ITEM error ", this.context.catalog_items)
-
+    // this.favoritedByReturn = this.favoritedByArray.map(fav => {
+    //   return {
+    //     contact_id: fav.contact_id,
+    //     name: fav.name,
+    //     business_name: fav.business_name,
+    //   }
+    // }
+    // )
+    // this.favoritedByReturnMapped = this.favoritedByReturn.map(contact => {
+    //   return (
+    //     <div key={`contact` + contact.contact_id} className="favorited-by">
+    //     {`${contact.name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}       
+    //     </div>
+    //     )
+    // })
     this.catalogObjectRender = this.catalogArray.map((item) => {
-
       // if (!item.events){ 
       //   item.events = []
       // }
@@ -74,37 +52,35 @@ class ViewCatalog extends Component {
    
 
       
-      // if(!item.images){item.images = ""}
+      if(!item.images){item.images = ""}
 
-      // this.imageArray = item.images.split(', ')
+      this.imageArray = item.images.split(', ')
 
-      // this.itemImagesArrayReturn = this.imageArray.map((item) => {
-      //   if (item === ""){
-      //     return (<div key={uuid()}></div>)
-      //   }
-      //   else{
-      //   return (
-      //     <img className="catalog-img-item-view" src={require("../../assets/" + item)} alt="catalog item" height="42px" width="42px" />
-      //   )
-      // }
-      // })
+      this.itemImagesArrayReturn = this.imageArray.map((item) => {
+        if (item === ""){
+          return (<div key={'catalogimage' + item.id}></div>)
+        }
+        else{
+        return (
+          <img className="catalog-img-item-view" src={require("../../assets/" + item)} alt="catalog item" height="42px" width="42px" />
+        )
+      }
+      })
 
-      // this.catalogImagesIncluded = () => {
-      //   if (item.images) {
-      //     return (<div className="catalog-view-img">
-      //       {this.itemImagesArrayReturn}
-      //     </div>)
-      //   }
-      // }
-    
+      this.catalogImagesIncluded = () => {
+        if (item.images) {
+          return (<div className="catalog-view-img">
+            {this.itemImagesArrayReturn}
+          </div>)
+        }
+      }  
   
-  
-      console.log("this is item", item)
+
       return (
         <div>
-          <div key={item.catalog_id} className="item-wrap">
-          <button className="back-to-btn" type="button" value="backToCatalog" onClick={(() => { this.handleBackToCatalog(item.catalog_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px"/><span className="all-catalog-text">Catalog</span></button>
-          <button className="edit-btn" onClick={(() => { this.handleEditClick(item.catalog_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+          <div key={item.id} className="item-wrap">
+          <button className="back-to-btn" type="button" value="backToCatalog" onClick={(() => { this.handleBackToCatalog(item.id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px"/><span className="all-catalog-text">Catalog</span></button>
+          <button className="edit-btn" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
             <div className="item catalog-item">
   
               {this.catalogImagesIncluded()}
@@ -146,10 +122,10 @@ class ViewCatalog extends Component {
                 <div className="catalog-view-location">
                   <span className="catalog-labels">Location:</span>{item.location}
                 </div>
-                <div className="catalog-view-favorited">
+                {/* <div className="catalog-view-favorited">
                   <span className="catalog-labels">Favorited By:</span>
                     {this.favoritedByReturnMapped}
-                </div>
+                </div> */}
               </div>
               <div className="catalog-view-block4">
                 <div className="catalog-view-date">
@@ -179,7 +155,7 @@ class ViewCatalog extends Component {
               </div>
             </div>
             <div className="button-wrap">
-            <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.catalog_id) }}>Delete</button>
+            <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.id) }}>Delete</button>
             </div>
             </div>
 
@@ -189,7 +165,6 @@ class ViewCatalog extends Component {
     })
     return (
       <div>
-        <PageParentHeader pageName="Catalog"/>
         {this.catalogObjectRender}
       </div>
     )

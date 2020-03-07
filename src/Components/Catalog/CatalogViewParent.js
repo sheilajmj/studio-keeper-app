@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import CatalogItem from './CatalogItem'
+// import CatalogItem from './CatalogItem'
 import StudioKeeperContext from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
 import CatalogApiService from '../../services/catalog-api-service'
+import ViewCatalog from './ViewCatalog';
 
-class CatalogParent extends Component {
+class CatalogViewParent extends Component {
   static contextType = StudioKeeperContext
 
   componentDidMount() {
-    CatalogApiService.getCatalogItems()
+    CatalogApiService.getCatalogItem()
       .then(this.context.setCatalogItems)
       .catch(this.context.setError)
   }
@@ -17,10 +18,10 @@ class CatalogParent extends Component {
   return (
     <section className='catalog'>
       <PageParentHeader pageName="Catalog" />
-      <CatalogItem />
-    </section>
+      <ViewCatalog id={this.props.match.params.id} />    
+</section>
   );
   }
 }
 
-export default CatalogParent;
+export default CatalogViewParent;

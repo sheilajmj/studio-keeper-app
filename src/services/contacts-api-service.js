@@ -4,6 +4,7 @@ import config from '../config'
 
 const ContactsApiService = {
     getContacts() {
+        console.log("getContacts- success")
         return fetch(`${config.API_ENDPOINT}/contacts`, {
             headers:{
                 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
@@ -18,8 +19,8 @@ const ContactsApiService = {
         )
     },
 
-    getContact(contact_id) {
-        return fetch (`${config.API_ENDPOINT}/contacts/${contact_id}`, {
+    getContact(id) {
+        return fetch (`${config.API_ENDPOINT}/contacts/${id}`, {
             headers: {
                 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
                 //'Authorization': `bearer ${TokenService.getAuthToken()}`,

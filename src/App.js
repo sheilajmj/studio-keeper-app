@@ -4,11 +4,11 @@ import StudioKeeperContext from './Context'
 import CatalogParent from './Components/Catalog/CatalogParent'
 import AddCatalogEntry from './Components/Catalog/AddCatalogEntry'
 import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
-import ViewCatalog from './Components/Catalog/ViewCatalog'
+// import ViewCatalog from './Components/Catalog/ViewCatalog'
 import ContactsParent from './Components/Contacts/ContactsParent'
 import AddContact from './Components/Contacts/AddContact'
 import EditContact from './Components/Contacts/EditContact'
-import ViewContact from './Components/Contacts/ViewContact'
+// import ViewContact from './Components/Contacts/ViewContact'
 import EventParent from './Components/Events/EventParent'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
@@ -18,7 +18,10 @@ import LandingPage from './Components/LandingPage/LandingPage'
 import Nav from './Components/Nav/Nav'
 import Gallery from './Components/Gallery/Gallery'
 import SignInForm from './Components/SignInForm/SignInForm'
-
+import ContactsApiService from './services/contacts-api-service'
+import CatalogApiService from './services/catalog-api-service'
+import CatalogViewParent from './Components/Catalog/CatalogViewParent'
+import ViewContactParent from './Components/Contacts/ViewContactParent' 
 // let json_data = require('./db.json');
 
 // const catalog_items = json_data.catalog_items
@@ -36,7 +39,6 @@ class App extends Component {
       updateValue: true,
     }
   }
-
 
   updateAppStateContactsCreate = (newContact) => {
     const currentStateContacts = JSON.parse(JSON.stringify(this.state.contacts))
@@ -95,12 +97,29 @@ class App extends Component {
   }
 
   setCatalogItems = (catalogItems) => {
+    console.log("hit set catalog Items")
     this.setState({catalog_items: catalogItems })
   }
 
   setContacts = (contacts) => {
     this.setState({contacts: contacts})
+    console.log("hit set contacts in App")
   }
+
+
+  componentDidMount() {
+    ContactsApiService.getContacts()
+      .then(this.setContacts)
+      .catch(this.context.setError)
+
+    CatalogApiService.getCatalogItems()
+        .then(this.setCatalogItems)
+        .catch(this.context.setError)
+      
+    console.log(this.state, "state")
+  }
+
+
 
   render() {
     const contextValue = {
@@ -133,7 +152,7 @@ class App extends Component {
         <main className='app'>
           <Switch>
             <Route
-              path={'/catalog/edit/:catalog_id'}
+              path={'/catalog/edit/:id'}
               component={EditCatalogEntry}
             />
             <Route
@@ -141,15 +160,15 @@ class App extends Component {
               component={AddCatalogEntry}
             />
             <Route
-              exact path={'/catalog/:catalog_id'}
-              component={ViewCatalog}
+              exact path={'/catalog/:id'}
+              component={CatalogViewParent}
             />
             <Route
               path={'/catalog'}
               component={CatalogParent}
             />
             <Route
-              exact path={'/contacts/edit/:contact_id'}
+              exact path={'/contacts/edit/:id'}
               component={EditContact}
             />
             <Route
@@ -157,15 +176,15 @@ class App extends Component {
               component={AddContact}
             />
             <Route
-              exact path={'/contacts/:contact_id'}
-              component={ViewContact}
+              exact path={'/contacts/:id'}
+              component={ViewContactParent}
             />
             <Route
               exact path={'/contacts'}
               component={ContactsParent}
             />
             <Route
-              path={'/events/edit/:event_id'}
+              path={'/events/edit/:id'}
               component={EditEvent}
             />
             <Route
@@ -173,7 +192,7 @@ class App extends Component {
               component={AddEvent}
             />
             <Route
-              exact path={'/events/:event_id'}
+              exact path={'/events/:id'}
               component={ViewEvent}
             />
             <Route

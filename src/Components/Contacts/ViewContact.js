@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
-import PageParentHeader from '../Nav/PageParentHeader'
+// import PageParentHeader from '../Nav/PageParentHeader'
 import ContactsApiService from '../../services/contacts-api-service'
 
 class ViewContact extends Component {
   static contextType = StudioKeeperContext
 
-  componentDidMount() {
-    ContactsApiService.getContact()
+
+  loadState = () => {
+    ContactsApiService.getContacts()
       .then(this.context.setContacts)
       .catch(this.context.setError)
+      
+    console.log(this.context.contacts, "state -> Contacts")
   }
-
 
   handleEditClick = (id) => {
     this.context.history.push(`/contacts/edit/${id}`)
@@ -27,9 +29,32 @@ class ViewContact extends Component {
   }
 
   render() {
-    this.selectedContactId = this.props.match.params.contact_id
-    this.contactObject = this.context.contacts.find(contact => contact.contact_id === this.selectedContactId)
+      ContactsApiService.getContacts()
+        .then(this.context.setContacts)
+        .catch(this.context.setError)
+        
+      console.log(this.context.contacts, "state -> Contacts")
+  
+    this.handleEditClick = (id) => {
+      this.context.history.push(`/contacts/edit/${id}`)
+    }
+  
+    this.handleDeleteClick = (id) => {
+      this.handleDeleteContact(id)
+      this.context.history.push(`/contacts`)
+    }
+  
+    this.handleBackToContacts = (e) => {
+      this.context.history.push('/contacts')
+    }
+  
+
+    this.selectedContactId = this.props.id
+    console.log(this.selectedContactId, "selectedContactId")
+    this.contactObject = this.context.contacts.find(contact => parseFloat(contact.id) === parseFloat(this.selectedContactId))
     this.contactArray = [this.contactObject]
+
+    console.log(this.context.contacts, "contacts from context - from within ViewContact")
     this.handleDeleteContact = (id) => {
       let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === id)
       let contactsList = JSON.parse(JSON.stringify(this.context.contacts))
@@ -40,64 +65,6 @@ class ViewContact extends Component {
 
     this.contactObjectRender = this.contactArray.map((item) => {
     
-    //get event name and link for contact
-    if (item.events !== []){
-      console.log(item.events, "item.events in ViewContact", typeof item.events, "type of")
-      this.eventIds = item.events
-      this.eventIdsToObjects = this.eventIds.map((ids) => {
-        this.eventObjects = this.context.events.filter((events) => {
-          return events.event_id === ids
-        })
-        return this.eventObjects
-      })
-      this.eventObjectReturnArray = this.eventIdsToObjects.map((event) => {
-        this.eventObjectReturn = event.map((event) => {
-          return (
-          <div className="event-name">
-            <a href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
-            </div>
-            
-          )
-        })
-        return this.eventObjectReturn
-      })
-    }
-
-
-    //get the catalog_id of the favorites in an array
-    if (item.favorites !== null || item.favorites !== ""){
-      this.contactFavoritesIdArray = item.favorites
-      this.favoritesObject = this.contactFavoritesIdArray.map((id) => {
-          //get the catalog object of the contact favorite
-        return (
-          this.catalogObject = this.context.catalog_items.filter((item) => {
-          return item.catalog_id === id
-        })
-        )
-        })
-      }
-      this.favoritesArray = this.favoritesObject.flat()
-        
-        //turn the catalog object into a return value for the image
-      this.favoritesReturn = this.favoritesArray.map((item) => {       
-         if (item.images !== null || item.images !== ""){
-            this.imgReturn = [item.images.split(', ')[0]].map((image) => {
-            return (
-              <div className="favorites-imgs">
-              <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-              </div>
-            )
-          })
-        }
-      
-        return (
-          <a href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
-            {this.imgReturn}
-            </a>
-        )
-      })
-
-
       this.contactTypeBusiness = () => {
         if (item.contact_type === "Business"){
           return ""
@@ -113,10 +80,9 @@ class ViewContact extends Component {
       
         return (
           <div>
-            <PageParentHeader pageName="Contacts" />
-            <div key={item.contact_id} className="item-wrap">
-            <button className="back-to-btn" type="button" value="backToContacts" onClick={(() => { this.handleBackToContacts(item.contact_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px"/> <span className="all-contact-text">All Contacts</span></button>
-            <button className="edit-btn" onClick={(() => { this.handleEditClick(item.contact_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+            <div key={item.id} className="item-wrap">
+            <button className="back-to-btn" type="button" value="backToContacts" onClick={(() => { this.handleBackToContacts(item.id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px"/> <span className="all-contact-text">All Contacts</span></button>
+            <button className="edit-btn" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
               <ul className="item">
                 <li>
                   <span className="contact-labels">Contact Type:</span> {item.contact_type}
@@ -169,8 +135,6 @@ class ViewContact extends Component {
           {this.contactObjectRender}
         </div>
       )
-
-
     }
 }
   export default ViewContact
