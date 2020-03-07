@@ -20,6 +20,7 @@ class ViewContact extends Component {
     this.context.history.push('/contacts')
   }
 
+  
   render() {
      
     this.handleEditClick = (id) => {
@@ -36,7 +37,7 @@ class ViewContact extends Component {
     }
   
 
-    this.selectedContactId = this.props.id
+    this.selectedContactId = this.props.match.params.id
     console.log(this.selectedContactId, "selectedContactId")
     this.contactObject = this.context.contacts.find(contact => parseFloat(contact.id) === parseFloat(this.selectedContactId))
     this.contactArray = [this.contactObject]
