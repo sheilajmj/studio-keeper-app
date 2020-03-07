@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context';
+import PageParentHeader from '../Nav/PageParentHeader';
 
 class EventItem extends Component {
   static contextType = Context;
@@ -16,7 +17,15 @@ class EventItem extends Component {
     this.context.history.push(`/events/${id}`)
   }
 
-  eventItemsObject = this.context.events.map((item) => {
+
+  render() {   
+  this.eventItemsObject = this.context.events.map((item) => {
+    console.log("events items", item)
+    if (!item){
+      return <div></div>
+    }
+
+   
     //return contacts
     this.contactsLinkedArray = this.context.contacts.filter((contact) => {
       return (contact.contact_id === item.contact)
@@ -126,10 +135,10 @@ class EventItem extends Component {
     );
   });
 
-  render() {
 
     return (
       <div>
+        <PageParentHeader pageName="Events" />
         {this.eventItemsObject}
       </div>
     );

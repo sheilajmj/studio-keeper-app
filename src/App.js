@@ -4,12 +4,12 @@ import StudioKeeperContext from './Context'
 import CatalogParent from './Components/Catalog/CatalogParent'
 import AddCatalogEntry from './Components/Catalog/AddCatalogEntry'
 import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
-// import ViewCatalog from './Components/Catalog/ViewCatalog'
+import ViewCatalog from './Components/Catalog/ViewCatalog'
 import ContactItemList from './Components/Contacts/ContactItemList'
 import AddContact from './Components/Contacts/AddContact'
 import EditContact from './Components/Contacts/EditContact'
 import ViewContact from './Components/Contacts/ViewContact'
-import EventParent from './Components/Events/EventParent'
+import EventItem from './Components/Events/EventItem'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
 import ViewEvent from './Components/Events/ViewEvent'
@@ -20,12 +20,7 @@ import Gallery from './Components/Gallery/Gallery'
 import SignInForm from './Components/SignInForm/SignInForm'
 import ContactsApiService from './services/contacts-api-service'
 import CatalogApiService from './services/catalog-api-service'
-import CatalogViewParent from './Components/Catalog/CatalogViewParent'
-// let json_data = require('./db.json');
-
-// const catalog_items = json_data.catalog_items
-// const events = json_data.events
-// const contacts = json_data.contacts
+import EventsApiService from './services/events-api-service'
 
 class App extends Component {
   constructor(props) {
@@ -96,15 +91,16 @@ class App extends Component {
   }
 
   setCatalogItems = (catalogItems) => {
-    console.log("hit set catalog Items")
     this.setState({catalog_items: catalogItems })
   }
 
   setContacts = (contacts) => {
     this.setState({contacts: contacts})
-    console.log("hit set contacts in App")
   }
 
+  setEventItems = (events) => {
+    this.setState({events: events})
+  }
 
   componentDidMount() {
     ContactsApiService.getContacts()
@@ -115,9 +111,9 @@ class App extends Component {
         .then(this.setCatalogItems)
         .catch(this.context.setError)
 
-    
-      
-    console.log(this.state, "state")
+    EventsApiService.getEventItems()
+        .then(this.setEventItems)
+        .catch(this.context.setError)
   }
 
 
@@ -139,6 +135,7 @@ class App extends Component {
       updateAppStateEventsDelete: this.updateAppStateEventsDelete,
       setCatalogItems: this.setCatalogItems,
       setContacts: this.setContacts,
+      setEvents: this.setEvents
     }
 
 
@@ -162,7 +159,7 @@ class App extends Component {
             />
             <Route
               exact path={'/catalog/:id'}
-              component={CatalogViewParent}
+              component={ViewCatalog}
             />
             <Route
               path={'/catalog'}
@@ -198,7 +195,7 @@ class App extends Component {
             />
             <Route
               path={'/events'}
-              component={EventParent}
+              component={EventItem}
             />
             <Route
               path={'/gallery'}

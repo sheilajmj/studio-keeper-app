@@ -47,6 +47,10 @@ class AddEvent extends Component {
 
   render() {
     this.contactsBySelectionBoxes = this.context.contacts.map(contact => {
+      if(!contact){
+        return<div></div>
+      }
+
       return (
         <div key={uuid()}>
           <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
@@ -56,6 +60,10 @@ class AddEvent extends Component {
     })
 
     this.catalogItemsBySelectionBoxes = this.context.catalog_items.map(item => {
+      if (!item){
+        return <div></div>
+      }
+
       this.catalogImgReturn = () => {
         if (item.images !== null || item.images !== "") {
           this.catalogItemsImages = [item.images.split(', ')[0]].map((item) => {
@@ -66,6 +74,7 @@ class AddEvent extends Component {
         }
         return this.catalogItemsImages
       }
+
         return (
           <div key={'catalog-items' + item.catalog_id} className="checkbox">
             <input type="checkbox" id={'catalog-items' + item.catalog_id} name={"catalog-items"} value={item.catalog_id} onChange={this.handleCatalogItemsClick} defaultChecked={false} />
@@ -77,6 +86,7 @@ class AddEvent extends Component {
           </div>
         )
       })
+    
 
     return (
       <>

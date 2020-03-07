@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader'
-const { uuid } = require('uuidv4');
 
 
 class ViewEvent extends Component {
@@ -33,57 +32,61 @@ class ViewEvent extends Component {
     }
 
     this.eventObjectRender = this.eventArray.map((item) => {
+      if (!item){
+        return <div></div>
+      }
+      
+      // //catalog items
+      // this.catalogItemsRender = item.catalog_items.map((id) => {
+      //       this.catalogObject = this.context.catalog_items.filter((item) => {
+      //         return item.catalog_id === id
+      //       })
+      //       return this.catalogObject
+      //     })
 
-      //catalog items
-      this.catalogItemsRender = item.catalog_items.map((id) => {
-            this.catalogObject = this.context.catalog_items.filter((item) => {
-              return item.catalog_id === id
-            })
-            return this.catalogObject
-          })
-
-          this.catalogItemsArray = this.catalogItemsRender.flat()
-          this.catalogReturn = this.catalogItemsRender.map((item) => {  
-            if (item[0].images !== null || item[0].images !== "") {
-              this.imgReturn = [item[0].images.split(', ')[0]].map((image) => {
-                return (
-                  <img key={"img" + item.image} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-                )
-              })
-            }
+      //     this.catalogItemsArray = this.catalogItemsRender.flat()
+      //     this.catalogReturn = this.catalogItemsRender.map((item) => {  
+      //       if (item[0].images !== null || item[0].images !== "") {
+      //         this.imgReturn = [item[0].images.split(', ')[0]].map((image) => {
+      //           return (
+      //             <img key={"img" + item.image} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+      //           )
+      //         })
+      //       }
         
-            return (
-              <a key={uuid()} href={'/catalog/' + item[0].catalog_id} target="_blank" rel="noopener noreferrer">
-                {this.imgReturn}
-              </a>
-            )
-          })
+      //       return (
+      //         <a key={uuid()} href={'/catalog/' + item[0].catalog_id} target="_blank" rel="noopener noreferrer">
+      //           {this.imgReturn}
+      //         </a>
+      //       )
+      //     })
         
   
 
 
-      //contacts linked 
+      // //contacts linked 
 
-      this.contactsLinkedArray = this.context.contacts.filter(contact => contact.events.includes(this.selectedEventId))
-      this.contactsLinkedReturn = this.contactsLinkedArray.map(contact => {
-        return {
-          contact_id: contact.contact_id,
-          name: contact.name,
-          business_name: contact.business_name,
-        }
-      }
-      )
+      // this.contactsLinkedArray = this.context.contacts.filter(contact => contact.events.includes(this.selectedEventId))
+      // this.contactsLinkedReturn = this.contactsLinkedArray.map(contact => {
+      //   return {
+      //     contact_id: contact.contact_id,
+      //     name: contact.name,
+      //     business_name: contact.business_name,
+      //   }
+      // }
+      // )
 
-      this.contactsLinkedReturnMapped = this.contactsLinkedReturn.map(contact => {
-        return (
-          <div key={`contact` + contact.contact_id} className="favorited-by">
-            {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}
-          </div>
-        )
-      })
+      // this.contactsLinkedReturnMapped = this.contactsLinkedReturn.map(contact => {
+      //   return (
+      //     <div key={`contact` + contact.contact_id} className="favorited-by">
+      //       {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}
+      //     </div>
+      //   )
+      // })
 
       return (
-        <div key={`event` + item.event_id}><PageParentHeader pageName="Events" />
+        <div key={`event` + item.event_id}>
+          <PageParentHeader pageName="Events" />
           <div className="item-wrap">
             <button type="button" className="back-to-btn" value="backToEvents" onClick={(() => { this.handleBackToEvents(item.event_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /><span className="all-events-text">All Events</span></button>
             <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.event_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>

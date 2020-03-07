@@ -1,9 +1,9 @@
 //import TokenService from '../services/token-service'
 import config from '../config'
 
-const CatalogApiService = {
-    getCatalogItems() {
-        return fetch(`${config.API_ENDPOINT}/catalog`, {
+const EventsApiService = {
+    getEventItems() {
+        return fetch(`${config.API_ENDPOINT}/events`, {
             headers:{
                 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
 
@@ -17,8 +17,8 @@ const CatalogApiService = {
         )
     },
 
-    getCatalogItem(catalog_id) {
-        return fetch (`${config.API_ENDPOINT}/catalog/${catalog_id}`, {
+    getEventItem(event_id) {
+        return fetch (`${config.API_ENDPOINT}/events/${event_id}`, {
             headers: {
                 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
                 //'Authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -32,8 +32,8 @@ const CatalogApiService = {
             )
     }
 
-    // postCatalogItem(articleId, text) {
-    //     return fetch(`${config.API_ENDPOINT}/comments`, {
+    // postEventItem(event_id, text) {
+    //     return fetch(`${config.API_ENDPOINT}/events`, {
     //       method: 'POST',
     //       headers: {
     //         'content-type': 'application/json',
@@ -57,4 +57,4 @@ const CatalogApiService = {
 
 
 
-export default CatalogApiService 
+export default EventsApiService 
