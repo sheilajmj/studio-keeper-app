@@ -38,8 +38,13 @@ class ViewContact extends Component {
   
 
     this.selectedContactId = this.props.match.params.id
-    console.log(this.selectedContactId, "selectedContactId")
     this.contactObject = this.context.contacts.find(contact => parseFloat(contact.id) === parseFloat(this.selectedContactId))
+    if (!this.contactObject) {
+      return (
+          <div></div>
+      );
+  }
+  
     this.contactArray = [this.contactObject]
 
     console.log(this.context.contacts, "contacts from context - from within ViewContact")

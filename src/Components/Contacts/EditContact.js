@@ -70,29 +70,29 @@ class EditContact extends Component {
       this.setUpdatedArray(e);  
       }
 
-      this.setUpdatedFavoritesArray = (e) =>{
-        let catalog_id = e.target.value
-        let currentFavoritesArray = this.state.updatedContact.favorites
-        let updatedFavoritesArray 
+      // this.setUpdatedFavoritesArray = (e) =>{
+      //   let catalog_id = e.target.value
+      //   let currentFavoritesArray = this.state.updatedContact.favorites
+      //   let updatedFavoritesArray 
   
-        if (!currentFavoritesArray.includes(catalog_id)){
-          let favoritesArrayLength = currentFavoritesArray.push(catalog_id)
-          updatedFavoritesArray = currentFavoritesArray
-          console.log(favoritesArrayLength)
-        }
+      //   if (!currentFavoritesArray.includes(catalog_id)){
+      //     let favoritesArrayLength = currentFavoritesArray.push(catalog_id)
+      //     updatedFavoritesArray = currentFavoritesArray
+      //     console.log(favoritesArrayLength)
+      //   }
   
-        else{
-          updatedFavoritesArray = currentFavoritesArray.filter((favorite) => catalog_id !== favorite)
-        }
+      //   else{
+      //     updatedFavoritesArray = currentFavoritesArray.filter((favorite) => catalog_id !== favorite)
+      //   }
   
-        this.setState({updatedFavoritesArray: updatedFavoritesArray})
-        this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, favorites: updatedFavoritesArray}, updateBoolean: true }))
+      //   this.setState({updatedFavoritesArray: updatedFavoritesArray})
+      //   this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, favorites: updatedFavoritesArray}, updateBoolean: true }))
   
-      }
+      // }
      
-      this.handleFavoritesClick = (e) => {
-        this.setUpdatedFavoritesArray(e)
-      }
+      // this.handleFavoritesClick = (e) => {
+      //   this.setUpdatedFavoritesArray(e)
+      // }
 
     this.handleCancel = (e) => {
       this.context.history.push('/contacts')
@@ -107,58 +107,69 @@ class EditContact extends Component {
       this.context.history.push(`/contacts`)
     }
 
-    this.eventFieldSelectionOptions = this.context.events.map(event => {
-      this.checkedValue = () => {
-        if (this.selectedContactArray[0].events.includes(event.event_id)){
-        return true
-        }
-        }    
+    // this.eventFieldSelectionOptions = this.context.events.map(event => {
+    //   this.checkedValue = () => {
+    //     if (this.selectedContactArray[0].events.includes(event.event_id)){
+    //     return true
+    //     }
+    //     }    
       
-      return (
-        <div key={'event' + event.event_id} className="checkbox">
-          <input type="checkbox" id={event.event_id} name={"events"} value={event.event_id} onChange={this.handleEventClick} defaultChecked={this.checkedValue()}  />
-          <label htmlFor={event.event_id}> {<a href={'/events/'+ event.event_id} target="_blank"  rel="noopener noreferrer"> {event.name}</a>} </label>
-        </div>
-      )
-    })
+    //   return (
+    //     <div key={'event' + event.event_id} className="checkbox">
+    //       <input type="checkbox" id={event.event_id} name={"events"} value={event.event_id} onChange={this.handleEventClick} defaultChecked={this.checkedValue()}  />
+    //       <label htmlFor={event.event_id}> {<a href={'/events/'+ event.event_id} target="_blank"  rel="noopener noreferrer"> {event.name}</a>} </label>
+    //     </div>
+    //   )
+    // })
 
 
-  this.favoritesFieldSelectionOptions = this.context.catalog_items.map((item) => {
-    console.log(item, "what is item again?", "contactarray", this.selectedContactArray[0].favorites)
-    this.checkedValue = () => {
-      if (this.selectedContactArray[0].favorites.includes(item.catalog_id)){
-      return true
-      }
-    }
+  // this.favoritesFieldSelectionOptions = this.context.catalog_items.map((item) => {
+  //   console.log(item, "what is item again?", "contactarray", this.selectedContactArray[0].favorites)
+  //   this.checkedValue = () => {
+  //     if (this.selectedContactArray[0].favorites.includes(item.catalog_id)){
+  //     return true
+  //     }
+  //   }
 
-    this.favoritesImgReturn = () => {
-      if (item.images !== null || item.images !== "" ){
-        this.imgReturn = [item.images.split(', ')[0]].map((image) => {
-                return (
-                  <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-                  )
-              })
-      }
-      return this.imgReturn
-    }       
+  //   this.favoritesImgReturn = () => {
+  //     if (item.images !== null || item.images !== "" ){
+  //       this.imgReturn = [item.images.split(', ')[0]].map((image) => {
+  //               return (
+  //                 <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+  //                 )
+  //             })
+  //     }
+  //     return this.imgReturn
+  //   }       
 
-      return(
-        <div key={'favorite' + item.catalog_id}  className="checkbox">
-          <input type="checkbox" id={item.catalog_id} name={"favorites"} value={item.catalog_id} onChange={this.handleFavoritesClick} defaultChecked={this.checkedValue()} />
-        <label htmlFor={item.catalog_id}>
-          {<a href={'/catalog/'+ item.catalog_id} target="_blank"  rel="noopener noreferrer">
-              {this.favoritesImgReturn()} 
-              </a>}   
-        </label> 
-        </div>
-      )
+  //     return(
+  //       <div key={'favorite' + item.catalog_id}  className="checkbox">
+  //         <input type="checkbox" id={item.catalog_id} name={"favorites"} value={item.catalog_id} onChange={this.handleFavoritesClick} defaultChecked={this.checkedValue()} />
+  //       <label htmlFor={item.catalog_id}>
+  //         {<a href={'/catalog/'+ item.catalog_id} target="_blank"  rel="noopener noreferrer">
+  //             {this.favoritesImgReturn()} 
+  //             </a>}   
+  //       </label> 
+  //       </div>
+  //     )
 
 
 
-  })
+  // })
 
     this.selectedContactForm = this.selectedContactArray.map((item) => {
+    if (!item){
+        return (
+        <div></div>
+        )
+      }
+      
       this.handleContactType = () => {
+        if (!this.state.updatedContact){
+          return (
+            <div></div>
+          )
+        }
         if (this.state.updatedContact.contact_type === "Business") {
           return (
             <div className="form-space">

@@ -114,6 +114,8 @@ class App extends Component {
     CatalogApiService.getCatalogItems()
         .then(this.setCatalogItems)
         .catch(this.context.setError)
+
+    
       
     console.log(this.state, "state")
   }

@@ -63,23 +63,29 @@ class EditCatalogEntry extends Component {
           this.context.history.push(`/catalog`)
         }
 
-      this.contactFieldSelectionOptions = this.context.contacts.map((contact) => {
-        this.checkValue = () => {
-          if(this.selectedCatalogArray[0].favorited_by.includes(contact.contact_id)){
-            return true
-          }
-        }
+      // this.contactFieldSelectionOptions = this.context.contacts.map((contact) => {
+      //   this.checkValue = () => {
+      //     if(this.selectedCatalogArray[0].favorited_by.includes(contact.contact_id)){
+      //       return true
+      //     }
+      //   }
 
-        return (
-          <div key={'contact'+ contact.contact_id} className="checkbox">
-            <input type="checkbox" id={contact.contact_id} name={"contacts"} value={contact.contact_id} onChange = {this.handleContactClick} defaultChecked={this.checkValue()} />
-            <label htmlFor={contact.contact_id}> {<a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer">{contact.name !== "" ? contact.name : contact.business_name }</a>}</label>
-           </div>
-        )
-      })
+      //   return (
+      //     <div key={'contact'+ contact.contact_id} className="checkbox">
+      //       <input type="checkbox" id={contact.contact_id} name={"contacts"} value={contact.contact_id} onChange = {this.handleContactClick} defaultChecked={this.checkValue()} />
+      //       <label htmlFor={contact.contact_id}> {<a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer">{contact.name !== "" ? contact.name : contact.business_name }</a>}</label>
+      //      </div>
+      //   )
+      // })
 
 
     this.selectedCatalogItemForm = this.selectedCatalogArray.map((item) => {
+      if (!item){
+        return (
+        <div></div>
+        )
+      }
+
       return (
         <div key={item.catalog_id} className="item-edit-wrap catalog-edit">
           <form onSubmit={this.handleSubmit}>

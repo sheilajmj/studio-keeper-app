@@ -4,12 +4,28 @@ import StudioKeeperContext from '../../Context'
 class ViewCatalog extends Component {
   static contextType = StudioKeeperContext
  
+  handleEditClick(id) {
+    this.context.history.push(`/catalog/edit/${id}`)
+  }
+
+
   render() {
+    this.handleBackToCatalog = () => {
+      this.context.history.push('/catalog')
+
+    }
+
     this.selectedCatalogId = this.props.id
-    console.log(this.context, "context")
     this.catalogObject = this.context.catalog_items.find(item => parseFloat(item.id) === parseFloat(this.selectedCatalogId))
+    if (!this.catalogObject) {
+      return (
+          <div></div>
+      );
+  }
+  
     this.catalogArray = [this.catalogObject]
-    console.log("catalogArray", this.catalogObject)
+
+
     this.handleDeleteCatalogItem = (id) => {
       let indexToDelete = this.context.catalog_items.findIndex(item => item.id === id)
       let catalogList = JSON.parse(JSON.stringify(this.context.catalog_items))
@@ -18,40 +34,7 @@ class ViewCatalog extends Component {
       this.context.updateAppStateCatalogDelete(newCatalogList)
     }
 
-    // this.favoritedByArray = this.context.contacts.filter(contact => contact.favorites.includes(this.selectedCatalogId))
-
-    // this.favoritedByReturn = this.favoritedByArray.map(fav => {
-    //   return {
-    //     contact_id: fav.contact_id,
-    //     name: fav.name,
-    //     business_name: fav.business_name,
-    //   }
-    // }
-    // )
-    // this.favoritedByReturnMapped = this.favoritedByReturn.map(contact => {
-    //   return (
-    //     <div key={`contact` + contact.contact_id} className="favorited-by">
-    //     {`${contact.name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}       
-    //     </div>
-    //     )
-    // })
-    this.catalogObjectRender = this.catalogArray.map((item) => {
-      // if (!item.events){ 
-      //   item.events = []
-      // }
-
-      // this.eventArray = item.events
-      
-
-      // this.eventObjectReturnArray = this.eventArray.map((event) => {
-      //     return (
-      //       <a key={`event` + event.event_id}href={'/events/' + event.event_id} target="_blank" rel="noopener noreferrer"> {event.name}</a>
-      //     )
-      // })
-
-   
-
-      
+    this.catalogObjectRender = this.catalogArray.map((item) => { 
       if(!item.images){item.images = ""}
 
       this.imageArray = item.images.split(', ')
