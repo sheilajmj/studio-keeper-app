@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
-// import PageParentHeader from '../Nav/PageParentHeader'
-import ContactsApiService from '../../services/contacts-api-service'
+// import ContactsApiService from '../../services/contacts-api-service'
+import PageParentHeader from '../Nav/PageParentHeader';
 
 class ViewContact extends Component {
   static contextType = StudioKeeperContext
 
-
-  loadState = () => {
-    ContactsApiService.getContacts()
-      .then(this.context.setContacts)
-      .catch(this.context.setError)
-      
-    console.log(this.context.contacts, "state -> Contacts")
-  }
 
   handleEditClick = (id) => {
     this.context.history.push(`/contacts/edit/${id}`)
@@ -29,12 +21,7 @@ class ViewContact extends Component {
   }
 
   render() {
-      ContactsApiService.getContacts()
-        .then(this.context.setContacts)
-        .catch(this.context.setError)
-        
-      console.log(this.context.contacts, "state -> Contacts")
-  
+     
     this.handleEditClick = (id) => {
       this.context.history.push(`/contacts/edit/${id}`)
     }
@@ -131,9 +118,12 @@ class ViewContact extends Component {
         )
       })
       return (
+        <section className='contacts'>
         <div>
+        <PageParentHeader pageName={"Contacts"} />
           {this.contactObjectRender}
         </div>
+        </section>
       )
     }
 }

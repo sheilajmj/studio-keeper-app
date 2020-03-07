@@ -5,10 +5,10 @@ import CatalogParent from './Components/Catalog/CatalogParent'
 import AddCatalogEntry from './Components/Catalog/AddCatalogEntry'
 import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
 // import ViewCatalog from './Components/Catalog/ViewCatalog'
-import ContactsParent from './Components/Contacts/ContactsParent'
+import ContactItemList from './Components/Contacts/ContactItemList'
 import AddContact from './Components/Contacts/AddContact'
 import EditContact from './Components/Contacts/EditContact'
-// import ViewContact from './Components/Contacts/ViewContact'
+import ViewContact from './Components/Contacts/ViewContact'
 import EventParent from './Components/Events/EventParent'
 import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
@@ -21,7 +21,6 @@ import SignInForm from './Components/SignInForm/SignInForm'
 import ContactsApiService from './services/contacts-api-service'
 import CatalogApiService from './services/catalog-api-service'
 import CatalogViewParent from './Components/Catalog/CatalogViewParent'
-import ViewContactParent from './Components/Contacts/ViewContactParent' 
 // let json_data = require('./db.json');
 
 // const catalog_items = json_data.catalog_items
@@ -177,11 +176,11 @@ class App extends Component {
             />
             <Route
               exact path={'/contacts/:id'}
-              component={ViewContactParent}
+              component={ViewContact}
             />
             <Route
               exact path={'/contacts'}
-              component={ContactsParent}
+              component={ContactItemList}
             />
             <Route
               path={'/events/edit/:id'}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context';
+import PageParentHeader from '../Nav/PageParentHeader'
 
 class ContactItem extends Component {
   static contextType = Context;
@@ -95,9 +96,12 @@ class ContactItem extends Component {
     });
 
     return (
+      <section className='contacts'>
       <div>
+        <PageParentHeader pageName={"Contacts"} />
         {this.contactItemsList}
       </div>
+      </section>
     );
   }
 };
