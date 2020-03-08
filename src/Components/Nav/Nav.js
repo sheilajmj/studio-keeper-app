@@ -8,17 +8,25 @@ class Nav extends Component {
   render() {
     return (
       <nav className="nav-wrap">
-        <ul>
-          <li>
-          <a href="/contacts">Contacts</a>
-          </li>
-          <li>
-          <a href="/catalog">Catalog</a>
-          </li>
-          <li>
-          <a href="/events">Events</a>
-          </li>
-        </ul>
+        <div className="hm-btn-container">
+          <div className="contact-wrap hm-wrap">
+            <button className="contactBtn hm-btn" onClick={(() => { this.context.history.push('/contacts') })}> </button>
+            <div className="hm-btn-label">Contact</div>
+          </div>
+          <div className="catalog-wrap hm-wrap">
+            <button className="catalogBtn hm-btn" onClick={(() => { this.context.history.push('/catalog') })}> </button>
+            <div className="hm-btn-label">Catalog</div>
+          </div>
+          <br />
+          <div className="event-wrap hm-wrap">
+            <button className="eventBtn hm-btn" onClick={(() => { this.context.history.push('/events') })}> </button>
+            <div className="hm-btn-label">Event</div>
+          </div>
+          <div className="gallery-wrap hm-wrap">
+            <button className="galleryBtn hm-btn" onClick={(() => { this.context.history.push('/gallery') })}> </button>
+            <div className="hm-btn-label">Gallery</div>
+          </div>
+        </div>
       </nav>
     );
   }

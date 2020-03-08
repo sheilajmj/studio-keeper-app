@@ -34,21 +34,30 @@ main{
 }
 
 .header{
-  font-style: italic;
+  font-family: 'Cabin', sans-serif;
   text-decoration: none;
-  color: black;
+  color: #fa255e;
+  font-weight: lighter;
 }
 
 header h1{
 text-align: center;
 }
 
+
 .nav-wrap{
   background-color: white; 
   width: 100%;
-}
+  }
 
 nav ul{
+  display: inline-block;
+  flex-wrap: wrap;
+  text-align: center;
+  list-style: none;
+}
+
+ul{
   display:flex;
   text-align: center;
   list-style: none;
@@ -185,6 +194,16 @@ form{
   display: inline-block
 }
 
+.collapsible-header{
+  cursor: pointer;
+  border-left: solid 1px #f2f2f2;
+  border-right: solid 1px #f2f2f2;
+  border-bottom: solid 1px #f2f2f2;
+  border-radius: 0 0 5px 5px;
+  padding: 15px;
+  font-family: verdana;
+  font-size: 14px;
+}
 
 .contact-labels, .catalog-labels, .event-labels{
 font-weight: normal;
@@ -458,18 +477,24 @@ p.event-labels{
   margin-top: 5%;
 }
 
+.hm-btn-label{
+  color: #fa255e;
+  font-family: 'Cabin', sans-serif;
+}
+
 .hm-btn{
-  width: 100px;
-  height: 100px;
-  background-color: gainsboro;
+  width: 70px;
+  height: 70px;
   font-size: 1em;
   margin-right: 5%;
   margin-left: 5%;
   text-align: center;
-  border-radius: 5%;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
+  background-color: white;
+  border: none;
+
 }
 
 
@@ -482,12 +507,28 @@ p.event-labels{
 
 .hm-wrap{
   text-align: center;
-  width: 50%;
+  width: 25%;
   padding: 2.5%;
 }
 
 .contact-wrap, .event-wrap, .catalog-wrap .gallery-wrap{
   padding: 2.5%;
+}
+
+.contactBtn{
+  background-image: url('./assets/buttons/contactBtn.svg')
+}
+
+.galleryBtn{
+  background-image: url('./assets/buttons/galleryBtn.svg')
+}
+
+.eventBtn{
+  background-image: url('./assets/buttons/eventBtn.svg')
+}
+
+.catalogBtn{
+  background-image: url('./assets/buttons/catalogBtn.svg')
 }
 
 

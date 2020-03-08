@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
+import EventsCatalogService from '../../services/events-catalog-api-service'
 import PageParentHeader from '../Nav/PageParentHeader'
-
+const { uuid } = require('uuidv4');
 
 class ViewEvent extends Component {
   static contextType = StudioKeeperContext
@@ -20,11 +21,22 @@ class ViewEvent extends Component {
   }
 
   render() {
-    this.selectedEventId = this.props.match.params.event_id
-    this.eventObject = this.context.events.find(event => event.event_id === this.selectedEventId)
+
+    
+    
+
+
+
+    this.selectedEventId = this.props.match.params.id
+
+    this.eventObject = this.context.events.find(item => parseInt(item.id) === parseInt(this.selectedEventId))
+      if(!this.eventObject){
+        return <div key={uuid()}></div>
+      }
+
     this.eventArray = [this.eventObject]
     this.handleDeleteEvent = (id) => {
-      let indexToDelete = this.context.events.findIndex(event => event.event_id === id)
+      let indexToDelete = this.context.events.findIndex(item => item.id === id)
       let eventsList = JSON.parse(JSON.stringify(this.context.events))
       eventsList.splice(indexToDelete, 1)
       let newEventsList = eventsList
@@ -32,34 +44,62 @@ class ViewEvent extends Component {
     }
 
     this.eventObjectRender = this.eventArray.map((item) => {
-      if (!item){
-        return <div></div>
+       
+      //catalog items
+     
+      let eventCatalogItems
+      this.setCatalogItems = (val) =>{
+        eventCatalogItems = val
       }
-      
-      // //catalog items
-      // this.catalogItemsRender = item.catalog_items.map((id) => {
-      //       this.catalogObject = this.context.catalog_items.filter((item) => {
-      //         return item.catalog_id === id
-      //       })
-      //       return this.catalogObject
-      //     })
 
-      //     this.catalogItemsArray = this.catalogItemsRender.flat()
-      //     this.catalogReturn = this.catalogItemsRender.map((item) => {  
-      //       if (item[0].images !== null || item[0].images !== "") {
-      //         this.imgReturn = [item[0].images.split(', ')[0]].map((image) => {
-      //           return (
-      //             <img key={"img" + item.image} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-      //           )
-      //         })
-      //       }
+      let key = "event_id"
+      let value = this.selectedEventId
+      EventsCatalogService.getCatalogAndEvents(key, value)
+        .then(this.setCatalogItems)
+        .catch(this.context.setError)
+  
         
-      //       return (
-      //         <a key={uuid()} href={'/catalog/' + item[0].catalog_id} target="_blank" rel="noopener noreferrer">
-      //           {this.imgReturn}
-      //         </a>
-      //       )
-      //     })
+  
+  
+
+
+
+
+
+
+
+      /////
+
+
+      if (!item.Catalog_items){
+        return(
+        <div key={uuid()}></div>
+        )
+      }
+      this.catalogItemsRender = item.catalog_items.map((id) => {
+
+            this.catalogObject = this.context.catalog_items.filter((item) => {
+              return item.catalog_id === id
+            })
+            return this.catalogObject
+          })
+
+          this.catalogItemsArray = this.catalogItemsRender.flat()
+          this.catalogReturn = this.catalogItemsRender.map((item) => {  
+            if (item[0].images !== null || item[0].images !== "") {
+              this.imgReturn = [item[0].images.split(', ')[0]].map((image) => {
+                return (
+                  <img key={"img" + item.image} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
+                )
+              })
+            }
+        
+            return (
+              <a key={'catalog' + item.id} href={'/catalog/' + item[0].id} target="_blank" rel="noopener noreferrer">
+                {this.imgReturn}
+              </a>
+            )
+          })
         
   
 
