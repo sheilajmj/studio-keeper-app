@@ -59,6 +59,8 @@ class ViewCatalog extends Component {
       }  
   
 
+      
+
       return (
         <div>
           <div key={item.id} className="item-wrap">
@@ -105,10 +107,10 @@ class ViewCatalog extends Component {
                 <div className="catalog-view-location">
                   <span className="catalog-labels">Location:</span>{item.location}
                 </div>
-                {/* <div className="catalog-view-favorited">
+                <div className="catalog-view-favorited">
                   <span className="catalog-labels">Favorited By:</span>
                     {this.favoritedByReturnMapped}
-                </div> */}
+                </div>
               </div>
               <div className="catalog-view-block4">
                 <div className="catalog-view-date">

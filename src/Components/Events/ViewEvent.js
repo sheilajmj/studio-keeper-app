@@ -6,6 +6,13 @@ const { uuid } = require('uuidv4');
 
 class ViewEvent extends Component {
   static contextType = StudioKeeperContext
+  constructor(props){
+    super(props);
+    this.state = {
+    eventCatalogItems: []
+    }
+}
+
 
   handleEditClick = (id) => {
     this.context.history.push(`/events/edit/${id}`)
@@ -20,12 +27,11 @@ class ViewEvent extends Component {
     this.context.history.push('/events')
   }
 
+  setCatalogItems = (response) => {
+    this.setState({eventCatalogItems: response})
+   }
+
   render() {
-
-    
-    
-
-
 
     this.selectedEventId = this.props.match.params.id
 
@@ -44,42 +50,34 @@ class ViewEvent extends Component {
     }
 
     this.eventObjectRender = this.eventArray.map((item) => {
-       
-      //catalog items
-     
-      let eventCatalogItems
-      this.setCatalogItems = (val) =>{
-        eventCatalogItems = val
-      }
-
-      let key = "event_id"
-      let value = this.selectedEventId
-      EventsCatalogService.getCatalogAndEvents(key, value)
-        .then(this.setCatalogItems)
-        .catch(this.context.setError)
-  
-        
-  
-  
-
-
-
-
-
-
-
-      /////
-
-
-      if (!item.Catalog_items){
+      if (!item){
         return(
         <div key={uuid()}></div>
         )
       }
-      this.catalogItemsRender = item.catalog_items.map((id) => {
+
+      //catalog items
+
+
+
+      let key = "event_id"
+      let value = this.selectedEventId
+      EventsCatalogService.getCatalogAndEvents(key, value)
+        .then((res) => {
+          this.setCatalogItems(res)})
+        .catch(this.context.setError)
+
+
+      let catalogItems = this.state.eventCatalogItems
+          
+      this.catalogItemsRender = () => {if (!catalogItems){
+        return <div></div>
+        }
+      
+        catalogItems.map((id) => {
 
             this.catalogObject = this.context.catalog_items.filter((item) => {
-              return item.catalog_id === id
+              return item.id === id
             })
             return this.catalogObject
           })
@@ -100,7 +98,7 @@ class ViewEvent extends Component {
               </a>
             )
           })
-        
+      }
   
 
 

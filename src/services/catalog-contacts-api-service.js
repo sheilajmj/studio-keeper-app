@@ -1,8 +1,8 @@
 import config from '../config'
 
-const EventsCatalogService = {
-    getCatalogAndEvents(key, value){
-        return fetch(`${config.API_ENDPOINT}/catalogevents`, {
+const CatalogContactsService = {
+    getCatalogAndContacts(key, value){
+        return fetch(`${config.API_ENDPOINT}/catalogcontacts`, {
             headers:{
                 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
                 //`bearer ${TokenService.getAuthToken()}`,
