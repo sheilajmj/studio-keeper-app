@@ -30,7 +30,23 @@ const CatalogApiService = {
             ? res.json().then(e => Promise.reject(e))
             : res.json()
             )
-    }
+    },
+
+
+    getCatalogImages(){
+        return fetch(`${config.API_ENDPOINT}/images`, {
+            headers:{
+                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
+
+                //`bearer ${TokenService.getAuthToken()}`,
+            }
+        })
+        .then(res => 
+            (!res.ok)
+            ? res.json().then(e => Promise.reject(e))
+            : res.json()
+        )
+        },
 
     // postCatalogItem(articleId, text) {
     //     return fetch(`${config.API_ENDPOINT}/comments`, {

@@ -1,8 +1,8 @@
 import config from '../config'
 
-const CatalogContactsService = {
-    getCatalogAndContacts(key, value){
-        return fetch(`${config.API_ENDPOINT}/catalogcontacts`, {
+const CatalogContactsApiService = {
+    getCatalogAndContacts(field, id){
+        return fetch(`${config.API_ENDPOINT}/catalogcontacts?${field}=${id}`, {
             headers:{
                 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
                 //`bearer ${TokenService.getAuthToken()}`,
@@ -21,4 +21,4 @@ const CatalogContactsService = {
 
 }
 
-export default EventsCatalogService
+export default CatalogContactsApiService

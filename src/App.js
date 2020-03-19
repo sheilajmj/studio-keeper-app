@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import StudioKeeperContext from './Context'
-import CatalogParent from './Components/Catalog/CatalogParent'
+import CatalogItem from './Components/Catalog/CatalogItem'
 import AddCatalogEntry from './Components/Catalog/AddCatalogEntry'
 import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
 import ViewCatalog from './Components/Catalog/ViewCatalog'
@@ -163,7 +163,7 @@ class App extends Component {
             />
             <Route
               path={'/catalog'}
-              component={CatalogParent}
+              component={CatalogItem}
             />
             <Route
               exact path={'/contacts/edit/:id'}

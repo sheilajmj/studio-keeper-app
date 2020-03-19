@@ -483,8 +483,8 @@ p.event-labels{
 }
 
 .hm-btn{
-  width: 70px;
-  height: 70px;
+  width: 55px;
+  height: 55px;
   font-size: 1em;
   margin-right: 5%;
   margin-left: 5%;
@@ -494,6 +494,7 @@ p.event-labels{
   margin-right: auto;
   background-color: white;
   border: none;
+  background-repeat: no-repeat;
 
 }
 

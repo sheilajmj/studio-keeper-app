@@ -3,6 +3,9 @@ import Context from '../../Context';
 import PageParentHeader from '../Nav/PageParentHeader';
 import Collapsible from '../Collapsible/Collaplisble'
 
+let moment = require('moment');
+
+
 class EventItem extends Component {
   static contextType = Context;
 
@@ -18,6 +21,10 @@ class EventItem extends Component {
     this.context.history.push(`/events/${id}`)
   }
 
+  prettyDate = (date) => {
+    let newDate = moment(`${date}`).format('L')
+    return newDate
+  }  
 
   render() {  
     
@@ -91,14 +98,14 @@ class EventItem extends Component {
     this.eventDatesIncluded = () => {
       if (item.event_dates) {
         return (<li>
-          <span className="event-labels">Event Dates:</span> {item.event_dates}
+          <span className="event-labels">Event Dates:</span> {this.prettyDate(item.event_dates)}
         </li>)
       }
     }
     this.eventAppDatesIncluded = () => {
       if (item.application_due_date) {
         return (<li>
-          <span className="event-labels">Application Due Dates:</span> {item.application_due_date}
+          <span className="event-labels">Application Due Dates:</span> {this.prettyDate(item.application_due_date)}
         </li>)
       }
     }

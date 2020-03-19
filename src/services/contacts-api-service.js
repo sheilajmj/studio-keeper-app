@@ -4,7 +4,6 @@ import config from '../config'
 
 const ContactsApiService = {
     getContacts() {
-        console.log("getContacts- success")
         return fetch(`${config.API_ENDPOINT}/contacts`, {
             headers:{
                 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
@@ -18,6 +17,22 @@ const ContactsApiService = {
             : res.json()
         )
     },
+
+    getContactsQuery(field, id){
+        return fetch(`${config.API_ENDPOINT}/contacts?${field}=${id}`, {
+        headers:{
+            'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
+
+            //`bearer ${TokenService.getAuthToken()}`,
+        }
+    })
+    .then(res => 
+        (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
+    )
+},
+  
 
     getContact(id) {
         return fetch (`${config.API_ENDPOINT}/contacts/${id}`, {
