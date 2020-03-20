@@ -5,13 +5,14 @@ import PageParentHeader from '../Nav/PageParentHeader'
 import ContactsEventsApiService from '../../services/contacts-events-api-service'
 import EventsApiService from '../../services/events-api-service'
 import CatalogImagesApiService from '../../services/images-api-service'
+import ContactsApiService from '../../services/contacts-api-service'
 
 let moment = require('moment');
 
 
 class ViewEvent extends Component {
   static contextType = StudioKeeperContext
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       selectedEventId: '',
@@ -25,30 +26,30 @@ class ViewEvent extends Component {
 
   setSelectedEventId = () => {
     let selectedEventId = this.props.match.params.id
-    this.setState({selectedEventId: selectedEventId})
+    this.setState({ selectedEventId: selectedEventId })
   }
-  
+
   setSelectedEventItem = (item) => {
-    this.setState({selectedEventItem: item})
+    this.setState({ selectedEventItem: item })
   }
 
 
 
   setEventCatalogIds = (response) => {
-    this.setState({eventCatalogIds: response})
+    this.setState({ eventCatalogIds: response })
     this.getEventCatalogArray()
   }
 
   setEventCatalogArray = (response) => {
     let eventCatalogArray = this.state.eventCatalogArray
     let unused = eventCatalogArray.push(response)
-    this.setState({eventCatalogArray: eventCatalogArray})
+    this.setState({ eventCatalogArray: eventCatalogArray })
     this.catalogImageReturn()
     return unused
   }
 
   setEventContactIds = (ids) => {
-    this.setState({eventContactIds: ids})
+    this.setState({ eventContactIds: ids })
     this.getEventContactArray()
   }
 
@@ -56,14 +57,14 @@ class ViewEvent extends Component {
     let eventContactArray = this.state.eventContactArray
     let unused = eventContactArray.push(contact)
     console.log("eventContactsArray2", eventContactArray)
-    this.setState({eventContactArray: eventContactArray})
+    this.setState({ eventContactArray: eventContactArray })
     return unused
   }
-  
+
   prettyDate = (date) => {
     let newDate = moment(`${date}`).format('L')
     return newDate
-  }  
+  }
 
   componentDidMount = () => {
     this.setSelectedEventId()
@@ -76,10 +77,10 @@ class ViewEvent extends Component {
       .then(this.setSelectedEventItem)
       .catch(this.context.setError)
 
-    CatalogEventsService.getCatalogAndEvents('catalog_id', this.props.match.params.id)
+    CatalogEventsService.getCatalogAndEvents('event_id', this.props.match.params.id)
       .then(this.setEventCatalogIds)
       .catch(this.context.setError)
-}
+  }
 
   handleEditClick = (id) => {
     this.context.history.push(`/events/edit/${id}`)
@@ -97,13 +98,13 @@ class ViewEvent extends Component {
     this.context.history.push('/events')
   }
 
-   getEventCatalogArray = () => {
-    let eventCatalogMap = this.state.eventCatalogIds.map((catalog) => { 
+  getEventCatalogArray = () => {
+    let eventCatalogMap = this.state.eventCatalogIds.map((catalog) => {
       // take catalog id and request image 
       CatalogImagesApiService.getCatalogImages('catalog_id', catalog.catalog_id)
-        .then(res => {this.setEventCatalogArray(res)})
+        .then(res => { this.setEventCatalogArray(res) })
         .catch(this.context.setError)
-        return(catalog.catalog_id)
+      return (catalog.catalog_id)
 
     })
     return eventCatalogMap
@@ -111,10 +112,10 @@ class ViewEvent extends Component {
 
   getEventContactArray = () => {
     let eventContactMap = this.state.eventContactIds.map((contact) => {
-      ContactsEventsApiService.getContactsAndEvents('contact_id', contact.contact_id)
-      .then(res => {this.setEventContactsArray(res)})
-      .catch(this.context.setError)
-      return(contact.contact_id) 
+      ContactsApiService.getContact(contact.contact_id)
+        .then(res => { this.setEventContactsArray(res) })
+        .catch(this.context.setError)
+      return (contact.contact_id)
     })
     return eventContactMap
   }
@@ -126,20 +127,20 @@ class ViewEvent extends Component {
     if (images !== [{}]) {
       imageMap = images.flat().map((item) => {
         console.log("THIS IS ITEM", item)
-        return (    
-          <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">               
-                <img className="catalog-img-item" src={require("../../../public/assets/" + item.image_name)} alt="catalog item" />
-         </a>)
+        return (
+          <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+            <img className="catalog-img-item" src={require("../../../public/assets/" + item.image_name)} alt="catalog item" />
+          </a>)
       })
       console.log("imageMap", imageMap)
       return imageMap
     }
- 
+
   }
 
 
 
-  
+
   render() {
 
 
@@ -148,7 +149,7 @@ class ViewEvent extends Component {
     //     return <div key={uuid()}></div>
     //   }
 
-    
+
     this.handleDeleteEvent = (id) => {
       let indexToDelete = this.context.events.findIndex(item => item.id === id)
       let eventsList = JSON.parse(JSON.stringify(this.context.events))
@@ -158,124 +159,89 @@ class ViewEvent extends Component {
     }
 
     this.selectedEventReturn = () => {
-      if (this.state.selectedEventItem !== []){
-      let selectedEventMap = [this.state.selectedEventItem].map((item) => {
-      
-
-      // //catalog items
-
-      // CatalogEventsService.getCatalogAndEvents('catalog_id', '2')
-      //   .then((res) => {
-      //     this.setCatalogItems(res)
-      //   })
-      //   .catch(this.context.setError)
-
-      //let catalogItems = this.state.eventCatalogItems
-          
-      // this.catalogItemsRender = () => {
-      //   if (!catalogItems){
-      //   return <div></div>
-      //   }
-      
-        // catalogItems.map((id) => {
-
-        //     this.catalogObject = this.context.catalog_items.filter((item) => {
-        //       return item.id === id
-        //     })
-        //     return this.catalogObject
-        //   })
-
-      //     this.catalogItemsArray = this.catalogItemsRender.flat()
-      //     this.catalogReturn = this.catalogItemsRender.map((item) => {  
-      //       if (item[0].images !== null || item[0].images !== "") {
-      //         this.imgReturn = [item[0].images.split(', ')[0]].map((image) => {
-      //           return (
-      //             <img key={"img" + item.image} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-      //           )
-      //         })
-      //       }
-        
-      //       return (
-      //         <a key={'catalog' + item.id} href={'/catalog/' + item[0].id} target="_blank" rel="noopener noreferrer">
-      //           {this.imgReturn}
-      //         </a>
-      //       )
-      //     })
-      // }
-  
+      if (this.state.selectedEventItem !== []) {
+        let selectedEventMap = [this.state.selectedEventItem].map((item) => {
 
 
-      // //contacts linked 
 
-      // this.contactsLinkedArray = this.context.contacts.filter(contact => contact.events.includes(this.selectedEventId))
-      // this.contactsLinkedReturn = this.contactsLinkedArray.map(contact => {
-      //   return {
-      //     contact_id: contact.contact_id,
-      //     name: contact.name,
-      //     business_name: contact.business_name,
-      //   }
-      // }
-      // )
 
-      // this.contactsLinkedReturnMapped = this.contactsLinkedReturn.map(contact => {
-      //   return (
-      //     <div key={`contact` + contact.contact_id} className="favorited-by">
-      //       {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}
-      //     </div>
-      //   )
-      // })
+          // //contacts linked 
 
-      return (
-        <div key={`event` + item.event_id}>
-          <PageParentHeader pageName="Events" />
-          <div className="item-wrap">
-            <button type="button" className="back-to-btn" value="backToEvents" onClick={(() => { this.handleBackToEvents(item.event_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /><span className="all-events-text">All Events</span></button>
-            <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.event_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
-            <ul className="item event-view">
-              <li>
-                <span className="event-labels">Event Type:</span> {item.event_type}
-              </li>
-              <li>
-                <span className="event-labels">Name:</span> {item.name}
-              </li>
-              <li>
-                <span className="event-labels">Website:</span> {item.website}
-              </li>
-              <li>
-                <span className="event-labels">Location:</span> {item.location}
-              </li>
-              <li>
-                <span className="event-labels">Event Dates:</span> {console.log("this is event_date date", item.event_dates)}
-              {this.prettyDate(item.event_dates)}
-              </li>
-              <div className="border"></div>
-              <li>
-                <span className="event-labels">Application Due Dates:</span> {this.prettyDate(item.application_due_date)}
-              </li>
-              <li>
-                <p className="event-labels">Submission Requirements:</p> {item.submission_requirements}
-              </li>
-              <li>
-                <span className="event-labels">Affiliated Contacts:</span> {this.contactsLinkedReturnMapped}
-              </li>
-              <li>
-                <p className="event-labels">Notes:</p> {item.notes}
-              </li>
-              <li>
-                <div className="border"></div>
-                <p className="event-labels">Catalog Items (items to show or sell at event):</p> {this.catalogImageReturn()}
-              </li>
-            </ul>
-            <div className="button-wrap">
-              <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.event_id) }}>Delete</button>
+          // this.contactsLinkedArray = this.context.contacts.filter(contact => contact.events.includes(this.selectedEventId))
+          // this.contactsLinkedReturn = this.contactsLinkedArray.map(contact => {
+          //   return {
+          //     contact_id: contact.contact_id,
+          //     name: contact.name,
+          //     business_name: contact.business_name,
+          //   }
+          // }
+          // )
+
+
+          this.contactsLinkedReturnMapped = () => {
+            console.log("in return map", this.state.eventContactArray)
+            if (this.state.eventContactArray) {
+              let arrayMap = this.state.eventContactArray.map(contact => {
+                console.log('made it in')
+                return (
+                  <div key={`contact` + contact.id} className="favorited-by">
+                    {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}
+                  </div>
+                )
+              })
+              return arrayMap
+            }
+          }
+          return (
+            <div key={`event` + item.event_id}>
+              <PageParentHeader pageName="Events" />
+              <div className="item-wrap">
+                <button type="button" className="back-to-btn" value="backToEvents" onClick={(() => { this.handleBackToEvents(item.event_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /><span className="all-events-text">All Events</span></button>
+                <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.event_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+                <ul className="item event-view">
+                  <li>
+                    <span className="event-labels">Event Type:</span> {item.event_type}
+                  </li>
+                  <li>
+                    <span className="event-labels">Name:</span> {item.name}
+                  </li>
+                  <li>
+                    <span className="event-labels">Website:</span> {item.website}
+                  </li>
+                  <li>
+                    <span className="event-labels">Location:</span> {item.location}
+                  </li>
+                  <li>
+                    <span className="event-labels">Event Dates:</span> {this.prettyDate(item.event_dates)}
+                  </li>
+                  <div className="border"></div>
+                  <li>
+                    <span className="event-labels">Application Due Dates:</span> {this.prettyDate(item.application_due_date)}
+                  </li>
+                  <li>
+                    <p className="event-labels">Submission Requirements:</p> {item.submission_requirements}
+                  </li>
+                  <li>
+                    <span className="event-labels">Affiliated Contacts:</span> {this.contactsLinkedReturnMapped()}
+                  </li>
+                  <li>
+                    <p className="event-labels">Notes:</p> {item.notes}
+                  </li>
+                  <li>
+                    <div className="border"></div>
+                    <p className="event-labels">Catalog Items (items to show or sell at event):</p> {this.catalogImageReturn()}
+                  </li>
+                </ul>
+                <div className="button-wrap">
+                  <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.event_id) }}>Delete</button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      );
-    })
-    return selectedEventMap
-  }
-  }
+          );
+        })
+        return selectedEventMap
+      }
+    }
 
     return (
       <div>

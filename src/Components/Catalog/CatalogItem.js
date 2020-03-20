@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
-// import CatalogApiService from '../../services/catalog-api-service'
+import CatalogApiService from '../../services/catalog-api-service'
+import PageParentHeader from '../Nav/PageParentHeader'
+
 
 class CatalogItem extends Component {
   static contextType = Context;
+  constructor(props) {
+    super(props);
+    this.state={
+      catalog_items: []
+    }
+  }
+
 
   handleEditClick(id) {
     this.context.history.push(`/catalog/edit/${id}`)
@@ -17,9 +26,24 @@ class CatalogItem extends Component {
     this.context.history.push(`/catalog/${id}`)
   }
 
+  setCatalogItems = (items) => {
+    this.setState({catalog_items: items})
+  }
+
+componentDidMount = () => {
+  CatalogApiService.getCatalogItems()
+  .then(this.setCatalogItems)
+  .catch(this.context.setError)
+}
+
   
   render() {
-    this.catalogItemsList = this.context.catalog_items.map((item) => {
+    if (this.state.catalog_items === {}){
+      this.setCatalogItems(this.context.catalog_items)
+    }
+
+    if (this.state.catalog_items !== {}){
+    this.catalogItemsList = this.state.catalog_items.map((item) => {
     
       this.handleImages = () => {    
       if (!item.images){
@@ -112,10 +136,12 @@ class CatalogItem extends Component {
         </div>
       )
     })
-  
+    }
   
     return (
       <section className='catalog-item'>
+          <PageParentHeader pageName="Catalog" />
+
         {this.catalogItemsList}
       </section>
     );

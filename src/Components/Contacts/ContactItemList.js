@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import Context from '../../Context';
 import PageParentHeader from '../Nav/PageParentHeader'
+import ContactApiService from '../../services/contacts-api-service'
 
 class ContactItem extends Component {
   static contextType = Context;
-
+  constructor(props){
+    super(props);
+    this.state={
+      contact_items: []
+    }
+  }
 
 
   handleEditClick = (id) => {
@@ -22,11 +28,25 @@ class ContactItem extends Component {
   fieldValueLabels = () => {
     //set this up to not show blank fields
   }
+  setContactItems = (items) => {
+    this.setState({contact_items: items})
+  }
 
+  componentDidMount = () => {
+    ContactApiService.getContacts()
+    .then(this.setContactItems)
+    .catch(this.context.setError)
+  }
+  
 
   
 
   render() {
+    if(this.state.contact_items === []){
+      this.setContactItems(this.context.contacts)
+    }
+
+    if(this.state.catalog_items !== []){
     this.contactItemsList = this.context.contacts.map((item, index) => {
 
       this.contactNameIncluded = () => {
@@ -94,6 +114,7 @@ class ContactItem extends Component {
         </div>
       );
     });
+  }
 
     return (
       <section className='contacts'>

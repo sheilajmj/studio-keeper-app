@@ -47,6 +47,55 @@ const ContactsApiService = {
             ? res.json().then(e => Promise.reject(e))
             : res.json()
             )
+    },
+
+    postContactItem(contact){
+        return fetch(`${config.API_ENDPOINT}/contacts`, {
+            method: 'POST',
+            headers: {
+              'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+              'content-type': 'application/json',
+          //     'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+        
+        body: JSON.stringify(
+            contact
+            )
+        })
+        .then(res =>
+            (!res.ok)
+              ? res.json().then(e => Promise.reject(e))
+              : res.json()
+          )
+      },
+    
+      updateContactItem(id, contactItem) {  
+        let newId = parseInt(id.id)
+    return fetch(`${config.API_ENDPOINT}/contact/${newId}`, {
+        method: 'PATCH',
+        headers: {
+          'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+          'content-type': 'application/json',
+      //     'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify(
+          contactItem
+        ),
+      })
+      },
+
+    deleteContactItem(id){
+        return fetch(`${config.API_ENDPOINT}/contact/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+              'content-type': 'application/json',
+          //     'authorization': `bearer ${TokenService.getAuthToken()}`,
+            },
+
+    })
+
+    
     }
 
 }

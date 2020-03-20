@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
+import ContactsApiService from '../../services/contacts-api-service';
 const { uuid } = require('uuidv4');
 
 class AddContact extends Component {
@@ -14,17 +15,15 @@ class AddContact extends Component {
       name: "Name",
       title: "Title",
       business: "Business Name",
-      events: null,
       email: "jdoe@email.com",
       phone: "123-456-7890",
       address_street: "1122 Default St.",
       address_line2:  "Apartment 2",
       address_city: "Gotham City",
       address_state: "State",
-      address_zip: "Zip Code",
+      address_zip: "12344",
       address_country: "Country",
       website: "http://website.com",
-      favorites: "Favorites",
       notes: "Notes",
       }
     } 
@@ -34,19 +33,20 @@ class AddContact extends Component {
   const key = (e.target.name)
   const value = (e.target.value)
   this.setState(previousState => ({newContact: {...previousState.newContact, [key]: value}}))
-  this.setState(previousState => ({newContact: {...previousState.newContact, contact_id: uuid()}}))
+  this.setState(previousState => ({newContact: {...previousState.newContact, id: uuid()}}))
   }
 
   createNewContact = () => {
     const newContact = this.state.newContact
-    this.context.updateAppStateContactsCreate(newContact, null)
+    this.context.updateAppStateContactsCreate(newContact)
+    ContactsApiService.postContactItem(newContact)
   }
 
 
   handleSubmit = (e) => {
     e.preventDefault()
     this.createNewContact(e)
-    this.context.history.push(`/contacts`) 
+    // this.context.history.push(`/contacts/`) 
 
   }
   
@@ -126,10 +126,10 @@ class AddContact extends Component {
             </select>
           </div>
          {this.nameFieldPopulator()}
-          <div className="form-space">
+          {/* <div className="form-space">
             <label htmlFor="event" className="contact-edit">Event Affiliation:</label>
             {this.eventFieldSelectionOptions}        
-            </div>
+            </div> */}
           <div className="form-space">
             <label htmlFor="email" className="contact-edit">Email:</label>
             <input type="text" name="email" id="email" onChange={this.handleChange} defaultValue={this.state.newContact.email} />
@@ -166,10 +166,10 @@ class AddContact extends Component {
             <label htmlFor="website" className="contact-edit">Website:</label>
             <input type="text" name="website" id="website" onChange={this.handleChange} defaultValue={this.state.newContact.website} />
           </div>
-          <div className="form-space">
+          {/* <div className="form-space">
             <label htmlFor="favorites" className="contact-edit">Favorites:</label>
             {this.favoritesBySelectionBoxes}      
-          </div>
+          </div> */}
           <div className="form-space">
             <label htmlFor="notes" className="contact-edit">Notes:</label>
             <br/><textarea type="text"  className="contact-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newContact.notes} />

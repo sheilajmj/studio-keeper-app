@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader'
+import ContactApiService from '../../services/contacts-api-service'
 
 class EditContact extends Component {
   static contextType = StudioKeeperContext
@@ -12,31 +13,39 @@ class EditContact extends Component {
       updatedContact: [],
       updatedEventsArray: [],
       updatedFavoritesArray: [],
+      contactToEdit: []
       }
   }
 
-  componentDidMount = () =>{
-    this.setInitialDefaultState()   
+
+  setSelectedContactItem = (contactItem) => {
+    if (this.state.updateBoolean === false) {
+      this.setState({ updatedContact: contactItem })
+      this.setState({contactToEdit: contactItem})
+    }
+  }
+
+
+  componentDidMount = () =>{  
+    ContactApiService.getContact(this.props.match.params.id)
+    .then(this.setSelectedContactItem)
+    .catch(this.context.setError)
   }
 
   render() {
 
-    this.selectedContactId = this.props.match.params.contact_id;
-    this.selectedContactObject = this.context.contacts.find(contact => contact.contact_id === this.selectedContactId);
-    this.selectedContactArray = [this.selectedContactObject];
+    // this.selectedContactId = this.props.match.params.contact_id;
+    // this.selectedContactObject = this.context.contacts.find(contact => contact.contact_id === this.selectedContactId);
+    // this.selectedContactArray = [this.selectedContactObject];
 
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.context.updateAppStateContactsUpdate(this.state.updatedContact)
       this.context.history.push(`/contacts`)
+      ContactApiService.updateContact(this.props.match.params, this.state.updatedContact)
+
     }
 
-    this.setInitialDefaultState = () => {
-      if (this.state.updateBoolean === false) {
-        this.setState({ updatedContact: this.selectedContactObject })
-        this.setState({ updateBoolean: true})
-      }
-    }
 
 
     this.handleChange = (e) => {
@@ -157,8 +166,12 @@ class EditContact extends Component {
 
   // })
 
-    this.selectedContactForm = this.selectedContactArray.map((item) => {
-    if (!item){
+    this.selectedContactForm = () => {
+      if(this.state.contactToEdit !== {}){
+     let contactToEditArray = [this.state.contactToEdit]
+    this.selectedContactItemForm = contactToEditArray.map((item) => {
+    console.log(item, 'here is item')
+      if (!item){
         return (
         <div></div>
         )
@@ -194,7 +207,7 @@ class EditContact extends Component {
       }
 
       return (
-        <div key={item.contact_id} className="item-edit-wrap contact-edit">
+        <div key={item.id} className="item-edit-wrap contact-edit">
           <form onSubmit={this.handleSubmit}>
             <h3 className="add-item-header">Edit Contact</h3>
             {/* <div className="form-space contact-edit"> */}
@@ -267,6 +280,9 @@ class EditContact extends Component {
         </div>
       );
     })
+  }
+return this.selectedContactItemForm
+}
 
     return (
       <div>

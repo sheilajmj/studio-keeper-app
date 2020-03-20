@@ -97,12 +97,14 @@ class ViewCatalog extends Component {
 
 
   //deleting the selected catalog item
-  handleDeleteCatalogItem = (id) => {
+  handleDeleteClick = (id) => {
     let indexToDelete = this.context.catalog_items.findIndex(item => item.id === id)
     let catalogList = JSON.parse(JSON.stringify(this.context.catalog_items))
     catalogList.splice(indexToDelete, 1)
     let newCatalogList = catalogList
     this.context.updateAppStateCatalogDelete(newCatalogList)
+    CatalogApiService.deleteCatalogItem(id)
+    this.context.history.push(`/catalog`)
   }
 
   //Contacts/Favorited By -- update contactObjectsArray in state with the data of relevant contact items.

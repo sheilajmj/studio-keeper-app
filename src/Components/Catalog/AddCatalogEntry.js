@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
+import CatalogApiService from '../../services/catalog-api-service';
 const { uuid } = require('uuidv4');
 
 class AddCatalogEntry extends Component {
@@ -10,22 +11,23 @@ class AddCatalogEntry extends Component {
     super(props)
     this.state = {
       newCatalogEntry: {
-        type: "ie. Drawing",
-        collection: "Collection",
+        type: "ie. Drawing, Painting",
+        collection: "Collection Name",
+        name: "Piece Name",
         size: "Size",
         medium: "Medium",
-        price: "$5.00",
+        price: "5.00",
         date_created: "01/01/2020",
         concept_statement: "Concept Statement",
         notes: "Notes",
-        images: null,
+        // images: null,
         subject: "Subject",
-        quantity: "Quantity",
+        quantity: "5",
         location: "upstairs",
-        favorited_by: "Jane Doe, John Doe",
-        sold_to: "Jane Doe",
+        // favorited_by: "Jane Doe, John Doe",
         sold_date: "01/25/2020",
-        events: "002, 003",
+        sold_to: "Jane Doe",
+        // events: "002, 003",
         history: "01/1/1900 Shown at Winter Festival",
       }
     }
@@ -43,7 +45,7 @@ class AddCatalogEntry extends Component {
     const value = (e.target.files[0].name)
     // console.log("file name", e.target.files[0].name)
     this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
-    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, catalog_id: uuid() } }))
+    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, id: uuid() } }))
     }
  
 
@@ -51,6 +53,7 @@ class AddCatalogEntry extends Component {
     this.createNewCatalogEntry = () => {
       const newCatalogEntry = this.state.newCatalogEntry
       this.context.updateAppStateCatalogCreate(newCatalogEntry)
+      CatalogApiService.postCatalogItem(newCatalogEntry)
     }
 
     this.handleSubmit = (e) => {
