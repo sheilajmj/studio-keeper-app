@@ -36,17 +36,23 @@ class AddContact extends Component {
   this.setState(previousState => ({newContact: {...previousState.newContact, id: uuid()}}))
   }
 
+
+  setIdValue = (id) => {
+  this.setState(previousState => ({newContact: {...previousState.newContact, id: id}}))
+  }
+
   createNewContact = () => {
     const newContact = this.state.newContact
     this.context.updateAppStateContactsCreate(newContact)
     ContactsApiService.postContactItem(newContact)
+      .then(this.setIdValue)
   }
 
 
   handleSubmit = (e) => {
     e.preventDefault()
     this.createNewContact(e)
-    // this.context.history.push(`/contacts/`) 
+    this.context.history.push(`/contacts/`) 
 
   }
   
