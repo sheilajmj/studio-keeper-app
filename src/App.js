@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import StudioKeeperContext from './Context'
+import PrivateOnlyRoute from './Components/Utils/PrivateRoute'
+import PublicOnlyRoute from './Components/Utils/PublicOnlyRoute'
 import CatalogItem from './Components/Catalog/CatalogItem'
 import AddCatalogEntry from './Components/Catalog/AddCatalogEntry'
 import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
@@ -17,10 +19,12 @@ import Home from './Components/Home/Home'
 import LandingPage from './Components/LandingPage/LandingPage'
 import Nav from './Components/Nav/Nav'
 import Gallery from './Components/Gallery/Gallery'
-import SignInForm from './Components/SignInForm/SignInForm'
+import LoginPage from './Components/Login/LoginPage'
+import RegistrationPage from './Components/RegistrationPage/RegistrationPage'
 import ContactsApiService from './services/contacts-api-service'
 import CatalogApiService from './services/catalog-api-service'
 import EventsApiService from './services/events-api-service'
+import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
 
 class App extends Component {
   constructor(props) {
@@ -31,8 +35,14 @@ class App extends Component {
       events: [],
       selectedContact: [],
       updateValue: true,
+      hasError: false
     }
   }
+
+static getDerivedStateFromError(error){
+  console.error(error)
+  return { hasError: true }
+}
 
   updateAppStateContactsCreate = (newContact) => {
     const currentStateContacts = JSON.parse(JSON.stringify(this.state.contacts))
@@ -143,76 +153,84 @@ class App extends Component {
       <>     <StudioKeeperContext.Provider value={contextValue}>
         <header>
           <h1>
-            <a href="/" className="header">Studio Keeper</a>
+            <a href="/home" className="header">Studio Keeper</a>
           </h1>
         <Nav />
         </header>
         <main className='app'>
           <Switch>
             <Route
+              exact path={'/'}
+              component={LandingPage}
+            />
+            <PrivateOnlyRoute
+              exact path={'/home'}
+              component={Home}
+            />
+            <PublicOnlyRoute
+            path={'/login'}
+            component={LoginPage} 
+            />
+            <PublicOnlyRoute
+              path={'register'}
+              component={RegistrationPage}
+            />
+            <PrivateOnlyRoute
               path={'/catalog/edit/:id'}
               component={EditCatalogEntry}
             />
-            <Route
+            <PrivateOnlyRoute
               path={'/catalog/add'}
               component={AddCatalogEntry}
             />
-            <Route
+            <PrivateOnlyRoute
               exact path={'/catalog/:id'}
               component={ViewCatalog}
             />
-            <Route
+            <PrivateOnlyRoute
               path={'/catalog'}
               component={CatalogItem}
             />
-            <Route
+            <PrivateOnlyRoute
               exact path={'/contacts/edit/:id'}
               component={EditContact}
             />
-            <Route
+            <PrivateOnlyRoute
               exact path={'/contacts/add'}
               component={AddContact}
             />
-            <Route
+            <PrivateOnlyRoute
               exact path={'/contacts/:id'}
               component={ViewContact}
             />
-            <Route
+            <PrivateOnlyRoute
               exact path={'/contacts'}
               component={ContactItemList}
             />
-            <Route
+            <PrivateOnlyRoute
               path={'/events/edit/:id'}
               component={EditEvent}
             />
-            <Route
-              path={'/events/add'}
-              component={AddEvent}
-            />
-            <Route
-              exact path={'/events/:id'}
-              component={ViewEvent}
-            />
-            <Route
+            <PrivateOnlyRoute
               path={'/events'}
               component={EventItem}
             />
-            <Route
+            <PrivateOnlyRoute
+              path={'/events/add'}
+              component={AddEvent}
+            />
+            <PrivateOnlyRoute
+              exact path={'/events/:id'}
+              component={ViewEvent}
+            />
+            <PrivateOnlyRoute
               path={'/gallery'}
               component={Gallery}
               />
-              <Route
-              path={'/signin'}
-              component={SignInForm}
-              />
             <Route
-              exact path={'/'}
-              component={Home}
+              component={NotFoundPage}
             />
-            <Route
-              exact path={'/landing'}
-              component={LandingPage}
-            />
+
           </Switch>
         </main>
       </StudioKeeperContext.Provider>

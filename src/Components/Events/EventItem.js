@@ -134,7 +134,7 @@ class EventItem extends Component {
 
     return (
       <div>
-        <PageParentHeader pageName="Events" />
+        <PageParentHeader pageName="events" />
         {this.eventItemsObject}
         <Collapsible title="this is a title" children="HOWDY!" />
       </div>

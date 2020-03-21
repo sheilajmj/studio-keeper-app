@@ -13,7 +13,7 @@ class LandingPage extends Component {
             App Summary...<br />
             Get Started ->
         </div>
-        <button onClick={() => {this.context.history.push('/')}}>Get Started</button>
+        <button onClick={() => {this.context.history.push('/home')}}>Get Started</button>
       </section>
     );
   }

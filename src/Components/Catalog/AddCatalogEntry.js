@@ -29,9 +29,10 @@ class AddCatalogEntry extends Component {
         sold_to: "Jane Doe",
         // events: "002, 003",
         history: "01/1/1900 Shown at Winter Festival",
-      }
-    }
+      },
+      image: ""
   }
+}
 
   handleChange = (e) => {
     const key = (e.target.name)
@@ -40,11 +41,12 @@ class AddCatalogEntry extends Component {
   }
 
   handleFileSelection  = (e) => {
-    const key = (e.target.name)
-    const value = (e.target.files[0].name)
+    // const key = (e.target.name)
+    // const value = (e.target.files[0].name)
     // console.log("file name", e.target.files[0].name)
-    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
-    }
+    // this.setState(previousState => ({ image: {...previousState.image, [image]: value } }))
+    // CatalogApiService.postCatalogImages(this.state.image)
+  }
  
 
   render() {

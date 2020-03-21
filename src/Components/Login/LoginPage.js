@@ -43,7 +43,7 @@ export default class SignInForm extends Component {
           <label htmlFor='LoginForm__user_name'>
             User name
           </label>
-          <input requried name='user_name' id='signInForm_user_name' />
+          <input required name='user_name' id='signInForm_user_name' />
         </div>
         <div className='password'>
           <label htmlFor='LoginForm__password'>
