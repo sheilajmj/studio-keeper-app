@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
 import ContactsApiService from '../../services/contacts-api-service';
-const { uuid } = require('uuidv4');
+// const { uuid } = require('uuidv4');
 
 class AddContact extends Component {
   static contextType = Context;
@@ -25,7 +25,8 @@ class AddContact extends Component {
       address_country: "Country",
       website: "http://website.com",
       notes: "Notes",
-      }
+      },
+      sent: false
     } 
   }
 
@@ -33,27 +34,20 @@ class AddContact extends Component {
   const key = (e.target.name)
   const value = (e.target.value)
   this.setState(previousState => ({newContact: {...previousState.newContact, [key]: value}}))
-  this.setState(previousState => ({newContact: {...previousState.newContact, id: uuid()}}))
-  }
-
-
-  setIdValue = (id) => {
-  this.setState(previousState => ({newContact: {...previousState.newContact, id: id}}))
+  // this.setState(previousState => ({newContact: {...previousState.newContact, id: uuid()}}))
   }
 
   createNewContact = () => {
     const newContact = this.state.newContact
     this.context.updateAppStateContactsCreate(newContact)
     ContactsApiService.postContactItem(newContact)
-      .then(this.setIdValue)
+      .then((res) => {this.context.history.push(`/contacts/${res.id}`)})
   }
 
 
   handleSubmit = (e) => {
     e.preventDefault()
     this.createNewContact(e)
-    this.context.history.push(`/contacts/`) 
-
   }
   
   

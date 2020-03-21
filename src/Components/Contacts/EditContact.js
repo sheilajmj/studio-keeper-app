@@ -41,9 +41,8 @@ class EditContact extends Component {
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.context.updateAppStateContactsUpdate(this.state.updatedContact)
-      this.context.history.push(`/contacts`)
-      ContactApiService.updateContact(this.props.match.params, this.state.updatedContact)
-
+      ContactApiService.updateContactItem(this.props.match.params, this.state.updatedContact)
+      this.context.history.go()
     }
 
 
@@ -169,6 +168,7 @@ class EditContact extends Component {
     this.selectedContactForm = () => {
       if(this.state.contactToEdit !== {}){
      let contactToEditArray = [this.state.contactToEdit]
+     console.log(contactToEditArray, "array thingy")
     this.selectedContactItemForm = contactToEditArray.map((item) => {
     console.log(item, 'here is item')
       if (!item){
@@ -287,7 +287,7 @@ return this.selectedContactItemForm
     return (
       <div>
         <PageParentHeader pageName="Contacts" />
-        {this.selectedContactForm}
+        {this.selectedContactForm()}
       </div>
     )
   }

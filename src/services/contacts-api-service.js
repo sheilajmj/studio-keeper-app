@@ -63,15 +63,15 @@ const ContactsApiService = {
             )
         })
         .then(res =>
-            (!res.ok)
-              ? res.json().then(e => Promise.reject(e))
-              : res.json()
-          )
+                (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()
+        )
       },
     
       updateContactItem(id, contactItem) {  
         let newId = parseInt(id.id)
-    return fetch(`${config.API_ENDPOINT}/contact/${newId}`, {
+    return fetch(`${config.API_ENDPOINT}/contacts/${newId}`, {
         method: 'PATCH',
         headers: {
           'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
@@ -85,7 +85,7 @@ const ContactsApiService = {
       },
 
     deleteContactItem(id){
-        return fetch(`${config.API_ENDPOINT}/contact/${id}`, {
+        return fetch(`${config.API_ENDPOINT}/contacts/${id}`, {
             method: 'DELETE',
             headers: {
               'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',

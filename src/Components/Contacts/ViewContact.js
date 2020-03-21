@@ -80,11 +80,6 @@ class ViewContact extends Component {
     this.context.history.push(`/contacts/edit/${id}`)
   }
 
-  handleDeleteClick = (id) => {
-    this.handleDeleteContact(id)
-    this.context.history.push(`/contacts`)
-  }
-
   handleBackToContacts = (e) => {
     this.context.history.push('/contacts')
   }
@@ -100,8 +95,7 @@ class ViewContact extends Component {
 
   handleDeleteClick = (id) => {
     this.handleDeleteContact(id)
-    this.context.history.push(`/contacts`)
-  }
+    }
 
   handleBackToContacts = (e) => {
     this.context.history.push('/contacts')
@@ -113,6 +107,9 @@ class ViewContact extends Component {
     contactsList.splice(indexToDelete, 1)
     let newContactsList = contactsList
     this.context.updateAppStateContactsDelete(newContactsList)
+    console.log(id, "delete this id")
+    ContactsApiService.deleteContactItem(id)
+    this.context.history.push(`/contacts`)
   }
 
 
@@ -172,6 +169,7 @@ class ViewContact extends Component {
 
 
   render() {    
+
     this.selectedContactId = this.props.match.params.id
     this.contactObject = this.context.contacts.find(contact => parseFloat(contact.id) === parseFloat(this.selectedContactId))
     if (!this.contactObject) {
@@ -247,7 +245,7 @@ class ViewContact extends Component {
               </li>
             </ul>
             <div className="button-wrap">
-              <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.contact_id) }}>Delete</button>
+              <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.id) }}>Delete</button>
             </div>
           </div>
         </div>

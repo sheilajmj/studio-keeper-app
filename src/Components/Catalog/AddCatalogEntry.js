@@ -59,7 +59,7 @@ class AddCatalogEntry extends Component {
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.createNewCatalogEntry(e)
-      this.context.history.push(`/catalog`)
+      this.context.history.go(`/catalog/add`)
     }
 
     this.favoritedBySelectionBoxes = this.context.contacts.map(contact => {
