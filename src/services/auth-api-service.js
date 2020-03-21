@@ -2,7 +2,7 @@ import config from '../config'
 import TokenService from '../services/token-service'
 
 const AuthApiService = {
-  postLogin({ user_name, password }) {
+  postLogin(user_name, password) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
       method: 'POST',
       headers: {
