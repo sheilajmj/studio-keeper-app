@@ -83,7 +83,7 @@ class ViewEvent extends Component {
   }
 
   handleEditClick = (id) => {
-    this.context.history.push(`/events/edit/${id}`)
+    window.location.href=`/events/edit/${id}`
   }
 
 
@@ -91,11 +91,11 @@ class ViewEvent extends Component {
 
   handleDeleteClick = (id) => {
     this.handleDeleteEvent(id)
-    this.context.history.push(`/events`)
+  window.location.href=`/events`
   }
 
   handleBackToEvents = (e) => {
-    this.context.history.push('/events')
+    window.location.href=`/events`
   }
 
   getEventCatalogArray = () => {
@@ -156,6 +156,8 @@ class ViewEvent extends Component {
       eventsList.splice(indexToDelete, 1)
       let newEventsList = eventsList
       this.context.updateAppStateEventsDelete(newEventsList)
+      EventsApiService.deleteEventItem(id)
+      window.location.href='/events'
     }
 
     this.selectedEventReturn = () => {
@@ -193,11 +195,11 @@ class ViewEvent extends Component {
             }
           }
           return (
-            <div key={`event` + item.event_id}>
+            <div key={`event` + item.id}>
               <PageParentHeader pageName="Events" />
               <div className="item-wrap">
                 <button type="button" className="back-to-btn" value="backToEvents" onClick={(() => { this.handleBackToEvents(item.event_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /><span className="all-events-text">All Events</span></button>
-                <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.event_id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+                <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
                 <ul className="item event-view">
                   <li>
                     <span className="event-labels">Event Type:</span> {item.event_type}
@@ -233,7 +235,7 @@ class ViewEvent extends Component {
                   </li>
                 </ul>
                 <div className="button-wrap">
-                  <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.event_id) }}>Delete</button>
+                  <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.id) }}>Delete</button>
                 </div>
               </div>
             </div>

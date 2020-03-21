@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
+import EventsApiService from '../../services/events-api-service';
 const { uuid } = require('uuidv4')
 
 
@@ -15,12 +16,10 @@ class AddEvent extends Component {
         name: "Event Name",
         website: "website",
         location: "Location",
-        event_dates: "Event Dates",
+        event_dates: "11/27/2019",
         application_due_dates: "Application Due Dates",
-        contact: "Contact",
         notes: "Notes",
         submission_requirements: "some requirements",
-        catalog_items: "Catalog Items",
       }
     }
   }
@@ -29,19 +28,19 @@ class AddEvent extends Component {
     const key = (e.target.name)
     const value = (e.target.value)
     this.setState(previousState => ({ newEvent: { ...previousState.newEvent, [key]: value } }))
-    this.setState(previousState => ({ newEvent: { ...previousState.newEvent, event_id: uuid() } }))
   }
 
   createNewEvent = () => {
-    const newEvent = this.state.newEvent
+    let newEvent = this.state.newEvent
     this.context.updateAppStateEventsCreate(newEvent)
+    EventsApiService.postEventItem(newEvent)
+    .then((res) => {window.location.href=`/events/${res.id}`})
   }
 
 
   handleSubmit = (e) => {
     e.preventDefault()
     this.createNewEvent(e)
-    this.context.history.push(`/events`)
   }
 
 
@@ -59,33 +58,33 @@ class AddEvent extends Component {
       )
     })
 
-    this.catalogItemsBySelectionBoxes = this.context.catalog_items.map(item => {
-      if (!item){
-        return <div></div>
-      }
+    // this.catalogItemsBySelectionBoxes = this.context.catalog_items.map(item => {
+    //   if (!item){
+    //     return <div></div>
+    //   }
 
-      this.catalogImgReturn = () => {
-        if (item.images !== null || item.images !== "") {
-          this.catalogItemsImages = [item.images.split(', ')[0]].map((item) => {
-            return (
-              <img key={item.contact_id+item.name} className="catalog-img-item" src={require("../../assets/" + item)} alt="catalog item" />
-            )
-          })
-        }
-        return this.catalogItemsImages
-      }
+      // this.catalogImgReturn = () => {
+      //   if (item.images !== null || item.images !== "") {
+      //     this.catalogItemsImages = [item.images.split(', ')[0]].map((item) => {
+      //       return (
+      //         <img key={item.contact_id+item.name} className="catalog-img-item" src={require("../../assets/" + item)} alt="catalog item" />
+      //       )
+      //     })
+      //   }
+      //   return this.catalogItemsImages
+      // }
 
-        return (
-          <div key={'catalog-items' + item.catalog_id} className="checkbox">
-            <input type="checkbox" id={'catalog-items' + item.catalog_id} name={"catalog-items"} value={item.catalog_id} onChange={this.handleCatalogItemsClick} defaultChecked={false} />
-            <label htmlFor={item.catalog_id}>
-              {<a href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
-                {this.catalogImgReturn()}
-              </a>}
-            </label>
-          </div>
-        )
-      })
+      //   return (
+      //     <div key={'catalog-items' + item.catalog_id} className="checkbox">
+      //       <input type="checkbox" id={'catalog-items' + item.catalog_id} name={"catalog-items"} value={item.catalog_id} onChange={this.handleCatalogItemsClick} defaultChecked={false} />
+      //       <label htmlFor={item.catalog_id}>
+      //         {<a href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+      //           {this.catalogImgReturn()}
+      //         </a>}
+      //       </label>
+      //     </div>
+      //   )
+      // })
     
 
     return (

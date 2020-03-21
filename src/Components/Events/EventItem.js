@@ -10,11 +10,11 @@ class EventItem extends Component {
   static contextType = Context;
 
   handleEditClick(id) {
-    this.context.history.push(`/events/edit/${id}`)
+    window.location.href=`/events/edit/${id}`
   }
 
   handleItemClick = (id) => {
-    this.context.history.push(`/events/${id}`)
+    window.location.href=`/events/${id}`
   }
 
   handleViewEvent = (id) => {
@@ -29,7 +29,6 @@ class EventItem extends Component {
   render() {  
     
   this.eventItemsObject = this.context.events.map((item) => {
-    console.log("events items", item)
     if (!item){
       return <div></div>
     }

@@ -109,7 +109,7 @@ class ViewContact extends Component {
     this.context.updateAppStateContactsDelete(newContactsList)
     console.log(id, "delete this id")
     ContactsApiService.deleteContactItem(id)
-    this.context.history.push(`/contacts`)
+    window.location.href=`/contacts`
   }
 
 

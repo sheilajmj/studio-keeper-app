@@ -37,9 +37,8 @@ class EditCatalogEntry extends Component {
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.context.updateAppStateCatalogUpdate(this.state.updatedCatalogEntry)
-      this.context.history.push(`/catalog`)
+      window.location.href=`/catalog`
       CatalogApiService.updateCatalogItem(this.props.match.params, this.state.updatedCatalogEntry)
-      console.log("this is updated catalog entry", this.state.updatedCatalogEntry)
     }
 
     this.handleChange = (e) => {
@@ -57,7 +56,7 @@ class EditCatalogEntry extends Component {
 
 
     this.handleCancel = (e) => {
-      this.context.history.push('/catalog')
+      window.location.href='/catalog'
     }
 
     this.handleDeleteCatalogItem = (id) => {
@@ -66,7 +65,7 @@ class EditCatalogEntry extends Component {
       catalogList.splice(indexToDelete, 1)
       let newCatalogList = catalogList
       this.context.updateAppStateCatalogDelete(newCatalogList)
-      this.context.history.push(`/catalog`)
+      window.location.href=`/catalog`
       CatalogApiService.deleteCatalogItem(id)
     }
 

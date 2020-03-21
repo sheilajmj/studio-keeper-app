@@ -37,7 +37,6 @@ class AddCatalogEntry extends Component {
     const key = (e.target.name)
     const value = (e.target.value)
     this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
-    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, catalog_id: uuid() } }))
   }
 
   handleFileSelection  = (e) => {
@@ -45,7 +44,6 @@ class AddCatalogEntry extends Component {
     const value = (e.target.files[0].name)
     // console.log("file name", e.target.files[0].name)
     this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
-    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, id: uuid() } }))
     }
  
 
@@ -54,12 +52,12 @@ class AddCatalogEntry extends Component {
       const newCatalogEntry = this.state.newCatalogEntry
       this.context.updateAppStateCatalogCreate(newCatalogEntry)
       CatalogApiService.postCatalogItem(newCatalogEntry)
+      .then((res) => {window.location.href=`/catalog/${res.id}`})
     }
 
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.createNewCatalogEntry(e)
-      this.context.history.go(`/catalog/add`)
     }
 
     this.favoritedBySelectionBoxes = this.context.contacts.map(contact => {

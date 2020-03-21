@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import StudioKeeperContext from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader'
 import ContactApiService from '../../services/contacts-api-service'
+import ContactsApiService from '../../services/contacts-api-service';
 
 class EditContact extends Component {
   static contextType = StudioKeeperContext
@@ -42,7 +43,7 @@ class EditContact extends Component {
       e.preventDefault()
       this.context.updateAppStateContactsUpdate(this.state.updatedContact)
       ContactApiService.updateContactItem(this.props.match.params, this.state.updatedContact)
-      this.context.history.go()
+      window.location.href='/contacts'
     }
 
 
@@ -103,7 +104,7 @@ class EditContact extends Component {
       // }
 
     this.handleCancel = (e) => {
-      this.context.history.push('/contacts')
+      window.location.href='/contacts'
     }
 
     this.handleDeleteContact = (id) => {
@@ -112,7 +113,8 @@ class EditContact extends Component {
       contactsList.splice(indexToDelete, 1)
       let newContactsList = contactsList
       this.context.updateAppStateContactsDelete(newContactsList)
-      this.context.history.push(`/contacts`)
+      ContactsApiService.deleteContactItem(id)
+      window.location.href=`/contacts`
     }
 
     // this.eventFieldSelectionOptions = this.context.events.map(event => {

@@ -104,7 +104,7 @@ class ViewCatalog extends Component {
     let newCatalogList = catalogList
     this.context.updateAppStateCatalogDelete(newCatalogList)
     CatalogApiService.deleteCatalogItem(id)
-    this.context.history.push(`/catalog`)
+    window.location.href=`/catalog`
   }
 
   //Contacts/Favorited By -- update contactObjectsArray in state with the data of relevant contact items.
