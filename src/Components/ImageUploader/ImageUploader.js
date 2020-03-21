@@ -13,7 +13,6 @@ class App extends Component {
 
     this.state = {
       multerImage: DefaultImg,
-      firebaseImage: DefaultImg,
       baseImage: DefaultImg
     }
   }

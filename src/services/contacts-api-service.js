@@ -1,5 +1,5 @@
 import config from '../config'
-//import TokenService from '../services/token-service'
+import TokenService from '../services/token-service'
 
 
 const ContactsApiService = {
@@ -53,7 +53,8 @@ const ContactsApiService = {
         return fetch(`${config.API_ENDPOINT}/contacts`, {
             method: 'POST',
             headers: {
-              'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+              'authorization': `bearer ${TokenService.getAuthToken()}`,
+              //'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
               'content-type': 'application/json',
           //     'authorization': `bearer ${TokenService.getAuthToken()}`,
             },

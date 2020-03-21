@@ -1,11 +1,13 @@
 import config from '../config'
+import TokenService from '../services/token-service'
 
 const CatalogImagesApiService = {
 
     getCatalogImages(field, id) {
         return fetch (`${config.API_ENDPOINT}/catalogimages?${field}=${id}`, {
             headers: {
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+               // 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
                 //'Authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         })

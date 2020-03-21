@@ -1,13 +1,15 @@
 import config from '../config'
+import TokenService from '../services/token-service'
 
 const AuthApiService = {
   postLogin({ user_name, password }) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
       method: 'POST',
       headers: {
-        'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json',
       },
+      //'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
       body: JSON.stringify(user_name, password),
     })
       .then(res =>

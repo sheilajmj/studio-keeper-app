@@ -1,11 +1,13 @@
-//import TokenService from '../services/token-service'
+import TokenService from '../services/token-service'
 import config from '../config'
 
 const CatalogApiService = {
     getCatalogItems() {
         return fetch(`${config.API_ENDPOINT}/catalog`, {
             headers:{
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                
+                //'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
 
                 //`bearer ${TokenService.getAuthToken()}`,
             }
