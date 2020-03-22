@@ -155,7 +155,7 @@ static getDerivedStateFromError(error){
           <h1>
             <a href="/home" className="header">Studio Keeper</a>
           </h1>
-        <Nav />
+        {/* <Nav /> */}
         </header>
         <main className='app'>
           <Switch>

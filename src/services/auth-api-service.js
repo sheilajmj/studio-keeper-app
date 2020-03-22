@@ -6,11 +6,11 @@ const AuthApiService = {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
       method: 'POST',
       headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
+        // 'authorization': `bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json',
       },
       //'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
-      body: JSON.stringify(user_name, password),
+      body: JSON.stringify({user_name, password}),
     })
       .then(res =>
         (!res.ok)
@@ -22,7 +22,7 @@ const AuthApiService = {
     return fetch(`${config.API_ENDPOINT}/users`, {
       method: 'POST',
       headers: {
-        'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+        // 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
         'content-type': 'application/json',
       },
       body: JSON.stringify(user),
