@@ -7,9 +7,6 @@ const CatalogApiService = {
             headers:{
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
                 
-                //'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
-
-                //`bearer ${TokenService.getAuthToken()}`,
             }
         })
         .then(res => 
@@ -23,7 +20,6 @@ const CatalogApiService = {
         return fetch (`${config.API_ENDPOINT}/catalog/${catalog_id}`, {
             headers: {
                 'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
-                //'Authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         })
 
@@ -52,10 +48,15 @@ const CatalogApiService = {
 
     postCatalogImages(image){
         return fetch(`${config.API_ENDPOINT}/images`, {
-            headers:{
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
-                //`bearer ${TokenService.getAuthToken()}`,
-            }
+            method:'POST',
+            headers:{ 
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json',
+            },
+            body:
+            JSON.stringify(
+                image
+            ),
         })
         .then(res => 
             (!res.ok)

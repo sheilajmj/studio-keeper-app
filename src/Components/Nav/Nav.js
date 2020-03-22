@@ -5,9 +5,16 @@ import Context from '../../Context'
 class Nav extends Component {
   static contextType = Context;
 
+
   render() {
+    this.hideClass = () => {
+      if (window.location.pathname === '/login'){
+      return 'hide'
+      }
+    }
+
     return (
-      <nav className="nav-wrap">
+      <nav className={`nav-wrap ${this.hideClass}`}>
         <div className="hm-btn-container">
           <div className="contact-wrap hm-wrap">
             <button className="contactBtn hm-btn" onClick={(() => { this.context.history.push('/contacts') })}> </button>

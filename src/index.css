@@ -10,7 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100%vh;
-  background-color: white;
+  background-color: #F4F4F4;
   margin-left: auto;
   margin-right: auto;
   display:grid;
@@ -46,7 +46,7 @@ text-align: center;
 
 
 .nav-wrap{
-  background-color: white; 
+  background-color: #F4F4F4; 
   width: 100%;
   }
 
@@ -87,7 +87,7 @@ ul{
 .nav-bk {
   border: solid black;
   border-radius: 0;
-  background-color: white;
+  background-color: #F4F4F4;
   transform: rotate(45deg);
   border-width: 0 0 2px 2px;
   height: 10px;
@@ -95,14 +95,14 @@ ul{
 }
 
 .nav-hm{
-  background-color: white;
+  background-color: #F4F4F4;
   border-style: none;
 }
 
 .nav-fw {
   border: solid black;
   border-radius: 0;
-  background-color: white;
+  background-color: #F4F4F4;
   transform: rotate(45deg);
   border-width: 2px 2px 0 0;
   height: 20px;
@@ -150,7 +150,7 @@ li{
 }
 
 .submit-search{
-  background-color: white;
+  background-color: #F4F4F4;
   border-style: none;
 }
 
@@ -158,14 +158,14 @@ li{
 .edit-btn {
   display: inline-block;
   margin-left: auto;
-  background-color: whitesmoke;
+  background-color: white;
   border: none;
 }
 
 .view-item{
   display: inline-block;
   margin-right: auto;
-  background-color: whitesmoke;
+  background-color: white;
   border: none;
 }
 
@@ -173,7 +173,7 @@ li{
 
 .back-to-btn{
   display: inline-block;
-  background-color: whitesmoke;
+  background-color: white;
   border: none;
   width: 80%;
   text-align: left;
@@ -183,10 +183,14 @@ form{
   width: 100%;
 }
 
+.hide{
+  display: none;
+}
+
 .back-arrow{
   border: solid black;
   border-radius: 0;
-  background-color: white;
+  background-color: #F4F4F4;
   transform: rotate(45deg);
   border-width: 0 0 2px 2px;
   height: 20px;
@@ -234,7 +238,7 @@ padding-right: 15px;
 
 .item-wrap{
   text-align: left;
-  background-color: whitesmoke;
+  background-color: white;
   margin-top: 10%;
   width: 100%;
   margin-bottom: 5%;
@@ -248,7 +252,7 @@ padding-right: 15px;
 
  .item-edit-wrap.contact-edit, .item-edit-wrap.catalog-edit, .item-edit-wrap.event-edit{
   text-align: left;
-  background-color: whitesmoke;
+  background-color: white;
   margin-top: 10%;
   width: 100%;
   max-width: 425px;
@@ -290,7 +294,7 @@ padding-right: 15px;
 }
 
 .delete-btn, .submit-btn, .delete-contact-btn, .cancel-btn{
-  background-color: whitesmoke;
+  background-color: white;
   border: solid lightgray;
   margin-left: 2%;
   margin-right: 2%;
@@ -380,7 +384,7 @@ padding-right: 15px;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  background-color: whitesmoke;
+  background-color: white;
   border-bottom: solid lightgray;
   border-top: solid lightgray;
 }
@@ -425,7 +429,7 @@ p.event-labels{
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  background-color: whitesmoke;
+  background-color: white;
   border-bottom: solid lightgray;
 }
 
@@ -458,7 +462,7 @@ p.event-labels{
     margin: 3%;
     width: 100%;
     max-height: 100%;
-    border: solid white 10px;
+    border: solid #F4F4F4 10px;
   }
 /* 
 -------------------------------- */
@@ -478,7 +482,7 @@ p.event-labels{
 }
 
 .hm-btn-label{
-  color: #fa255e;
+  color: #2F6F7B;
   font-family: 'Cabin', sans-serif;
 }
 
@@ -486,13 +490,15 @@ p.event-labels{
   width: 55px;
   height: 55px;
   font-size: 1em;
+  padding-right: 2%;
+  padding-left: 2%;
   margin-right: 5%;
   margin-left: 5%;
   text-align: center;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
-  background-color: white;
+  background-color: #F4F4F4;
   border: none;
   background-repeat: no-repeat;
 
@@ -562,7 +568,7 @@ button {
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  background-color: whitesmoke;
+  background-color: white;
 }
 
 

@@ -16,6 +16,7 @@ import AddEvent from './Components/Events/AddEvent'
 import EditEvent from './Components/Events/EditEvent'
 import ViewEvent from './Components/Events/ViewEvent'
 import Home from './Components/Home/Home'
+import Header from './Components/Header/Header'
 import LandingPage from './Components/LandingPage/LandingPage'
 //pimport Nav from './Components/Nav/Nav'
 import Gallery from './Components/Gallery/Gallery'
@@ -151,16 +152,15 @@ static getDerivedStateFromError(error){
 
     return (
       <>     <StudioKeeperContext.Provider value={contextValue}>
-        <header>
-          <h1>
-            <a href="/home" className="header">Studio Keeper</a>
-          </h1>
-        {/* <Nav /> */}
-        </header>
         <main className='app'>
+          <Header />
           <Switch>
-            <Route
+          <Route
               exact path={'/'}
+              component={LandingPage}
+            />
+            <Route
+              exact path={'/landing'}
               component={LandingPage}
             />
             <PrivateOnlyRoute
@@ -172,7 +172,7 @@ static getDerivedStateFromError(error){
             component={LoginPage} 
             />
             <PublicOnlyRoute
-              path={'register'}
+              path={'/register'}
               component={RegistrationPage}
             />
             <PrivateOnlyRoute

@@ -22,7 +22,7 @@ export default class SignInForm extends Component {
         user_name.value = ''
         password.value = ''
         TokenService.saveAuthToken(res.authToken)
-        this.props.onLoginSuccess()
+        window.location.href='/home'
       })
       .catch(res => {
         this.setState({ error: res.error })
@@ -30,15 +30,15 @@ export default class SignInForm extends Component {
      }
 
   render() {
-    const { error } = this.state
+    const error  = this.state.error
     return (
       <form
         className='LoginForm'
         onSubmit={this.handleSubmitJwtAuth}
       >
-        <div role='alert'>
+        {/* <div role='alert'>
           {error && <p className='red'>{error}</p>}
-        </div>
+        </div> */}
         <div className='user_name'>
           <label htmlFor='LoginForm__user_name'>
             User name

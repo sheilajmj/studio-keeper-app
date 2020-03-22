@@ -41,13 +41,16 @@ class AddCatalogEntry extends Component {
   }
 
   handleFileSelection  = (e) => {
-    // const key = (e.target.name)
-    // const value = (e.target.files[0].name)
-    // console.log("file name", e.target.files[0].name)
-    // this.setState(previousState => ({ image: {...previousState.image, [image]: value } }))
-    // CatalogApiService.postCatalogImages(this.state.image)
+    const image = e.target.name
+    const value = e.target.files[0].name
+    this.setState(previousState => ({ image: {...previousState.image, [image]: value } }))
+    console.log("file name", e.target.files[0].name)
+
   }
  
+  sendImage = () => {
+    CatalogApiService.postCatalogImages(this.state.image)
+  }
 
   render() {
     this.createNewCatalogEntry = () => {
@@ -60,6 +63,7 @@ class AddCatalogEntry extends Component {
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.createNewCatalogEntry(e)
+      this.sendImage()
     }
 
     this.favoritedBySelectionBoxes = this.context.contacts.map(contact => {

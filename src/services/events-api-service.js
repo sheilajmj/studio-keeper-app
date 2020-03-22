@@ -37,9 +37,8 @@ const EventsApiService = {
         return fetch(`${config.API_ENDPOINT}/events`, {
             method: 'POST',
             headers: {
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
-                // 'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
             body: JSON.stringify(
                 newEventItem,
