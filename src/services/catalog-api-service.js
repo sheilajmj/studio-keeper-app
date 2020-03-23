@@ -1,5 +1,6 @@
 import TokenService from '../services/token-service'
 import config from '../config'
+const formData = new FormData();
 
 const CatalogApiService = {
     getCatalogItems() {
@@ -47,16 +48,17 @@ const CatalogApiService = {
         },
 
     postCatalogImages(image){
+        formData().append('images', image, image.name)
+        handleUploadImage(){
+            this.context.uploadImage(formData)
+        }
+
         return fetch(`${config.API_ENDPOINT}/images`, {
             method:'POST',
             headers:{ 
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
-                'content-type': 'application/json',
             },
-            body:
-            JSON.stringify(
-                image
-            ),
+            body: formData
         })
         .then(res => 
             (!res.ok)

@@ -127,6 +127,7 @@ static getDerivedStateFromError(error){
         .catch(this.context.setError)
   }
 
+  uploadImage(formData)
 
 
   render() {

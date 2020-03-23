@@ -4,6 +4,7 @@ import PageParentHeader from '../Nav/PageParentHeader';
 import CatalogApiService from '../../services/catalog-api-service';
 const { uuid } = require('uuidv4');
 
+
 class AddCatalogEntry extends Component {
   static contextType = Context;
 
@@ -31,8 +32,8 @@ class AddCatalogEntry extends Component {
         history: "01/1/1900 Shown at Winter Festival",
       },
       image: ""
+    }
   }
-}
 
   handleChange = (e) => {
     const key = (e.target.name)
@@ -40,56 +41,63 @@ class AddCatalogEntry extends Component {
     this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
   }
 
-  handleFileSelection  = (e) => {
-    const image = e.target.name
-    const value = e.target.files[0].name
-    this.setState(previousState => ({ image: {...previousState.image, [image]: value } }))
-    console.log("file name", e.target.files[0].name)
+  handleImageChange = (e) => {
+    let image = e.target.files[0]
+    CatalogApiService.postCatalogImages(image)
+    //here send teh name and catalog values to the junction table
 
+    // this.setState(previousState => ({ image: { ...previousState.image, [image]: value } }))
   }
- 
-  sendImage = () => {
-    CatalogApiService.postCatalogImages(this.state.image)
-  }
+
+  // handleSendImage = (e) => {
+  //   console.log("this is e.target", e.target)
+  //   e.preventDefault()
+  //   console.log(e.target.files[0])
+  //   // let image = this.state.image
+  //   // let catalog_id 
+  //   // CatalogApiService.postCatalogImages(formData)
+  // }
 
   render() {
     this.createNewCatalogEntry = () => {
       const newCatalogEntry = this.state.newCatalogEntry
       this.context.updateAppStateCatalogCreate(newCatalogEntry)
       CatalogApiService.postCatalogItem(newCatalogEntry)
-      .then((res) => {window.location.href=`/catalog/${res.id}`})
+        .then((res) => {
+          this.sendImage(res.id)
+          window.location.href = `/catalog/${res.id}`
+        })
     }
 
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.createNewCatalogEntry(e)
-      this.sendImage()
     }
 
     this.favoritedBySelectionBoxes = this.context.contacts.map(contact => {
-        return (
-          <div key={uuid()}>
-            <input type="checkbox" id={"contact-"+contact.contact_id} name={contact.name} />
-            <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/'+ contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
-          </div>
-        )
-      })
-
-    this.eventsBySelectionBoxes = this.context.events.map(event => {
-      return(
+      return (
         <div key={uuid()}>
-          <input type="checkbox" id={"event-"+event.event_id} name={event.name} />
-          <label htmlFor={event.name}>{<a href={'/events/'+ event.event_id} >{event.name}</a>} </label>
+          <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
+          <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
         </div>
       )
-    })  
+    })
+
+    this.eventsBySelectionBoxes = this.context.events.map(event => {
+      return (
+        <div key={uuid()}>
+          <input type="checkbox" id={"event-" + event.event_id} name={event.name} />
+          <label htmlFor={event.name}>{<a href={'/events/' + event.event_id} >{event.name}</a>} </label>
+        </div>
+      )
+    })
     return (
       <>
-      <PageParentHeader pageName="Catalog" />
+        <PageParentHeader pageName="Catalog" />
         <div className="item-edit-wrap catalog-edit">
-          <form onSubmit={this.handleSubmit}>
-          <h3 className="add-item-header">Add Catalog Entry</h3>
-          <div className="form-space">
+          <form onSubmit={this.handleSubmit} >
+            <h3 className="add-item-header">Add Catalog Entry</h3>
+            <div className="form-space">
               <label htmlFor="name" className="catalog-add">Name:</label>
               <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.name} />
             </div>
@@ -146,9 +154,9 @@ class AddCatalogEntry extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="events" className="catalog-add">Events:</label>
-              {this.eventsBySelectionBoxes}            
-              </div>
-              <div className="form-space">
+              {this.eventsBySelectionBoxes}
+            </div>
+            <div className="form-space">
               <label htmlFor="sold_date" className="catalog-add">Sold Date:</label>
               <input type="text" name="sold_date" id="sold_date" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.sold_date} />
             </div>
@@ -158,18 +166,22 @@ class AddCatalogEntry extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="notes" className="catalog-add">Notes:</label>
-              <br/><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.notes} />
+              <br /><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.notes} />
             </div>
             <div className="border"></div>
-            <div className="form-space">
-            <p>(this upload image feature is currently just a placeholder)</p>
-              <label htmlFor="images" className="catalog-add">Images:</label>
-              <input type="file" name="images" id="images" onChange={this.handleFileSelection}  />
-            </div>
             <div className="button-wrap">
-            <button className="submit-btn" type="submit" value="submit">Submit</button>
+              <button className="submit-btn" type="submit" value="submit">Submit</button>
             </div>
+          </form>
+
+          <div className="form-space add-img-form">
+          {/* onSubmit={this.handleSendImage} */}
+            <form encType="multipart/form-data"  >
+              <label htmlFor="images" className="catalog-add">Images:</label>
+              <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple/>
+              <button className=" btn upload-btn" type="submit" value="submit">Upload</button>
             </form>
+          </div>
         </div>
       </>
     );
