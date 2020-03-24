@@ -47,27 +47,33 @@ const CatalogApiService = {
         )
         },
 
-    postCatalogImages(image){
-        formData().append('images', image, image.name)
-        handleUploadImage(){
-            this.context.uploadImage(formData)
-        }
-
+    postCatalogImages(fd, image_name, catalog_id){
         return fetch(`${config.API_ENDPOINT}/images`, {
             method:'POST',
             headers:{ 
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
+                //'Content-Type': 'multipart/form-data'
             },
-            body: formData
+            form: {
+                fd,
+            },
+            body: JSON.stringify({
+               image_name: image_name,
+               catalog_id: catalog_id 
+            })
+
+            //change the user_id to the logged in user
         })
-        .then(res => 
+        .then((res) => { 
+            console.log(res)
             (!res.ok)
             ? res.json().then(e => Promise.reject(e))
-            : res.json()
-            )
+            : res()
+        })
     },
 
     postCatalogItem(catalogItem) {
+        console.log("HERE IN CATALOg", catalogItem)
         return fetch(`${config.API_ENDPOINT}/catalog`, {
           method: 'POST',
           headers: {

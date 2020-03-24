@@ -18,7 +18,7 @@ import ViewEvent from './Components/Events/ViewEvent'
 import Home from './Components/Home/Home'
 import Header from './Components/Header/Header'
 import LandingPage from './Components/LandingPage/LandingPage'
-//pimport Nav from './Components/Nav/Nav'
+//import Nav from './Components/Nav/Nav'
 import Gallery from './Components/Gallery/Gallery'
 import LoginPage from './Components/Login/LoginPage'
 import RegistrationPage from './Components/RegistrationPage/RegistrationPage'
@@ -127,7 +127,7 @@ static getDerivedStateFromError(error){
         .catch(this.context.setError)
   }
 
-  uploadImage(formData)
+  // uploadImage(formData)
 
 
   render() {
@@ -147,7 +147,8 @@ static getDerivedStateFromError(error){
       updateAppStateEventsDelete: this.updateAppStateEventsDelete,
       setCatalogItems: this.setCatalogItems,
       setContacts: this.setContacts,
-      setEvents: this.setEvents
+      setEvents: this.setEvents,
+      uploadImage: this.uploadImage
     }
 
 
@@ -213,16 +214,16 @@ static getDerivedStateFromError(error){
               component={EditEvent}
             />
             <PrivateOnlyRoute
-              path={'/events'}
-              component={EventItem}
-            />
-            <PrivateOnlyRoute
               path={'/events/add'}
               component={AddEvent}
             />
             <PrivateOnlyRoute
               exact path={'/events/:id'}
               component={ViewEvent}
+            />
+            <PrivateOnlyRoute
+              path={'/events'}
+              component={EventItem}
             />
             <PrivateOnlyRoute
               path={'/gallery'}

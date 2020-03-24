@@ -17,7 +17,7 @@ const StudioKeeperContext = React.createContext({
       setCatalogItems: () => {},
       setContacts: () => {},
       setEvents: () => {},
-      uploadImage()
+      uploadImage: () => {}
   })
   
   export default StudioKeeperContext;

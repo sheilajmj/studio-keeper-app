@@ -31,7 +31,8 @@ class AddCatalogEntry extends Component {
         // events: "002, 003",
         history: "01/1/1900 Shown at Winter Festival",
       },
-      image: ""
+      selectedFile: null,
+      selectedFileName: null,
     }
   }
 
@@ -41,33 +42,37 @@ class AddCatalogEntry extends Component {
     this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
   }
 
-  handleImageChange = (e) => {
-    let image = e.target.files[0]
-    CatalogApiService.postCatalogImages(image)
-    //here send teh name and catalog values to the junction table
+  handleImageChange = (event) => {
+    this.setState({ selectedFile: event.target.files[0] })
+    this.setState({ selectedFileName: event.target.files[0].name })
+    console.log("FILE NAME", event.target.files[0].name)
 
-    // this.setState(previousState => ({ image: { ...previousState.image, [image]: value } }))
   }
 
-  // handleSendImage = (e) => {
-  //   console.log("this is e.target", e.target)
-  //   e.preventDefault()
-  //   console.log(e.target.files[0])
-  //   // let image = this.state.image
-  //   // let catalog_id 
-  //   // CatalogApiService.postCatalogImages(formData)
-  // }
+  handleUploadImage = (id) => {
+    const fd = new FormData();
+
+
+    fd.append('images', this.state.selectedFile, this.state.selectedFile.name, this.state.newCatalogId);
+    CatalogApiService.postCatalogImages(fd)
+  }
+
+
+  createNewCatalogEntry = () => {
+    const newCatalogEntry = this.state.newCatalogEntry
+    this.context.updateAppStateCatalogCreate(newCatalogEntry)
+    CatalogApiService.postCatalogItem(newCatalogEntry)
+      .then((res) => {
+        this.sendImage(res.id)
+        window.location.href = `/catalog/${res.id}`
+        this.setState({ newCatalogId: res.id })
+        this.handleUploadImage(res.id)
+      })
+  }
+
+
 
   render() {
-    this.createNewCatalogEntry = () => {
-      const newCatalogEntry = this.state.newCatalogEntry
-      this.context.updateAppStateCatalogCreate(newCatalogEntry)
-      CatalogApiService.postCatalogItem(newCatalogEntry)
-        .then((res) => {
-          this.sendImage(res.id)
-          window.location.href = `/catalog/${res.id}`
-        })
-    }
 
     this.handleSubmit = (e) => {
       e.preventDefault()
@@ -95,7 +100,7 @@ class AddCatalogEntry extends Component {
       <>
         <PageParentHeader pageName="Catalog" />
         <div className="item-edit-wrap catalog-edit">
-          <form onSubmit={this.handleSubmit} >
+          <form onSubmit={this.handleSubmit} encType="multipart/form-data" >
             <h3 className="add-item-header">Add Catalog Entry</h3>
             <div className="form-space">
               <label htmlFor="name" className="catalog-add">Name:</label>
@@ -172,16 +177,11 @@ class AddCatalogEntry extends Component {
             <div className="button-wrap">
               <button className="submit-btn" type="submit" value="submit">Submit</button>
             </div>
-          </form>
-
-          <div className="form-space add-img-form">
-          {/* onSubmit={this.handleSendImage} */}
-            <form encType="multipart/form-data"  >
+            <div className="form-space add-img-form">
               <label htmlFor="images" className="catalog-add">Images:</label>
-              <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple/>
-              <button className=" btn upload-btn" type="submit" value="submit">Upload</button>
-            </form>
-          </div>
+              <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple />
+            </div>
+          </form>
         </div>
       </>
     );
