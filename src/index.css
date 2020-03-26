@@ -44,21 +44,27 @@ main{
   padding: 2%;
 }
 
-mg-sm{
+.mg-sm{
   margin: 2%;
 }
-pd-r-sm{
+.pd-r-sm{
 padding-right: 4%;
 }
 
-.user_name{
-
+.tx-a-c{
+  text-align: center;
 }
 
+.tx-a-l{
+  text-align: left;
+}
 
-/* .login-welcome{
-  display: inline-t-- */
-/* } */
+.login-welcome{
+  display: flex;
+  height: 150px;
+ }
+
+ fb-item
 
 header h1{
 text-align: center;

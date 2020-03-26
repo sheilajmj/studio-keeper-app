@@ -16,17 +16,17 @@ const CatalogImagesApiService = {
             )
     },
 
-    postCatalogImages(fd) {
-        console.log(fd.file)
+    postCatalogImages(image) {
+        console.log("This is the formData file: ", image.name)
+          const fd = new FormData();
+          fd.append('image', image, 'image.name.jpg')
           return fetch(`${config.API_ENDPOINT}/images`, {
             method: 'POST',
             headers: {
-                'authorization': `bearer ${TokenService.getAuthToken()}`,
+               'authorization': `bearer ${TokenService.getAuthToken()}`,
             //    'Content-Type': 'multipart/form-data'
             },
-            formData: {
-                "image": fd.file,
-            },
+            body: fd
         })
             .then((res) => {
                 // console.log(res) 

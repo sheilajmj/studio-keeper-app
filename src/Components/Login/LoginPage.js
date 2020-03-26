@@ -32,26 +32,26 @@ export default class SignInForm extends Component {
   render() {
     return (
       <form
-        className='LoginForm'
+        className='LoginForm tx-a-c'
         onSubmit={this.handleSubmitJwtAuth}
       >
         {/* <div role='alert'>
           {error && <p className='red'>{error}</p>}
         </div> */}
-        <div className='user_name'>
+        <div className='user_name tx-a-l'>
           <label className='pd-r-sm' htmlFor='LoginForm__user_name'>
             User name   
           </label>
           <input required name='user_name' id='signInForm_user_name' />
         </div>
-        <div className='password'>
-          <label htmlFor='LoginForm__password'>
+        <div className='password tx-a-l'>
+          <label className='pd-r-sm' htmlFor='LoginForm__password'>
             Password    
           </label>
           <input required name='password'  type='password' id='signInForm__password' />
 
         </div>
-        <button type='submit'>
+        <button className="mg-sm" type='submit'>
           Login
         </button>
       </form>

@@ -7,7 +7,7 @@ import TokenService from '../../services/token-service'
 export default class Header extends Component {
     handleLogoutClick = () => {
         TokenService.clearAuthToken()
-        window.location.href='/home'
+        window.location.href = '/home'
     }
 
     renderLogoutLink() {
@@ -42,20 +42,21 @@ export default class Header extends Component {
     render() {
         return (
             <nav className='Header'>
-                <div className='longin-welcome'>
-                 <a href='/landing'>Welcome</a>
-                {TokenService.hasAuthToken()
-                    ? this.renderLogoutLink()
-                    : this.renderLoginLink()}
-                </div>
-                <h1>                    
-                <a href="/home" className="header">Studio Keeper</a>
+                <h1>
+                    <a href="/home" className="header">Studio Keeper</a>
                 </h1>
-         
+                <div className='login-welcome'>
+                    <a className="d-flex" href='/landing'>Welcome</a>
+                    {TokenService.hasAuthToken()
+                        ? this.renderLogoutLink()
+                        : this.renderLoginLink()}
+                </div>
+
+
             </nav>
         )
     }
-    }
+}
 
 
 

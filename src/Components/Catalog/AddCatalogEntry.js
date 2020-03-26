@@ -54,13 +54,13 @@ class AddCatalogEntry extends Component {
   }
 
   handleUploadImage = () => {
-
-    const fd = new FormData();
-    fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
+console.log("Selected File: ", this.state.selectedFile, "Selected File Name: ", this.state.selectedFile.name)
+    // const fd = new FormData();
+    // fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
     // fd.append('user_id', 1)
     // fd.append('image_name', this.state.selectedFile.name)
     // fd.append('catalog_id', this.state.newCatalogId)
-    CatalogImagesApiService.postCatalogImages(fd)
+    return CatalogImagesApiService.postCatalogImages(this.state.selectedFile)
       .then((res) => {
         console.log("response", res)
       })
@@ -73,8 +73,8 @@ class AddCatalogEntry extends Component {
     CatalogApiService.postCatalogItem(newCatalogEntry)
       .then((res) => {
         this.setState({ newCatalogId: res.id })
-        this.handleUploadImage()
-        return (res)
+        return this.handleUploadImage().then(() => res)
+        
       })
       .then ((res) => {
         window.location.href = `/catalog/${res.id}`
@@ -103,14 +103,15 @@ class AddCatalogEntry extends Component {
   })
 }
 
+
+handleSubmit = (e) => {
+  e.preventDefault()
+  this.createNewCatalogEntry(e)
+}
+
+
   render() {
 
-    this.handleSubmit = (e) => {
-      e.preventDefault()
-      this.createNewCatalogEntry(e)
-    }
-
-   
     return (
       <>
         <PageParentHeader pageName="Catalog" />
