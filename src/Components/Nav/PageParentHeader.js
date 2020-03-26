@@ -12,7 +12,8 @@ class PageParentHeader extends Component {
     <section className='page-parent-header'>
         <PageNav pageName={this.props.pageName} />
         <div className='search-add-wrap'>
-        <SearchBar /><AddButton pageName={this.props.pageName} />
+        {/* <SearchBar /> */}
+        <AddButton pageName={this.props.pageName} />
         </div>
     </section>
   );

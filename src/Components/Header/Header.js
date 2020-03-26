@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import Nav from '../Nav/Nav'
 import { Hyph } from '../Utils/Utils'
 import TokenService from '../../services/token-service'
-import './Header.css'
 
 export default class Header extends Component {
     handleLogoutClick = () => {
@@ -43,13 +42,16 @@ export default class Header extends Component {
     render() {
         return (
             <nav className='Header'>
-                <h1>
-                <a href="/home" className="header">Studio Keeper</a>
-                </h1>
-                <a href='/landing'>Welcome</a>
+                <div className='longin-welcome'>
+                 <a href='/landing'>Welcome</a>
                 {TokenService.hasAuthToken()
                     ? this.renderLogoutLink()
                     : this.renderLoginLink()}
+                </div>
+                <h1>                    
+                <a href="/home" className="header">Studio Keeper</a>
+                </h1>
+         
             </nav>
         )
     }

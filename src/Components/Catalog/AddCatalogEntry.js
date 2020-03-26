@@ -40,8 +40,10 @@ class AddCatalogEntry extends Component {
   handleChange = (e) => {
     const key = (e.target.name)
     const value = (e.target.value)
-    this.setState(previousState => ({ newCatalogEntry: { ...previousState.newCatalogEntry, [key]: value } }))
-  }
+    const { newCatalogEntry } = this.state;
+    newCatalogEntry[key] = value;
+    this.setState({ newCatalogEntry })
+    }
 
   handleImageChange = (event) => {
     console.log("EVENT TARGET 0", event.target.files[0])
@@ -79,7 +81,23 @@ class AddCatalogEntry extends Component {
       })
       
   }
+  favoritedBySelectionBoxes = this.context.contacts.map(contact => {
+    return (
+      <div key={uuid()}>
+        <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
+        <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
+      </div>
+    )
+  })
 
+  eventsBySelectionBoxes = this.context.events.map(event => {
+    return (
+      <div key={uuid()}>
+        <input type="checkbox" id={"event-" + event.event_id} name={event.name} />
+        <label htmlFor={event.name}>{<a href={'/events/' + event.event_id} >{event.name}</a>} </label>
+      </div>
+    )
+  })
 
 
   render() {
@@ -89,23 +107,7 @@ class AddCatalogEntry extends Component {
       this.createNewCatalogEntry(e)
     }
 
-    this.favoritedBySelectionBoxes = this.context.contacts.map(contact => {
-      return (
-        <div key={uuid()}>
-          <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
-          <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
-        </div>
-      )
-    })
-
-    this.eventsBySelectionBoxes = this.context.events.map(event => {
-      return (
-        <div key={uuid()}>
-          <input type="checkbox" id={"event-" + event.event_id} name={event.name} />
-          <label htmlFor={event.name}>{<a href={'/events/' + event.event_id} >{event.name}</a>} </label>
-        </div>
-      )
-    })
+   
     return (
       <>
         <PageParentHeader pageName="Catalog" />
@@ -184,12 +186,12 @@ class AddCatalogEntry extends Component {
               <br /><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.notes} />
             </div>
             <div className="border"></div>
-            <div className="button-wrap">
-              <button className="submit-btn" type="submit" value="submit">Submit</button>
-            </div>
             <div className="form-space add-img-form">
               <label htmlFor="images" className="catalog-add">Images:</label>
               <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple/>
+            </div>
+            <div className="button-wrap">
+              <button className="submit-btn" type="submit" value="submit">Submit</button>
             </div>
           </form>
         </div>

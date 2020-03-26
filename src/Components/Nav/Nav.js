@@ -17,16 +17,16 @@ class Nav extends Component {
       <nav className={`nav-wrap ${this.hideClass}`}>
         <div className="hm-btn-container">
           <div className="contact-wrap hm-wrap">
-            <button className="contactBtn hm-btn" onClick={(() => { this.context.history.push('/contacts') })}> </button>
+            <button className="contactBtn hm-btn" onClick={(() => { window.location.href='/contacts' })}> </button>
             <div className="hm-btn-label">Contact</div>
           </div>
           <div className="catalog-wrap hm-wrap">
-            <button className="catalogBtn hm-btn" onClick={(() => { this.context.history.push('/catalog') })}> </button>
+            <button className="catalogBtn hm-btn" onClick={(() => { window.location.href='/catalog' })}> </button>
             <div className="hm-btn-label">Catalog</div>
           </div>
           <br />
           <div className="event-wrap hm-wrap">
-            <button className="eventBtn hm-btn" onClick={(() => { this.context.history.push('/events') })}> </button>
+            <button className="eventBtn hm-btn" onClick={(() => { window.location.href='/events' })}> </button>
             <div className="hm-btn-label">Event</div>
           </div>
           <div className="gallery-wrap hm-wrap">

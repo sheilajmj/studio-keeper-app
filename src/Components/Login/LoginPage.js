@@ -39,14 +39,14 @@ export default class SignInForm extends Component {
           {error && <p className='red'>{error}</p>}
         </div> */}
         <div className='user_name'>
-          <label htmlFor='LoginForm__user_name'>
-            User name
+          <label className='pd-r-sm' htmlFor='LoginForm__user_name'>
+            User name   
           </label>
           <input required name='user_name' id='signInForm_user_name' />
         </div>
         <div className='password'>
           <label htmlFor='LoginForm__password'>
-            Password
+            Password    
           </label>
           <input required name='password'  type='password' id='signInForm__password' />
 
