@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
 import CatalogApiService from '../../services/catalog-api-service';
+import CatalogImagesApiService from '../../services/images-api-service'
 const { uuid } = require('uuidv4');
 
 
@@ -43,18 +44,24 @@ class AddCatalogEntry extends Component {
   }
 
   handleImageChange = (event) => {
+    console.log("EVENT TARGET 0", event.target.files[0])
     this.setState({ selectedFile: event.target.files[0] })
+    console.log("SELECTED FILE", this.state.selectedFile)
     this.setState({ selectedFileName: event.target.files[0].name })
-    console.log("FILE NAME", event.target.files[0].name)
-
+    console.log("FILE NAME", this.state.selectedFileName)
   }
 
-  handleUploadImage = (id) => {
+  handleUploadImage = () => {
+
     const fd = new FormData();
-
-
-    fd.append('images', this.state.selectedFile, this.state.selectedFile.name, this.state.newCatalogId);
-    CatalogApiService.postCatalogImages(fd)
+    fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
+    // fd.append('user_id', 1)
+    // fd.append('image_name', this.state.selectedFile.name)
+    // fd.append('catalog_id', this.state.newCatalogId)
+    CatalogImagesApiService.postCatalogImages(fd)
+      .then((res) => {
+        console.log("response", res)
+      })
   }
 
 
@@ -63,11 +70,14 @@ class AddCatalogEntry extends Component {
     this.context.updateAppStateCatalogCreate(newCatalogEntry)
     CatalogApiService.postCatalogItem(newCatalogEntry)
       .then((res) => {
-        this.sendImage(res.id)
-        window.location.href = `/catalog/${res.id}`
         this.setState({ newCatalogId: res.id })
-        this.handleUploadImage(res.id)
+        this.handleUploadImage()
+        return (res)
       })
+      .then ((res) => {
+        window.location.href = `/catalog/${res.id}`
+      })
+      
   }
 
 
@@ -179,7 +189,7 @@ class AddCatalogEntry extends Component {
             </div>
             <div className="form-space add-img-form">
               <label htmlFor="images" className="catalog-add">Images:</label>
-              <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple />
+              <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple/>
             </div>
           </form>
         </div>

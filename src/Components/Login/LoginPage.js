@@ -30,7 +30,6 @@ export default class SignInForm extends Component {
      }
 
   render() {
-    const error  = this.state.error
     return (
       <form
         className='LoginForm'
