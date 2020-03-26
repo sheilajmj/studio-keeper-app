@@ -43,7 +43,7 @@ class AddCatalogEntry extends Component {
     const { newCatalogEntry } = this.state;
     newCatalogEntry[key] = value;
     this.setState({ newCatalogEntry })
-  }
+    }
 
   handleImageChange = (event) => {
     console.log("EVENT TARGET 0", event.target.files[0])
@@ -76,12 +76,13 @@ class AddCatalogEntry extends Component {
         this.handleUploadImage()
         return (res)
       })
-      .then((res) => {
+      .then ((res) => {
         window.location.href = `/catalog/${res.id}`
       })
-
+      
   }
-  favoritedBySelectionBoxes = this.context.contacts.map(contact => {
+  favoritedBySelectionBoxes = () => {
+    this.context.contacts.map(contact => {
     return (
       <div key={uuid()}>
         <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
@@ -89,8 +90,10 @@ class AddCatalogEntry extends Component {
       </div>
     )
   })
+}
 
-  eventsBySelectionBoxes = this.context.events.map(event => {
+  eventsBySelectionBoxes = () => {
+    this.context.events.map(event => {
     return (
       <div key={uuid()}>
         <input type="checkbox" id={"event-" + event.event_id} name={event.name} />
@@ -98,7 +101,7 @@ class AddCatalogEntry extends Component {
       </div>
     )
   })
-
+}
 
   render() {
 
@@ -107,7 +110,7 @@ class AddCatalogEntry extends Component {
       this.createNewCatalogEntry(e)
     }
 
-
+   
     return (
       <>
         <PageParentHeader pageName="Catalog" />
@@ -188,7 +191,7 @@ class AddCatalogEntry extends Component {
             <div className="border"></div>
             <div className="form-space add-img-form">
               <label htmlFor="images" className="catalog-add">Images:</label>
-              <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple />
+              <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple/>
             </div>
             <div className="button-wrap">
               <button className="submit-btn" type="submit" value="submit">Submit</button>
