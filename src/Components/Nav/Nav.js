@@ -14,7 +14,7 @@ class Nav extends Component {
     }
 
     return (
-      <nav className={`nav-wrap ${this.hideClass}`}>
+      <nav className={`nav-wrap ${this.hideClass} bkg-color-lt`}>
         <div className="hm-btn-container">
           <div className="contact-wrap hm-wrap">
             <button className="contactBtn hm-btn" onClick={(() => { window.location.href='/contacts' })}> </button>

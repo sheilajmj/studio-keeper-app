@@ -20,7 +20,7 @@ class PageNav extends Component {
           <li>
           <button className="nav-bk" onClick={() => {this.handleBackClick()}}></button>
           </li>
-              <h2 className="pageName"><a className="pageName-link" href={`/` + this.props.pageName}>{this.props.pageName}</a></h2>
+              <h2 className="pageName color-pk"><a className="pageName-link color-pk" href={`/` + this.props.pageName.toLowerCase()}>{this.props.pageName}</a></h2>
           <li>
           <button className="nav-fw" onClick={() => {this.handleForwardClick()}}></button>
           </li>

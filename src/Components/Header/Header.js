@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Nav from '../Nav/Nav'
-import { Hyph } from '../Utils/Utils'
 import TokenService from '../../services/token-service'
 
 export default class Header extends Component {
@@ -12,26 +10,28 @@ export default class Header extends Component {
 
     renderLogoutLink() {
         return (
-            <div className='Header__logged-in'>
-                <Nav />
-                <Link
-                    onClick={this.handleLogoutClick}
-                    to='/'>
-                    Logout
+            <>
+                <div className='Header__logged-in bkg-color-lt'>
+                    <a className='color-te' href='/landing'>Welcome</a>
+                    <Link
+                        onClick={this.handleLogoutClick}
+                        to='/'>
+                        Logout
                 </Link>
-            </div>
+                </div>
+            </>
         )
     }
 
     renderLoginLink() {
         return (
             <div className='Header__not-logged-in'>
+                <a className='color-te' href='/landing'>Welcome</a>
                 <Link
                     to='/register'>
                     Register
             </Link>
-                <Hyph />
-                <Link
+            <Link className="width-100"
                     to='/login'>
                     Log in
             </Link>
@@ -41,19 +41,18 @@ export default class Header extends Component {
 
     render() {
         return (
-            <nav className='Header'>
-                <h1>
-                    <a href="/home" className="header">Studio Keeper</a>
+            <section className='Header'>
+                <h1 className='app-title'>
+                    <a href="/home" className='header color-pk'>Studio Keeper</a>
                 </h1>
-                <div className='login-welcome'>
-                    <a className="d-flex" href='/landing'>Welcome</a>
+                <div className='m-neg-t-sm color-te txt-r login-wrap'>
+
                     {TokenService.hasAuthToken()
                         ? this.renderLogoutLink()
                         : this.renderLoginLink()}
                 </div>
 
-
-            </nav>
+            </section>
         )
     }
 }

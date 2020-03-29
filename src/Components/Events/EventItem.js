@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Context from '../../Context';
 import PageParentHeader from '../Nav/PageParentHeader';
-import Collapsible from '../Collapsible/Collaplisble'
 
 let moment = require('moment');
 
@@ -134,9 +133,10 @@ class EventItem extends Component {
 
     return (
       <div>
-        <PageParentHeader pageName="events" />
+        <PageParentHeader pageName="Events" />
+        <div className="flex-container bkg-color-tra"> 
         {this.eventItemsObject}
-        <Collapsible title="this is a title" children="HOWDY!" />
+        </div>
       </div>
     );
   }

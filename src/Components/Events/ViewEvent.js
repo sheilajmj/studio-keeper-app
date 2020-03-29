@@ -44,7 +44,7 @@ class ViewEvent extends Component {
     let eventCatalogArray = this.state.eventCatalogArray
     let unused = eventCatalogArray.push(response)
     this.setState({ eventCatalogArray: eventCatalogArray })
-    this.catalogImageReturn()
+    // this.catalogImageReturn()
     return unused
   }
 
@@ -121,22 +121,22 @@ class ViewEvent extends Component {
   }
 
 
-  catalogImageReturn = () => {
-    let images = this.state.eventCatalogArray
-    let imageMap
-    if (images !== [{}]) {
-      imageMap = images.flat().map((item) => {
-        console.log("THIS IS ITEM", item)
-        return (
-          <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
-            <img className="catalog-img-item" src={require("../../../public/assets/" + item.image_name)} alt="catalog item" />
-          </a>)
-      })
-      console.log("imageMap", imageMap)
-      return imageMap
-    }
+  // catalogImageReturn = () => {
+  //   let images = this.state.eventCatalogArray
+  //   let imageMap
+  //   if (images !== [{}]) {
+  //     imageMap = images.flat().map((item) => {
+  //       console.log("THIS IS ITEM", item)
+  //       return (
+  //         <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+  //           <img className="catalog-img-item" src={require("../../../public/assets/" + item.image_name)} alt="catalog item" />
+  //         </a>)
+  //     })
+  //     console.log("imageMap", imageMap)
+  //     return imageMap
+  //   }
 
-  }
+  // }
 
 
 
@@ -197,6 +197,7 @@ class ViewEvent extends Component {
           return (
             <div key={`event` + item.id}>
               <PageParentHeader pageName="Events" />
+              <div className="flex-container bkg-color-tra"> 
               <div className="item-wrap">
                 <button type="button" className="back-to-btn" value="backToEvents" onClick={(() => { this.handleBackToEvents(item.event_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /><span className="all-events-text">All Events</span></button>
                 <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
@@ -231,12 +232,14 @@ class ViewEvent extends Component {
                   </li>
                   <li>
                     <div className="border"></div>
-                    <p className="event-labels">Catalog Items (items to show or sell at event):</p> {this.catalogImageReturn()}
+                    <p className="event-labels">Catalog Items (items to show or sell at event):</p> 
+                    {/* {this.catalogImageReturn()} */}
                   </li>
                 </ul>
                 <div className="button-wrap">
                   <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.id) }}>Delete</button>
                 </div>
+              </div>
               </div>
             </div>
           );

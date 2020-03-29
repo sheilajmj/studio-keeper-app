@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
+import Nav from '../Nav/Nav'
+import EventsHome from '../Events/EventsHome'
+import CatalogHome from '../Catalog/CatalogHome'
 
 class Home extends Component {
     static contextType = Context;
@@ -12,7 +15,14 @@ class Home extends Component {
     render() {
         return (
             <section className='home'>
-                <div>Upcoming Events</div>
+                <Nav />
+                <div className="flex-hm-container">
+                    <h1 className="color-pk">Upcoming Events</h1>
+                    <EventsHome />
+                    <h1 className="color-pk">Catalog Favorites</h1>
+                    <CatalogHome />   
+                    
+                </div>
                 {/* < */}
                 {/* <div className="hm-btn-container">
                     <div className="contact-wrap hm-wrap">

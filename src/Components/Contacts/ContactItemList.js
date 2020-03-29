@@ -101,7 +101,7 @@ class ContactItem extends Component {
   
   
       return (
-        <div key={"contact" + item.id} className="item-wrap">
+        <div key={"contact" + item.id} className="item-wrap set-ht-1">
           <button className="edit-btn" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
           <ul className="item" onClick={(() => { this.handleItemClick(item.id) })}>
             {this.contactNameIncluded()}
@@ -120,7 +120,9 @@ class ContactItem extends Component {
       <section className='contacts'>
       <div>
         <PageParentHeader pageName={"Contacts"} />
+        <div className="flex-container">
         {this.contactItemsList}
+        </div>
       </div>
       </section>
     );

@@ -148,7 +148,7 @@ class ViewContact extends Component {
           console.log("THIS IS ITEM", item)
           return (    
             <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">               
-                  <img className="catalog-img-item" src={require("../../../public/assets/" + item.image_name)} alt="catalog item" />
+                  {/* <img className="catalog-img-item" src={require("../../../public/assets/" + item.image_name)} alt="catalog item" /> */}
            </a>)
         })
       }
@@ -201,6 +201,7 @@ class ViewContact extends Component {
 
       return (
         <div>
+          <div className="flex-container bkg-color-tra"> 
           <div key={item.id} className="item-wrap">
             <button className="back-to-btn" type="button" value="backToContacts" onClick={(() => { this.handleBackToContacts(item.id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /> <span className="all-contact-text">All Contacts</span></button>
             <button className="edit-btn" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
@@ -248,6 +249,7 @@ class ViewContact extends Component {
               <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.id) }}>Delete</button>
             </div>
           </div>
+          </div>  
         </div>
       )
     })

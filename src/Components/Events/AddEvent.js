@@ -53,7 +53,8 @@ class AddEvent extends Component {
       return (
         <div key={uuid()}>
           <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
-          <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
+          <label htmlFor={contact.name}> {<a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer">{contact.name ? contact.name : contact.business_name }</a>}</label>
+
         </div>
       )
     })

@@ -226,10 +226,7 @@ class EditContact extends Component {
             </div> */}
             <div className="form-space">
             <legend className="contact-edit">Event Affiliation:</legend>
-            <fieldset>
-            {this.eventFieldSelectionOptions}
-            </fieldset>
-                    
+            {this.eventFieldSelectionOptions}                    
             </div>
             <div className="form-space">
               <label htmlFor="email" className="contact-edit">Email:</label>

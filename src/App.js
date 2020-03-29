@@ -127,6 +127,17 @@ static getDerivedStateFromError(error){
         .catch(this.context.setError)
   }
 
+  backgroundSelection = () => {
+    console.log(this.props.match.path, "What is the path")
+    if(this.props.location.pathname.includes("events")){
+      return "bkg-img-te bkg-div"
+    }
+    if(this.props.location.pathname.includes("contacts")){
+      return "bkg-img-pk bkg-div"
+    }
+  }
+
+
   // uploadImage(formData)
 
 
@@ -234,8 +245,10 @@ static getDerivedStateFromError(error){
             />
 
           </Switch>
+          
         </main>
       </StudioKeeperContext.Provider>
+      <div className={this.backgroundSelection()}><img className="bkvg-size" src={require("./assets/bkgr-img-te.svg")} alt="background" /> </div>
       </>
     );
   };

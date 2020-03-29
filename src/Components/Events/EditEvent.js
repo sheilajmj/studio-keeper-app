@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
 import EventsApiService from '../../services/events-api-service';
+import ContactsApiService from '../../services/contacts-api-service';
+import ContactsEventsApiService from '../../services/contacts-events-api-service';
 
 class EditEvent extends Component {
   static contextType = Context;
@@ -11,10 +13,20 @@ class EditEvent extends Component {
     this.state = {
       updateBoolean: false,
       updatedEvent: [],
-      eventToEdit: []
+      eventToEdit: [],
+      contactsEventsConnect: [],
+      contacts: [],
+      checkedContacts: [],
     }
   }
 
+  setCheckedContacts = (id) => {
+    let checkedContactsState = this.state.checkedContacts
+    let splicedContacts = checkedContactsState.splice(-1, 0, id)
+    console.log(checkedContactsState)
+    this.setState({checkedContacts: checkedContactsState})
+    return splicedContacts
+  }
 
   setSelectedEventItem = (eventItem) => {
     if (this.state.updateBoolean === false) {
@@ -23,17 +35,58 @@ class EditEvent extends Component {
     }
   }
 
+  setContacts = (contacts) => { 
+      this.setState({contacts: contacts})
+  }
+  
+
+  setContactsEventsConnect = (contacts) => {
+    this.setState({contactsEventsConnect: contacts})
+  }
 
   componentDidMount = () => {
     EventsApiService.getEventItem(this.props.match.params.id)
       .then(this.setSelectedEventItem)
       .catch(this.context.setError)
+
+    ContactsApiService.getContacts()
+      .then(this.setContacts)
+      .then(this.context.setError)
+
+    ContactsEventsApiService.getContactsAndEvents("event_id", this.props.match.params.id) 
+      .then(this.setContactsEventsConnect)
+      .then(this.context.setError)
   }
+
+    checkedContactValue = (contact_id) => {
+          // // see if the current contact is in the contactEventsConnect set if so indicate true
+          this.checkValue = () => {
+            if (!this.state.contactsEventsConnect){
+              return 
+            }
+            else {
+              let contactCheckedItem = this.state.contactsEventsConnect.find((contact) => contact.contact_id === contact_id)
+              if (contactCheckedItem){
+                 return true
+               }              
+              }
+              return this.contactCheckedItem
+            }
+            // this.setCheckedContacts(this.checkValue())
+            return this.checkValue()
+          }
+
+
+    // handeContactClick = (contact.id) => {
+          // event_id = this.props.match.params
+//          if checked === true => Add selected contact.id and event_id pair to the contactsEvents state object.
+            // if checked !== true => remove selected contact.id and event_id pair from the contactsEvents state object.
+
+            //on submit - how to send each? of those objects in state?
+    // }
 
 
   render() {
-    // selectedEventItem = this.context.events.filter(item => item.event_id === this.selectedEventId)
-
     this.handleSubmit = (e) => {
       e.preventDefault()
       this.context.updateAppStateEventsUpdate(this.state.updatedEvent)
@@ -48,12 +101,23 @@ class EditEvent extends Component {
     }
 
 
-    // this.setInitialDefaultState = () => {
-    //   if(this.state.updateBoolean === false){
-    //     this.setState({updatedEvent: this.selectedEventObject})
-    //   }
-    // }
-
+    this.contactFieldSelectionOptions = () => {
+      if(this.state.contacts === undefined){
+        return <div></div>
+      }
+      else {
+        let contactReturn = this.state.contacts.map((contact) => {
+          return (
+            <div key={'contact'+ contact.id} className="checkbox">
+              <input type="checkbox" id={'contact' + contact.id} name={"contacts"} value={contact.id} onChange = {this.handleContactClick} defaultChecked={this.checkedContactValue(contact.id)} />
+              <label htmlFor={contact.id}> {<a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer">{contact.name ? contact.name : contact.business_name }</a>}</label>
+             </div>
+          )
+        })
+        return contactReturn
+      }
+    }
+    
 
 
     this.handleCancel = (e) => {
@@ -120,40 +184,22 @@ class EditEvent extends Component {
     //     )
     //     })
 
-    // this.contactFieldSelectionOptions = this.context.contacts.map((contact) => {
-
-    //     this.checkValue = () => {
-    //       if(this.selectedEventArray[0].contact.includes(contact.contact_id)){
-    //         return true
-    //       }
-    //     }
-
-    //     return (
-    //       <div key={'contact'+ contact.contact_id} className="checkbox">
-    //         <input type="checkbox" id={'contact' + contact.contact_id} name={"contacts"} value={contact.contact_id} onChange = {this.handleContactClick} defaultChecked={this.checkValue()} />
-    //         <label htmlFor={contact.contact_id}> {<a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer">{contact.name !== "" ? contact.name : contact.business_name }</a>}</label>
-    //        </div>
-    //     )
-    //   })
-
-
-
-
-
+    // 
 
 
     this.selectedEventForm = () => {
+      if(this.state.eventToEdit === undefined){
+        return <div></div>
+      }
       if (this.state.eventToEdit !== {}) {
-        console.log(this.state.eventToEdit, "STATE STUFF")
         let selectedEventItemForm = [this.state.eventToEdit].map((item) => {
-          console.log(item, "ITEM IN EVENTS")
           if (!item) {
             return (
               <div></div>
             )
           }
           return (
-            <div key={item.id} className="item-edit-wrap event-edit">
+            <div key={item.id + item.name} className="item-edit-wrap event-edit">
               <form onSubmit={this.handleSubmit}>
                 <h3 className="add-item-header">Edit Event</h3>
                 <div className="form-space">
@@ -178,7 +224,7 @@ class EditEvent extends Component {
                 </div>
                 <div className="form-space">
                   <label htmlFor="contact" className="event-edit">Contact:</label>
-                  {this.contactFieldSelectionOptions}
+                  {this.contactFieldSelectionOptions()}
                   {/* <input type="text" name="contact" id="contact" onChange={this.handleChange} defaultValue={item.contact} /> */}
                 </div>
                 <div className="form-space">

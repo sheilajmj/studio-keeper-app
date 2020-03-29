@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Context from '../../Context';
-import PageParentHeader from '../Nav/PageParentHeader'
 
 class Gallery extends Component {
   static contextType = Context;
 
-  
+
     galleryItemsList = this.context.catalog_items.map((item) => {
   
       this.handleImages = () => {    
@@ -67,11 +66,9 @@ class Gallery extends Component {
         }
       }
   
-
-  
       return (
         <div key={item.catalog_id} className="item-wrap">
-          <ul className="gallery" onClick={(() => { this.handleItemClick(item.catalog_id) })}>
+          <ul className="gallery" >
             {this.catalogImagesIncluded()}
             {this.catalogCollectionIncluded()}
             {this.catalogNameIncluded()}
@@ -80,8 +77,7 @@ class Gallery extends Component {
       )
     })
   
- 
-  
+
   
 
   
@@ -89,13 +85,10 @@ class Gallery extends Component {
 
     return (
       <div>
-          <PageParentHeader />
-          <h1>Who is viewing?
-          View favorites
-          </h1>
-          <h2>Artist's Statement</h2>
-            <button className="edit-btn"></button>
+          <h1>Gallery</h1>
+            <div className="flex-container">
             { this.galleryItemsList }
+            </div>
       </div>
     );
   }

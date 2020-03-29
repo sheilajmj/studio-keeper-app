@@ -54,13 +54,13 @@ class AddCatalogEntry extends Component {
   }
 
   handleUploadImage = () => {
-console.log("Selected File: ", this.state.selectedFile, "Selected File Name: ", this.state.selectedFile.name)
+console.log("New Catalog ID: ", this.state.newCatalogId)
     // const fd = new FormData();
     // fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
     // fd.append('user_id', 1)
     // fd.append('image_name', this.state.selectedFile.name)
     // fd.append('catalog_id', this.state.newCatalogId)
-    return CatalogImagesApiService.postCatalogImages(this.state.selectedFile)
+    return CatalogImagesApiService.postCatalogImages(this.state.selectedFile, this.state.newCatalogId)
       .then((res) => {
         console.log("response", res)
       })
