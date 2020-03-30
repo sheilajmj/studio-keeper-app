@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
 import CatalogApiService from '../../services/catalog-api-service';
-import CatalogImagesApiService from '../../services/images-api-service'
-const { uuid } = require('uuidv4');
+// import CatalogImagesApiService from '../../services/images-api-service'
+// const { uuid } = require('uuidv4');
 
 
 class AddCatalogEntry extends Component {
@@ -60,48 +60,53 @@ console.log("New Catalog ID: ", this.state.newCatalogId)
     // fd.append('user_id', 1)
     // fd.append('image_name', this.state.selectedFile.name)
     // fd.append('catalog_id', this.state.newCatalogId)
-    return CatalogImagesApiService.postCatalogImages(this.state.selectedFile, this.state.newCatalogId)
-      .then((res) => {
-        console.log("response", res)
-      })
+    // return CatalogImagesApiService.postCatalogImages(this.state.selectedFile, this.state.newCatalogId)
+    //   .then((res) => {
+    //     console.log("response", res)
+    //   })
   }
 
+  setCatalogId = (res) => {
+    this.setState({ newCatalogId: res.id })
+
+  }
 
   createNewCatalogEntry = () => {
+    if (this.state.newCatalogEntry){
     const newCatalogEntry = this.state.newCatalogEntry
     this.context.updateAppStateCatalogCreate(newCatalogEntry)
     CatalogApiService.postCatalogItem(newCatalogEntry)
       .then((res) => {
-        this.setState({ newCatalogId: res.id })
-        return this.handleUploadImage().then(() => res)
-        
+        this.setCatalogId(res)
+        return res
+        // return this.handleUploadImage().then(() => res)
       })
-      .then ((res) => {
-        window.location.href = `/catalog/${res.id}`
+        .then (res => {
+          window.location.href = `/catalog/${res.id}`
       })
-      
+  }      
   }
-  favoritedBySelectionBoxes = () => {
-    this.context.contacts.map(contact => {
-    return (
-      <div key={uuid()}>
-        <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
-        <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
-      </div>
-    )
-  })
-}
+//   favoritedBySelectionBoxes = () => {
+//     this.context.contacts.map(contact => {
+//     return (
+//       <div key={uuid()}>
+//         <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
+//         <label htmlFor={contact.name}> {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.contact_id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>} </label>
+//       </div>
+//     )
+//   })
+// }
 
-  eventsBySelectionBoxes = () => {
-    this.context.events.map(event => {
-    return (
-      <div key={uuid()}>
-        <input type="checkbox" id={"event-" + event.event_id} name={event.name} />
-        <label htmlFor={event.name}>{<a href={'/events/' + event.event_id} >{event.name}</a>} </label>
-      </div>
-    )
-  })
-}
+//   eventsBySelectionBoxes = () => {
+//     this.context.events.map(event => {
+//     return (
+//       <div key={uuid()}>
+//         <input type="checkbox" id={"event-" + event.event_id} name={event.name} />
+//         <label htmlFor={event.name}>{<a href={'/events/' + event.event_id} >{event.name}</a>} </label>
+//       </div>
+//     )
+//   })
+// }
 
 
 handleSubmit = (e) => {
@@ -160,10 +165,10 @@ handleSubmit = (e) => {
               <label htmlFor="location" className="catalog-add">Location:</label>
               <input type="text" name="location" id="location" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.location} />
             </div>
-            <div className="form-space">
+            {/* <div className="form-space">
               <p htmlFor="favorited_by" className="catalog-add">Favorited By:</p>
               {this.favoritedBySelectionBoxes}
-            </div>
+            </div> */}
             <div className="border"></div>
             <div className="form-space">
               <label htmlFor="date_created" className="catalog-add">Date Created:</label>
@@ -173,10 +178,10 @@ handleSubmit = (e) => {
               <label htmlFor="history" className="catalog-add">History:</label>
               <br /><textarea type="text" className="catalog-textarea" name="history" id="history" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.history} />
             </div>
-            <div className="form-space">
+            {/* <div className="form-space">
               <label htmlFor="events" className="catalog-add">Events:</label>
               {this.eventsBySelectionBoxes}
-            </div>
+            </div> */}
             <div className="form-space">
               <label htmlFor="sold_date" className="catalog-add">Sold Date:</label>
               <input type="text" name="sold_date" id="sold_date" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.sold_date} />
@@ -190,10 +195,10 @@ handleSubmit = (e) => {
               <br /><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.notes} />
             </div>
             <div className="border"></div>
-            <div className="form-space add-img-form">
+            {/* <div className="form-space add-img-form">
               <label htmlFor="images" className="catalog-add">Images:</label>
               <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple/>
-            </div>
+            </div> */}
             <div className="button-wrap">
               <button className="submit-btn" type="submit" value="submit">Submit</button>
             </div>

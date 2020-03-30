@@ -223,8 +223,8 @@ class EditEvent extends Component {
                   <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} defaultValue={item.application_due_dates} />
                 </div>
                 <div className="form-space">
-                  <label htmlFor="contact" className="event-edit">Contact:</label>
-                  {this.contactFieldSelectionOptions()}
+                  {/* <label htmlFor="contact" className="event-edit">Contact:</label>
+                  {this.contactFieldSelectionOptions()} */}
                   {/* <input type="text" name="contact" id="contact" onChange={this.handleChange} defaultValue={item.contact} /> */}
                 </div>
                 <div className="form-space">
@@ -236,8 +236,8 @@ class EditEvent extends Component {
                   <br /><textarea type="text" className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} defaultValue={item.submission_requirements} />
                 </div>
                 <div className="form-space">
-                  <label htmlFor="catalog_items" className="event-edit">Catalog Items:</label>
-                  {this.catalogFieldSelectionOptions}
+                  {/* <label htmlFor="catalog_items" className="event-edit">Catalog Items:</label>
+                  {this.catalogFieldSelectionOptions} */}
                   {/* <input type="text" name="catalog_items" id="catalog_items" onChange={this.handleChange} defaultValue={item.catalog_items} /> */}
                 </div>
                 <div className="button-wrap">

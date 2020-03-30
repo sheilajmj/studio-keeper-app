@@ -41,7 +41,7 @@ export default class Header extends Component {
 
     render() {
         return (
-            <section className='Header gradient'>
+            <section className='Header bkg-color-lt'>
                 <h1 className='app-title'>
                     <a href="/home" className='header color-pk'>Studio Keeper</a>
                 </h1>

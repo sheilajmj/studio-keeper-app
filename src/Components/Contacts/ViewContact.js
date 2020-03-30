@@ -213,9 +213,9 @@ class ViewContact extends Component {
                 <span className="contact-labels">Business Name:</span> {item.business_name}
               </li>
               {this.contactTypeBusiness()}
-              <li>
+              {/* <li>
                 <p className="contact-labels">Event Affliation:</p>   {this.eventDataReturn()}
-              </li>
+              </li> */}
               <li>
                 <span className="contact-labels">Email:</span> <a href={"mailto:" + item.email} target="_blank" rel="noopener noreferrer"> {item.email} </a>
               </li>
@@ -238,10 +238,10 @@ class ViewContact extends Component {
                 <span className="contact-labels">website:</span> <a href={item.website} target="_blank" rel="noopener noreferrer">{item.website}</a>
               </li>
               <li>
-      <p className="contact-labels">Favorites:</p> {this.catalogImageReturn()}
+      {/* <p className="contact-labels">Favorites:</p> {this.catalogImageReturn()}
               </li>
               <li>
-                <p className="contact-labels expand-field">Notes:</p>
+                <p className="contact-labels expand-field">Notes:</p> */}
                 {item.notes}
               </li>
             </ul>

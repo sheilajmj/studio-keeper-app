@@ -248,7 +248,7 @@ static getDerivedStateFromError(error){
           
         </main>
       </StudioKeeperContext.Provider>
-      <div className={this.backgroundSelection()}><img className="bkvg-size" src={require("./assets/bkgr-img-te.svg")} alt="background" /> </div>
+      <div className={this.backgroundSelection()}><img className="bkg-size" src={require("./assets/bkgr-te.svg")} alt="background" /> </div>
       </>
     );
   };

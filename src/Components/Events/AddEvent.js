@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
 import EventsApiService from '../../services/events-api-service';
-const { uuid } = require('uuidv4')
+// const { uuid } = require('uuidv4')
 
 
 class AddEvent extends Component {
@@ -45,19 +45,19 @@ class AddEvent extends Component {
 
 
   render() {
-    this.contactsBySelectionBoxes = this.context.contacts.map(contact => {
-      if(!contact){
-        return<div></div>
-      }
+    // this.contactsBySelectionBoxes = this.context.contacts.map(contact => {
+    //   if(!contact){
+    //     return<div></div>
+    //   }
 
-      return (
-        <div key={uuid()}>
-          <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
-          <label htmlFor={contact.name}> {<a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer">{contact.name ? contact.name : contact.business_name }</a>}</label>
+    //   return (
+    //     <div key={uuid()}>
+    //       <input type="checkbox" id={"contact-" + contact.contact_id} name={contact.name} />
+    //       <label htmlFor={contact.name}> {<a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer">{contact.name ? contact.name : contact.business_name }</a>}</label>
 
-        </div>
-      )
-    })
+    //     </div>
+    //   )
+    // })
 
     // this.catalogItemsBySelectionBoxes = this.context.catalog_items.map(item => {
     //   if (!item){
@@ -118,10 +118,10 @@ class AddEvent extends Component {
               <label htmlFor="application_due_dates" className="event-edit">Application Due Dates:</label>
               <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} defaultValue={this.state.newEvent.application_due_dates} />
             </div>
-            <div className="form-space">
+            {/* <div className="form-space">
               <label htmlFor="contact" className="event-edit">Contact:</label>
               {this.contactsBySelectionBoxes}
-            </div>
+            </div> */}
             <div className="form-space">
               <label htmlFor="notes" className="event-edit">Notes:</label>
               <textarea type="text" className="event-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newEvent.notes} />
@@ -130,10 +130,10 @@ class AddEvent extends Component {
               <label htmlFor="submission_requirements" className="event-edit">Submission Requirements:</label>
               <textarea type="text" className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} defaultValue={this.state.newEvent.submission_requirements} />
             </div>
-            <div className="form-space">
+            {/* <div className="form-space">
               <label htmlFor="catalog_items" className="event-edit">Catalog Items:</label>
               {this.catalogItemsBySelectionBoxes}
-            </div>
+            </div> */}
             <div className="button-wrap">
               <button className="submit-btn" type="submit" value="submit">Submit</button>
             </div>

@@ -100,7 +100,7 @@ padding-right: 4%;
 }
 
 .LoginForm{
-  width: 60%;
+  width: 40%;
   background-color: white;
   
 }
@@ -136,11 +136,11 @@ background-color: #f4f4f4;
 
 /* .bkg-img-te{
   background-image: url('assets/bkgr-te.svg');
-} */
+}
 
 .bkg-img-pk{
   background-image: url('assets/bkgr-pk-str.svg')
-}
+} */
 
 .bkg-size{
   width: 100%;
@@ -548,6 +548,8 @@ padding-right: 15px;
   margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
+  padding-right: 3%;
+  padding-left: 3%;
 }
 
 .catalog-view-block2{
@@ -878,6 +880,13 @@ width: 48%;
   .item-wrap{
     max-width: 60%;
   }
+
+  .LoginForm{
+    width: 30%;
+    background-color: white;
+    
+  }
+  
 }
 
 @media screen and (min-width: 1024px) {
