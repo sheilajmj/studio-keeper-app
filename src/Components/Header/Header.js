@@ -12,7 +12,7 @@ export default class Header extends Component {
         return (
             <>
                 <div className='Header__logged-in bkg-color-lt'>
-                    <a className='color-te' href='/landing'>Welcome</a>
+                    <a className='color-te pd-r-md' href='/landing'>Welcome</a>
                     <Link
                         onClick={this.handleLogoutClick}
                         to='/'>
@@ -26,8 +26,8 @@ export default class Header extends Component {
     renderLoginLink() {
         return (
             <div className='Header__not-logged-in'>
-                <a className='color-te' href='/landing'>Welcome</a>
-                <Link
+                <a className='color-te pd-r-md' href='/landing'>Welcome</a>
+                <Link className="pd-r-md"
                     to='/register'>
                     Register
             </Link>
@@ -41,11 +41,11 @@ export default class Header extends Component {
 
     render() {
         return (
-            <section className='Header'>
+            <section className='Header gradient'>
                 <h1 className='app-title'>
                     <a href="/home" className='header color-pk'>Studio Keeper</a>
                 </h1>
-                <div className='m-neg-t-sm color-te txt-r login-wrap'>
+                <div className='color-te tx-a-c login-wrap'>
 
                     {TokenService.hasAuthToken()
                         ? this.renderLogoutLink()

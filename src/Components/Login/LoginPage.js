@@ -32,6 +32,8 @@ export default class SignInForm extends Component {
   render() {
     return (
       <div className="container-center">
+        
+        <div className="flex-container bkg-color-tra"> 
         <form
           className='LoginForm tx-a-c' 
           onSubmit={this.handleSubmitJwtAuth}
@@ -40,23 +42,24 @@ export default class SignInForm extends Component {
           {error && <p className='red'>{error}</p>}
         </div> */}
 
-          <div className='user_name tx-a-l pd-t-lg container-center'>
+          <div className='user_name pd-t-lg container-center'>
             <label className='pd-r-sm mg-sm ' htmlFor='LoginForm__user_name'>
               User name
           </label>
-            <input required name='user_name' id='signInForm_user_name' />
+            <input className='Input' required name='user_name' id='signInForm_user_name' />
           </div>
-          <div className='password tx-a-l pd-t-sm'>
+          <div className='password  pd-t-sm'>
             <label className='pd-r-sm mg-sm' htmlFor='LoginForm__password'>
               Password
           </label>
-            <input required name='password' type='password' id='signInForm__password' />
+            <input className='Input' required name='password' type='password' id='signInForm__password' />
 
           </div>
-          <button className="mg-sm" type='submit'>
+          <button className="mg-sm Button bkg-color-lt" type='submit'>
             Login
         </button>
         </form>
+        </div>
       </div>
     )
   }

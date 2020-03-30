@@ -35,13 +35,13 @@ main{
   justify-content: space-between;
   font-family: 'Cabin', sans-serif;
   text-decoration: none;
-  background-color: #f4f4f4;
   color: #fa255e;
-  height: 10vh;
+  height: auto;
   font-weight: lighter;
   padding-top: 4%;
   padding-right: 4%;
   padding-left: 4%;
+  padding-bottom: 4%;
 }
 
 
@@ -55,11 +55,15 @@ main{
 }
 
 .pd-t-sm{
-  padding-top: 4%
+  padding-top: 2%;
 }
 
 .pd-b-sm{
-  padding-top: 4%      
+  padding-top: 4%;      
+}
+
+.pd-r-md{
+  padding-right: 7%;
 }
 
 .pd-t-lg{
@@ -91,6 +95,16 @@ padding-right: 4%;
   text-align: left;
 }
 
+.gradient{
+  background-image: linear-gradient(rgba(244, 244, 244, 1), rgba(244, 244,244, 0));
+}
+
+.LoginForm{
+  width: 60%;
+  background-color: white;
+  
+}
+
 .align-center{
   align-content: center;
   margin-left: auto;
@@ -109,6 +123,10 @@ background-color: #f4f4f4;
 
 .bkg-color-wt{
   background-color: white;
+}
+
+.bkg-color-te{
+  background-color: #2f6f7b;
 }
 
 .bkg-color-tra{
@@ -137,7 +155,6 @@ text-align: right;
 .app-title{
   font-size: larger;
   width: 100%;
-  text-align: left;
 }
 
 .m-neg-t-sm{
@@ -167,13 +184,10 @@ ul{
 .login-wrap{
   width: 100%;
   margin-right: 4%;
+  margin-top: 2%;
+  margin-bottom: 2%;
   
 }
-
-.Header a{
-  padding-right: 7%;
-}
-
 
 .page-nav ul{
   display:flex;
@@ -249,9 +263,14 @@ background-image: url('assets/buttons/add-btn.svg');
   background-color: transparent ;
   color: white;
   font-size: x-large;
-
-
 }
+
+.Section{
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
 
 .search{
   display: inline-block;
@@ -875,18 +894,18 @@ width: 48%;
 
 .Header h1 a {
   text-decoration: none;
+  font-size: x-large;
 }
 
 
 .Header__not-logged-in {
-  display: inline-block;
-  flex-direction: column;
+
 }
 
 .Header__not-logged-in .Hyph {
   display: none;
 }
-
+.
 @media screen and (min-width: 450px) {
   .Header {
     align-items: baseline;

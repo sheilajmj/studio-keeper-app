@@ -31,54 +31,58 @@ class EditContact extends Component {
     ContactApiService.getContact(this.props.match.params.id)
     .then(this.setSelectedContactItem)
     .catch(this.context.setError)
+
+
   }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.context.updateAppStateContactsUpdate(this.state.updatedContact)
+    ContactApiService.updateContactItem(this.props.match.params, this.state.updatedContact)
+    window.location.href='/contacts'
+  }
+
+  handleChange = (e) => {
+    const key = (e.target.name)
+    const value = (e.target.value)
+    this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, [key]: value }, updateBoolean: true }))
+  }
+
+
+  setUpdatedArray = (e) =>{
+    let event_id = e.target.value
+    let currentEventsArray = this.state.updatedContact.events
+    let updatedEventsArray 
+
+    if (!currentEventsArray.includes(event_id)){
+      let eventArrayLength = currentEventsArray.push(event_id)
+      updatedEventsArray = currentEventsArray
+      console.log(eventArrayLength)
+    }
+
+    else{
+      updatedEventsArray = currentEventsArray.filter((event) => event_id !== event)
+    }
+
+    this.setState({updatedEventsArray: updatedEventsArray})
+    this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, events: updatedEventsArray}, updateBoolean: true }))
+
+  }
+
+  handleEventClick = (e) => {
+    this.setUpdatedArray(e);  
+    }
+
 
   render() {
 
-    // this.selectedContactId = this.props.match.params.contact_id;
-    // this.selectedContactObject = this.context.contacts.find(contact => contact.contact_id === this.selectedContactId);
-    // this.selectedContactArray = [this.selectedContactObject];
-
-    this.handleSubmit = (e) => {
-      e.preventDefault()
-      this.context.updateAppStateContactsUpdate(this.state.updatedContact)
-      ContactApiService.updateContactItem(this.props.match.params, this.state.updatedContact)
-      window.location.href='/contacts'
-    }
 
 
 
-    this.handleChange = (e) => {
-      const key = (e.target.name)
-      const value = (e.target.value)
-      this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, [key]: value }, updateBoolean: true }))
-    }
 
 
-    this.setUpdatedArray = (e) =>{
-      let event_id = e.target.value
-      let currentEventsArray = this.state.updatedContact.events
-      let updatedEventsArray 
 
-      if (!currentEventsArray.includes(event_id)){
-        let eventArrayLength = currentEventsArray.push(event_id)
-        updatedEventsArray = currentEventsArray
-        console.log(eventArrayLength)
-      }
-
-      else{
-        updatedEventsArray = currentEventsArray.filter((event) => event_id !== event)
-      }
-
-      this.setState({updatedEventsArray: updatedEventsArray})
-      this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, events: updatedEventsArray}, updateBoolean: true }))
-
-    }
-
-    this.handleEventClick = (e) => {
-      this.setUpdatedArray(e);  
-      }
-
+    
       // this.setUpdatedFavoritesArray = (e) =>{
       //   let catalog_id = e.target.value
       //   let currentFavoritesArray = this.state.updatedContact.favorites
