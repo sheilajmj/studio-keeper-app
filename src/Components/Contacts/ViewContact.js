@@ -147,7 +147,7 @@ class ViewContact extends Component {
         imageMap = images.flat().map((item) => {
           console.log("THIS IS ITEM", item)
           return (    
-            <a href={'localhost:3000/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">               
+            <a href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">               
                   {/* <img className="catalog-img-item" src={require("../../../public/assets/" + item.image_name)} alt="catalog item" /> */}
            </a>)
         })

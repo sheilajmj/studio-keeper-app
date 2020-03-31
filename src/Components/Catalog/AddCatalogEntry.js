@@ -195,10 +195,10 @@ handleSubmit = (e) => {
               <br /><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newCatalogEntry.notes} />
             </div>
             <div className="border"></div>
-            {/* <div className="form-space add-img-form">
+            <div className="form-space add-img-form">
               <label htmlFor="images" className="catalog-add">Images:</label>
               <input type="file" name="images" id="images" onChange={this.handleImageChange} multiple/>
-            </div> */}
+            </div>
             <div className="button-wrap">
               <button className="submit-btn" type="submit" value="submit">Submit</button>
             </div>

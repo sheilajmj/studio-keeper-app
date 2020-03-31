@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 // import DefaultImg from './assets/default-img.jpg';
 
 // base api url being used
-const API_URL = "http://localhost:8000";
+const API_URL = "https://fathomless-savannah-95789.herokuapp.com/";
 
 class App extends Component {
   constructor(props) {
