@@ -465,7 +465,6 @@ padding-right: 15px;
   text-align: left;
   background-color: white;
   margin-top: 3%;
-  width: 100%;
   border: solid 2px #2F6F7B;
   -webkit-border-radius: 10px; 
   -moz-border-radius: 10px;
@@ -482,7 +481,7 @@ padding-right: 15px;
   -moz-box-shadow: 4px 4px 4px #2F6F7B;
   -webkit-box-shadow: 4px 4px 4px #2F6F7B;
   margin-bottom: 5%;
-  max-width: 70%;
+  max-width: 50%;
   display: inline-flex;
  }
  
