@@ -215,11 +215,11 @@ class ViewEvent extends Component {
                     <span className="event-labels">Location:</span> {item.location}
                   </li>
                   <li>
-                    <span className="event-labels">Event Dates:</span> {this.prettyDate(item.event_dates)}
+                    <span className="event-labels">Event Dates:</span> {item.event_dates ? this.prettyDate(item.event_dates) : ' '}
                   </li>
                   <div className="border"></div>
                   <li>
-                    <span className="event-labels">Application Due Dates:</span> {this.prettyDate(item.application_due_date)}
+                    <span className="event-labels">Application Due Dates:</span> {item.application_due_date ? this.prettyDate(item.application_due_date) : ' '}
                   </li>
                   <li>
                     <p className="event-labels">Submission Requirements:</p> {item.submission_requirements}

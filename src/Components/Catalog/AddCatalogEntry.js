@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Context from '../../Context'
 import PageParentHeader from '../Nav/PageParentHeader';
 import CatalogApiService from '../../services/catalog-api-service';
-// import CatalogImagesApiService from '../../services/images-api-service'
+import CatalogImagesApiService from '../../services/images-api-service'
 // const { uuid } = require('uuidv4');
 
 
@@ -46,24 +46,21 @@ class AddCatalogEntry extends Component {
     }
 
   handleImageChange = (event) => {
-    console.log("EVENT TARGET 0", event.target.files[0])
     this.setState({ selectedFile: event.target.files[0] })
-    console.log("SELECTED FILE", this.state.selectedFile)
     this.setState({ selectedFileName: event.target.files[0].name })
-    console.log("FILE NAME", this.state.selectedFileName)
   }
 
   handleUploadImage = () => {
 console.log("New Catalog ID: ", this.state.newCatalogId)
-    // const fd = new FormData();
-    // fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
-    // fd.append('user_id', 1)
-    // fd.append('image_name', this.state.selectedFile.name)
-    // fd.append('catalog_id', this.state.newCatalogId)
-    // return CatalogImagesApiService.postCatalogImages(this.state.selectedFile, this.state.newCatalogId)
-    //   .then((res) => {
-    //     console.log("response", res)
-    //   })
+    const fd = new FormData();
+    fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
+    fd.append('user_id', 1)
+    fd.append('image_name', this.state.selectedFile.name)
+    fd.append('catalog_id', this.state.newCatalogId)
+    return CatalogImagesApiService.postCatalogImages(this.state.selectedFile, this.state.newCatalogId)
+      .then((res) => {
+        console.log("response", res)
+      })
   }
 
   setCatalogId = (res) => {
@@ -78,8 +75,7 @@ console.log("New Catalog ID: ", this.state.newCatalogId)
     CatalogApiService.postCatalogItem(newCatalogEntry)
       .then((res) => {
         this.setCatalogId(res)
-        return res
-        // return this.handleUploadImage().then(() => res)
+        return this.handleUploadImage().then(() => res)
       })
         .then (res => {
           window.location.href = `/catalog/${res.id}`
