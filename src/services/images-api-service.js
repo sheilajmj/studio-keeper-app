@@ -35,7 +35,7 @@ const CatalogImagesApiService = {
     postCatalogImages(image, catalog_id) {
           const fd = new FormData();
           fd.append('image', image, image.name)
-        //   fd.append('catalog_id', catalog_id)
+          fd.append('catalog_id', catalog_id)
           return fetch(`${config.API_ENDPOINT}/image-upload`, {
             method: 'POST',
             headers: {
@@ -43,7 +43,7 @@ const CatalogImagesApiService = {
             //    'Content-Type': 'multipart/form-data'
             },
             body: fd,
-            // catalog_id
+            catalog_id
         })
         
     },
