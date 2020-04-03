@@ -6,7 +6,6 @@ const EventsApiService = {
         return fetch(`${config.API_ENDPOINT}/events`, {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
-                //`bearer ${TokenService.getAuthToken()}`,
             }
         })
             .then(res =>
@@ -20,8 +19,6 @@ const EventsApiService = {
         return fetch(`${config.API_ENDPOINT}/events/${event_id}`, {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
-                //'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
-                //'Authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         })
 
@@ -51,15 +48,12 @@ const EventsApiService = {
     },
 
     updateEventItem(id, eventItem) {
-       let newId = id.id
-
-        console.log("HERE IS EENT ITEM", eventItem)
+        let newId = id.id
         return fetch(`${config.API_ENDPOINT}/events/${newId}`, {
             method: 'PATCH',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
-                //     'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
             body: JSON.stringify(
                 eventItem
@@ -73,7 +67,6 @@ const EventsApiService = {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
-                //     'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
 
         })

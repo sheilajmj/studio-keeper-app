@@ -32,35 +32,32 @@ export default class SignInForm extends Component {
   render() {
     return (
       <div className="container-center">
-        
-        <div className="flex-container bkg-color-tra"> 
-        <form
-          className='LoginForm tx-a-c' 
-          onSubmit={this.handleSubmitJwtAuth}
-        >
-          {/* <div role='alert'>
-          {error && <p className='red'>{error}</p>}
-        </div> */}
-          <h3>Please feel free to try out the app <br/> with demo credentials</h3>
-          <h3>user name: painter99</h3>
-          <h3>password: penny</h3>
-          <div className='user_name pd-t-lg container-center'>
-            <label className='pd-r-sm mg-sm ' htmlFor='LoginForm__user_name'>
-              User name
-          </label>
-            <input className='Input' required name='user_name' id='signInForm_user_name' />
-          </div>
-          <div className='password  pd-t-sm'>
-            <label className='pd-r-sm mg-sm' htmlFor='LoginForm__password'>
-              Password
-          </label>
-            <input className='Input' required name='password' type='password' id='signInForm__password' />
 
-          </div>
-          <button className="mg-sm Button bkg-color-lt" type='submit'>
-            Login
+        <div className="flex-container bkg-color-tra">
+          <form
+            className='LoginForm tx-a-c'
+            onSubmit={this.handleSubmitJwtAuth}
+          >
+            <h3>Please feel free to try out the app <br /> with demo credentials</h3>
+            <h3>user name: painter99</h3>
+            <h3>password: penny</h3>
+            <div className='user_name pd-t-lg container-center'>
+              <label className='pd-r-sm mg-sm ' htmlFor='LoginForm__user_name'>
+                User name
+          </label>
+              <input className='Input' required name='user_name' id='signInForm_user_name' />
+            </div>
+            <div className='password  pd-t-sm'>
+              <label className='pd-r-sm mg-sm' htmlFor='LoginForm__password'>
+                Password
+          </label>
+              <input className='Input' required name='password' type='password' id='signInForm__password' />
+
+            </div>
+            <button className="mg-sm Button bkg-color-lt" type='submit'>
+              Login
         </button>
-        </form>
+          </form>
         </div>
       </div>
     )

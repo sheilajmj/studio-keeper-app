@@ -8,9 +8,9 @@ class PageNav extends Component {
   handleBackClick = () => {
     this.context.history.goBack()
   }
-    
+
   handleForwardClick = () => {
-    this.context.history.goForward()  
+    this.context.history.goForward()
   }
 
   render() {
@@ -18,11 +18,11 @@ class PageNav extends Component {
       <div className="page-nav">
         <ul>
           <li>
-          <button className="nav-bk" onClick={() => {this.handleBackClick()}}></button>
+            <button className="nav-bk" onClick={() => { this.handleBackClick() }}></button>
           </li>
-              <h2 className="pageName color-pk"><a className="pageName-link color-pk" href={`/` + this.props.pageName.toLowerCase()}>{this.props.pageName}</a></h2>
+          <h2 className="pageName color-pk"><a className="pageName-link color-pk" href={`/` + this.props.pageName.toLowerCase()}>{this.props.pageName}</a></h2>
           <li>
-          <button className="nav-fw" onClick={() => {this.handleForwardClick()}}></button>
+            <button className="nav-fw" onClick={() => { this.handleForwardClick() }}></button>
           </li>
         </ul>
       </div>

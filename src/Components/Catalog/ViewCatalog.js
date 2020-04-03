@@ -52,9 +52,7 @@ class ViewCatalog extends Component {
 
   setEventObjectsArray = (event) => {
     let existingEventsObjArray = this.state.catalogEvents
-    console.log("existing", existingEventsObjArray)
     let unused = existingEventsObjArray.splice(-1, 0, event)
-    console.log("existing 2", existingEventsObjArray)
     this.setState({ eventObjectsArray: existingEventsObjArray })
     return unused
   }
@@ -107,10 +105,8 @@ class ViewCatalog extends Component {
     window.location.href = `/catalog`
   }
 
-  //Contacts/Favorited By -- update contactObjectsArray in state with the data of relevant contact items.
   catalogContactsReturn = () => {
     let catalogContactsMap = this.state.catalogContacts.map((contact) => {
-      // take contact item and request entire contact object
       ContactsApiService.getContact(contact.contact_id)
         .then(res => { this.setContactObjectsArray(res) })
         .catch(this.context.setError)
@@ -124,13 +120,11 @@ class ViewCatalog extends Component {
   //Events - update event object in state with the data of relevant event items
   catalogEventsReturn = () => {
     let catalogEventsMap = this.state.catalogEvents.map((events) => {
-      //take event id and request entire event object
       EventsApiService.getEventItem(events.event_id)
         .then(res => { this.setEventObjectsArray(res) })
         .catch(this.context.setError)
       return (events.event_id)
     })
-    console.log("MAP", catalogEventsMap)
     return catalogEventsMap
   }
 
@@ -182,8 +176,8 @@ class ViewCatalog extends Component {
       let newDate = moment(`${date}`).format("MM/DD/YY")
       return newDate
     }
-    // main catalog render block
 
+    // main catalog render block
     this.catalogItemRender = () => {
       let catalog_item = [this.state.selectedCatalogItem]
       if (!catalog_item) {

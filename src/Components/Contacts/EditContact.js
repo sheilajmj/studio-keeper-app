@@ -32,13 +32,11 @@ class EditContact extends Component {
   }
 
   setAllEvents = (events) => {
-    console.log("allevents", events)
-      this.setState({ allEvents: events })
+    this.setState({ allEvents: events })
   }
 
   setEventsContactsIds = (events) => {
-    console.log("eventscontacts", events)
-      this.setState({ eventsContactsIds: events })
+    this.setState({ eventsContactsIds: events })
   }
 
   setEventsOfContact = (events) => {
@@ -75,7 +73,7 @@ class EditContact extends Component {
     const { updatedContact } = this.state;
     updatedContact[key] = value;
     this.setState({ updatedContact })
-  
+
   }
 
 
@@ -87,7 +85,6 @@ class EditContact extends Component {
     if (!currentEventsArray.includes(event_id)) {
       let eventArrayLength = currentEventsArray.push(event_id)
       updatedEventsArray = currentEventsArray
-      console.log(eventArrayLength)
     }
 
     else {
@@ -102,31 +99,6 @@ class EditContact extends Component {
   handleEventClick = (e) => {
     this.setUpdatedArray(e);
   }
-
-
-  // this.setUpdatedFavoritesArray = (e) =>{
-  //   let catalog_id = e.target.value
-  //   let currentFavoritesArray = this.state.updatedContact.favorites
-  //   let updatedFavoritesArray 
-
-  //   if (!currentFavoritesArray.includes(catalog_id)){
-  //     let favoritesArrayLength = currentFavoritesArray.push(catalog_id)
-  //     updatedFavoritesArray = currentFavoritesArray
-  //     console.log(favoritesArrayLength)
-  //   }
-
-  //   else{
-  //     updatedFavoritesArray = currentFavoritesArray.filter((favorite) => catalog_id !== favorite)
-  //   }
-
-  //   this.setState({updatedFavoritesArray: updatedFavoritesArray})
-  //   this.setState(previousState => ({ updatedContact: { ...previousState.updatedContact, favorites: updatedFavoritesArray}, updateBoolean: true }))
-
-  // }
-
-  // this.handleFavoritesClick = (e) => {
-  //   this.setUpdatedFavoritesArray(e)
-  // }
 
   handleCancel = (e) => {
     window.location.href = '/contacts'
@@ -143,74 +115,7 @@ class EditContact extends Component {
   }
 
 
-  // eventFieldSelectionOptions = () => {
-  //   if (this.state.allEvents) {
-  //     let eventsReturn = this.state.allEvents.map(event => {
-  //       this.checkedValue = () => {
-  //         let eventsMapped = this.state.eventsContactsIds.map((eventId) => {
-  //           if (event.id === eventId.id ) {
-  //             return true
-  //           }
-  //           else return false
-  //         })
-  //         return eventsMapped
-  //       }
-
-  //       return (
-  //         <div key={'event' + event.id} className="checkbox">
-  //           <input type="checkbox" id={event.id} name={"events"} value={event.id} onChange={this.handleEventClick} defaultChecked={this.checkedValue()} />
-  //           <label htmlFor={event.id}> {<a href={'/events/' + event.id} target="_blank" rel="noopener noreferrer"> {event.name}</a>} </label>
-  //         </div>
-  //       )
-  //     })
-  //     return eventsReturn
-  //   }
-  //   else {
-  //     return <div></div>
-  //   }
-  // }
-
-  // this.favoritesFieldSelectionOptions = this.context.catalog_items.map((item) => {
-  //   console.log(item, "what is item again?", "contactarray", this.selectedContactArray[0].favorites)
-  //   this.checkedValue = () => {
-  //     if (this.selectedContactArray[0].favorites.includes(item.catalog_id)){
-  //     return true
-  //     }
-  //   }
-
-  //   this.favoritesImgReturn = () => {
-  //     if (item.images !== null || item.images !== "" ){
-  //       this.imgReturn = [item.images.split(', ')[0]].map((image) => {
-  //               return (
-  //                 <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-  //                 )
-  //             })
-  //     }
-  //     return this.imgReturn
-  //   }       
-
-  //     return(
-  //       <div key={'favorite' + item.catalog_id}  className="checkbox">
-  //         <input type="checkbox" id={item.catalog_id} name={"favorites"} value={item.catalog_id} onChange={this.handleFavoritesClick} defaultChecked={this.checkedValue()} />
-  //       <label htmlFor={item.catalog_id}>
-  //         {<a href={'/catalog/'+ item.catalog_id} target="_blank"  rel="noopener noreferrer">
-  //             {this.favoritesImgReturn()} 
-  //             </a>}   
-  //       </label> 
-  //       </div>
-  //     )
-
-
-
-  // })
-
-
   render() {
-
-
-
-
-
     this.selectedContactForm = () => {
       if (this.state.contactToEdit !== {}) {
         let contactToEditArray = [this.state.contactToEdit]
@@ -255,22 +160,12 @@ class EditContact extends Component {
             <div key={item.id} className="item-edit-wrap contact-edit">
               <form onSubmit={this.handleSubmit}>
                 <h3 className="add-item-header">Edit Contact</h3>
-                {/* <div className="form-space contact-edit"> */}
                 <label htmlFor="contact_type" className="contact-edit">Contact Type:</label>
                 <select name="contact_type" onChange={this.handleChange}>
                   <option value="Individual">Individual</option>
                   <option value="Business">Business</option>
                 </select>
-                {/* </div> */}
                 {this.handleContactType()}
-                {/* <div className="form-space">
-              <label htmlFor="event" className="contact-edit">Event Name:</label>
-              <input type="text" name="event" id="event" onChange={this.handleChange} defaultValue={item.event_name} />
-            </div> */}
-                {/* <div className="form-space">
-                  <legend className="contact-edit">Event Affiliation:</legend>
-                  {this.eventFieldSelectionOptions()}
-                </div> */}
                 <div className="form-space">
                   <label htmlFor="email" className="contact-edit">Email:</label>
                   <input type="text" name="email" id="email" onChange={this.handleChange} defaultValue={item.email} />

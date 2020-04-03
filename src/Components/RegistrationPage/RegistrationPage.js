@@ -5,7 +5,7 @@ import RegistrationForm from '../RegistrationForm/RegistrationForm'
 export default class RegistrationPage extends Component {
   static defaultProps = {
     history: {
-      push: () => {},
+      push: () => { },
     },
   }
 

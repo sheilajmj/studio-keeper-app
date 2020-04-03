@@ -31,7 +31,7 @@ export default class Header extends Component {
                     to='/register'>
                     Register
             </Link>
-            <Link className="width-100"
+                <Link className="width-100"
                     to='/login'>
                     Log in
             </Link>
@@ -46,12 +46,10 @@ export default class Header extends Component {
                     <a href="/home" className='header app-title color-pk'>Studio Keeper</a>
                 </h1>
                 <div className='color-te bkg-color-tra tx-a-c login-wrap'>
-
                     {TokenService.hasAuthToken()
                         ? this.renderLogoutLink()
                         : this.renderLoginLink()}
                 </div>
-
             </section>
         )
     }

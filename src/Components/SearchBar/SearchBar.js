@@ -5,27 +5,26 @@ import Context from '../../Context'
 class SearchBar extends Component {
   static contextType = Context;
 
-handleSubmitSearch = (e) => {
+  handleSubmitSearch = (e) => {
     e.preventDefault()
-    console.log("submit search button")
-}
+  }
 
   handleBackClick = () => {
     this.context.history.goBack()
   }
-    
+
   handleForwardClick = () => {
-    this.context.history.goForward()  
+    this.context.history.goForward()
   }
 
   render() {
     return (
-        <div className="search-wrap">
-      <form className="search" onSubmit={this.handleSubmitSearch}>
+      <div className="search-wrap">
+        <form className="search" onSubmit={this.handleSubmitSearch}>
           <label htmlFor="search"></label>
           <input type="text" id="search" defaultValue="Search option is not ready"></input>
           <button type="submit" value="submit" className="submit-search">?</button>
-      </form>
+        </form>
       </div>
     );
   }

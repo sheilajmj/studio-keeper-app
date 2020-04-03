@@ -11,7 +11,7 @@ class CatalogButton extends Component {
 
   render() {
     return (
-        <button onClick={() => { this.handleCatalogClick() }}>Catalog</button>
+      <button onClick={() => { this.handleCatalogClick() }}>Catalog</button>
     );
   }
 }

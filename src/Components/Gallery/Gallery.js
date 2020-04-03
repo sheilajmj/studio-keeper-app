@@ -36,7 +36,6 @@ class Gallery extends Component {
 
     this.imageFilterReturn = () => {
       let imageMap = imageFilter.map((image) => {
-        console.log("IMAGE", image)
         return (
           <img className="gallery-img-item gallery-item" src={image.image_url} alt="catalog item" />
         )
@@ -50,9 +49,9 @@ class Gallery extends Component {
   catalogCollectionIncluded = (collection) => {
     if (collection) {
       return (
-      <div className="catalog-collection gallery-item">
-        <p>Collection: <span className="font-wt-str">{collection}</span></p>
-      </div>
+        <div className="catalog-collection gallery-item">
+          <p>Collection: <span className="font-wt-str">{collection}</span></p>
+        </div>
       )
     }
   }
@@ -60,9 +59,9 @@ class Gallery extends Component {
   catalogNameIncluded = (name) => {
     if (name) {
       return (
-      <div className="catalog-name gallery-item">
-      <p>Name: <span className="font-wt-str">{name}</span></p>
-      </div>
+        <div className="catalog-name gallery-item">
+          <p>Name: <span className="font-wt-str">{name}</span></p>
+        </div>
       )
     }
   }
@@ -73,13 +72,13 @@ class Gallery extends Component {
       this.catalogItemsMap = this.state.catalogItems.map((item) => {
         return (
           <div key={item.catalog_id} className="item-wrap">
-              <div className="gallery-img-wrap">
-                {this.handleCatalogImages(item.id)}
-              </div>
-              <div className="gallery-text-wrap">
+            <div className="gallery-img-wrap">
+              {this.handleCatalogImages(item.id)}
+            </div>
+            <div className="gallery-text-wrap">
               {this.catalogCollectionIncluded(item.collection)}
               {this.catalogNameIncluded(item.name)}
-              </div>
+            </div>
           </div>
         )
       })
@@ -89,9 +88,6 @@ class Gallery extends Component {
       return <div></div>
     }
   }
-
-
-
 
 
   render() {

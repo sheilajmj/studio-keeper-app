@@ -49,24 +49,23 @@ class CatalogHome extends Component {
 
 
   handleImages = (id) => {
-    if(this.state.catalogItemImages === []){
+    if (this.state.catalogItemImages === []) {
       return <div></div>
     }
-    else{
-    if (this.state.catalogItemImages !== []) {
-      let images = this.state.catalogItemImages
-      let catalogImageFilter = images.filter(image => image.catalog_id === id)
-      let catalogImageReturn = catalogImageFilter.map((image) => {
-        console.log("image url", image.image_url)
-        return (
-          <img key={`${image.image_url}`} className="catalog-img-item align-center" src={image.image_url} alt="catalog item" />
-        )
-      })
-    return catalogImageReturn
+    else {
+      if (this.state.catalogItemImages !== []) {
+        let images = this.state.catalogItemImages
+        let catalogImageFilter = images.filter(image => image.catalog_id === id)
+        let catalogImageReturn = catalogImageFilter.map((image) => {
+          return (
+            <img key={`${image.image_url}`} className="catalog-img-item align-center" src={image.image_url} alt="catalog item" />
+          )
+        })
+        return catalogImageReturn
+      }
     }
   }
-  }
-  
+
 
   catalogCollectionIncluded = (item) => {
     if (item.collection) {
@@ -85,41 +84,38 @@ class CatalogHome extends Component {
   }
 
   setCatalogHomeItems = () => {
-    if(this.state.catalog_items !== null){
-    this.setState({ catalogHomeItems: [this.state.catalog_items[0], this.state.catalog_items[1], this.state.catalog_items[2]] })
-    console.log("CatalogHOmeItems", this.state.catalogHomeItems)
+    if (this.state.catalog_items !== null) {
+      this.setState({ catalogHomeItems: [this.state.catalog_items[0], this.state.catalog_items[1], this.state.catalog_items[2]] })
+    }
   }
-}
-
-
 
 
   render() {
     this.catalogHomeReturn = () => {
-      if (this.state.catalog_items === null){
+      if (this.state.catalog_items === null) {
         return <div></div>
       }
-      if(!this.state.catalogHomeItems){
+      if (!this.state.catalogHomeItems) {
         return <div></div>
       }
       let catalogHomeMap = this.state.catalogHomeItems.map((item) => {
-      return (
-        <div key={'catalog' + item.id} className="item-wrap">
-          <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
-          <div className="home-item" onClick={(() => { this.handleItemClick(item.id) })}>
-            <div className="gallery-img-wrap">
-            {this.handleImages(item.id)}
-            </div>
-            <div className="gallery-text-wrap">
-            {this.catalogNameIncluded(item)}
-            {this.catalogCollectionIncluded(item)}
+        return (
+          <div key={'catalog' + item.id} className="item-wrap">
+            <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+            <div className="home-item" onClick={(() => { this.handleItemClick(item.id) })}>
+              <div className="gallery-img-wrap">
+                {this.handleImages(item.id)}
+              </div>
+              <div className="gallery-text-wrap">
+                {this.catalogNameIncluded(item)}
+                {this.catalogCollectionIncluded(item)}
+              </div>
             </div>
           </div>
-        </div>
-      )
-    })
-    return catalogHomeMap
-  }
+        )
+      })
+      return catalogHomeMap
+    }
 
 
     return (

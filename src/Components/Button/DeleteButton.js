@@ -20,29 +20,11 @@ class DeleteButton extends Component {
 
 
 
-render() {
-    this.handleDeleteClick = () => {
-        console.log("params", this.props.match)
-        // let contact_id = this.props.match.params.contact_id
-        
-        // let catalog_id = this.context.match.params.catalog_id
-        // let event_id = this.context.match.params.event_id
-    
-        // if (contact_id){
-        //     this.handleDeleteContact = (contact_id) => {
-        //         let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === contact_id)
-        //         let contacts = JSON.parse(JSON.stringify(this.context.contacts))
-        //         let contactDeleted = contacts.splice(indexToDelete, 1)
-        //         this.context.updateAppStateContactsDelete(contacts, contactDeleted)
-        //       }
-        // }
-    
-    
-    }
-  return (
-    <button className="nav-btn delete-btn" onClick={() => {this.handleDeleteClick()}}>Delete</button>
-  );
-}
+  render() {
+    return (
+      <button className="nav-btn delete-btn" onClick={() => { this.handleDeleteClick() }}>Delete</button>
+    );
+  }
 }
 
 export default DeleteButton;

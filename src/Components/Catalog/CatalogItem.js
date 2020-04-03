@@ -46,46 +46,22 @@ class CatalogItem extends Component {
   }
 
 
-
-
-  //   loadImagesReturn() {
-  //     let itemImages = this.state.catalogItemImages
-
-  //     console.log("ITEM IMAGES", itemImages)
-
-  //     if (!itemImages) {
-  //       return <div></div>
-  //     }
-
-  //     else {
-
-  //       this.itemImagesReturn = () => {
-  //           return ( <img className="catalog-img-item" src={require("image_url")} alt="catalog item" />
-  //         )
-  //       }
-  //   }
-  // }
-
-
-
-
   handleImages = (id) => {
-    if(this.state.catalogItemImages === []){
+    if (this.state.catalogItemImages === []) {
       return <div></div>
     }
-    else{
-    if (this.state.catalogItemImages !== []) {
-      let images = this.state.catalogItemImages
-      let catalogImageFilter = images.filter(image => image.catalog_id === id)
-      let catalogImageReturn = catalogImageFilter.map((image) => {
-        console.log("image url", image.image_url)
-        return (
-          <img key={`${image.image_url}`} className="catalog-img-item" src={image.image_url} alt="catalog item" />
-        )
-      })
-    return catalogImageReturn
+    else {
+      if (this.state.catalogItemImages !== []) {
+        let images = this.state.catalogItemImages
+        let catalogImageFilter = images.filter(image => image.catalog_id === id)
+        let catalogImageReturn = catalogImageFilter.map((image) => {
+          return (
+            <img key={`${image.image_url}`} className="catalog-img-item" src={image.image_url} alt="catalog item" />
+          )
+        })
+        return catalogImageReturn
+      }
     }
-  }
   }
 
 
@@ -133,7 +109,6 @@ class CatalogItem extends Component {
 
         return (
           <div key={'catalog' + item.id} className="item-wrap">
-            {/* <button type="button" className="view-item" value="viewCatalog" onClick={(() => {this.handleViewCatalog(item.catalog_id)})}><img src={require("../../assets/viewItem.svg")} width="30px" alt="view item" /></button> */}
             <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
             <ul className="item" onClick={(() => { this.handleItemClick(item.id) })}>
               {this.handleImages(item.id)}
@@ -151,8 +126,8 @@ class CatalogItem extends Component {
     return (
       <section className='catalog-item'>
         <PageParentHeader pageName="Catalog" />
-      <div className="flex-container">
-        {this.catalogItemsList}
+        <div className="flex-container">
+          {this.catalogItemsList}
         </div>
       </section>
     );

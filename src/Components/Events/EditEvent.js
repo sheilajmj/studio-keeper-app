@@ -23,8 +23,7 @@ class EditEvent extends Component {
   setCheckedContacts = (id) => {
     let checkedContactsState = this.state.checkedContacts
     let splicedContacts = checkedContactsState.splice(-1, 0, id)
-    console.log(checkedContactsState)
-    this.setState({checkedContacts: checkedContactsState})
+    this.setState({ checkedContacts: checkedContactsState })
     return splicedContacts
   }
 
@@ -35,13 +34,13 @@ class EditEvent extends Component {
     }
   }
 
-  setContacts = (contacts) => { 
-      this.setState({contacts: contacts})
+  setContacts = (contacts) => {
+    this.setState({ contacts: contacts })
   }
-  
+
 
   setContactsEventsConnect = (contacts) => {
-    this.setState({contactsEventsConnect: contacts})
+    this.setState({ contactsEventsConnect: contacts })
   }
 
   componentDidMount = () => {
@@ -53,38 +52,26 @@ class EditEvent extends Component {
       .then(this.setContacts)
       .then(this.context.setError)
 
-    ContactsEventsApiService.getContactsAndEvents("event_id", this.props.match.params.id) 
+    ContactsEventsApiService.getContactsAndEvents("event_id", this.props.match.params.id)
       .then(this.setContactsEventsConnect)
       .then(this.context.setError)
   }
 
-    checkedContactValue = (contact_id) => {
-          // // see if the current contact is in the contactEventsConnect set if so indicate true
-          this.checkValue = () => {
-            if (!this.state.contactsEventsConnect){
-              return 
-            }
-            else {
-              let contactCheckedItem = this.state.contactsEventsConnect.find((contact) => contact.contact_id === contact_id)
-              if (contactCheckedItem){
-                 return true
-               }              
-              }
-              return this.contactCheckedItem
-            }
-            // this.setCheckedContacts(this.checkValue())
-            return this.checkValue()
-          }
-
-
-    // handeContactClick = (contact.id) => {
-          // event_id = this.props.match.params
-//          if checked === true => Add selected contact.id and event_id pair to the contactsEvents state object.
-            // if checked !== true => remove selected contact.id and event_id pair from the contactsEvents state object.
-
-            //on submit - how to send each? of those objects in state?
-    // }
-
+  checkedContactValue = (contact_id) => {
+    this.checkValue = () => {
+      if (!this.state.contactsEventsConnect) {
+        return
+      }
+      else {
+        let contactCheckedItem = this.state.contactsEventsConnect.find((contact) => contact.contact_id === contact_id)
+        if (contactCheckedItem) {
+          return true
+        }
+      }
+      return this.contactCheckedItem
+    }
+    return this.checkValue()
+  }
 
   render() {
     this.handleSubmit = (e) => {
@@ -102,22 +89,22 @@ class EditEvent extends Component {
 
 
     this.contactFieldSelectionOptions = () => {
-      if(this.state.contacts === undefined){
+      if (this.state.contacts === undefined) {
         return <div></div>
       }
       else {
         let contactReturn = this.state.contacts.map((contact) => {
           return (
-            <div key={'contact'+ contact.id} className="checkbox">
-              <input type="checkbox" id={'contact' + contact.id} name={"contacts"} value={contact.id} onChange = {this.handleContactClick} defaultChecked={this.checkedContactValue(contact.id)} />
-              <label htmlFor={contact.id}> {<a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer">{contact.name ? contact.name : contact.business_name }</a>}</label>
-             </div>
+            <div key={'contact' + contact.id} className="checkbox">
+              <input type="checkbox" id={'contact' + contact.id} name={"contacts"} value={contact.id} onChange={this.handleContactClick} defaultChecked={this.checkedContactValue(contact.id)} />
+              <label htmlFor={contact.id}> {<a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer">{contact.name ? contact.name : contact.business_name}</a>}</label>
+            </div>
           )
         })
         return contactReturn
       }
     }
-    
+
 
 
     this.handleCancel = (e) => {
@@ -134,61 +121,8 @@ class EditEvent extends Component {
       window.location.href = `/events`
     }
 
-    // this.handleCatalogItemsClick = (e) => {
-    //   let catalog_id = e.target.value
-    //   let currentCatalogItemsArray = this.state.updatedEvent.catalog_items
-    //   let updatedCatalogItemsArray 
-
-    //   if (!currentCatalogItemsArray.includes(catalog_id)){
-    //     let catalogArrayLength = currentCatalogItemsArray.push(catalog_id)
-    //     updatedCatalogItemsArray = currentCatalogItemsArray
-    //     console.log(catalogArrayLength)
-    //   }
-
-    //   else{
-    //     updatedCatalogItemsArray = currentCatalogItemsArray.filter((item) => catalog_id !== item)
-    //   }
-
-    //   this.setState({updatedCatalogItemsArray: updatedCatalogItemsArray})
-    //   this.setState(previousState => ({ updatedEvent: { ...previousState.updatedEvent, catalog_items: updatedCatalogItemsArray}, updateBoolean: true }))
-
-    // }
-
-    // this.catalogFieldSelectionOptions = this.context.catalog_items.map((item) => {
-    //   this.checkedValue = () => {
-    //     if (this.selectedEventArray[0].catalog_items.includes(item.catalog_id)){
-    //     return true
-    //     }
-    //   }
-
-    //   this.catalogImgReturn = () => {
-    //     if (item.images !== null || item.images !== "" ){
-    //       this.imgReturn = [item.images.split(', ')[0]].map((image) => {
-    //               return (
-    //                 <img key={item.contact_id+image.name} className="catalog-img-item" src={require("../../assets/" + image)} alt="catalog item" />
-    //                 )
-    //             })
-    //     }
-    //     return this.imgReturn
-    //   }       
-
-    //     return(
-    //       <div key={'catalog-items' + item.catalog_id}  className="checkbox">
-    //         <input type="checkbox" id={'catalog-items'+ item.catalog_id} name={"catalog-items"} value={item.catalog_id} onChange={this.handleCatalogItemsClick} defaultChecked={this.checkedValue()} />
-    //       <label htmlFor={item.catalog_id}>
-    //         {<a href={'/catalog/'+ item.catalog_id} target="_blank"  rel="noopener noreferrer">
-    //             {this.catalogImgReturn()} 
-    //             </a>}   
-    //       </label> 
-    //       </div>
-    //     )
-    //     })
-
-    // 
-
-
     this.selectedEventForm = () => {
-      if(this.state.eventToEdit === undefined){
+      if (this.state.eventToEdit === undefined) {
         return <div></div>
       }
       if (this.state.eventToEdit !== {}) {
@@ -223,9 +157,6 @@ class EditEvent extends Component {
                   <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} defaultValue={item.application_due_dates} />
                 </div>
                 <div className="form-space">
-                  {/* <label htmlFor="contact" className="event-edit">Contact:</label>
-                  {this.contactFieldSelectionOptions()} */}
-                  {/* <input type="text" name="contact" id="contact" onChange={this.handleChange} defaultValue={item.contact} /> */}
                 </div>
                 <div className="form-space">
                   <label htmlFor="notes" className="event-edit">Notes:</label>
@@ -236,9 +167,6 @@ class EditEvent extends Component {
                   <br /><textarea type="text" className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} defaultValue={item.submission_requirements} />
                 </div>
                 <div className="form-space">
-                  {/* <label htmlFor="catalog_items" className="event-edit">Catalog Items:</label>
-                  {this.catalogFieldSelectionOptions} */}
-                  {/* <input type="text" name="catalog_items" id="catalog_items" onChange={this.handleChange} defaultValue={item.catalog_items} /> */}
                 </div>
                 <div className="button-wrap">
                   <button className="submit-btn" type="submit" value="submit">Submit</button>

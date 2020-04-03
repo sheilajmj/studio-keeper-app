@@ -9,8 +9,7 @@ const AuthApiService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json',
       },
-      //'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
-      body: JSON.stringify({user_name, password}),
+      body: JSON.stringify({ user_name, password }),
     })
       .then(res =>
         (!res.ok)
@@ -19,7 +18,6 @@ const AuthApiService = {
       )
   },
   postUser(user) {
-    console.log(user - "this is user")
     return fetch(`${config.API_ENDPOINT}/users`, {
       method: 'POST',
       headers: {

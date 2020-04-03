@@ -11,7 +11,7 @@ class EventButton extends Component {
 
   render() {
     return (
-        <button onClick={() => { this.handleEventsClick() }}>Events</button>
+      <button onClick={() => { this.handleEventsClick() }}>Events</button>
     );
   }
 }

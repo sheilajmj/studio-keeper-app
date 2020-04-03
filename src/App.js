@@ -18,7 +18,6 @@ import ViewEvent from './Components/Events/ViewEvent'
 import Home from './Components/Home/Home'
 import Header from './Components/Header/Header'
 import LandingPage from './Components/LandingPage/LandingPage'
-//import Nav from './Components/Nav/Nav'
 import Gallery from './Components/Gallery/Gallery'
 import LoginPage from './Components/Login/LoginPage'
 import RegistrationPage from './Components/RegistrationPage/RegistrationPage'
@@ -40,10 +39,10 @@ class App extends Component {
     }
   }
 
-static getDerivedStateFromError(error){
-  console.error(error)
-  return { hasError: true }
-}
+  static getDerivedStateFromError(error) {
+    console.error(error)
+    return { hasError: true }
+  }
 
   updateAppStateContactsCreate = (newContact) => {
     const currentStateContacts = JSON.parse(JSON.stringify(this.state.contacts))
@@ -102,15 +101,15 @@ static getDerivedStateFromError(error){
   }
 
   setCatalogItems = (catalogItems) => {
-    this.setState({catalog_items: catalogItems })
+    this.setState({ catalog_items: catalogItems })
   }
 
   setContacts = (contacts) => {
-    this.setState({contacts: contacts})
+    this.setState({ contacts: contacts })
   }
 
   setEventItems = (events) => {
-    this.setState({events: events})
+    this.setState({ events: events })
   }
 
   componentDidMount() {
@@ -119,27 +118,22 @@ static getDerivedStateFromError(error){
       .catch(this.context.setError)
 
     CatalogApiService.getCatalogItems()
-        .then(this.setCatalogItems)
-        .catch(this.context.setError)
+      .then(this.setCatalogItems)
+      .catch(this.context.setError)
 
     EventsApiService.getEventItems()
-        .then(this.setEventItems)
-        .catch(this.context.setError)
+      .then(this.setEventItems)
+      .catch(this.context.setError)
   }
 
   backgroundSelection = () => {
-    console.log(this.props.match.path, "What is the path")
-    if(this.props.location.pathname.includes("events")){
+    if (this.props.location.pathname.includes("events")) {
       return "bkg-img-te bkg-div"
     }
-    if(this.props.location.pathname.includes("contacts")){
+    if (this.props.location.pathname.includes("contacts")) {
       return "bkg-img-pk bkg-div"
     }
   }
-
-
-  // uploadImage(formData)
-
 
   render() {
     const contextValue = {
@@ -168,7 +162,7 @@ static getDerivedStateFromError(error){
         <main className='app'>
           <Header />
           <Switch>
-          <Route
+            <Route
               exact path={'/'}
               component={LandingPage}
             />
@@ -181,8 +175,8 @@ static getDerivedStateFromError(error){
               component={Home}
             />
             <PublicOnlyRoute
-            path={'/login'}
-            component={LoginPage} 
+              path={'/login'}
+              component={LoginPage}
             />
             <PublicOnlyRoute
               path={'/register'}
@@ -239,16 +233,15 @@ static getDerivedStateFromError(error){
             <PrivateOnlyRoute
               path={'/gallery'}
               component={Gallery}
-              />
+            />
             <Route
               component={NotFoundPage}
             />
 
           </Switch>
-          
+
         </main>
       </StudioKeeperContext.Provider>
-      {/* <div className={this.backgroundSelection()}><img className="bkg-size" src={require("./assets/bkgr-te.svg")} alt="background" /> </div> */}
       </>
     );
   };

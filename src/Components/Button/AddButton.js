@@ -11,7 +11,7 @@ class AddButton extends Component {
 
   render() {
     return (
-        <button className={`add-btn bkg-color-tra`} onClick={(() => { this.handleAddClick(`${this.props.pageName.toLowerCase()}`) })}></button>
+      <button className={`add-btn bkg-color-tra`} onClick={(() => { this.handleAddClick(`${this.props.pageName.toLowerCase()}`) })}></button>
     );
   }
 }
