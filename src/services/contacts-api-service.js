@@ -34,7 +34,7 @@ const ContactsApiService = {
     getContact(id) {
         return fetch (`${config.API_ENDPOINT}/contacts/${id}`, {
             headers: {
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
+                'authorization': `bearer ${TokenService.getAuthToken()}`
                 //'Authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         })
@@ -72,7 +72,7 @@ const ContactsApiService = {
     return fetch(`${config.API_ENDPOINT}/contacts/${newId}`, {
         method: 'PATCH',
         headers: {
-          'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
           'content-type': 'application/json',
       //     'authorization': `bearer ${TokenService.getAuthToken()}`,
         },
@@ -86,7 +86,7 @@ const ContactsApiService = {
         return fetch(`${config.API_ENDPOINT}/contacts/${id}`, {
             method: 'DELETE',
             headers: {
-              'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+              'authorization': `bearer ${TokenService.getAuthToken()}`,
               'content-type': 'application/json',
           //     'authorization': `bearer ${TokenService.getAuthToken()}`,
             },

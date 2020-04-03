@@ -5,8 +5,7 @@ const EventsApiService = {
     getEventItems() {
         return fetch(`${config.API_ENDPOINT}/events`, {
             headers: {
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
-
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 //`bearer ${TokenService.getAuthToken()}`,
             }
         })
@@ -58,7 +57,7 @@ const EventsApiService = {
         return fetch(`${config.API_ENDPOINT}/events/${newId}`, {
             method: 'PATCH',
             headers: {
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
                 //     'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
@@ -72,7 +71,7 @@ const EventsApiService = {
         return fetch(`${config.API_ENDPOINT}/events/${id}`, {
             method: 'DELETE',
             headers: {
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c',
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
                 //     'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
