@@ -897,6 +897,8 @@ margin-bottom: 3%;
 .catalog-img-item{
 margin: 1%;
 width: 48%;
+margin-right: auto;
+margin-left: auto;
 }
 
 .catalog-img-item-view{
