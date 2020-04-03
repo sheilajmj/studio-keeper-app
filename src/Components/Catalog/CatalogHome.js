@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context'
 import CatalogApiService from '../../services/catalog-api-service'
-// import CatalogImagesApiService from '../../services/images-api-service'
+import CatalogImagesApiService from '../../services/images-api-service'
 
 class CatalogHome extends Component {
   static contextType = Context;
@@ -40,69 +40,47 @@ class CatalogHome extends Component {
       .then(this.setCatalogItems)
       .catch(this.context.setError)
 
-    // CatalogImagesApiService.getCatalogImages()
-    //   .then(this.setCatalogItemImages)
-    //   .catch(this.context.setError)
+    CatalogImagesApiService.getCatalogImages()
+      .then(this.setCatalogItemImages)
+      .catch(this.context.setError)
   }
-
-
-
-
-  //   loadImagesReturn() {
-  //     let itemImages = this.state.catalogItemImages
-
-  //     console.log("ITEM IMAGES", itemImages)
-
-  //     if (!itemImages) {
-  //       return <div></div>
-  //     }
-
-  //     else {
-
-  //       this.itemImagesReturn = () => {
-  //           return ( <img className="catalog-img-item" src={require("image_url")} alt="catalog item" />
-  //         )
-  //       }
-  //   }
-  // }
 
 
 
 
   handleImages = (id) => {
-    //     if(this.state.catalogImageItems === []){
-    //       return <div></div>
-    //     }
-    //     else{
-    //     if (this.state.catalogItemImages !== []) {
-    //       let images = this.state.catalogItemImages
-    //       let catalogImageFilter = images.filter(image => image.catalog_id === id)
-    //       let catalogImageReturn = catalogImageFilter.map((image) => {
-    //         console.log("image url", image.image_url)
-    //         return (
-    //           <img key={`${image.image_url}`} className="catalog-img-item" src={require(`${image.image_url}`)} alt="catalog item" />
-    //         )
-    //       })
-    //       console.log("FILTER", catalogImageFilter)
-    // return catalogImageReturn
-    // }
-    // }
+    if(this.state.catalogItemImages === []){
+      return <div></div>
+    }
+    else{
+    if (this.state.catalogItemImages !== []) {
+      let images = this.state.catalogItemImages
+      let catalogImageFilter = images.filter(image => image.catalog_id === id)
+      let catalogImageReturn = catalogImageFilter.map((image) => {
+        console.log("image url", image.image_url)
+        return (
+          <img key={`${image.image_url}`} className="catalog-img-item align-center" src={image.image_url} alt="catalog item" />
+        )
+      })
+    return catalogImageReturn
+    }
   }
-
+  }
+  
 
   catalogCollectionIncluded = (item) => {
     if (item.collection) {
-      return (<li className="catalog-collection">
+      return (<div className="catalog-collection">
         <span className="catalog-labels">Collection:</span> {item.collection}
-      </li>)
+      </div>)
     }
   }
 
   catalogNameIncluded = (item) => {
     if (item.name) {
-      return (<li className="catalog-name">
+      return (<div className="catalog-name">
         <span className="catalog-labels">Name:</span>{item.name}
-      </li>)
+      </div>)
     }
   }
 
@@ -127,14 +105,16 @@ class CatalogHome extends Component {
       let catalogHomeMap = this.state.catalogHomeItems.map((item) => {
       return (
         <div key={'catalog' + item.id} className="item-wrap">
-          {/* <button type="button" className="view-item" value="viewCatalog" onClick={(() => {this.handleViewCatalog(item.catalog_id)})}><img src={require("../../assets/viewItem.svg")} width="30px" alt="view item" /></button> */}
           <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
-          <ul className="item" onClick={(() => { this.handleItemClick(item.id) })}>
-            {/* {this.catalogImagesIncluded()} */}
+          <div className="home-item" onClick={(() => { this.handleItemClick(item.id) })}>
+            <div className="gallery-img-wrap">
             {this.handleImages(item.id)}
+            </div>
+            <div className="gallery-text-wrap">
             {this.catalogNameIncluded(item)}
             {this.catalogCollectionIncluded(item)}
-          </ul>
+            </div>
+          </div>
         </div>
       )
     })

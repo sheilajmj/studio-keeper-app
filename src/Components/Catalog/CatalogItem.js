@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Context from '../../Context'
 import CatalogApiService from '../../services/catalog-api-service'
 import PageParentHeader from '../Nav/PageParentHeader'
-//import CatalogImagesApiService from '../../services/images-api-service'
+import CatalogImagesApiService from '../../services/images-api-service'
 
 class CatalogItem extends Component {
   static contextType = Context;
@@ -40,9 +40,9 @@ class CatalogItem extends Component {
       .then(this.setCatalogItems)
       .catch(this.context.setError)
 
-    // CatalogImagesApiService.getCatalogImages()
-    //   .then(this.setCatalogItemImages)
-    //   .catch(this.context.setError)
+    CatalogImagesApiService.getCatalogImages()
+      .then(this.setCatalogItemImages)
+      .catch(this.context.setError)
   }
 
 
@@ -70,23 +70,22 @@ class CatalogItem extends Component {
 
 
   handleImages = (id) => {
-//     if(this.state.catalogImageItems === []){
-//       return <div></div>
-//     }
-//     else{
-//     if (this.state.catalogItemImages !== []) {
-//       let images = this.state.catalogItemImages
-//       let catalogImageFilter = images.filter(image => image.catalog_id === id)
-//       let catalogImageReturn = catalogImageFilter.map((image) => {
-//         console.log("image url", image.image_url)
-//         return (
-//           <img key={`${image.image_url}`} className="catalog-img-item" src={require(`${image.image_url}`)} alt="catalog item" />
-//         )
-//       })
-//       console.log("FILTER", catalogImageFilter)
-// return catalogImageReturn
-    // }
-  // }
+    if(this.state.catalogItemImages === []){
+      return <div></div>
+    }
+    else{
+    if (this.state.catalogItemImages !== []) {
+      let images = this.state.catalogItemImages
+      let catalogImageFilter = images.filter(image => image.catalog_id === id)
+      let catalogImageReturn = catalogImageFilter.map((image) => {
+        console.log("image url", image.image_url)
+        return (
+          <img key={`${image.image_url}`} className="catalog-img-item" src={image.image_url} alt="catalog item" />
+        )
+      })
+    return catalogImageReturn
+    }
+  }
   }
 
 
@@ -98,25 +97,6 @@ class CatalogItem extends Component {
 
     if (this.state.catalog_items !== {}) {
       this.catalogItemsList = this.state.catalog_items.map((item) => {
-
-
-
-        // this.favoritedByArray = this.context.contacts.filter(contact => contact.favorites.includes(item.id))
-
-        // this.favoritedByReturn = this.favoritedByArray.map(fav => {
-        //   return {
-        //     contact_id: fav.contact_id,
-        //     name: fav.name,
-        //     business_name: fav.business_name,
-        //   }
-        // }
-        // )
-        // this.favoritedByReturnMapped = this.favoritedByReturn.map(fav => {
-        //   return (
-        //     <li><a href={`./contacts/` + fav.contact_id} target="_blank" rel="noopener noreferrer">{fav.name}</a></li>
-        //   )
-        // })
-
 
 
         this.catalogCollectionIncluded = () => {
@@ -156,7 +136,6 @@ class CatalogItem extends Component {
             {/* <button type="button" className="view-item" value="viewCatalog" onClick={(() => {this.handleViewCatalog(item.catalog_id)})}><img src={require("../../assets/viewItem.svg")} width="30px" alt="view item" /></button> */}
             <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
             <ul className="item" onClick={(() => { this.handleItemClick(item.id) })}>
-              {/* {this.catalogImagesIncluded()} */}
               {this.handleImages(item.id)}
               {this.catalogNameIncluded()}
               <div className="low-level">

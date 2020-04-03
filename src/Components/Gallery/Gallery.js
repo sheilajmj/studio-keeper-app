@@ -1,94 +1,107 @@
 import React, { Component } from 'react';
 import Context from '../../Context';
+import CatalogImagesApiService from '../../services/images-api-service'
+import CatalogApiService from '../../services/catalog-api-service'
 
 class Gallery extends Component {
   static contextType = Context;
-
-
-    galleryItemsList = this.context.catalog_items.map((item) => {
-  
-      this.handleImages = () => {    
-      if (!item.images){
-        item.images = ""
-      }
-      this.imageArray = item.images.split(', ')
-      this.itemImagesArrayReturn = this.imageArray.map((item) => {
-        if (item.images === ""){
-          return (<></>)
-        }
-        else{
-        return (
-          this.imageItems = <img className="gallery-img-item" src={require("../../assets/" + item)} alt="catalog item" />
-        )
-        }
-      })
-    return this.imageItems
+  constructor(props) {
+    super(props);
+    this.state = {
+      catalogItemImages: [],
     }
-  
-  
-    //   this.favoritedByArray = this.context.contacts.filter(contact => contact.favorites.includes(item.catalog_id))
-  
-    //   this.favoritedByReturn = this.favoritedByArray.map(fav => {
-    //     return {
-    //       contact_id: fav.contact_id,
-    //       name: fav.name,
-    //       business_name: fav.business_name,
-    //     }
-    //   }
-    //   )
-    //   this.favoritedByReturnMapped = this.favoritedByReturn.map(fav => {
-    //     return (
-    //       <li><a href={`http://localhost:3000/contacts/` + fav.contact_id} target="_blank" rel="noopener noreferrer">{fav.name}</a></li>
-    //     )
-    //   })
-  
-      this.catalogImagesIncluded = () => {
-        if (item.images) {
-          return (<li className="gallery-img">
-            {this.handleImages()}
-          </li>)
-        }
-      }
-  
-      this.catalogCollectionIncluded = () => {
-        if (item.collection) {
-          return (<li className="catalog-collection">
-            <span className="catalog-labels">Collection:</span> {item.collection}
-          </li>)
-        }
-      }
-  
-      this.catalogNameIncluded = () => {
-        if (item.name) {
-          return (<li className="catalog-name">
-            <span className="catalog-labels">Name:</span>{item.name}
-          </li>)
-        }
-      }
-  
+  };
+
+  setCatalogItemImages = (response) => {
+    this.setState({ catalogItemImages: response })
+  }
+  setCatalogItems = (item) => {
+    this.setState({ catalogItems: item })
+  }
+
+
+  componentDidMount = () => {
+    CatalogImagesApiService.getCatalogImages()
+      .then(this.setCatalogItemImages)
+      .catch(this.context.setError)
+
+    CatalogApiService.getCatalogItems()
+      .then(this.setCatalogItems)
+      .catch(this.context.setError)
+
+  }
+
+  handleCatalogImages = (catalog_id) => {
+    let imageFilter = this.state.catalogItemImages.filter((images) => images.catalog_id === catalog_id)
+
+    this.imageFilterReturn = () => {
+      let imageMap = imageFilter.map((image) => {
+        console.log("IMAGE", image)
+        return (
+          <img className="gallery-img-item gallery-item" src={image.image_url} alt="catalog item" />
+        )
+      })
+      return imageMap
+    }
+    return this.imageFilterReturn()
+  }
+
+
+  catalogCollectionIncluded = (collection) => {
+    if (collection) {
       return (
-        <div key={item.catalog_id} className="item-wrap">
-          <ul className="gallery" >
-            {this.catalogImagesIncluded()}
-            {this.catalogCollectionIncluded()}
-            {this.catalogNameIncluded()}
-          </ul>
-        </div>
+      <div className="catalog-collection gallery-item">
+        <p>Collection: <span className="font-wt-str">{collection}</span></p>
+      </div>
       )
-    })
-  
+    }
+  }
 
-  
+  catalogNameIncluded = (name) => {
+    if (name) {
+      return (
+      <div className="catalog-name gallery-item">
+      <p>Name: <span className="font-wt-str">{name}</span></p>
+      </div>
+      )
+    }
+  }
 
-  
+
+  galleryItemsList = () => {
+    if (this.state.catalogItems && this.state.catalogItemImages) {
+      this.catalogItemsMap = this.state.catalogItems.map((item) => {
+        return (
+          <div key={item.catalog_id} className="item-wrap">
+              <div className="gallery-img-wrap">
+                {this.handleCatalogImages(item.id)}
+              </div>
+              <div className="gallery-text-wrap">
+              {this.catalogCollectionIncluded(item.collection)}
+              {this.catalogNameIncluded(item.name)}
+              </div>
+          </div>
+        )
+      })
+      return this.catalogItemsMap
+    }
+    else {
+      return <div></div>
+    }
+  }
+
+
+
+
+
   render() {
 
     return (
-      <div>
-          <h1>Gallery</h1>
-            <div className="flex-container">
-            { this.galleryItemsList }
-            </div>
+      <div className="bkg-color-dk">
+        <h1 className="color-white gallery-title">Gallery</h1>
+        <div className="flex-container">
+          {this.galleryItemsList()}
+        </div>
       </div>
     );
   }

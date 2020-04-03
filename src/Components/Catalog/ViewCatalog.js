@@ -137,19 +137,19 @@ class ViewCatalog extends Component {
 
   render() {
 
-    // // Catalog Images return block
-    // this.catalogImageReturn = () => {
-    //   let images = this.state.selectedCatalogItemImages
-    //   let imageMap
-    //   if (images !== []) {
-    //     imageMap = images.map((image) => {
-    //       return (
-    //         <img className="catalog-img-item-view" src={require("../../../public/assets/" + image.image_name)} alt="catalog item" height="42px" width="42px" />
-    //       )
-    //     })
-    //   }
-    //   return imageMap
-    // }
+    // Catalog Images return block
+    this.catalogImageReturn = () => {
+      let images = this.state.selectedCatalogItemImages
+      let imageMap
+      if (images !== []) {
+        imageMap = images.map((image) => {
+          return (
+            <img className="catalog-img-item-view" src={image.image_url} alt="catalog item" height="42px" width="42px" />
+          )
+        })
+      }
+      return imageMap
+    }
 
     //Catalog Contacts/Favorited By return block
     this.contactDataReturn = () => {
@@ -200,7 +200,7 @@ class ViewCatalog extends Component {
                 <button className="edit-btn" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
                 <div className="item catalog-item">
 
-                  {/* {this.catalogImageReturn()} */}
+                  {this.catalogImageReturn()}
 
                   <div className="catalog-view-block1">
                     <div className="catalog-view-name">
