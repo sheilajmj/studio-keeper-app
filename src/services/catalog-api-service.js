@@ -19,7 +19,7 @@ const CatalogApiService = {
     getCatalogItem(catalog_id) {
         return fetch (`${config.API_ENDPOINT}/catalog/${catalog_id}`, {
             headers: {
-                'authorization': 'bearer db943962-4003-4d18-ab25-9f0c6bb2679c'
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         })
 
