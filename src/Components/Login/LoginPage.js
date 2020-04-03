@@ -41,7 +41,9 @@ export default class SignInForm extends Component {
           {/* <div role='alert'>
           {error && <p className='red'>{error}</p>}
         </div> */}
-
+          <h3>Please feel free to try out the app <br/> with demo credentials</h3>
+          <h3>user name: painter99</h3>
+          <h3>password: penny</h3>
           <div className='user_name pd-t-lg container-center'>
             <label className='pd-r-sm mg-sm ' htmlFor='LoginForm__user_name'>
               User name
