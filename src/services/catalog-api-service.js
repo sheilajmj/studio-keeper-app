@@ -33,7 +33,7 @@ const CatalogApiService = {
 
     
     postCatalogItem(catalogItem) {
-        const user_id = 1
+        // const user_id = 1
         //change user_id to the logged in user
         return fetch(`${config.API_ENDPOINT}/catalog`, {
           method: 'POST',
@@ -41,8 +41,7 @@ const CatalogApiService = {
             'authorization': `bearer ${TokenService.getAuthToken()}`,
             'content-type': 'application/json',
           },
-          body: JSON.stringify({
-              user_id, 
+          body: JSON.stringify({ 
               catalogItem
           }),
        })
