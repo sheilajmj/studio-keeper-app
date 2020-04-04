@@ -88,10 +88,6 @@ class ViewContact extends Component {
     this.context.history.push(`/contacts/edit/${id}`)
   }
 
-  handleDeleteClick = (id) => {
-    this.handleDeleteContact(id)
-  }
-
   handleBackToContacts = (e) => {
     this.context.history.push('/contacts')
   }
@@ -103,9 +99,12 @@ class ViewContact extends Component {
     let newContactsList = contactsList
     this.context.updateAppStateContactsDelete(newContactsList)
     ContactsApiService.deleteContactItem(id)
-    window.location.href = `/contacts`
-  }
+      .then(res => { window.location.href = `/contacts` })
 
+  }
+  handleDeleteClick = (id) => {
+    this.handleDeleteContact(id)
+  }
 
   catalogFavsReturn = () => {
     let catalogFavsMap = this.state.contactCatalogFavs.map((catalog) => {

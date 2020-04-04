@@ -102,7 +102,7 @@ class ViewCatalog extends Component {
     let newCatalogList = catalogList
     this.context.updateAppStateCatalogDelete(newCatalogList)
     CatalogApiService.deleteCatalogItem(id)
-    window.location.href = `/catalog`
+      .then(res => { window.location.href = `/catalog` })
   }
 
   catalogContactsReturn = () => {

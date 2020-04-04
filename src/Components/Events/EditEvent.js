@@ -78,7 +78,7 @@ class EditEvent extends Component {
       e.preventDefault()
       this.context.updateAppStateEventsUpdate(this.state.updatedEvent)
       EventsApiService.updateEventItem(this.props.match.params, this.state.updatedEvent)
-      window.location.href = `/events`
+        .then(res => { window.location.href = `/events` })
     }
 
     this.handleChange = (e) => {
@@ -118,7 +118,7 @@ class EditEvent extends Component {
       let newEventsList = eventsList
       this.context.updateAppStateEventsDelete(newEventsList)
       EventsApiService.deleteEventItem(id)
-      window.location.href = `/events`
+        .then(res => { window.location.href = `/events` })
     }
 
     this.selectedEventForm = () => {

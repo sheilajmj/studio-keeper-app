@@ -71,8 +71,7 @@ class AddCatalogEntry extends Component {
           this.setCatalogId(res)
           return this.handleUploadImage().then(() => res)
         })
-        .then(res => {
-          window.location.href = `/catalog/${res.id}`
+        .then(res => {window.location.href = `/catalog/${res.id}`
         })
     }
   }

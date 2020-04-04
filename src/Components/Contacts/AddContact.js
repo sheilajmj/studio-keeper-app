@@ -39,7 +39,7 @@ class AddContact extends Component {
     const newContact = this.state.newContact
     this.context.updateAppStateContactsCreate(newContact)
     ContactsApiService.postContactItem(newContact)
-      .then((res) => { window.location.href = `/contacts/${res.id}` })
+      .then(res => { window.location.href = `/contacts/${res.id}` })
   }
 
 

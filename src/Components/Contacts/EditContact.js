@@ -64,7 +64,8 @@ class EditContact extends Component {
     e.preventDefault()
     this.context.updateAppStateContactsUpdate(this.state.updatedContact)
     ContactApiService.updateContactItem(this.props.match.params, this.state.updatedContact)
-    window.location.href = '/contacts'
+      .then(() => window.location.href = '/contacts')
+
   }
 
   handleChange = (e) => {
@@ -112,7 +113,7 @@ class EditContact extends Component {
     let newContactsList = contactsList
     this.context.updateAppStateContactsDelete(newContactsList)
     ContactsApiService.deleteContactItem(id)
-    window.location.href = `/contacts`
+      .then(res => { window.location.href = `/contacts` })
   }
 
 
