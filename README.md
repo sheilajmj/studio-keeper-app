@@ -30,7 +30,7 @@ Users may click an icon along the top menu to view a preview of the entries.
 
 The user will see several options from here.  Options include, viewing entry details, adding an entry, editing an entry, selecting a different icon from the main menu to view a new category or to view the gallery, and returing to the application landing page.
 
-<img src="src/assets/readme-assets/contact-items-mk.png" alt="contact-item-anno" width="500">
+<img src="src/assets/readme-assets/contact-items-mk.png" alt="contact-item-anno" width="700">
 
 ### Adding an Entry
 
@@ -51,7 +51,7 @@ The gallery page is a minimal view of the catalog entries, designed to serve as 
 
 <img src="src/assets/readme-assets/gallery1.png" alt="gallery1" height="300">
 
-
+<br />
 
 
 <img src="src/assets/readme-assets/gallery2.png" alt="gallery2" height="300">
@@ -65,7 +65,7 @@ The server and client application are deployed to Heroku.  Image storage is mana
 
 <img src="src/assets/readme-assets/react-logo.svg" alt="react-logo" height="48"> The frontend was created using React
 
-<img src="src/assets/readme-assets/node-logo.svg" alt="node-logo" height="48"> The backend was created using Node
+<img src="src/assets/readme-assets/node-logo.svg" alt="node-logo" height="96"> The backend was created using Node
 
 <img src="src/assets/readme-assets/postgres-logo.png" alt="postgres-logo" height="48"> The database used was Postgres
 
