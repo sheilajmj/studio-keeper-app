@@ -10,7 +10,7 @@ Api Repo: [API Repo](https://github.com/sheilajmj/studio-keeper-server)
 Upon first arriving to the site, you will see the welcome page.  Here you may click the 'get started' button or the 'login' button to continue.
 
 <img src="src/assets/readme-assets/app-welcome-mk.png" alt="welcome-page"
-	maxWidth="60%" maxHeight="60%" />
+	width="60%" height="60%" />
 
 
 To view the project in action, you will need to log in using the demo account.  
