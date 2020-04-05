@@ -9,12 +9,8 @@ Api Repo: [API Repo](https://github.com/sheilajmj/studio-keeper-server)
 ## Getting Started
 Upon first arriving to the site, you will see the welcome page.  Here you may click the 'get started' button or the 'login' button to continue.
 
-![welcome-page](src/assets/readme-assets/app-welcome-mk.png#img)
+![welcome-page | width= 300](src/assets/readme-assets/app-welcome-mk.png#img)
 
-img[[src*="#img"] {
-  width: 300px;
-  height: 300px;
-}
 
 To view the project in action, you will need to log in using the demo account.  
 Username: painter99
