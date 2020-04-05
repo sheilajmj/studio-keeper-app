@@ -1,68 +1,74 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Studio Keeper
 
-## Available Scripts
+Studio Keeper is a web application designed to support artists, makers, and designers manage the business of their creative work.  The application allows users to easily catalog their work, enter contacts, and keep track of events of interest.  The application also provides a gallery view, which allows users to easily share their work.  
 
-In the project directory, you can run:
+## Getting Started
+Upon first arriving to the site, you will see the welcome page.  Here you may click the 'get started' button or the 'login' button to continue.
 
-### `npm start`
+![welcome-page](src\assets\readme-assets\app-welcome-mk.png)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+To view the project in action, you will need to log in using the demo account.  
+Username: painter99
+password: penny
 
-### `npm test`
+![login-page](src\assets\login-mk.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Using the App
 
-### `npm run build`
+Once logged in, users will see the application landing page.  
+![application-landing-page](src\assets\readme-assets\app-landing.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Users may click an icon along the top menu to view a preview of the entries.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![view-items](src\assets\readme-assets\contact-items.png)
 
-### `npm run eject`
+The user will see several options from here.  Options include, viewing entry details, adding an entry, editing an entry, selecting a different icon from the main menu to view a new category or to view the gallery, and returing to the application landing page.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![page-options](src\assets\readme-assets\contact-items-mk.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Adding an Entry
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Selecting to add an entry will allow the user to enter information, and choose 'submit' to commit the new entry to the database.  
+![page-options](src\assets\readme-assets\contact-submit-mk.png)
 
-## Learn More
+### Editing an Entry
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Selecting to edit an entry will allow the user to make changes to the selected entry.  The user has options to submit the changes to the database, cancel the changes, or delete the entire entry from the database.  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![page-options](src\assets\readme-assets\edit-event-mk.png)
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## The Gallery
 
-### Analyzing the Bundle Size
+The gallery page is a minimal view of the catalog entries, designed to serve as a tool for showcasing work.  To allow the focus to be on the catalog images, the additional navigation options are not present.  However, by clicking the title at the top, a user may return to the main application landing page.  
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+![page-options](src\assets\readme-assets\gallery1.png)
 
-### Making a Progressive Web App
+![page-options](src\assets\readme-assets\gallery2.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
+## Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+The server and client application are deployed to Heroku.  Image storage is managed in AWS S3.  
 
-### Deployment
+## Built With
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+* ![React](src\assets\readme-assets\react-logo.svg) - The frontend was created using React
+* ![Node](src\assets\readme-assets\gallery1.png) - The backend was created using Node
+* ![Postgres](src\assets\readme-assets\postgres-logo.png) - The database used was Postgres
+* ![AWS](src\assets\readme-assets\aws-logo.png) - Images are stored using AWS S3
 
-### `npm run build` fails to minify
+## Authors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* **Sheila Jagla** - [SheilaJagla](https://github.com/sheilajmj)
+
+## Acknowledgments
+
+* Stock Images
+    Paweł Czerwiński on Unsplash
+    Mr Karl on Unsplash
+    Alexander Ant on Unsplash
+
