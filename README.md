@@ -65,7 +65,7 @@ The server and client application are deployed to Heroku.  Image storage is mana
 
 <img src="src/assets/readme-assets/react-logo.svg" alt="react-logo" height="48"> The frontend was created using React
 
-<img src="src/assets/readme-assets/node-logo.svg" alt="node-logo" height="96"> The backend was created using Node
+<img src="src/assets/readme-assets/node-logo.png" alt="node-logo" height="48"> The backend was created using Node
 
 <img src="src/assets/readme-assets/postgres-logo.png" alt="postgres-logo" height="48"> The database used was Postgres
 
