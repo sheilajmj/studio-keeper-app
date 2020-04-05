@@ -78,7 +78,7 @@ The server and client application are deployed to Heroku.  Image storage is mana
 ## Acknowledgments
 
 ###### Stock Images
-    * Paweł Czerwiński on Unsplash
-    * Mr Karl on Unsplash
-    * Alexander Ant on Unsplash
+* Paweł Czerwiński on Unsplash
+* Mr Karl on Unsplash
+* Alexander Ant on Unsplash
 
