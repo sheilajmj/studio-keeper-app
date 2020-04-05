@@ -26,7 +26,7 @@ Once logged in, users will see the application landing page.
 
 Users may click an icon along the top menu to view a preview of the entries.
 
-<img src="src/assets/readme-assets/contact-items.png" alt="contact-item" width="300">
+<img src="src/assets/readme-assets/main-nav-mk.png" alt="main-nav" width="300">
 
 The user will see several options from here.  Options include, viewing entry details, adding an entry, editing an entry, selecting a different icon from the main menu to view a new category or to view the gallery, and returing to the application landing page.
 
@@ -36,7 +36,7 @@ The user will see several options from here.  Options include, viewing entry det
 
 Selecting to add an entry will allow the user to enter information, and choose 'submit' to commit the new entry to the database.  
 
-<img src="src/assets/readme-assets/contact-add.png" alt="contact-add" width="300">
+<img src="src/assets/readme-assets/contact-submit-mk.png" alt="contact-add" width="300">
 
 
 ### Editing an Entry
