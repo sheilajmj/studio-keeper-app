@@ -9,7 +9,7 @@ Api Repo: [API Repo](https://github.com/sheilajmj/studio-keeper-server)
 ## Getting Started
 Upon first arriving to the site, you will see the welcome page.  Here you may click the 'get started' button or the 'login' button to continue.
 
-![welcome-page | max-width=50](src/assets/readme-assets/app-welcome-mk.png)
+![welcome-page | style="max-width=60%"](src/assets/readme-assets/app-welcome-mk.png)
 
 
 
