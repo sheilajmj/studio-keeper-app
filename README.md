@@ -9,50 +9,53 @@ Api Repo: [API Repo](https://github.com/sheilajmj/studio-keeper-server)
 ## Getting Started
 Upon first arriving to the site, you will see the welcome page.  Here you may click the 'get started' button or the 'login' button to continue.
 
-<img src="src/assets/readme-assets/app-welcome-mk.png" alt="welcome=page" width="300">
+<img src="src/assets/readme-assets/app-welcome-mk.png" alt="welcome-page" width="300">
 
 To view the project in action, you will need to log in using the demo account.  
 Username: painter99
 password: penny
 
-![login-page](src/assets/login-mk.png =500)
+<img src="src/assets/login-mk.png" alt="login-page" width="300">
 
 ## Using the App
 
 Once logged in, users will see the application landing page.  
-![application-landing-page](src/assets/readme-assets/app-landing.png =500)
+
+<img src="src/assets/app-landing.png" alt="landing-page" height="300">
 
 
 Users may click an icon along the top menu to view a preview of the entries.
 
-![view-items](src/assets/readme-assets/contact-items.png)
+<img src="src/assets/contact-items.png" alt="contact-item" height="300">
 
 The user will see several options from here.  Options include, viewing entry details, adding an entry, editing an entry, selecting a different icon from the main menu to view a new category or to view the gallery, and returing to the application landing page.
 
-![page-options](src/assets/readme-assets/contact-items-mk.png)
-
+<img src="src/assets/contact-items-mk.png" alt="contact-item-anno" height="300">
 
 ### Adding an Entry
 
 Selecting to add an entry will allow the user to enter information, and choose 'submit' to commit the new entry to the database.  
-![page-options](src/assets/readme-assets/contact-submit-mk.png)
+
+<img src="src/assets/contact-add.png" alt="contact-add" height="300">
+
 
 ### Editing an Entry
 
 Selecting to edit an entry will allow the user to make changes to the selected entry.  The user has options to submit the changes to the database, cancel the changes, or delete the entire entry from the database.  
 
-![page-options](src/assets/readme-assets/edit-event-mk.png)
-
+<img src="src/assets/edit-event-mk.png" alt="edit-event" height="300">
 
 ## The Gallery
 
 The gallery page is a minimal view of the catalog entries, designed to serve as a tool for showcasing work.  To allow the focus to be on the catalog images, the additional navigation options are not present.  However, by clicking the title at the top, a user may return to the main application landing page.  
 
 ![page-options](src/assets/readme-assets/gallery1.png)
+<img src="src/assets/gallery1.png" alt="gallery1" height="300">
 
 
 
-![page-options](src/assets/readme-assets/gallery2.png)
+
+<img src="src/assets/gallery2.png" alt="gallery2" height="300">
 
 
 ## Deployment
@@ -61,10 +64,17 @@ The server and client application are deployed to Heroku.  Image storage is mana
 
 ## Built With
 
-* ![React](src/assets/readme-assets/react-logo.svg) - The frontend was created using React
-* ![Node](src/assets/readme-assets/gallery1.png) - The backend was created using Node
-* ![Postgres](src/assets/readme-assets/postgres-logo.png) - The database used was Postgres
-* ![AWS](src/assets/readme-assets/aws-logo.png) - Images are stored using AWS S3
+<img src="src/assets/react-logo.svg" alt="react-logo" height="48">
+*The frontend was created using React
+
+<img src="src/assets/node-logo.svg" alt="node-logo" height="48">
+*The backend was created using Node
+
+<img src="src/assets/postgres-logo.png" alt="postgres-logo" height="48">
+*The database used was Postgres
+
+<img src="src/assets/aws-logo.png" alt="aws-logo" height="48">
+*Images are stored using AWS S3
 
 ## Authors
 
