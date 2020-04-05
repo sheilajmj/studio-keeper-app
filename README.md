@@ -12,8 +12,8 @@ Upon first arriving to the site, you will see the welcome page.  Here you may cl
 ![welcome-page](src/assets/readme-assets/app-welcome-mk.png#img)
 
 img[[src*="#img"] {
-  max-width: 60%;
-  max-height: 60%
+  width: 300px;
+  height: 300px;
 }
 
 To view the project in action, you will need to log in using the demo account.  
