@@ -53,35 +53,35 @@ class AddEvent extends Component {
             <h3 className="add-item-header">Add Event</h3>
             <div className="form-space">
               <label htmlFor="event_type" className="event-edit">Event Type:</label>
-              <input type="text" name="event_type" id="event_type" onChange={this.handleChange} defaultValue={this.state.newEvent.event_type} />
+              <input type="text" name="event_type" id="event_type" onChange={this.handleChange} placeholder={this.state.newEvent.event_type} />
             </div>
             <div className="form-space">
               <label htmlFor="name" className="event-edit">Name:</label>
-              <input type="text" name="name" id="name" onChange={this.handleChange} defaultValue={this.state.newEvent.name} />
+              <input type="text" name="name" id="name" onChange={this.handleChange} placeholder={this.state.newEvent.name} />
             </div>
             <div className="form-space">
               <label htmlFor="website" className="event-edit">Website:</label>
-              <input type="text" name="website" id="website" onChange={this.handleChange} defaultValue={this.state.newEvent.website} />
+              <input type="text" name="website" id="website" onChange={this.handleChange} placeholder={this.state.newEvent.website} />
             </div>
             <div className="form-space">
               <label htmlFor="location" className="event-edit">Location:</label>
-              <input type="location" name="location" id="location" onChange={this.handleChange} defaultValue={this.state.newEvent.location} />
+              <input type="location" name="location" id="location" onChange={this.handleChange} placeholder={this.state.newEvent.location} />
             </div>
             <div className="form-space">
               <label htmlFor="event_dates" className="event-edit">Event Dates:</label>
-              <input type="text" name="event_dates" id="event_dates" onChange={this.handleChange} defaultValue={this.state.newEvent.event_dates} />
+              <input type="text" name="event_dates" id="event_dates" onChange={this.handleChange} placeholder={this.state.newEvent.event_dates} />
             </div>
             <div className="form-space">
               <label htmlFor="application_due_dates" className="event-edit">Application Due Dates:</label>
-              <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} defaultValue={this.state.newEvent.application_due_dates} />
+              <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} placeholder={this.state.newEvent.application_due_dates} />
             </div>
             <div className="form-space">
               <label htmlFor="notes" className="event-edit">Notes:</label>
-              <textarea type="text" className="event-textarea" name="notes" id="notes" onChange={this.handleChange} defaultValue={this.state.newEvent.notes} />
+              <textarea type="text" className="event-textarea" name="notes" id="notes" onChange={this.handleChange} placeholder={this.state.newEvent.notes} />
             </div>
             <div className="form-space">
               <label htmlFor="submission_requirements" className="event-edit">Submission Requirements:</label>
-              <textarea type="text" className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} defaultValue={this.state.newEvent.submission_requirements} />
+              <textarea type="text" className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} placeholder={this.state.newEvent.submission_requirements} />
             </div>
             <div className="button-wrap">
               <button className="submit-btn" type="submit" value="submit">Submit</button>
