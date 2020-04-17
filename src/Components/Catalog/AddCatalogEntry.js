@@ -69,7 +69,12 @@ class AddCatalogEntry extends Component {
       CatalogApiService.postCatalogItem(newCatalogEntry)
         .then((res) => {
           this.setCatalogId(res)
+            if (this.state.selectedFile){
           return this.handleUploadImage().then(() => res)
+            }
+            else{
+              return res
+            }
         })
         .then(res => {window.location.href = `/catalog/${res.id}`
         })
