@@ -73,70 +73,70 @@ class EditCatalogEntry extends Component {
           }
 
           return (
-            <div key={item.id} className="item-edit-wrap catalog-edit">
+            <div key={'catalog-item' + item.id} className="item-edit-wrap catalog-edit">
               <form onSubmit={this.handleSubmit}>
                 <h3 className="add-item-header">Edit Catalog Entry</h3>
                 <div className="form-space">
                   <label htmlFor="type" className="catalog-edit">Type:</label>
-                  <input type="text" name="type" id="type" onChange={this.handleChange} placeholder={item.type} />
+                  <input type="text" name="type" id="type" onChange={this.handleChange} value={item.type} required />
                 </div>
                 <div className="form-space">
                   <label htmlFor="collection" className="catalog-edit">Collection:</label>
-                  <input type="text" name="collection" id="collection" onChange={this.handleChange} placeholder={item.collection} />
+                  <input type="text" name="collection" id="collection" onChange={this.handleChange} value={item.collection || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="name" className="catalog-edit">Name:</label>
-                  <input type="text" name="name" id="name" onChange={this.handleChange} placeholder={item.name} />
+                  <input type="text" name="name" id="name" onChange={this.handleChange} value={item.name} required />
                 </div>
                 <div className="form-space">
                   <label htmlFor="size" className="catalog-edit">Size:</label>
-                  <input type="text" name="size" id="size" onChange={this.handleChange} placeholder={item.size} />
+                  <input type="text" name="size" id="size" onChange={this.handleChange} value={item.size || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="medium" className="catalog-edit">Medium:</label>
-                  <input type="text" name="medium" id="medium" onChange={this.handleChange} placeholder={item.medium} />
+                  <input type="text" name="medium" id="medium" onChange={this.handleChange} value={item.medium || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="price" className="catalog-edit">Price:</label>
-                  <input type="text" name="price" id="price" onChange={this.handleChange} placeholder={item.price} />
+                  <input type="text" name="price" id="price" onChange={this.handleChange} value={item.price || ''} />
                 </div>
                 <div className="form-space">
                   <div className="date-creatd">
                     <label htmlFor="date_created" className="catalog-edit">Date Created (mm/yyyy):</label>
-                    <input type="text" name="date_created" id="date_created" onChange={this.handleChange} placeholder={item.date_created} />
+                    <input type="text" name="date_created" id="date_created" onChange={this.handleChange} value={item.date_created || ''} />
                   </div>
                 </div>
                 <div className="form-space">
                   <label htmlFor="concept_statement" className="catalog-edit">Concept Statement:</label>
-                  <br /><textarea type="text" className="catalog-textarea" name="concept_statement" id="concept_statement" onChange={this.handleChange} placeholder={item.concept_statement} />
+                  <br /><textarea type="text" className="catalog-textarea" name="concept_statement" id="concept_statement" onChange={this.handleChange} value={item.concept_statement || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="notes" className="catalog-edit">Notes:</label>
-                  <br /><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} placeholder={item.notes} />
+                  <br /><textarea type="text" className="catalog-textarea" name="notes" id="notes" onChange={this.handleChange} value={item.notes || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="subject" className="catalog-edit">Subject:</label>
-                  <input type="text" name="subject" id="subject" onChange={this.handleChange} placeholder={item.subject} />
+                  <input type="text" name="subject" id="subject" onChange={this.handleChange} value={item.subject || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="quantity" className="catalog-edit">Quantity:</label>
-                  <input type="text" name="quantity" id="quantity" onChange={this.handleChange} placeholder={item.quantity} />
+                  <input type="text" name="quantity" id="quantity" onChange={this.handleChange} value={item.quantity || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="location" className="catalog-edit">Location:</label>
-                  <input type="text" name="location" id="location" onChange={this.handleChange} placeholder={item.location} />
+                  <input type="text" name="location" id="location" onChange={this.handleChange} value={item.location || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="sold_date" className="catalog-edit">Sold Date:</label>
-                  <input type="text" name="sold_date" id="sold_date" onChange={this.handleChange} placeholder={item.sold_date} />
+                  <input type="text" name="sold_date" id="sold_date" onChange={this.handleChange} value={item.sold_date || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="sold_to" className="catalog-edit">Sold To:</label>
-                  <input type="text" name="sold_to" id="sold_to" onChange={this.handleChange} placeholder={item.sold_to} />
+                  <input type="text" name="sold_to" id="sold_to" onChange={this.handleChange} value={item.sold_to || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="history" className="catalog-edit">History:</label>
-                  <br /><textarea type="text" className="catalog-textarea" name="history" id="history" onChange={this.handleChange} placeholder={item.history} />
+                  <br /><textarea type="text" className="catalog-textarea" name="history" id="history" onChange={this.handleChange} value={item.history || ''} />
                 </div>
                 <div className="button-wrap">
                   <button className="submit-btn" type="submit" value="submit">Submit</button>

@@ -10,20 +10,20 @@ class AddContact extends Component {
     super(props)
     this.state = {
       newContact: {
-        contact_type: "Individual",
-        name: "Name",
-        title: "Title",
-        business: "Business Name",
-        email: "jdoe@email.com",
-        phone: "123-456-7890",
-        address_street: "1122 Default St.",
-        address_line2: "Apartment 2",
-        address_city: "Gotham City",
-        address_state: "State",
-        address_zip: "12344",
-        address_country: "Country",
-        website: "http://website.com",
-        notes: "Notes",
+        contact_type: 'Individual',
+        name: null,
+        title: null,
+        business: null,
+        email: null,
+        phone: null,
+        address_street: null,
+        address_line2: null,
+        address_city: null,
+        address_state: null,
+        address_zip: null,
+        address_country: null,
+        website: null,
+        notes: null,
       },
       sent: false
     }
@@ -56,15 +56,15 @@ class AddContact extends Component {
           <>
             <div className="form-space">
               <label htmlFor="name" className="contact-edit">Name:</label>
-              <input type="text" name="name" id="name" onChange={this.handleChange} placeholder={this.state.newContact.name} />
+              <input type="text" name="name" id="name" onChange={this.handleChange} placeholder='Name (required)' required/>
             </div>
             <div className="form-space">
               <label htmlFor="title" className="contact-edit">Title:</label>
-              <input type="text" name="title" id="title" onChange={this.handleChange} placeholder={this.state.newContact.title} />
+              <input type="text" name="title" id="title" onChange={this.handleChange} placeholder='Title' />
             </div>
             <div className="form-space">
               <label htmlFor="business" className="contact-edit">Business:</label>
-              <input type="text" name="business" id="business" onChange={this.handleChange} placeholder={this.state.newContact.business} />
+              <input type="text" name="business" id="business" onChange={this.handleChange} placeholder="Business Name" />
             </div>
           </>
         )
@@ -73,7 +73,7 @@ class AddContact extends Component {
         return (
           <div className="form-space">
             <label htmlFor="business" className="contact-edit">Business Name:</label>
-            <input type="text" name="business" id="business" onChange={this.handleChange} placeholder={this.state.newContact.business} />
+            <input type="text" name="business" id="business" onChange={this.handleChange} placeholder="Business Name (required)" required/>
           </div>
 
         )
@@ -88,7 +88,7 @@ class AddContact extends Component {
             <h3 className="add-item-header">Add Contact</h3>
             <div className="form-space">
               <label className="contact-edit" htmlFor="contact_type">Contact Type:</label>
-              <select name="contact_type" onChange={this.handleChange} value={this.state.newContact.contact_type}>
+              <select name="contact_type" onChange={this.handleChange} value='Individual'>
                 <option value="Individual">Individual</option>
                 <option value="Business">Business</option>
               </select>
@@ -96,27 +96,27 @@ class AddContact extends Component {
             {this.nameFieldPopulator()}
             <div className="form-space">
               <label htmlFor="email" className="contact-edit">Email:</label>
-              <input type="text" name="email" id="email" onChange={this.handleChange} placeholder={this.state.newContact.email} />
+              <input type="text" name="email" id="email" onChange={this.handleChange} placeholder='email address' />
             </div>
             <div className="form-space">
               <label htmlFor="phone" className="contact-edit">Phone:</label>
-              <input type="text" name="phone" id="phone" onChange={this.handleChange} placeholder={this.state.newContact.phone} />
+              <input type="text" name="phone" id="phone" onChange={this.handleChange} placeholder='phone number' />
             </div>
             <div className="form-space">
               <label htmlFor="address_street" className="contact-edit">Address: (line 1)</label>
-              <input type="text" name="address_street" id="address_street" onChange={this.handleChange} placeholder={this.state.newContact.address_street} />
+              <input type="text" name="address_street" id="address_street" onChange={this.handleChange} placeholder='1122 Default St.' />
             </div>
             <div className="form-space">
               <label htmlFor="address_line2" className="contact-edit">Address: (line 2)</label>
-              <input type="text" name="address_line2" id="address_line2" onChange={this.handleChange} placeholder={this.state.newContact.address_line2} />
+              <input type="text" name="address_line2" id="address_line2" onChange={this.handleChange} placeholder='Apartment 2' />
             </div>
             <div className="form-space">
               <label htmlFor="address_city" className="contact-edit">City:</label>
-              <input type="text" name="address_city" id="address_city" onChange={this.handleChange} placeholder={this.state.newContact.address_city} />
+              <input type="text" name="address_city" id="address_city" onChange={this.handleChange} placeholder='Gotham City' />
             </div>
             <div className="form-space">
               <label htmlFor="address_state" className="contact-edit">State:</label>
-              <input type="text" name="address_state" id="address_state" onChange={this.handleChange} placeholder={this.state.newContact.address_state} />
+              <input type="text" name="address_state" id="address_state" onChange={this.handleChange} placeholder='State' />
             </div>
             <div className="form-space">
               <label htmlFor="address_zip" className="contact-edit">Zip Code:</label>
@@ -124,15 +124,15 @@ class AddContact extends Component {
             </div>
             <div className="form-space">
               <label htmlFor="address_country" className="contact-edit">Country:</label>
-              <input type="text" name="address_country" id="address_country" onChange={this.handleChange} placeholder={this.state.newContact.address_country} />
+              <input type="text" name="address_country" id="address_country" onChange={this.handleChange} placeholder='Country' />
             </div>
             <div className="form-space">
               <label htmlFor="website" className="contact-edit">Website:</label>
-              <input type="text" name="website" id="website" onChange={this.handleChange} placeholder={this.state.newContact.website} />
+              <input type="text" name="website" id="website" onChange={this.handleChange} placeholder='website' />
             </div>
             <div className="form-space">
               <label htmlFor="notes" className="contact-edit">Notes:</label>
-              <br /><textarea type="text" className="contact-textarea" name="notes" id="notes" onChange={this.handleChange} placeholder={this.state.newContact.notes} />
+              <br /><textarea type="text" className="contact-textarea" name="notes" id="notes" onChange={this.handleChange} placeholder="Notes" />
             </div>
             <div className="button-wrap">
               <button className="submit-btn" type="submit" value="submit">Submit</button>

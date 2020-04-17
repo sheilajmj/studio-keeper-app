@@ -187,9 +187,9 @@ class ViewCatalog extends Component {
       this.catalogMap = catalog_item.map((item) => {
 
         return (
-          <div>
+          <div key={'catalog-item' + item.id}>
             <div className="flex-container bkg-color-tra">
-              <div key={item.id} className="item-wrap">
+              <div className="item-wrap">
                 <button className="back-to-btn" type="button" value="backToCatalog" onClick={(() => { this.handleBackToCatalog(item.id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /><span className="all-catalog-text">Catalog</span></button>
                 <button className="edit-btn" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
                 <div className="item catalog-item">

@@ -85,10 +85,6 @@ class ViewEvent extends Component {
 
 
 
-  handleDeleteClick = (id) => {
-    this.handleDeleteEvent(id)
-    window.location.href = `/events`
-  }
 
   handleBackToEvents = (e) => {
     window.location.href = `/events`
@@ -115,17 +111,20 @@ class ViewEvent extends Component {
     return eventContactMap
   }
 
+  handleDeleteEvent = (id) => {
+    let indexToDelete = this.context.events.findIndex(item => item.id === id)
+    let eventsList = JSON.parse(JSON.stringify(this.context.events))
+    eventsList.splice(indexToDelete, 1)
+    let newEventsList = eventsList
+    this.context.updateAppStateEventsDelete(newEventsList)
+    EventsApiService.deleteEventItem(id)
+      .then ((res) => {window.location.href = '/events'})
+
+  }
+
   render() {
 
-    this.handleDeleteEvent = (id) => {
-      let indexToDelete = this.context.events.findIndex(item => item.id === id)
-      let eventsList = JSON.parse(JSON.stringify(this.context.events))
-      eventsList.splice(indexToDelete, 1)
-      let newEventsList = eventsList
-      this.context.updateAppStateEventsDelete(newEventsList)
-      EventsApiService.deleteEventItem(id)
-      window.location.href = '/events'
-    }
+
 
     this.selectedEventReturn = () => {
       if (this.state.selectedEventItem !== []) {
@@ -184,7 +183,7 @@ class ViewEvent extends Component {
                     </li>
                   </ul>
                   <div className="button-wrap">
-                    <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.id) }}>Delete</button>
+                    <button className="delete-btn" onClick={() => { this.handleDeleteEvent(item.id) }}>Delete</button>
                   </div>
                 </div>
               </div>

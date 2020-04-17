@@ -133,7 +133,7 @@ class ViewContact extends Component {
     if (images !== [{}]) {
       imageMap = images.flat().map((item) => {
         return (
-          <a href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
+          <a key={'catalogImg' + item.id} href={'/catalog/' + item.catalog_id} target="_blank" rel="noopener noreferrer">
           </a>)
       })
     }
@@ -173,7 +173,7 @@ class ViewContact extends Component {
         }
         else {
           return (<li>
-            <span className="contact-labels">Name:</span> {item.name}
+            <span key={'name' + item.id} className="contact-labels">Name:</span> {item.name}
           </li>
           )
         }
@@ -181,9 +181,9 @@ class ViewContact extends Component {
       }
 
       return (
-        <div>
+        <div key={item.id}>
           <div className="flex-container bkg-color-tra">
-            <div key={item.id} className="item-wrap">
+            <div className="item-wrap">
               <button className="back-to-btn" type="button" value="backToContacts" onClick={(() => { this.handleBackToContacts(item.id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /> <span className="all-contact-text">All Contacts</span></button>
               <button className="edit-btn" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
               <ul className="item">

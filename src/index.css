@@ -38,10 +38,6 @@ main{
   color: #fa255e;
   height: auto;
   font-weight: lighter;
-  padding-top: 4%;
-  padding-right: 4%;
-  padding-left: 4%;
-  padding-bottom: 4%;
 }
 
 .mg-sm{
@@ -212,6 +208,8 @@ ul{
   display:flex;
   text-align: center;
   list-style: none;
+  width: 100%;
+  padding: 0px;
 }
 .width-100{
   width: 100%;
@@ -220,8 +218,7 @@ ul{
 .login-wrap{
   width: 100%;
   margin-right: 4%;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  padding-bottom: 2%;
   
 }
 
@@ -269,10 +266,6 @@ ul{
   border-width: 2px 2px 0 0;
   height: 20px;
   width: 20px;
-}
-
-ul{
-  padding: 0px;
 }
 
 li{
@@ -486,6 +479,7 @@ padding-right: 15px;
   -moz-box-shadow: 4px 4px 4px #2F6F7B;
   -webkit-box-shadow: 4px 4px 4px #2F6F7B;
   margin-bottom: 5%;
+  width: 61%;
   max-width: 90%;
   display: inline-flex;
  }
@@ -939,6 +933,10 @@ margin-left: auto;
     background-color: white;
   }
 
+  .item-edit-wrap{
+    max-width: 60%;
+  }
+
 }
 
 @media screen and (min-width: 768px){
@@ -962,6 +960,10 @@ margin-left: auto;
 
   .LoginForm{
     width: 25%;
+  }
+
+  .item-edit-wrap{
+    max-width: 50%;
   }
 
 }
@@ -990,14 +992,10 @@ margin-left: auto;
 }
 
 
-.Header__not-logged-in {
-
-}
-
 .Header__not-logged-in .Hyph {
   display: none;
 }
-.
+
 @media screen and (min-width: 450px) {
   .Header {
     align-items: baseline;

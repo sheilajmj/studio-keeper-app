@@ -138,7 +138,7 @@ class EditContact extends Component {
               return (
                 <div className="form-space">
                   <label htmlFor="business" className="contact-edit">Business:</label>
-                  <input type="text" name="business_name" id="business" onChange={this.handleChange} placeholder={item.business_name} />
+                  <input type="text" name="business_name" id="business" onChange={this.handleChange} value={item.business_name} required />
                 </div>
               )
             }
@@ -147,11 +147,11 @@ class EditContact extends Component {
                 <>
                   <div className="form-space">
                     <label htmlFor="name" className="contact-edit">Name:</label>
-                    <input type="text" name="name" id="name" onChange={this.handleChange} placeholder={item.name} />
+                    <input type="text" name="name" id="name" onChange={this.handleChange} value={item.name} required/>
                   </div>
                   <div className="form-space">
                     <label htmlFor="business" className="contact-edit">Business:</label>
-                    <input type="text" name="business_name" id="business" onChange={this.handleChange} placeholder={item.business_name} />
+                    <input type="text" name="business_name" id="business" onChange={this.handleChange} value={item.business_name || ''} />
                   </div>
                 </>
               )
@@ -159,7 +159,7 @@ class EditContact extends Component {
           }
 
           return (
-            <div key={item.id} className="item-edit-wrap contact-edit">
+            <div key={'edit-contact' + item.id} className="item-edit-wrap contact-edit">
               <form onSubmit={this.handleSubmit}>
                 <h3 className="add-item-header">Edit Contact</h3>
                 <label htmlFor="contact_type" className="contact-edit">Contact Type:</label>
@@ -170,50 +170,47 @@ class EditContact extends Component {
                 {this.handleContactType()}
                 <div className="form-space">
                   <label htmlFor="email" className="contact-edit">Email:</label>
-                  <input type="text" name="email" id="email" onChange={this.handleChange} placeholder={item.email} />
+                  <input type="text" name="email" id="email" onChange={this.handleChange} value={item.email || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="phone" className="contact-edit">Phone:</label>
-                  <input type="text" name="phone" id="phone" onChange={this.handleChange} placeholder={item.phone} />
+                  <input type="text" name="phone" id="phone" onChange={this.handleChange} value={item.phone || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="address_street" className="contact-edit">Address: (line 1)</label>
-                  <input type="text" name="address_street" id="address_street" onChange={this.handleChange} placeholder={item.address_street} />
+                  <input type="text" name="address_street" id="address_street" onChange={this.handleChange} value={item.address_street || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="address_line2" className="contact-edit">Address: (line 2)</label>
-                  <input type="text" name="address_line2" id="address_line2" onChange={this.handleChange} placeholder={item.address_line2} />
+                  <input type="text" name="address_line2" id="address_line2" onChange={this.handleChange} value={item.address_line2 || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="address_city" className="contact-edit">City:</label>
-                  <input type="text" name="address_city" id="address_city" onChange={this.handleChange} placeholder={item.address_city} />
+                  <input type="text" name="address_city" id="address_city" onChange={this.handleChange} value={item.address_city || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="address_state" className="contact-edit">State:</label>
-                  <input type="text" name="business" id="address_state" onChange={this.handleChange} placeholder={item.business} />
+                  <input type="text" name="business" id="address_state" onChange={this.handleChange} value={item.business || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="address_zip" className="contact-edit">Zip Code:</label>
-                  <input type="text" name="address_zip" id="address_zip" placeholder={item.address_zip} />
+                  <input type="text" name="address_zip" id="address_zip" onChange={this.handleChange} value={item.address_zip || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="address_country" className="contact-edit">Country:</label>
-                  <input type="text" name="address_country" id="address_country" placeholder={item.address_country} />
+                  <input type="text" name="address_country" id="address_country" onChange={this.handleChange} value={item.address_country || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="website" className="contact-edit">Website:</label>
-                  <input type="text" name="website" id="website" placeholder={item.website} />
-                </div>
-                <div className="form-space">
-                  {this.favoritesFieldSelectionOptions}
+                  <input type="text" name="website" id="website" onChange={this.handleChange} value={item.website || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="notes" className="contact-edit">Notes:</label>
-                  <br /><textarea type="text" className="contact-textarea" name="notes" id="notes" placeholder={item.notes} />
+                  <br /><textarea type="text" className="contact-textarea" name="notes" id="notes" onChange={this.handleChange} value={item.notes || ''} />
                 </div>
                 <div className="button-wrap">
                   <button type="submit" className="submit-btn" value="submit">Submit Changes</button><button type="button" className="cancel-btn" value="cancel" onClick={(() => { this.handleCancel(item.contact_id) })}>Cancel</button>
-                  <br /><button type="button" className="delete-contact-btn" value="delete" onClick={(() => { this.handleDeleteContact(item.contact_id) })}>Delete Contact</button>
+                  <br /><button type="button" className="delete-contact-btn" value="delete" onClick={(() => { this.handleDeleteContact(item.id) })}>Delete Contact</button>
                 </div>
               </form>
             </div>

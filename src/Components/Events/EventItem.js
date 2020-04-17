@@ -51,7 +51,7 @@ class EventItem extends Component {
       this.eventWebIncluded = () => {
         if (item.website) {
           return (<li>
-            <span className="event-labels">Web:</span> {item.website}
+            <span className="event-labels">Website:</span> {item.website}
           </li>)
         }
       }

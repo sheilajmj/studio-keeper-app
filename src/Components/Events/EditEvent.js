@@ -138,33 +138,33 @@ class EditEvent extends Component {
                 <h3 className="add-item-header">Edit Event</h3>
                 <div className="form-space">
                   <label htmlFor="event_type" className="event-edit">Event Type:</label>
-                  <input type="text" name="event_type" id="event_type" onChange={this.handleChange} placeholder={item.event_type} />
+                  <input type="text" name="event_type" id="event_type" onChange={this.handleChange} value={item.event_type || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="name" className="event-edit">Name:</label>
-                  <input type="text" name="name" id="name" onChange={this.handleChange} placeholder={item.name} />
+                  <input type="text" name="name" id="name" onChange={this.handleChange} value={item.name} required />
                 </div>
                 <div className="form-space">
                   <label htmlFor="location" className="event-edit">Location:</label>
-                  <input type="location" name="location" id="location" onChange={this.handleChange} placeholder={item.location} />
+                  <input type="location" name="location" id="location" onChange={this.handleChange} value={item.location || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="event_dates" className="event-edit">Event Dates:</label>
-                  <input type="text" name="event_dates" id="event_dates" onChange={this.handleChange} placeholder={item.event_dates} />
+                  <input type="text" name="event_dates" id="event_dates" onChange={this.handleChange} value={item.event_dates || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="application_due_dates" className="event-edit">Application Due Dates:</label>
-                  <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} placeholder={item.application_due_dates} />
+                  <input type="text" className="application-due-date" name="application_due_dates" id="application_due_dates" onChange={this.handleChange} value={item.application_due_dates || ''} />
                 </div>
                 <div className="form-space">
                 </div>
                 <div className="form-space">
                   <label htmlFor="notes" className="event-edit">Notes:</label>
-                  <textarea type="text" className="event-textarea" name="notes" id="notes" onChange={this.handleChange} placeholder={item.notes} />
+                  <textarea type="text" className="event-textarea" name="notes" id="notes" onChange={this.handleChange} value={item.notes || ''} />
                 </div>
                 <div className="form-space">
                   <label htmlFor="submission_requirements" className="event-edit">Submission Requirements:</label>
-                  <br /><textarea type="text" className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} placeholder={item.submission_requirements} />
+                  <br /><textarea type="text" className="event-textarea" name="submission_requirements" id="submission_requirements" onChange={this.handleChange} value={item.submission_requirements || ''} />
                 </div>
                 <div className="form-space">
                 </div>
