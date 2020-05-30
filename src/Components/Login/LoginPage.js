@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import TokenService from '../../services/token-service'
-import AuthApiService from '../../services/auth-api-service'
+import React, { Component } from 'react';
+import TokenService from '../../services/token-service';
+import AuthApiService from '../../services/auth-api-service';
 
 export default class SignInForm extends Component {
   static defaultProps = {
@@ -32,7 +32,6 @@ export default class SignInForm extends Component {
   render() {
     return (
       <div className="container-center">
-
         <div className="flex-container bkg-color-tra">
           <form
             className='LoginForm tx-a-c'
@@ -60,6 +59,6 @@ export default class SignInForm extends Component {
           </form>
         </div>
       </div>
-    )
+    );
   }
 }

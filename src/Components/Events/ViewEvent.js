@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import StudioKeeperContext from '../../Context'
-import CatalogEventsService from '../../services/catalog-events-api-service'
-import PageParentHeader from '../Nav/PageParentHeader'
-import ContactsEventsApiService from '../../services/contacts-events-api-service'
-import EventsApiService from '../../services/events-api-service'
-import CatalogImagesApiService from '../../services/images-api-service'
-import ContactsApiService from '../../services/contacts-api-service'
+import StudioKeeperContext from '../../Context';
+import CatalogEventsService from '../../services/catalog-events-api-service';
+import PageParentHeader from '../Nav/PageParentHeader';
+import ContactsEventsApiService from '../../services/contacts-events-api-service';
+import EventsApiService from '../../services/events-api-service';
+import CatalogImagesApiService from '../../services/images-api-service';
+import ContactsApiService from '../../services/contacts-api-service';
 
 let moment = require('moment');
-
 
 class ViewEvent extends Component {
   static contextType = StudioKeeperContext
@@ -82,10 +81,6 @@ class ViewEvent extends Component {
     window.location.href = `/events/edit/${id}`
   }
 
-
-
-
-
   handleBackToEvents = (e) => {
     window.location.href = `/events`
   }
@@ -96,7 +91,6 @@ class ViewEvent extends Component {
         .then(res => { this.setEventCatalogArray(res) })
         .catch(this.context.setError)
       return (catalog.catalog_id)
-
     })
     return eventCatalogMap
   }
@@ -119,88 +113,84 @@ class ViewEvent extends Component {
     this.context.updateAppStateEventsDelete(newEventsList)
     EventsApiService.deleteEventItem(id)
       .then ((res) => {window.location.href = '/events'})
-
   }
 
-  render() {
-
-
-
-    this.selectedEventReturn = () => {
-      if (this.state.selectedEventItem !== []) {
-        let selectedEventMap = [this.state.selectedEventItem].map((item) => {
-          this.contactsLinkedReturnMapped = () => {
-            if (this.state.eventContactArray) {
-              let arrayMap = this.state.eventContactArray.map(contact => {
-                return (
-                  <div key={`contact` + contact.id} className="favorited-by">
-                    {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}
-                  </div>
-                )
-              })
-              return arrayMap
-            }
+  selectedEventReturn = () => {
+    if (this.state.selectedEventItem !== []) {
+      let selectedEventMap = [this.state.selectedEventItem].map((item) => {
+        this.contactsLinkedReturnMapped = () => {
+          if (this.state.eventContactArray) {
+            let arrayMap = this.state.eventContactArray.map(contact => {
+              return (
+                <div key={`contact` + contact.id} className="favorited-by">
+                  {`${contact.name}` !== "" ? <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.name} </a> : `${contact.business_name}` !== "" ? <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.business_name} </a> : <a href={'/contacts/' + contact.id} target="_blank" rel="noopener noreferrer"> {contact.contact_id} </a>}
+                </div>
+              )
+            })
+            return arrayMap
           }
-          return (
-            <div key={`event` + item.id}>
-              <PageParentHeader pageName="Events" />
-              <div className="flex-container bkg-color-tra">
-                <div className="item-wrap">
-                  <button type="button" className="back-to-btn" value="backToEvents" onClick={(() => { this.handleBackToEvents(item.event_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /><span className="all-events-text">All Events</span></button>
-                  <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
-                  <ul className="item event-view">
-                    <li>
-                      <span className="event-labels">Event Type:</span> {item.event_type}
-                    </li>
-                    <li>
-                      <span className="event-labels">Name:</span> {item.name}
-                    </li>
-                    <li>
-                      <span className="event-labels">Website:</span> {item.website}
-                    </li>
-                    <li>
-                      <span className="event-labels">Location:</span> {item.location}
-                    </li>
-                    <li>
-                      <span className="event-labels">Event Dates:</span> {item.event_dates ? this.prettyDate(item.event_dates) : ' '}
-                    </li>
+        }
+        return (
+          <div key={`event` + item.id}>
+            <PageParentHeader pageName="Events" />
+            <div className="flex-container bkg-color-tra">
+              <div className="item-wrap">
+                <button type="button" className="back-to-btn" value="backToEvents" onClick={(() => { this.handleBackToEvents(item.event_id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /><span className="all-events-text">All Events</span></button>
+                <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+                <ul className="item event-view">
+                  <li>
+                    <span className="event-labels">Event Type:</span> {item.event_type}
+                  </li>
+                  <li>
+                    <span className="event-labels">Name:</span> {item.name}
+                  </li>
+                  <li>
+                    <span className="event-labels">Website:</span> {item.website}
+                  </li>
+                  <li>
+                    <span className="event-labels">Location:</span> {item.location}
+                  </li>
+                  <li>
+                    <span className="event-labels">Event Dates:</span> {item.event_dates ? this.prettyDate(item.event_dates) : ' '}
+                  </li>
+                  <div className="border"></div>
+                  <li>
+                    <span className="event-labels">Application Due Dates:</span> {item.application_due_date ? this.prettyDate(item.application_due_date) : ' '}
+                  </li>
+                  <li>
+                    <p className="event-labels">Submission Requirements:</p> {item.submission_requirements}
+                  </li>
+                  <li>
+                    <span className="event-labels">Affiliated Contacts:</span> {this.contactsLinkedReturnMapped()}
+                  </li>
+                  <li>
+                    <p className="event-labels">Notes:</p> {item.notes}
+                  </li>
+                  <li>
                     <div className="border"></div>
-                    <li>
-                      <span className="event-labels">Application Due Dates:</span> {item.application_due_date ? this.prettyDate(item.application_due_date) : ' '}
-                    </li>
-                    <li>
-                      <p className="event-labels">Submission Requirements:</p> {item.submission_requirements}
-                    </li>
-                    <li>
-                      <span className="event-labels">Affiliated Contacts:</span> {this.contactsLinkedReturnMapped()}
-                    </li>
-                    <li>
-                      <p className="event-labels">Notes:</p> {item.notes}
-                    </li>
-                    <li>
-                      <div className="border"></div>
-                      <p className="event-labels">Catalog Items (items to show or sell at event):</p>
-                    </li>
-                  </ul>
-                  <div className="button-wrap">
-                    <button className="delete-btn" onClick={() => { this.handleDeleteEvent(item.id) }}>Delete</button>
-                  </div>
+                    <p className="event-labels">Catalog Items (items to show or sell at event):</p>
+                  </li>
+                </ul>
+                <div className="button-wrap">
+                  <button className="delete-btn" onClick={() => { this.handleDeleteEvent(item.id) }}>Delete</button>
                 </div>
               </div>
             </div>
-          );
-        })
-        return selectedEventMap
-      }
+          </div>
+        );
+      })
+      return selectedEventMap
     }
-
+  }
+  
+  render() {
     return (
       <div>
         {this.selectedEventReturn()}
       </div>
     )
-
-
   }
 }
+
+
 export default ViewEvent

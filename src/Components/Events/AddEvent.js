@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
+import Context from '../../Context';
 import PageParentHeader from '../Nav/PageParentHeader';
 import EventsApiService from '../../services/events-api-service';
 
 
 class AddEvent extends Component {
   static contextType = Context;
-
   constructor(props) {
     super(props)
     this.state = {
@@ -36,15 +35,12 @@ class AddEvent extends Component {
       .then((res) => { window.location.href = `/events/${res.id}` })
   }
 
-
   handleSubmit = (e) => {
     e.preventDefault()
     this.createNewEvent(e)
   }
 
-
   render() {
-
     return (
       <>
         <PageParentHeader pageName="Events" />
@@ -92,7 +88,6 @@ class AddEvent extends Component {
     );
   }
 }
-
 
 
 export default AddEvent;

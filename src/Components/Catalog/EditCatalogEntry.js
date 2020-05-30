@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
-import PageParentHeader from '../Nav/PageParentHeader'
+import Context from '../../Context';
+import PageParentHeader from '../Nav/PageParentHeader';
 import CatalogApiService from '../../services/catalog-api-service';
 
 class EditCatalogEntry extends Component {
@@ -47,7 +47,6 @@ class EditCatalogEntry extends Component {
       const value = date
       this.setState(previousState => ({ updatedCatalogEntry: { ...previousState.updatedCatalogEntry, [key]: value }, updateBoolean: true }))
     }
-
 
     this.handleCancel = (e) => {
       window.location.href = '/catalog'
@@ -151,13 +150,12 @@ class EditCatalogEntry extends Component {
       return this.selectedCatalogItemForm
     }
 
-
     return (
       <div>
         <PageParentHeader pageName="Catalog" />
         {this.catalogItemFormReturn()}
       </div>
-    )
+    );
   }
 }
 

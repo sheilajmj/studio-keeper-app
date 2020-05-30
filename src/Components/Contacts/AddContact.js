@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
+import Context from '../../Context';
 import PageParentHeader from '../Nav/PageParentHeader';
 import ContactsApiService from '../../services/contacts-api-service';
 
 class AddContact extends Component {
   static contextType = Context;
-
   constructor(props) {
     super(props)
     this.state = {
@@ -42,44 +41,42 @@ class AddContact extends Component {
       .then(res => { window.location.href = `/contacts/${res.id}` })
   }
 
-
   handleSubmit = (e) => {
     e.preventDefault()
     this.createNewContact(e)
   }
 
+  nameFieldPopulator = () => {
+    if (this.state.newContact.contact_type === "Individual") {
+      return (
+        <>
+          <div className="form-space">
+            <label htmlFor="name" className="contact-edit">Name:</label>
+            <input type="text" name="name" id="name" onChange={this.handleChange} placeholder='Name (required)' required/>
+          </div>
+          <div className="form-space">
+            <label htmlFor="title" className="contact-edit">Title:</label>
+            <input type="text" name="title" id="title" onChange={this.handleChange} placeholder='Title' />
+          </div>
+          <div className="form-space">
+            <label htmlFor="business" className="contact-edit">Business:</label>
+            <input type="text" name="business" id="business" onChange={this.handleChange} placeholder="Business Name" />
+          </div>
+        </>
+      )
+    }
+    else if (this.state.newContact.contact_type === "Business") {
+      return (
+        <div className="form-space">
+          <label htmlFor="business" className="contact-edit">Business Name:</label>
+          <input type="text" name="business" id="business" onChange={this.handleChange} placeholder="Business Name (required)" required/>
+        </div>
+
+      )
+    }
+  }
 
   render() {
-    this.nameFieldPopulator = () => {
-      if (this.state.newContact.contact_type === "Individual") {
-        return (
-          <>
-            <div className="form-space">
-              <label htmlFor="name" className="contact-edit">Name:</label>
-              <input type="text" name="name" id="name" onChange={this.handleChange} placeholder='Name (required)' required/>
-            </div>
-            <div className="form-space">
-              <label htmlFor="title" className="contact-edit">Title:</label>
-              <input type="text" name="title" id="title" onChange={this.handleChange} placeholder='Title' />
-            </div>
-            <div className="form-space">
-              <label htmlFor="business" className="contact-edit">Business:</label>
-              <input type="text" name="business" id="business" onChange={this.handleChange} placeholder="Business Name" />
-            </div>
-          </>
-        )
-      }
-      else if (this.state.newContact.contact_type === "Business") {
-        return (
-          <div className="form-space">
-            <label htmlFor="business" className="contact-edit">Business Name:</label>
-            <input type="text" name="business" id="business" onChange={this.handleChange} placeholder="Business Name (required)" required/>
-          </div>
-
-        )
-      }
-    }
-
     return (
       <>
         <PageParentHeader pageName="Contacts" />

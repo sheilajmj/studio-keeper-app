@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
-import Nav from '../Nav/Nav'
-import EventsHome from '../Events/EventsHome'
-import CatalogHome from '../Catalog/CatalogHome'
+import Context from '../../Context';
+import Nav from '../Nav/Nav';
+import EventsHome from '../Events/EventsHome';
+import CatalogHome from '../Catalog/CatalogHome';
 
 class Home extends Component {
     static contextType = Context;
@@ -10,7 +10,6 @@ class Home extends Component {
     handleAddClick = (location) => {
         this.context.history.push(`/${location}/add`)
     }
-
 
     render() {
         return (

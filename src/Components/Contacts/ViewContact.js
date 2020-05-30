@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import StudioKeeperContext from '../../Context'
+import StudioKeeperContext from '../../Context';
 import PageParentHeader from '../Nav/PageParentHeader';
 import ContactsApiService from '../../services/contacts-api-service';
-import CatalogContactsApiService from '../../services/catalog-contacts-api-service'
-import ContactsEventsApiService from '../../services/contacts-events-api-service'
-import EventsApiService from '../../services/events-api-service'
-import CatalogImagesApiService from '../../services/images-api-service'
+import CatalogContactsApiService from '../../services/catalog-contacts-api-service';
+import ContactsEventsApiService from '../../services/contacts-events-api-service';
+import EventsApiService from '../../services/events-api-service';
+import CatalogImagesApiService from '../../services/images-api-service';
 
 class ViewContact extends Component {
   static contextType = StudioKeeperContext
@@ -19,7 +19,7 @@ class ViewContact extends Component {
       contactEvents: [],
       eventObjectsArray: [],
     }
-  };
+  }
 
   setSelectedContactItem = (item) => {
     this.setState({ selectedContactItem: item })
@@ -36,9 +36,7 @@ class ViewContact extends Component {
     this.setState({ catalogFavsArray: existingCatalogFavsArray })
     this.catalogImageReturn()
     return unused
-
   }
-
 
   setContactEvents = (events) => {
     this.setState({ contactEvents: events })
@@ -52,10 +50,7 @@ class ViewContact extends Component {
     return unused
   }
 
-
-
   componentDidMount = () => {
-
     CatalogContactsApiService.getCatalogAndContacts('contact_id', this.props.match.params.id)
       .then(this.setContactCatalogFavs)
       .catch(this.context.setError)
@@ -64,28 +59,25 @@ class ViewContact extends Component {
       .then(this.setContactEvents)
       .catch(this.context.setError)
 
-    this.setSelectedContactId()
+    this.setSelectedContactValues()
 
     ContactsApiService.getContact(this.props.match.params.id)
       .then(this.setSelectedContactItem)
       .catch(this.context.setError)
   }
 
-  handleEditClick = (id) => {
-    this.context.history.push(`/contacts/edit/${id}`)
-  }
+
 
   handleBackToContacts = (e) => {
     this.context.history.push('/contacts')
   }
 
-  setSelectedContactId = () => {
+  setSelectedContactValues = () => {
     let selectedContactId = this.props.match.params.id
-    this.setState({ selectedContactId: selectedContactId })
-  }
-
-  handleEditClick = (id) => {
-    this.context.history.push(`/contacts/edit/${id}`)
+    let contactObject = this.context.contacts.find(contact => parseFloat(contact.id) === parseFloat(selectedContactId))
+    let contactArray = [contactObject]
+    this.setState({ selectedContactId: selectedContactId})
+    this.setState({ contactArray: contactArray })  
   }
 
   handleBackToContacts = (e) => {
@@ -100,11 +92,8 @@ class ViewContact extends Component {
     this.context.updateAppStateContactsDelete(newContactsList)
     ContactsApiService.deleteContactItem(id)
       .then(res => { window.location.href = `/contacts` })
+  }
 
-  }
-  handleDeleteClick = (id) => {
-    this.handleDeleteContact(id)
-  }
 
   catalogFavsReturn = () => {
     let catalogFavsMap = this.state.contactCatalogFavs.map((catalog) => {
@@ -112,7 +101,6 @@ class ViewContact extends Component {
         .then(res => { this.setCatalogFavsArray(res) })
         .catch(this.context.setError)
       return (catalog.catalog_id)
-
     })
     return catalogFavsMap
   }
@@ -152,89 +140,93 @@ class ViewContact extends Component {
     }
   }
 
+  contactObjectRender = () => {
+    if(this.state.contactArray){
+    let contactObject = this.state.contactArray.map((item) => {
 
-  render() {
-
-    this.selectedContactId = this.props.match.params.id
-    this.contactObject = this.context.contacts.find(contact => parseFloat(contact.id) === parseFloat(this.selectedContactId))
-    if (!this.contactObject) {
-      return (
-        <div></div>
-      );
-    }
-
-    this.contactArray = [this.contactObject]
-
-    this.contactObjectRender = this.contactArray.map((item) => {
-
-      this.contactTypeBusiness = () => {
-        if (item.contact_type === "Business") {
-          return ""
-        }
-        else {
-          return (<li>
-            <span key={'name' + item.id} className="contact-labels">Name:</span> {item.name}
-          </li>
-          )
-        }
-
+      this.handleEditClick = () => {
+        this.context.history.push(`/contacts/edit/${item.id}`)
+      }
+      this.handleDeleteClick = () => {
+        this.handleDeleteContact(item.id)
       }
 
-      return (
-        <div key={item.id}>
-          <div className="flex-container bkg-color-tra">
-            <div className="item-wrap">
-              <button className="back-to-btn" type="button" value="backToContacts" onClick={(() => { this.handleBackToContacts(item.id) })}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /> <span className="all-contact-text">All Contacts</span></button>
-              <button className="edit-btn" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
-              <ul className="item">
-                <li>
-                  <span className="contact-labels">Contact Type:</span> {item.contact_type}
-                </li>
-                <li>
-                  <span className="contact-labels">Business Name:</span> {item.business_name}
-                </li>
-                {this.contactTypeBusiness()}
-                <li>
-                  <span className="contact-labels">Email:</span> <a href={"mailto:" + item.email} target="_blank" rel="noopener noreferrer"> {item.email} </a>
-                </li>
-                <li>
-                  <span className="contact-labels">Phone:</span>
-                  <a href={"tel:" + item.phone} target="_blank" rel="noopener noreferrer">{item.phone}</a>
-                </li>
-                <li>
-                  <p className="contact-labels">Address:</p>
-                  <p className="address-block">
-                    <span className="address-center">
-                      {item.address_street}<br />
-                      {item.address_line2}<span>  </span>
-                      {item.address_city}<span>, </span>{item.address_state}<span>  </span>{item.address_zip}<br />
-                      {item.address_country}
-                    </span>
-                  </p>
-                </li>
-                <li>
-                  <span className="contact-labels">website:</span> <a href={item.website} target="_blank" rel="noopener noreferrer">{item.website}</a>
-                </li>
-                <li>
-                  {item.notes}
-                </li>
-              </ul>
-              <div className="button-wrap">
-                <button className="delete-btn" onClick={() => { this.handleDeleteClick(item.id) }}>Delete</button>
-              </div>
+    this.contactTypeBusiness = () => {
+      if (item.contact_type === "Business") {
+        return ""
+      }
+      else {
+        return (<li>
+          <span key={'name' + item.id} className="contact-labels">Name:</span> {item.name}
+        </li>
+        )
+      }
+    }
+
+    return (
+      <div key={item.id}>
+        <div className="flex-container bkg-color-tra">
+          <div className="item-wrap">
+            <button className="back-to-btn" type="button" value="backToContacts" onClick={this.handleBackToContacts}><img src={require("../../assets/back.svg")} alt="back icon" width="12px" /> <span className="all-contact-text">All Contacts</span></button>
+            <button className="edit-btn" onClick={this.handleEditClick}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+            <ul className="item">
+              <li>
+                <span className="contact-labels">Contact Type:</span> {item.contact_type}
+              </li>
+              <li>
+                <span className="contact-labels">Business Name:</span> {item.business_name}
+              </li>
+              {this.contactTypeBusiness()}
+              <li>
+                <span className="contact-labels">Email:</span> <a href={"mailto:" + item.email} target="_blank" rel="noopener noreferrer"> {item.email} </a>
+              </li>
+              <li>
+                <span className="contact-labels">Phone:</span>
+                <a href={"tel:" + item.phone} target="_blank" rel="noopener noreferrer">{item.phone}</a>
+              </li>
+              <li>
+                <p className="contact-labels">Address:</p>
+                <p className="address-block">
+                  <span className="address-center">
+                    {item.address_street}<br />
+                    {item.address_line2}<span>  </span>
+                    {item.address_city}<span>, </span>{item.address_state}<span>  </span>{item.address_zip}<br />
+                    {item.address_country}
+                  </span>
+                </p>
+              </li>
+              <li>
+                <span className="contact-labels">website:</span> <a href={item.website} target="_blank" rel="noopener noreferrer">{item.website}</a>
+              </li>
+              <li>
+                {item.notes}
+              </li>
+            </ul>
+            <div className="button-wrap">
+              <button className="delete-btn" onClick={this.handleDeleteClick}>Delete</button>
             </div>
           </div>
         </div>
-      )
-    })
+      </div>
+    );
+  })
+  return contactObject
+  }
+  else{
+    return (<div></div>)
+  }
+}
+
+  render() {
     return (
       <section className='contacts'>
         <div>
           <PageParentHeader pageName={"Contacts"} />
-          {this.contactObjectRender}
+          {this.contactObjectRender()}
         </div>
       </section>
-    )
+    );
   }
 }
+
 export default ViewContact

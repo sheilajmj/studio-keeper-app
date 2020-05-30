@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Context from '../../Context';
-import CatalogImagesApiService from '../../services/images-api-service'
-import CatalogApiService from '../../services/catalog-api-service'
+import CatalogImagesApiService from '../../services/images-api-service';
+import CatalogApiService from '../../services/catalog-api-service';
 
 class Gallery extends Component {
   static contextType = Context;
@@ -18,7 +18,6 @@ class Gallery extends Component {
   setCatalogItems = (item) => {
     this.setState({ catalogItems: item })
   }
-
 
   componentDidMount = () => {
     CatalogImagesApiService.getCatalogImages()
@@ -37,14 +36,13 @@ class Gallery extends Component {
     this.imageFilterReturn = () => {
       let imageMap = imageFilter.map((image) => {
         return (
-          <img className="gallery-img-item gallery-item" src={image.image_url} alt="catalog item" />
+          <img key={image.name+image.catalog_id} className="gallery-img-item gallery-item" src={image.image_url} alt="catalog item" />
         )
       })
       return imageMap
     }
     return this.imageFilterReturn()
   }
-
 
   catalogCollectionIncluded = (collection) => {
     if (collection) {
@@ -66,12 +64,11 @@ class Gallery extends Component {
     }
   }
 
-
   galleryItemsList = () => {
     if (this.state.catalogItems && this.state.catalogItemImages) {
       this.catalogItemsMap = this.state.catalogItems.map((item) => {
         return (
-          <div key={item.catalog_id} className="item-wrap">
+          <div key={item.id} className="item-wrap">
             <div className="gallery-img-wrap">
               {this.handleCatalogImages(item.id)}
             </div>
@@ -89,9 +86,7 @@ class Gallery extends Component {
     }
   }
 
-
   render() {
-
     return (
       <div className="bkg-color-dk">
         <h1 className="color-white gallery-title">Gallery</h1>
@@ -101,9 +96,6 @@ class Gallery extends Component {
       </div>
     );
   }
-};
-
-
-
+}
 
 export default Gallery

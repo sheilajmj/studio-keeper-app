@@ -3,7 +3,6 @@ import Context from '../../Context';
 
 let moment = require('moment');
 
-
 class EventsHome extends Component {
   static contextType = Context;
 
@@ -24,9 +23,8 @@ class EventsHome extends Component {
     return newDate
   }
 
-  render() {
-
-    this.eventItemsObject = this.context.events.map((item) => {
+  eventItemsObject = () => {
+    let eventItems = this.context.events.map((item) => {
       if (item === undefined) {
         return <div></div>
       }
@@ -70,6 +68,7 @@ class EventsHome extends Component {
           </li>)
         }
       }
+
       this.eventAppDatesIncluded = () => {
         if (item.application_due_date) {
           return (<li>
@@ -77,6 +76,7 @@ class EventsHome extends Component {
           </li>)
         }
       }
+
       this.eventLocationIncluded = () => {
         if (item.location) {
           return (<li>
@@ -96,19 +96,19 @@ class EventsHome extends Component {
         </div>
       );
     });
+    return eventItems
+  }
 
-
+  render() {
     return (
       <div>
         <div className="flex-container">
-          {this.eventItemsObject}
+          {this.eventItemsObject()}
         </div>
       </div>
     );
   }
-};
-
-
+}
 
 
 export default EventsHome

@@ -35,7 +35,6 @@ class CatalogHome extends Component {
     this.setState({ catalogItemImages: images });
   }
 
-
   componentDidMount = () => {
     CatalogApiService.getCatalogItems()
       .then(this.setCatalogItems)
@@ -45,9 +44,6 @@ class CatalogHome extends Component {
       .then(this.setCatalogItemImages)
       .catch(this.context.setError)
   }
-
-
-
 
   handleImages = (id) => {
     if (this.state.catalogItemImages === []) {
@@ -66,7 +62,6 @@ class CatalogHome extends Component {
       }
     }
   }
-
 
   catalogCollectionIncluded = (item) => {
     if (item.collection) {
@@ -90,35 +85,33 @@ class CatalogHome extends Component {
     }
   }
 
-
-  render() {
-    this.catalogHomeReturn = () => {
-      if (this.state.catalog_items === null) {
-        return <div></div>
-      }
-      if (!this.state.catalogHomeItems) {
-        return <div></div>
-      }
-      let catalogHomeMap = this.state.catalogHomeItems.map((item) => {
-        return (
-          <div key={'catalog' + item.id} className="item-wrap">
-            <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
-            <div className="home-item" onClick={(() => { this.handleItemClick(item.id) })}>
-              <div className="gallery-img-wrap">
-                {this.handleImages(item.id)}
-              </div>
-              <div className="gallery-text-wrap">
-                {this.catalogNameIncluded(item)}
-                {this.catalogCollectionIncluded(item)}
-              </div>
+  catalogHomeReturn = () => {
+    if (this.state.catalog_items === null) {
+      return <div></div>
+    }
+    if (!this.state.catalogHomeItems) {
+      return <div></div>
+    }
+    let catalogHomeMap = this.state.catalogHomeItems.map((item) => {
+      return (
+        <div key={'catalog' + item.id} className="item-wrap">
+          <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+          <div className="home-item" onClick={(() => { this.handleItemClick(item.id) })}>
+            <div className="gallery-img-wrap">
+              {this.handleImages(item.id)}
+            </div>
+            <div className="gallery-text-wrap">
+              {this.catalogNameIncluded(item)}
+              {this.catalogCollectionIncluded(item)}
             </div>
           </div>
-        )
-      })
-      return catalogHomeMap
-    }
+        </div>
+      );
+    })
+    return catalogHomeMap
+  }
 
-
+  render() {
     return (
       <section className='catalog-item'>
         <div className="flex-container">
@@ -128,7 +121,6 @@ class CatalogHome extends Component {
     );
   }
 }
-
 
 export default CatalogHome;
 

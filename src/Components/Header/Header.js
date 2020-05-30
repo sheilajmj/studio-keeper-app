@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import TokenService from '../../services/token-service'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import TokenService from '../../services/token-service';
 
 export default class Header extends Component {
     handleLogoutClick = () => {
@@ -51,7 +51,7 @@ export default class Header extends Component {
                         : this.renderLoginLink()}
                 </div>
             </section>
-        )
+        );
     }
 }
 

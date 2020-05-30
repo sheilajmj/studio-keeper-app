@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
-import CatalogApiService from '../../services/catalog-api-service'
-import PageParentHeader from '../Nav/PageParentHeader'
-import CatalogImagesApiService from '../../services/images-api-service'
+import Context from '../../Context';
+import CatalogApiService from '../../services/catalog-api-service';
+import PageParentHeader from '../Nav/PageParentHeader';
+import CatalogImagesApiService from '../../services/images-api-service';
 
 class CatalogItem extends Component {
   static contextType = Context;
@@ -34,7 +34,6 @@ class CatalogItem extends Component {
     this.setState({ catalogItemImages: images })
   }
 
-
   componentDidMount = () => {
     CatalogApiService.getCatalogItems()
       .then(this.setCatalogItems)
@@ -44,7 +43,6 @@ class CatalogItem extends Component {
       .then(this.setCatalogItemImages)
       .catch(this.context.setError)
   }
-
 
   handleImages = (id) => {
     if (this.state.catalogItemImages === []) {
@@ -64,8 +62,6 @@ class CatalogItem extends Component {
     }
   }
 
-
-
   render() {
     if (this.state.catalog_items === {}) {
       this.setCatalogItems(this.context.catalog_items)
@@ -73,8 +69,6 @@ class CatalogItem extends Component {
 
     if (this.state.catalog_items !== {}) {
       this.catalogItemsList = this.state.catalog_items.map((item) => {
-
-
         this.catalogCollectionIncluded = () => {
           if (item.collection) {
             return (<li className="catalog-collection">
@@ -133,7 +127,6 @@ class CatalogItem extends Component {
     );
   }
 }
-
 
 export default CatalogItem;
 
