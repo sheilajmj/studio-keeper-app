@@ -141,6 +141,9 @@ class ViewContact extends Component {
   }
 
   contactObjectRender = () => {
+    if (!this.state.contactArray){
+      return <div></div>
+    }
     if(this.state.contactArray){
     let contactObject = this.state.contactArray.map((item) => {
 

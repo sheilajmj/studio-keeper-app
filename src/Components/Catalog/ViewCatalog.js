@@ -131,7 +131,7 @@ class ViewCatalog extends Component {
     if (images !== []) {
       imageMap = images.map((image) => {
         return (
-          <img className="catalog-img-item-view" src={image.image_url} alt="catalog item" height="42px" width="42px" />
+          <img key={image.image_url} className="catalog-img-item-view" src={image.image_url} alt="catalog item" height="42px" width="42px" />
         )
       })
     }

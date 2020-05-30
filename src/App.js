@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   updateAppStateContactsUpdate = (updatedContact) => {
-    let contactId = updatedContact.contact_id
+    let contactId = updatedContact.id
     let contacts = JSON.parse(JSON.stringify(this.state.contacts))
     let index = contacts.findIndex((contacts) => contacts.contact_id === contactId)
     let contactReplaced = contacts.splice(index, 1, updatedContact)
@@ -69,7 +69,7 @@ class App extends Component {
   }
 
   updateAppStateCatalogUpdate = (updatedCatalogEntry) => {
-    let catalogId = updatedCatalogEntry.catalog_id
+    let catalogId = updatedCatalogEntry.id
     let catalog_items = JSON.parse(JSON.stringify(this.state.catalog_items))
     let index = catalog_items.findIndex((catalog_item) => catalog_item.catalog_id === catalogId)
     let catalogItemReplaced = catalog_items.splice(index, 1, updatedCatalogEntry)
@@ -87,7 +87,7 @@ class App extends Component {
   }
 
   updateAppStateEventsUpdate = (updatedEvent) => {
-    let eventId = updatedEvent.event_id
+    let eventId = updatedEvent.id
     let events = JSON.parse(JSON.stringify(this.state.events))
     let index = events.findIndex((events) => events.event_id === eventId)
     let eventItemReplaced = events.splice(index, 1, updatedEvent)

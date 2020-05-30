@@ -40,6 +40,11 @@ main{
   font-weight: lighter;
 }
 
+.errorMsg{
+  color: red;
+  margin-bottom: 2%;
+}
+
 .mg-sm{
   margin: 2%;
 }
