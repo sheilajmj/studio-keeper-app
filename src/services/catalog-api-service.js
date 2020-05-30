@@ -1,12 +1,11 @@
-import TokenService from '../services/token-service'
-import config from '../config'
+import TokenService from '../services/token-service';
+import config from '../config';
 
 const CatalogApiService = {
   getCatalogItems() {
     return fetch(`${config.API_ENDPOINT}/catalog`, {
       headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-
+        'authorization': `bearer ${TokenService.getAuthToken()}`
       }
     })
       .then(res =>
@@ -19,7 +18,7 @@ const CatalogApiService = {
   getCatalogItem(catalog_id) {
     return fetch(`${config.API_ENDPOINT}/catalog/${catalog_id}`, {
       headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`
       }
     })
 
@@ -30,14 +29,12 @@ const CatalogApiService = {
       )
   },
 
-
-
   postCatalogItem(catalogItem) {
     return fetch(`${config.API_ENDPOINT}/catalog`, {
       method: 'POST',
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json',
+        'content-type': 'application/json'
       },
       body: JSON.stringify({
         catalogItem
@@ -71,15 +68,9 @@ const CatalogApiService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
         'content-type': 'application/json',
       },
-
     })
   }
-
-
 }
-
-
-
 
 
 export default CatalogApiService 

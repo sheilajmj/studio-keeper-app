@@ -1,5 +1,5 @@
-import TokenService from '../services/token-service'
-import config from '../config'
+import TokenService from '../services/token-service';
+import config from '../config';
 
 const EventsApiService = {
     getEventItems() {
@@ -21,7 +21,6 @@ const EventsApiService = {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             }
         })
-
             .then(res =>
                 (!res.ok)
                     ? res.json().then(e => Promise.reject(e))
@@ -68,14 +67,9 @@ const EventsApiService = {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json',
             },
-
         })
-
     }
 }
-
-
-
 
 
 export default EventsApiService 

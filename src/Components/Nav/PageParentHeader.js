@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
-import PageNav from '../Nav/PageNav'
-import AddButton from '../Button/AddButton'
-import Nav from '../Nav/Nav'
+import Context from '../../Context';
+import PageNav from '../Nav/PageNav';
+import AddButton from '../Button/AddButton';
+import Nav from '../Nav/Nav';
+
 class PageParentHeader extends Component {
   static contextType = Context;
 

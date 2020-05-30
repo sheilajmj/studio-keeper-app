@@ -1,5 +1,5 @@
-import config from '../config'
-import TokenService from '../services/token-service'
+import config from '../config';
+import TokenService from '../services/token-service';
 
 const CatalogContactsApiService = {
     getCatalogAndContacts(field, id) {
@@ -14,7 +14,6 @@ const CatalogContactsApiService = {
                     : res.json()
             )
     },
-
 }
 
 export default CatalogContactsApiService

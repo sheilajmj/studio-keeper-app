@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Section } from '../../Components/Utils/Utils'
-import RegistrationForm from '../RegistrationForm/RegistrationForm'
+import React, { Component } from 'react';
+import { Section } from '../../Components/Utils/Utils';
+import RegistrationForm from '../RegistrationForm/RegistrationForm';
 
 export default class RegistrationPage extends Component {
   static defaultProps = {
@@ -22,6 +22,6 @@ export default class RegistrationPage extends Component {
           onRegistrationSuccess={this.handleRegistrationSuccess}
         />
       </Section>
-    )
+    );
   }
 }

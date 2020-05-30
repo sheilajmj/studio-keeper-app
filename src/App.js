@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import StudioKeeperContext from './Context'
-import PrivateOnlyRoute from './Components/Utils/PrivateRoute'
-import PublicOnlyRoute from './Components/Utils/PublicOnlyRoute'
-import CatalogItem from './Components/Catalog/CatalogItem'
-import AddCatalogEntry from './Components/Catalog/AddCatalogEntry'
-import EditCatalogEntry from './Components/Catalog/EditCatalogEntry'
-import ViewCatalog from './Components/Catalog/ViewCatalog'
-import ContactItemList from './Components/Contacts/ContactItemList'
-import AddContact from './Components/Contacts/AddContact'
-import EditContact from './Components/Contacts/EditContact'
-import ViewContact from './Components/Contacts/ViewContact'
-import EventItem from './Components/Events/EventItem'
-import AddEvent from './Components/Events/AddEvent'
-import EditEvent from './Components/Events/EditEvent'
-import ViewEvent from './Components/Events/ViewEvent'
-import Home from './Components/Home/Home'
-import Header from './Components/Header/Header'
-import LandingPage from './Components/LandingPage/LandingPage'
-import Gallery from './Components/Gallery/Gallery'
-import LoginPage from './Components/Login/LoginPage'
-import RegistrationPage from './Components/RegistrationPage/RegistrationPage'
-import ContactsApiService from './services/contacts-api-service'
-import CatalogApiService from './services/catalog-api-service'
-import EventsApiService from './services/events-api-service'
-import NotFoundPage from './Components/NotFoundPage/NotFoundPage'
+import StudioKeeperContext from './Context';
+import PrivateOnlyRoute from './Components/Utils/PrivateRoute';
+import PublicOnlyRoute from './Components/Utils/PublicOnlyRoute';
+import CatalogItem from './Components/Catalog/CatalogItem';
+import AddCatalogEntry from './Components/Catalog/AddCatalogEntry';
+import EditCatalogEntry from './Components/Catalog/EditCatalogEntry';
+import ViewCatalog from './Components/Catalog/ViewCatalog';
+import ContactItemList from './Components/Contacts/ContactItemList';
+import AddContact from './Components/Contacts/AddContact';
+import EditContact from './Components/Contacts/EditContact';
+import ViewContact from './Components/Contacts/ViewContact';
+import EventItem from './Components/Events/EventItem';
+import AddEvent from './Components/Events/AddEvent';
+import EditEvent from './Components/Events/EditEvent';
+import ViewEvent from './Components/Events/ViewEvent';
+import Home from './Components/Home/Home';
+import Header from './Components/Header/Header';
+import LandingPage from './Components/LandingPage/LandingPage';
+import Gallery from './Components/Gallery/Gallery';
+import LoginPage from './Components/Login/LoginPage';
+import RegistrationPage from './Components/RegistrationPage/RegistrationPage';
+import ContactsApiService from './services/contacts-api-service';
+import CatalogApiService from './services/catalog-api-service';
+import EventsApiService from './services/events-api-service';
+import NotFoundPage from './Components/NotFoundPage/NotFoundPage';
 
 class App extends Component {
   constructor(props) {
@@ -48,7 +48,6 @@ class App extends Component {
     const currentStateContacts = JSON.parse(JSON.stringify(this.state.contacts))
     currentStateContacts.push(newContact)
     this.setState({ contacts: currentStateContacts, })
-
   }
 
   updateAppStateContactsUpdate = (updatedContact) => {
@@ -57,12 +56,10 @@ class App extends Component {
     let index = contacts.findIndex((contacts) => contacts.contact_id === contactId)
     let contactReplaced = contacts.splice(index, 1, updatedContact)
     this.setState({ replacedContacts: contactReplaced, contacts: contacts })
-
   }
 
   updateAppStateContactsDelete = (newContactsList) => {
     this.setState({ contacts: newContactsList })
-
   }
 
   updateAppStateCatalogCreate = (newCatalogEntry) => {
@@ -96,6 +93,7 @@ class App extends Component {
     let eventItemReplaced = events.splice(index, 1, updatedEvent)
     this.setState({ replacedEventEntry: eventItemReplaced, events: events })
   }
+
   updateAppStateEventsDelete = (newEventsList) => {
     this.setState({ events: newEventsList })
   }
@@ -154,7 +152,7 @@ class App extends Component {
       setContacts: this.setContacts,
       setEvents: this.setEvents,
       uploadImage: this.uploadImage
-    }
+    };
 
 
     return (
@@ -237,14 +235,13 @@ class App extends Component {
             <Route
               component={NotFoundPage}
             />
-
           </Switch>
-
         </main>
       </StudioKeeperContext.Provider>
       </>
     );
-  };
-};
+  }
+}
+
 
 export default withRouter(App);

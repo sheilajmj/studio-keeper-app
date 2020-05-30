@@ -1,5 +1,5 @@
-import config from '../config'
-import TokenService from '../services/token-service'
+import config from '../config';
+import TokenService from '../services/token-service';
 
 const CatalogImagesApiService = {
 
@@ -30,8 +30,6 @@ const CatalogImagesApiService = {
         }
     },
 
-
-
     postCatalogImages(image, catalog_id) {
         const fd = new FormData();
         fd.append('image', image, image.name)
@@ -44,9 +42,8 @@ const CatalogImagesApiService = {
             body: fd,
             catalog_id
         })
-
     },
-
 }
+
 
 export default CatalogImagesApiService

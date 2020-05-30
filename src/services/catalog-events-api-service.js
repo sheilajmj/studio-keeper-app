@@ -1,5 +1,5 @@
-import config from '../config'
-import TokenService from '../services/token-service'
+import config from '../config';
+import TokenService from '../services/token-service';
 
 const CatalogEventsService = {
 
@@ -8,18 +8,13 @@ const CatalogEventsService = {
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
             },
-
         })
-
             .then(res =>
                 (!res.ok)
                     ? res.json().then(e => Promise.reject(e))
                     : res.json()
             )
     },
-
-
-
 }
 
 
