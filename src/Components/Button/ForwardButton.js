@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
-
+import Context from '../../Context';
 
 class ForwardButton extends Component {
   static contextType = Context;
 
   handleForwardClick = () => {
-    this.context.history.goForward()
-
+    this.context.history.goForward();
   }
 
   render() {

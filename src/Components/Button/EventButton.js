@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
-
+import Context from '../../Context';
 
 class EventButton extends Component {
   static contextType = Context;
 
   handleEventsClick = () => {
-    this.context.history.push('/events')
+    this.context.history.push('/events');
   }
 
   render() {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
-import CatalogApiService from '../../services/catalog-api-service'
-import CatalogImagesApiService from '../../services/images-api-service'
+import Context from '../../Context';
+import CatalogApiService from '../../services/catalog-api-service';
+import CatalogImagesApiService from '../../services/images-api-service';
+
 
 class CatalogHome extends Component {
   static contextType = Context;
@@ -14,24 +15,24 @@ class CatalogHome extends Component {
   }
 
   handleEditClick(id) {
-    this.context.history.push(`/catalog/edit/${id}`)
+    this.context.history.push(`/catalog/edit/${id}`);
   }
 
   handleItemClick = (id) => {
-    this.context.history.push(`/catalog/${id}`)
+    this.context.history.push(`/catalog/${id}`);
   }
 
   handleViewCatalog = (id) => {
-    this.context.history.push(`/catalog/${id}`)
+    this.context.history.push(`/catalog/${id}`);
   }
 
   setCatalogItems = (items) => {
-    this.setState({ catalog_items: items })
-    this.setCatalogHomeItems()
+    this.setState({ catalog_items: items });
+    this.setCatalogHomeItems();
   }
 
   setCatalogItemImages = (images) => {
-    this.setState({ catalogItemImages: images })
+    this.setState({ catalogItemImages: images });
   }
 
 

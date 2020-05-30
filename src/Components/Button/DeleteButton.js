@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
+import Context from '../../Context';
 
 
 class DeleteButton extends Component {
@@ -9,16 +9,13 @@ class DeleteButton extends Component {
     this.handleDeleteContact(id)
   }
 
-
   handleDeleteContact = (id) => {
-    let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === id)
-    let contacts = JSON.parse(JSON.stringify(this.context.contacts))
-    let contactDeleted = contacts.splice(indexToDelete, 1)
-    this.context.updateAppStateContactsDelete(contacts, contactDeleted)
-    this.context.history.push(`/`)
+    let indexToDelete = this.context.contacts.findIndex(contact => contact.contact_id === id);
+    let contacts = JSON.parse(JSON.stringify(this.context.contacts));
+    let contactDeleted = contacts.splice(indexToDelete, 1);
+    this.context.updateAppStateContactsDelete(contacts, contactDeleted);
+    this.context.history.push(`/`);
   }
-
-
 
   render() {
     return (

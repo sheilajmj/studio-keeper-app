@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
+import Context from '../../Context';
 import PageParentHeader from '../Nav/PageParentHeader';
 import CatalogApiService from '../../services/catalog-api-service';
-import CatalogImagesApiService from '../../services/images-api-service'
+import CatalogImagesApiService from '../../services/images-api-service';
 
 
 class AddCatalogEntry extends Component {
@@ -34,46 +34,45 @@ class AddCatalogEntry extends Component {
   }
 
   handleChange = (e) => {
-    const key = (e.target.name)
-    const value = (e.target.value)
+    const key = (e.target.name);
+    const value = (e.target.value);
     const { newCatalogEntry } = this.state;
     newCatalogEntry[key] = value;
-    this.setState({ newCatalogEntry })
+    this.setState({ newCatalogEntry });
   }
 
   handleImageChange = (event) => {
-    this.setState({ selectedFile: event.target.files[0] })
-    this.setState({ selectedFileName: event.target.files[0].name })
+    this.setState({ selectedFile: event.target.files[0] });
+    this.setState({ selectedFileName: event.target.files[0].name });
   }
 
   handleUploadImage = () => {
     if (this.state.selectedFile) {
       const fd = new FormData();
-      fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
-      fd.append('user_id', 1)
-      fd.append('image_name', this.state.selectedFile.name)
-      fd.append('catalog_id', this.state.newCatalogId)
-      return CatalogImagesApiService.postCatalogImages(this.state.selectedFile, this.state.newCatalogId)
+      fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
+      fd.append('user_id', 1);
+      fd.append('image_name', this.state.selectedFile.name);
+      fd.append('catalog_id', this.state.newCatalogId);
+      return CatalogImagesApiService.postCatalogImages(this.state.selectedFile, this.state.newCatalogId);
     }
   }
 
   setCatalogId = (res) => {
-    this.setState({ newCatalogId: res.id })
-
+    this.setState({ newCatalogId: res.id });
   }
 
   createNewCatalogEntry = () => {
     if (this.state.newCatalogEntry) {
-      const newCatalogEntry = this.state.newCatalogEntry
-      this.context.updateAppStateCatalogCreate(newCatalogEntry)
+      const newCatalogEntry = this.state.newCatalogEntry;
+      this.context.updateAppStateCatalogCreate(newCatalogEntry);
       CatalogApiService.postCatalogItem(newCatalogEntry)
         .then((res) => {
           this.setCatalogId(res)
             if (this.state.selectedFile){
-          return this.handleUploadImage().then(() => res)
+          return this.handleUploadImage().then(() => res);
             }
             else{
-              return res
+              return res;
             }
         })
         .then(res => {window.location.href = `/catalog/${res.id}`
@@ -81,15 +80,12 @@ class AddCatalogEntry extends Component {
     }
   }
 
-
   handleSubmit = (e) => {
-    e.preventDefault()
-    this.createNewCatalogEntry(e)
+    e.preventDefault();
+    this.createNewCatalogEntry(e);
   }
 
-
   render() {
-
     return (
       <>
         <PageParentHeader pageName="Catalog" />

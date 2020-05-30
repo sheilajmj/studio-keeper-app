@@ -5,7 +5,7 @@ import TokenService from '../../services/token-service'
 export default class Header extends Component {
     handleLogoutClick = () => {
         TokenService.clearAuthToken()
-        window.location.href = '/home'
+        window.location.href = '/'
     }
 
     renderLogoutLink() {

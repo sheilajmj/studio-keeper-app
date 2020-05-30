@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
+import Context from '../../Context';
 
 
 class CatalogButton extends Component {
   static contextType = Context;
 
   handleCatalogClick = () => {
-    this.context.history.push('/catalog')
+    this.context.history.push('/catalog');
   }
 
   render() {

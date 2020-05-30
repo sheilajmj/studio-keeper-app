@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Context from '../../Context'
+import Context from '../../Context';
 
 
 class AddButton extends Component {
   static contextType = Context;
 
   handleAddClick = (location) => {
-    this.context.history.push(`/${location}/add`)
+    this.context.history.push(`/${location}/add`);
   }
 
   render() {
