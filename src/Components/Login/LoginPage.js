@@ -22,7 +22,7 @@ export default class SignInForm extends Component {
         user_name.value = ''
         password.value = ''
         TokenService.saveAuthToken(res.authToken)
-        window.location.href = '/'
+        window.location.href = '/home'
       })
       .catch(res => {
         this.setState({ error: res.error })
