@@ -44,6 +44,7 @@ class CatalogItem extends Component {
       .catch(this.context.setError)
   }
 
+  //this prepares the image data for rendering with each catalog item
   handleImages = (id) => {
     if (this.state.catalogItemImages === []) {
       return <div></div>
@@ -62,66 +63,70 @@ class CatalogItem extends Component {
     }
   }
 
+  //this maps the catalog items and sets up the jsx for rendering
+  catalogItemReturn = () => {
+  if (this.state.catalog_items === {}) {
+    this.setCatalogItems(this.context.catalog_items)
+  }
+
+  if (this.state.catalog_items !== {}) {
+   let catalogItems = this.catalogItemsList = this.state.catalog_items.map((item) => {
+      this.catalogCollectionIncluded = () => {
+        if (item.collection) {
+          return (<li className="catalog-collection">
+            <span className="catalog-labels">Collection:</span> {item.collection}
+          </li>)
+        }
+      }
+
+      this.catalogNameIncluded = () => {
+        if (item.name) {
+          return (<li className="catalog-name">
+            <span className="catalog-labels">Name:</span>{item.name}
+          </li>)
+        }
+      }
+
+      this.catalogPriceIncluded = () => {
+        if (item.price) {
+          return (<li className="catalog-price">
+            <span className="catalog-labels">Price:</span> {item.price}
+          </li>)
+        }
+      }
+
+      this.catalogQuantityIncluded = () => {
+        if (item.quantity) {
+          return (<li className="catalog-quantity">
+            <span className="catalog-labels">Qty:</span> {item.quantity}
+          </li>)
+        }
+      }
+
+      return (
+        <div key={'catalog' + item.id} className="item-wrap">
+          <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
+          <ul className="item" onClick={(() => { this.handleItemClick(item.id) })}>
+            {this.handleImages(item.id)}
+            {this.catalogNameIncluded()}
+            <div className="low-level">
+              {this.catalogPriceIncluded()}
+              {this.catalogQuantityIncluded()}
+            </div>
+          </ul>
+        </div>
+      )
+    })
+    return catalogItems
+  }
+}
+
   render() {
-    if (this.state.catalog_items === {}) {
-      this.setCatalogItems(this.context.catalog_items)
-    }
-
-    if (this.state.catalog_items !== {}) {
-      this.catalogItemsList = this.state.catalog_items.map((item) => {
-        this.catalogCollectionIncluded = () => {
-          if (item.collection) {
-            return (<li className="catalog-collection">
-              <span className="catalog-labels">Collection:</span> {item.collection}
-            </li>)
-          }
-        }
-
-        this.catalogNameIncluded = () => {
-          if (item.name) {
-            return (<li className="catalog-name">
-              <span className="catalog-labels">Name:</span>{item.name}
-            </li>)
-          }
-        }
-
-        this.catalogPriceIncluded = () => {
-          if (item.price) {
-            return (<li className="catalog-price">
-              <span className="catalog-labels">Price:</span> {item.price}
-            </li>)
-          }
-        }
-
-        this.catalogQuantityIncluded = () => {
-          if (item.quantity) {
-            return (<li className="catalog-quantity">
-              <span className="catalog-labels">Qty:</span> {item.quantity}
-            </li>)
-          }
-        }
-
-        return (
-          <div key={'catalog' + item.id} className="item-wrap">
-            <button className="edit-btn" type="button" onClick={(() => { this.handleEditClick(item.id) })}><img src={require("../../assets/pencil.svg")} width="30px" alt="edit icon" /></button>
-            <ul className="item" onClick={(() => { this.handleItemClick(item.id) })}>
-              {this.handleImages(item.id)}
-              {this.catalogNameIncluded()}
-              <div className="low-level">
-                {this.catalogPriceIncluded()}
-                {this.catalogQuantityIncluded()}
-              </div>
-            </ul>
-          </div>
-        )
-      })
-    }
-
-    return (
+       return (
       <section className='catalog-item'>
         <PageParentHeader pageName="Catalog" />
         <div className="flex-container">
-          {this.catalogItemsList}
+          {this.catalogItemReturn()}
         </div>
       </section>
     );

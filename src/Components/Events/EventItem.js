@@ -19,11 +19,13 @@ class EventItem extends Component {
     this.context.history.push(`/events/${id}`)
   }
 
+  //formats the date
   prettyDate = (date) => {
     let newDate = moment(`${date}`).format('L')
     return newDate
   }
 
+  //maps the event items data (included fields only) and sets the JSX for rendering
   eventItemsObject = () => {
     let eventItems = this.context.events.map((item) => {
     if (!item) {
@@ -69,6 +71,7 @@ class EventItem extends Component {
         </li>)
       }
     }
+
     this.eventAppDatesIncluded = () => {
       if (item.application_due_date) {
         return (<li>
@@ -76,6 +79,7 @@ class EventItem extends Component {
         </li>)
       }
     }
+    
     this.eventLocationIncluded = () => {
       if (item.location) {
         return (<li>

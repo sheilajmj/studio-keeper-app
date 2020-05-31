@@ -20,6 +20,7 @@ class ContactItem extends Component {
     this.setContactItems(this.context.contacts)
   }
 
+  //maps the contact items data (included fields only) and sets the JSX for rendering
   contactItemsList = () => {
     let contactItems = this.context.contacts.map((item, index) => {
 

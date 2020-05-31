@@ -29,21 +29,28 @@ class EditCatalogEntry extends Component {
     }
   }
 
+  //Form validation - triggered after submitting
   handleValidation() {
     let fields = this.state.updatedCatalogEntry;
     let errors = {};
     let formIsValid = true;
 
+    this.startTimeout = () =>{
+      setTimeout(() => {this.setState({ errors:{} })}, 5000);
+      }
+
     //name
     if (!fields["name"]) {
       formIsValid = false;
       errors["name"] = "Cannot be empty";
+      this.startTimeout();
     }
 
     if (typeof fields["name"] !== "undefined" && fields["name"] !== null) {
       if (!fields["name"].match(/^[a-zA-Z ]+$/)) {
         formIsValid = false;
         errors["name"] = "Please use letters only.";
+        this.startTimeout();
       }
     }
 
@@ -52,6 +59,7 @@ class EditCatalogEntry extends Component {
       if (!fields["collection"].match(/^[a-zA-Z ]+$/)) {
         formIsValid = false;
         errors["collection"] = "Please use letters only.";
+        this.startTimeout();
       }
     }
 
@@ -59,11 +67,13 @@ class EditCatalogEntry extends Component {
     if (!fields["type"]) {
       formIsValid = false;
       errors["type"] = "Cannot be empty - please use letters only";
+      this.startTimeout();
     }
     if (typeof fields["type"] !== "undefined" && fields["type"] !== null) {
       if (!fields["type"].match(/^[a-zA-Z ]+$/)) {
         formIsValid = false;
         errors["type"] = "Please use letters only.";
+        this.startTimeout();
       }
     }
 
@@ -72,6 +82,7 @@ class EditCatalogEntry extends Component {
       if (!fields["medium"].match(/^[a-zA-Z ]+$/)) {
         formIsValid = false;
         errors["medium"] = "Please use letters only.";
+        this.startTimeout();
       }
     }
 
@@ -80,6 +91,7 @@ class EditCatalogEntry extends Component {
       if (!fields["size"].match(/[a-zA-Z0-9#.()/%&\s-?! ]{0,19}/)) {
         formIsValid = false;
         errors["size"] = "Please do not use special characters.";
+        this.startTimeout();
       }
     }
 
@@ -88,6 +100,7 @@ class EditCatalogEntry extends Component {
       if (!fields["subject"].match(/^[a-zA-Z0-9 ]*$/)) {
         formIsValid = false;
         errors["subject"] = "Please use letters and numbers only.";
+        this.startTimeout();
       }
     }
 
@@ -96,6 +109,7 @@ class EditCatalogEntry extends Component {
       if (!fields["concept_statement"].match(/[a-zA-Z0-9#.()/%&\s-?! ]{0,19}/)) {
         formIsValid = false;
         errors["concept_statement"] = "Please do not use special characters.";
+        this.startTimeout();
       }
     }
 
@@ -104,6 +118,7 @@ class EditCatalogEntry extends Component {
       if (!fields["price"].match(/\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?/)) {
         formIsValid = false;
         errors["price"] = "Please use numbers";
+        this.startTimeout();
       }
     }
 
@@ -112,6 +127,7 @@ class EditCatalogEntry extends Component {
       if (!fields["location"].match(/^[a-zA-Z0-9 ]*$/)) {
         formIsValid = false;
         errors["location"] = "Please use letters and numbers only.";
+        this.startTimeout();
       }
     }
 
@@ -120,6 +136,7 @@ class EditCatalogEntry extends Component {
       if (!fields["date_created"].match(/^[0-3]?[0-9]\/[0-3]?[0-9]\/(?:[0-9]{2})?[0-9]{2}$/)) {
         formIsValid = false;
         errors["date_created"] = "Please enter MM/DD/YYYY format.";
+        this.startTimeout();
       }
     }
 
@@ -128,6 +145,7 @@ class EditCatalogEntry extends Component {
       if (!fields["history"].match(/[a-zA-Z0-9#.()/%&\s-?! ]{0,19}/)) {
         formIsValid = false;
         errors["history"] = "Please do not use special characters.";
+        this.startTimeout();
       }
     }
 
@@ -136,6 +154,7 @@ class EditCatalogEntry extends Component {
       if (!fields["sold_date"].match(/^[0-3]?[0-9]\/[0-3]?[0-9]\/(?:[0-9]{2})?[0-9]{2}$/)) {
         formIsValid = false;
         errors["sold_date"] = "Please enter MM/DD/YYYY format.";
+        this.startTimeout();
       }
     }
 
@@ -144,6 +163,7 @@ class EditCatalogEntry extends Component {
       if (!fields["sold_to"].match(/^[a-zA-Z0-9 ]*$/)) {
         formIsValid = false;
         errors["sold_to"] = "Please use letters and numbers only.";
+        this.startTimeout();
       }
     }
 
@@ -152,6 +172,7 @@ class EditCatalogEntry extends Component {
       if (!fields["notes"].match(/[a-zA-Z0-9#.()/%&\s-?! ]{0,19}/)) {
         formIsValid = false;
         errors["notes"] = "Please do not use special characters.";
+        this.startTimeout();
       }
     }
 
@@ -197,6 +218,7 @@ class EditCatalogEntry extends Component {
       .then(res => { window.location.href = `/catalog` })
   }
 
+  //maps the fields and sets the JSX for the edit form
   catalogItemFormReturn = () => {
     if (this.state.entryToEdit !== []) {
       this.selectedCatalogItemForm = [this.state.entryToEdit].map((item) => {

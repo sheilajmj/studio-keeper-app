@@ -66,12 +66,11 @@ class ViewContact extends Component {
       .catch(this.context.setError)
   }
 
-
-
   handleBackToContacts = (e) => {
     this.context.history.push('/contacts')
   }
 
+  //sets state with the selected contact data
   setSelectedContactValues = () => {
     let selectedContactId = this.props.match.params.id
     let contactObject = this.context.contacts.find(contact => parseFloat(contact.id) === parseFloat(selectedContactId))
@@ -140,6 +139,7 @@ class ViewContact extends Component {
     }
   }
 
+  //maps the contact and sets the JSX for rendering
   contactObjectRender = () => {
     if (!this.state.contactArray){
       return <div></div>

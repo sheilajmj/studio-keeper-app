@@ -64,6 +64,7 @@ class Gallery extends Component {
     }
   }
 
+  //returns the gallery items for rendering
   galleryItemsList = () => {
     if (this.state.catalogItems && this.state.catalogItemImages) {
       this.catalogItemsMap = this.state.catalogItems.map((item) => {

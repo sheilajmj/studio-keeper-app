@@ -56,6 +56,7 @@ class ViewEvent extends Component {
     return unused
   }
 
+  //formats the dates
   prettyDate = (date) => {
     let newDate = moment(`${date}`).format('L')
     return newDate
@@ -85,6 +86,7 @@ class ViewEvent extends Component {
     window.location.href = `/events`
   }
 
+  //gets the event data
   getEventCatalogArray = () => {
     let eventCatalogMap = this.state.eventCatalogIds.map((catalog) => {
       CatalogImagesApiService.getCatalogImages('catalog_id', catalog.catalog_id)
@@ -95,6 +97,7 @@ class ViewEvent extends Component {
     return eventCatalogMap
   }
 
+  //gets contacts affiliated with the event
   getEventContactArray = () => {
     let eventContactMap = this.state.eventContactIds.map((contact) => {
       ContactsApiService.getContact(contact.contact_id)
@@ -115,6 +118,7 @@ class ViewEvent extends Component {
       .then ((res) => {window.location.href = '/events'})
   }
 
+//maps event data to return the jsx for rendering
   selectedEventReturn = () => {
     if (this.state.selectedEventItem !== []) {
       let selectedEventMap = [this.state.selectedEventItem].map((item) => {

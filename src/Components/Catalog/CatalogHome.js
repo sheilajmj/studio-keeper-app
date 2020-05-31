@@ -45,6 +45,7 @@ class CatalogHome extends Component {
       .catch(this.context.setError)
   }
 
+  //This gets the image data for rendering
   handleImages = (id) => {
     if (this.state.catalogItemImages === []) {
       return <div></div>
@@ -63,6 +64,7 @@ class CatalogHome extends Component {
     }
   }
 
+  //if collection data is included in the record, it is formatted for rendering
   catalogCollectionIncluded = (item) => {
     if (item.collection) {
       return (<div className="catalog-collection">
@@ -71,6 +73,7 @@ class CatalogHome extends Component {
     }
   }
 
+  //if the name is included in the record it is formatted for rendering
   catalogNameIncluded = (item) => {
     if (item.name) {
       return (<div className="catalog-name">
@@ -78,13 +81,14 @@ class CatalogHome extends Component {
       </div>)
     }
   }
-
+//selects the first three records to show on the app home page
   setCatalogHomeItems = () => {
     if (this.state.catalog_items !== null) {
       this.setState({ catalogHomeItems: [this.state.catalog_items[0], this.state.catalog_items[1], this.state.catalog_items[2]] })
     }
   }
 
+  //this maps the catalog items and sets up the jsx for rendering
   catalogHomeReturn = () => {
     if (this.state.catalog_items === null) {
       return <div></div>

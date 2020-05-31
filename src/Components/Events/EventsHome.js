@@ -22,19 +22,11 @@ class EventsHome extends Component {
     let newDate = moment(`${date}`).format('L')
     return newDate
   }
-
+  //maps the event items data and sets the JSX for rendering
   eventItemsObject = () => {
     let eventItems = this.context.events.map((item) => {
       if (item === undefined) {
         return <div></div>
-      }
-
-      this.eventTypeIncluded = () => {
-        if (item.event_type) {
-          return (<li>
-            <span className="event-labels">Event Type:</span> {item.event_type}
-          </li>)
-        }
       }
 
       this.eventNameIncluded = () => {
@@ -53,34 +45,10 @@ class EventsHome extends Component {
         }
       }
 
-      this.eventLocationIncluded = () => {
-        if (item.location) {
-          return (<li>
-            <span className="event-labels">Location:</span> {item.location}
-          </li>)
-        }
-      }
-
       this.eventDatesIncluded = () => {
         if (item.event_dates) {
           return (<li>
             <span className="event-labels">Event Dates:</span> {this.prettyDate(item.event_dates)}
-          </li>)
-        }
-      }
-
-      this.eventAppDatesIncluded = () => {
-        if (item.application_due_date) {
-          return (<li>
-            <span className="event-labels">Application Due Dates:</span> {this.prettyDate(item.application_due_date)}
-          </li>)
-        }
-      }
-
-      this.eventLocationIncluded = () => {
-        if (item.location) {
-          return (<li>
-            <span className="event-labels">Location:</span> {item.location}
           </li>)
         }
       }
