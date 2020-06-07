@@ -35,7 +35,7 @@ class AddCatalogEntry extends Component {
   }
 
 //Form validation - triggered after submitting
-  handleValidation() {
+  handleValidation = () => {
     let fields = this.state.newCatalogEntry;
     let errors = {};
     let formIsValid = true;
