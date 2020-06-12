@@ -59,7 +59,7 @@ main{
 }
 
 .pd-b-sm{
-  padding-top: 4%;      
+  padding-top: 2%;      
 }
 
 .pd-r-md{
@@ -444,7 +444,7 @@ padding-right: 15px;
   text-align: left;
   background-color: white;
   margin-top: 3%;
-  width: 100%;
+  width: 35%;
   border: solid 2px #2F6F7B;
   -webkit-border-radius: 10px; 
   -moz-border-radius: 10px;
@@ -715,7 +715,6 @@ p.event-labels{
   flex-wrap: wrap;
   flex-direction: row;
   background-color: #f4f4f4;
-  padding-bottom: 3%;
 }
 
 .hm-btn-label{

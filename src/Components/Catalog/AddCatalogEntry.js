@@ -34,21 +34,21 @@ class AddCatalogEntry extends Component {
     }
   }
 
-//Form validation - triggered after submitting
+  //Form validation - triggered after submitting
   handleValidation = () => {
     let fields = this.state.newCatalogEntry;
     let errors = {};
     let formIsValid = true;
 
-    this.startTimeout = () =>{
-      setTimeout(() => {this.setState({ errors:{} })}, 5000);
-      }
+    this.startTimeout = () => {
+      setTimeout(() => { this.setState({ errors: {} }) }, 5000);
+    }
 
     //name
     if (!fields["name"]) {
       formIsValid = false;
       errors["name"] = "Cannot be empty";
-      this.startTimeout(); 
+      this.startTimeout();
     }
 
     if (typeof fields["name"] !== "undefined" && fields["name"] !== null) {
@@ -60,13 +60,13 @@ class AddCatalogEntry extends Component {
     }
 
     //collection
-    if (typeof fields["collection"] !== "undefined" && fields["collection"] !== null){
+    if (typeof fields["collection"] !== "undefined" && fields["collection"] !== null) {
       if (!fields["collection"].match(/^[a-zA-Z]+$/)) {
         formIsValid = false;
         errors["collection"] = "Please use letters only.";
         this.startTimeout();
       }
-  }
+    }
 
     //type
     if (!fields["type"]) {
