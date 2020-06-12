@@ -324,7 +324,6 @@ background-image: url('assets/buttons/add-btn.svg');
 
 .edit-btn {
   display: inline-block;
-  width: 100%;
   margin-left: auto;
   background-color: white;
   border: none;
@@ -449,7 +448,7 @@ padding-right: 15px;
   -webkit-border-radius: 10px; 
   -moz-border-radius: 10px;
   border-radius: 10px;
-  padding-bottom: 5%;
+  padding-bottom: 3%;
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
