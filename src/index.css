@@ -381,6 +381,7 @@ form{
 .contact-labels, .catalog-labels, .event-labels{
 font-weight: normal;
 padding-right: 15px;
+display: block;
 }
 
 .catalog-labels{
@@ -416,10 +417,9 @@ padding-right: 15px;
 .item li{
   margin-top: .4em;
     margin-bottom: .4em;
-    padding-right: 6%;
     font-weight: bold;
     padding-left: 6%;
-    word-break: break-all;
+    word-break: break-word;
 }
 .set-ht-1{
   height:286px;
@@ -494,7 +494,6 @@ padding-right: 15px;
   margin-top: 0%;
   display: flex;
   flex-wrap: wrap;
-  padding-top: 10px;
 }
 
 .gallery-img-wrap{
@@ -938,6 +937,10 @@ margin-left: auto;
   .item-edit-wrap{
     max-width: 60%;
   }
+
+.contact-labels, .catalog-labels, .event-labels{
+  display: inline-block;
+}
 
 }
 
